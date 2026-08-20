@@ -94,19 +94,27 @@ jobs:
             dotnet test "$projekt" --configuration Release
           done
 
-      # Blokada, nie ostrzeżenie. Testowe identyfikatory Google zawsze zwracają reklamę
-      # testową, więc pakiet z nimi wygląda w sklepie na sprawny i nie zarabia ani groszem —
-      # a zauważa się to po tygodniach. Pierwsze prawdziwe wydanie wymaga zdjęcia tej blokady
-      # razem z wpisaniem identyfikatorów z konta AdMob.
+      # Testowe identyfikatory Google zawsze zwracają reklamę testową, więc pakiet z nimi
+      # wygląda w sklepie na sprawny i nie zarabia ani groszem — a zauważa się to po tygodniach.
+      #
+      # Rozróżnienie jest celowe. Znacznik to prawdziwe wydanie: wtedy BLOKADA. Uruchomienie
+      # ręczne to przebieg próbny — sprawdzenie, czy podpisywanie i sekrety działają, jeszcze
+      # przed założeniem konta AdMob — więc tylko ostrzeżenie. Pakiet z takiego przebiegu nie
+      # trafia do wydania w GitHubie, bo ten krok też jest zawężony do znacznika.
       - name: Kontrola identyfikatorów reklam
         run: |
           if grep -rq 'ca-app-pub-3940256099942544' \
                src/TwisterCompanion.App/Services/AdUnits.cs \
                src/TwisterCompanion.App/Platforms/Android/AndroidManifest.xml; then
-            echo '::error::Pakiet wydania ma TESTOWE identyfikatory reklam Google.'
-            echo 'Wpisz identyfikatory z konta AdMob w AdUnits.cs i w AndroidManifest.xml,'
-            echo 'a potem usuń test IdentyfikatoryReklam_SaJeszczeTestowe.'
-            exit 1
+            if [ '${{ startsWith(github.ref, 'refs/tags/v') }}' = 'true' ]; then
+              echo '::error::Pakiet wydania ma TESTOWE identyfikatory reklam Google.'
+              echo 'Wpisz identyfikatory z konta AdMob w AdUnits.cs i w AndroidManifest.xml,'
+              echo 'a potem usun test IdentyfikatoryReklam_SaJeszczeTestowe.'
+              exit 1
+            fi
+
+            echo '::warning::Przebieg probny: w kodzie sa TESTOWE identyfikatory reklam Google.'
+            echo 'Pakiet z tego przebiegu nie nadaje sie do sklepu — sluzy do sprawdzenia podpisu.'
           fi
 
       - name: Odtworzenie klucza podpisu
