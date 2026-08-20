@@ -2,11 +2,18 @@
 # Twister Companion — .gitignore (.NET / MAUI / Android)
 # ---------------------------------------------------------------------------
 
+# --- Dokumentacja i narzedzia trzymane WYLACZNIE lokalnie (decyzja wlasciciela projektu) ---
+# Konsekwencje w CI sa obsluzone jawnie, nie po cichu:
+#   * prog pokrycia (tools/pokrycie.py) - build.yml sprawdza obecnosc pliku i wypisuje
+#     ostrzezenie w kazdym przebiegu, w ktorym progu nie da sie sprawdzic,
+#   * zgodnosc wersji z CHANGELOG.md - dwa testy wypisuja POMINIETO, a w zamian release.yml
+#     porownuje VersionPrefix ze znacznikiem gita.
 CHANGELOG.md
 CHECKLISTA_TESTOW.md
 PLAN_DZIALANIA.md
 zalozenia.txt
 README.md
+tools/
 
 # --- Wyniki buildu ---
 [Bb]in/

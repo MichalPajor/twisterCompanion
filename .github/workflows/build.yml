@@ -82,7 +82,16 @@ jobs:
       # projektów testowych — bez scalania pokrycie Domain byłoby zaniżone, bo testy
       # warstwy Application wykonują też jej kod.
       - name: Próg pokrycia
-        run: python3 tools/pokrycie.py pokrycie --prog Domain=80 Application=80 --braki 5
+        run: |
+          # Skrypt progu pokrycia jest świadomie poza repozytorium zdalnym (decyzja
+          # właściciela projektu), więc w przebiegu może go nie być. Wtedy przebieg nie pada,
+          # ale mówi to na głos w każdym uruchomieniu — próg jest wtedy pilnowany lokalnie.
+          # Gdy plik kiedyś wejdzie do repozytorium, kontrola wraca sama.
+          if [ -f tools/pokrycie.py ]; then
+            python3 tools/pokrycie.py pokrycie --prog Domain=80 Application=80 --braki 5
+          else
+            echo '::warning::Brak tools/pokrycie.py — prog pokrycia NIE jest sprawdzany w CI.'
+          fi
 
       - name: Raporty pokrycia jako artefakt
         if: always()

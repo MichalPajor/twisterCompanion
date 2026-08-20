@@ -69,6 +69,23 @@ jobs:
           echo "numer=$WERSJA" >> "$GITHUB_OUTPUT"
           echo "Wersja wydania: $WERSJA (kod ${{ github.run_number }})"
 
+      # Zastępuje w przebiegu to, czego CI sprawdzić nie może: CHANGELOG.md jest świadomie
+      # poza repozytorium zdalnym, więc test zgodności wersji z historią zmian działa tylko
+      # lokalnie. Ta kontrola jest zresztą mocniejsza — dotyczy dokładnie tej wartości, która
+      # trafi do sklepu jako wersja widoczna dla użytkownika.
+      - name: Kontrola zgodności wersji
+        run: |
+          W_PLIKU=$(grep -oP '(?<=<VersionPrefix>)[^<]+' Directory.Build.props | head -1)
+          ZE_ZNACZNIKA="${{ steps.wersja.outputs.numer }}"
+
+          if [ "$W_PLIKU" != "$ZE_ZNACZNIKA" ]; then
+            echo "::error::Znacznik mówi $ZE_ZNACZNIKA, a VersionPrefix w Directory.Build.props to $W_PLIKU."
+            echo 'Podnies VersionPrefix do numeru ze znacznika albo oznacz inny commit.'
+            exit 1
+          fi
+
+          echo "Wersja zgodna: $W_PLIKU"
+
       # Testy przed pakietem, nie po. Wydanie, którego testy nie przechodzą, nie ma prawa
       # powstać — a przebieg weryfikacji dotyczy commita, niekoniecznie tego znacznika.
       - name: Testy

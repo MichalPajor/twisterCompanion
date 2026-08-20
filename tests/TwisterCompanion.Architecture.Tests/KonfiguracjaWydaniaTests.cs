@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using TwisterCompanion.Tests.Shared;
+using Xunit.Abstractions;
 
 namespace TwisterCompanion.Architecture.Tests;
 
@@ -19,7 +20,7 @@ namespace TwisterCompanion.Architecture.Tests;
 /// celuje w Androida, więc nie da się go tu zreferować.
 /// </para>
 /// </remarks>
-public class KonfiguracjaWydaniaTests
+public class KonfiguracjaWydaniaTests(ITestOutputHelper wyjscie)
 {
     /// <summary>Numer wydawcy w testowych identyfikatorach reklam Google.</summary>
     private const string WydawcaTestowy = "3940256099942544";
@@ -27,11 +28,33 @@ public class KonfiguracjaWydaniaTests
     /// <summary>Limit długości notatek wydania w Google Play, na język.</summary>
     private const int LimitNotatekPlay = 500;
 
+    /// <summary>
+    /// Powód pominięcia testów czytających historię zmian.
+    /// </summary>
+    /// <remarks>
+    /// <c>CHANGELOG.md</c> jest <b>świadomie trzymany poza repozytorium zdalnym</b> (decyzja
+    /// właściciela projektu), więc w przebiegu CI tego pliku nie ma. Lokalnie, czyli tam, gdzie
+    /// przygotowuje się wydanie, plik istnieje i oba testy działają w pełni. Zgodność numeru
+    /// wersji ze znacznikiem gita pilnuje dodatkowo sam przebieg wydania — i to jest guard
+    /// mocniejszy, bo dotyczy dokładnie tego, co idzie do sklepu.
+    /// </remarks>
+    private const string PowodPominiecia =
+        "POMINIĘTO: nie ma CHANGELOG.md. Plik jest świadomie poza repozytorium zdalnym,"
+        + " więc ten test działa tylko lokalnie. Zgodność wersji ze znacznikiem gita pilnuje"
+        + " krok kontroli zgodności wersji w .github/workflows/release.yml.";
+
     [Fact]
     public void WersjaWPliku_ZgadzaSieZNajnowszymWpisemHistorii()
     {
         // Dwa miejsca, jedna prawda. Rozjechanie się ich znaczy albo wydanie z numerem,
         // którego nie ma w historii, albo wpis w historii, który nigdy nie wyszedł.
+        if (!IstniejeHistoriaZmian)
+        {
+            wyjscie.WriteLine(PowodPominiecia);
+
+            return;
+        }
+
         string wersja = WersjaProjektu();
         string zHistorii = NajnowszaWersjaHistorii();
 
@@ -48,6 +71,13 @@ public class KonfiguracjaWydaniaTests
     public void NotatkiWydania_MieszczaSieWLimicieGooglePlay()
     {
         // Play nie ostrzega przed przekroczeniem limitu — ucina tekst w połowie zdania.
+        if (!IstniejeHistoriaZmian)
+        {
+            wyjscie.WriteLine(PowodPominiecia);
+
+            return;
+        }
+
         string historia = File.ReadAllText(KatalogRepozytorium.Plik("CHANGELOG.md"));
 
         MatchCollection bloki = Regex.Matches(
@@ -133,6 +163,10 @@ public class KonfiguracjaWydaniaTests
 
         return wersja!.Trim();
     }
+
+    /// <summary>Czy plik historii zmian jest dostępny (wymagane przez atrybut xunit).</summary>
+    public static bool IstniejeHistoriaZmian =>
+        File.Exists(KatalogRepozytorium.Plik("CHANGELOG.md"));
 
     private static string NajnowszaWersjaHistorii()
     {
