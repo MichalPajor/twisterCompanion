@@ -1037,7 +1037,7 @@ Talimatı duymadınız mı? «Tekrar» yeniden okur.</value>
     <value>Akla gelen en kötü muhabbet cümlesini birine söyle.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Buluşmaya gideceğin kişiyi göster.</value>
+    <value>Buluşmak isteyeceğin kişiyi göster.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Seçtiğin kişinin kulağına bir şey fısılda: ötekiler duymayacak.</value>

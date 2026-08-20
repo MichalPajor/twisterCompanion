@@ -1037,7 +1037,7 @@ Vous n’avez pas entendu la consigne ? « Répète » la relit.</value>
     <value>Sors à quelqu’un la pire phrase de drague qui te vient.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Montre la personne avec qui tu irais à un rendez-vous.</value>
+    <value>Montre la personne avec qui tu aimerais te voir.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Chuchote quelque chose à l’oreille de qui tu veux : les autres ne le sauront pas.</value>

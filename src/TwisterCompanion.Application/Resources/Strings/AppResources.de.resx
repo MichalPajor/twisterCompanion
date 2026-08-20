@@ -1037,7 +1037,7 @@ Die Anweisung nicht verstanden? „Wiederhole“ liest sie noch einmal vor.</val
     <value>Probiere den schlechtesten Anmachspruch aus, der dir einfällt.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Zeig auf die Person, mit der du auf ein Date gehen würdest.</value>
+    <value>Zeig auf die Person, mit der du dich gern treffen würdest.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Flüstere jemandem etwas ins Ohr – die anderen erfahren es nicht.</value>

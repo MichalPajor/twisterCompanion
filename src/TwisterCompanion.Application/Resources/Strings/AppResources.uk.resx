@@ -1037,7 +1037,7 @@ Twister® — торгова марка Hasbro. Цей застосунок не
     <value>Видай комусь найгіршу фразу для знайомства, яка спаде на думку.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Покажи на людину, з якою пішов би на побачення.</value>
+    <value>Покажи на людину, з якою хотів би зустрітися.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Шепни щось на вухо тому, кого вибереш: решта не дізнається.</value>

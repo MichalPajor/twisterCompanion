@@ -1064,7 +1064,7 @@ Did not catch the instruction? “Repeat” will read it out again.</value>
     <value>Try the worst pick-up line you can think of on somebody.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Point to the person you would go on a date with.</value>
+    <value>Point to the person you would like to meet up with.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Whisper something in someone’s ear — the others will not find out.</value>

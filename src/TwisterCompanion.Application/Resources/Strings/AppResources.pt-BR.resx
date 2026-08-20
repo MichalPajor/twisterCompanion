@@ -1037,7 +1037,7 @@ Não ouviram a instrução? «Repete» lê de novo.</value>
     <value>Solte para alguém a pior cantada que vier à cabeça.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Aponte a pessoa com quem você sairia num encontro.</value>
+    <value>Aponte a pessoa com quem você gostaria de se encontrar.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Sussurre algo no ouvido de quem você escolher: os outros não vão saber.</value>

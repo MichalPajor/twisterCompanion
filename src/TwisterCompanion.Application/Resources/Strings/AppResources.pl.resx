@@ -1055,7 +1055,7 @@ Nie dosłyszeliście polecenia? „Powtórz" przeczyta je jeszcze raz.</value>
     <value>Zrób komuś najgorszy podryw, jaki przyjdzie Ci do głowy.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Wskaż osobę, z którą wyszedłbyś na randkę.</value>
+    <value>Wskaż osobę, z którą wyszedłbyś na spotkanie.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Powiedz coś szeptem do ucha wybranej osobie — reszta się nie dowie.</value>

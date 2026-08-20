@@ -1037,7 +1037,7 @@ Non avete sentito l’istruzione? «Ripeti» la legge di nuovo.</value>
     <value>Prova su qualcuno la peggior frase per rimorchiare che ti viene.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Indica la persona con cui usciresti a un appuntamento.</value>
+    <value>Indica la persona con cui ti piacerebbe incontrarti.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Sussurra qualcosa nell’orecchio a chi vuoi: gli altri non lo sapranno.</value>

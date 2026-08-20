@@ -1037,7 +1037,7 @@ Con el control por voz activado no hace falta tocar el teléfono: di «siguiente
     <value>Suéltale a alguien la peor frase para ligar que se te ocurra.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Señala a la persona con la que saldrías en una cita.</value>
+    <value>Señala a la persona con la que te gustaría quedar.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Dile algo al oído a quien elijas: los demás no se enterarán.</value>
