@@ -1033,8 +1033,8 @@ Twister® — торгова марка Hasbro. Цей застосунок не
   <data name="Event_LastSearchQuery" xml:space="preserve">
     <value>Скажи, що ти останнього разу шукав в інтернеті.</value>
   </data>
-  <data name="Event_WorstPickupLine" xml:space="preserve">
-    <value>Видай комусь найгіршу фразу для знайомства, яка спаде на думку.</value>
+  <data name="Event_WorstExcuse" xml:space="preserve">
+    <value>Видай комусь найгіршу відмовку, яка спаде на думку.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
     <value>Покажи на людину, з якою хотів би зустрітися.</value>

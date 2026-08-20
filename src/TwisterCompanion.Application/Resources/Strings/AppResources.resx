@@ -1060,8 +1060,8 @@ Did not catch the instruction? “Repeat” will read it out again.</value>
   <data name="Event_LastSearchQuery" xml:space="preserve">
     <value>Say the last thing you searched for.</value>
   </data>
-  <data name="Event_WorstPickupLine" xml:space="preserve">
-    <value>Try the worst pick-up line you can think of on somebody.</value>
+  <data name="Event_WorstExcuse" xml:space="preserve">
+    <value>Give someone the worst excuse you can think of.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
     <value>Point to the person you would like to meet up with.</value>

@@ -1033,8 +1033,8 @@ Die Anweisung nicht verstanden? „Wiederhole“ liest sie noch einmal vor.</val
   <data name="Event_LastSearchQuery" xml:space="preserve">
     <value>Sag, wonach du zuletzt im Internet gesucht hast.</value>
   </data>
-  <data name="Event_WorstPickupLine" xml:space="preserve">
-    <value>Probiere den schlechtesten Anmachspruch aus, der dir einfällt.</value>
+  <data name="Event_WorstExcuse" xml:space="preserve">
+    <value>Verkauf jemandem die schlechteste Ausrede, die dir einfällt.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
     <value>Zeig auf die Person, mit der du dich gern treffen würdest.</value>

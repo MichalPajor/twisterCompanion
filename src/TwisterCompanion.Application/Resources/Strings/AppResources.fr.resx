@@ -1033,11 +1033,11 @@ Vous n’avez pas entendu la consigne ? « Répète » la relit.</value>
   <data name="Event_LastSearchQuery" xml:space="preserve">
     <value>Dis la dernière chose que tu as cherchée sur internet.</value>
   </data>
-  <data name="Event_WorstPickupLine" xml:space="preserve">
-    <value>Sors à quelqu’un la pire phrase de drague qui te vient.</value>
+  <data name="Event_WorstExcuse" xml:space="preserve">
+    <value>Sors à quelqu’un la pire excuse qui te vient.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Montre la personne avec qui tu aimerais te voir.</value>
+    <value>Montre la personne avec qui tu aimerais passer plus de temps.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Chuchote quelque chose à l’oreille de qui tu veux : les autres ne le sauront pas.</value>

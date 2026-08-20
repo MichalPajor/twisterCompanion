@@ -1033,8 +1033,8 @@ Não ouviram a instrução? «Repete» lê de novo.</value>
   <data name="Event_LastSearchQuery" xml:space="preserve">
     <value>Diga a última coisa que você pesquisou na internet.</value>
   </data>
-  <data name="Event_WorstPickupLine" xml:space="preserve">
-    <value>Solte para alguém a pior cantada que vier à cabeça.</value>
+  <data name="Event_WorstExcuse" xml:space="preserve">
+    <value>Solte para alguém a pior desculpa que vier à cabeça.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
     <value>Aponte a pessoa com quem você gostaria de se encontrar.</value>

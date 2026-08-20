@@ -251,7 +251,7 @@
     },
     {
       "id": "a0000000-0000-4000-8000-000000000636",
-      "nameKey": "Event_WorstPickupLine",
+      "nameKey": "Event_WorstExcuse",
       "chancePercent": 0.5,
       "isEnabled": true,
       "scope": "CurrentPlayer"

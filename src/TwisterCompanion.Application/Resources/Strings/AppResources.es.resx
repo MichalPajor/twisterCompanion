@@ -1033,8 +1033,8 @@ Con el control por voz activado no hace falta tocar el teléfono: di «siguiente
   <data name="Event_LastSearchQuery" xml:space="preserve">
     <value>Di lo último que has buscado en internet.</value>
   </data>
-  <data name="Event_WorstPickupLine" xml:space="preserve">
-    <value>Suéltale a alguien la peor frase para ligar que se te ocurra.</value>
+  <data name="Event_WorstExcuse" xml:space="preserve">
+    <value>Suéltale a alguien la peor excusa que se te ocurra.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
     <value>Señala a la persona con la que te gustaría quedar.</value>

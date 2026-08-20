@@ -1033,11 +1033,11 @@ Talimatı duymadınız mı? «Tekrar» yeniden okur.</value>
   <data name="Event_LastSearchQuery" xml:space="preserve">
     <value>İnternette en son ne aradığını söyle.</value>
   </data>
-  <data name="Event_WorstPickupLine" xml:space="preserve">
-    <value>Akla gelen en kötü muhabbet cümlesini birine söyle.</value>
+  <data name="Event_WorstExcuse" xml:space="preserve">
+    <value>Akla gelen en kötü bahaneyi birine yuttur.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Buluşmak isteyeceğin kişiyi göster.</value>
+    <value>Takılmak isteyeceğin kişiyi göster.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Seçtiğin kişinin kulağına bir şey fısılda: ötekiler duymayacak.</value>

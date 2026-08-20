@@ -1051,8 +1051,8 @@ Nie dosłyszeliście polecenia? „Powtórz" przeczyta je jeszcze raz.</value>
   <data name="Event_LastSearchQuery" xml:space="preserve">
     <value>Podaj nazwę ostatniej rzeczy, której szukałeś w wyszukiwarce.</value>
   </data>
-  <data name="Event_WorstPickupLine" xml:space="preserve">
-    <value>Zrób komuś najgorszy podryw, jaki przyjdzie Ci do głowy.</value>
+  <data name="Event_WorstExcuse" xml:space="preserve">
+    <value>Wciśnij komuś najgorszą wymówkę, jaka przyjdzie Ci do głowy.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
     <value>Wskaż osobę, z którą wyszedłbyś na spotkanie.</value>

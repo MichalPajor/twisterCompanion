@@ -1033,11 +1033,11 @@ Non avete sentito l’istruzione? «Ripeti» la legge di nuovo.</value>
   <data name="Event_LastSearchQuery" xml:space="preserve">
     <value>Di’ l’ultima cosa che hai cercato su internet.</value>
   </data>
-  <data name="Event_WorstPickupLine" xml:space="preserve">
-    <value>Prova su qualcuno la peggior frase per rimorchiare che ti viene.</value>
+  <data name="Event_WorstExcuse" xml:space="preserve">
+    <value>Rifila a qualcuno la peggior scusa che ti viene.</value>
   </data>
   <data name="Event_PickDateCandidate" xml:space="preserve">
-    <value>Indica la persona con cui ti piacerebbe incontrarti.</value>
+    <value>Indica la persona con cui ti piacerebbe passare più tempo.</value>
   </data>
   <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
     <value>Sussurra qualcosa nell’orecchio a chi vuoi: gli altri non lo sapranno.</value>
