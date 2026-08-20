@@ -1,0 +1,148 @@
+# ---------------------------------------------------------------------------
+# Twister Companion — wydanie
+# ---------------------------------------------------------------------------
+# Druga część zadania 5 Etapu 14: osobny przebieg dla wydania — pakiet AAB,
+# podpisywanie i wersja brana ze znacznika gita.
+#
+# Dlaczego osobny plik, a nie kolejne zadanie w weryfikacji: wydanie ma inne wyzwalacze
+# (znacznik, nie commit), inne uprawnienia (zapis wydań) i dostęp do sekretów z kluczem
+# podpisu. Trzymanie tego razem z przebiegiem, który rusza przy każdym pull requeście,
+# oznaczałoby wpuszczenie klucza podpisu w każdy przebieg z zewnętrznego forka.
+#
+# Znacznik nadaje wersję widoczną dla użytkownika (v1.2.3 → 1.2.3), a numer przebiegu
+# nadaje kod wersji dla sklepu. Kod wersji MUSI rosnąć z każdym wgraniem i numer przebiegu
+# tę własność ma — data albo suma z SemVera już nie.
+# ---------------------------------------------------------------------------
+
+name: Wydanie
+
+on:
+  push:
+    tags: ['v*.*.*']
+  workflow_dispatch:
+    inputs:
+      wersja:
+        description: 'Wersja do zbudowania, np. 1.2.3'
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  pakiet:
+    name: Pakiet AAB
+    runs-on: ubuntu-latest
+
+    env:
+      MAGAZYN_KLUCZY: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Workload MAUI (Android)
+        run: dotnet workload install maui-android
+
+      - name: Ustalenie wersji
+        id: wersja
+        run: |
+          if [ -n "${{ inputs.wersja }}" ]; then
+            WERSJA="${{ inputs.wersja }}"
+          else
+            WERSJA="${GITHUB_REF_NAME#v}"
+          fi
+
+          echo "numer=$WERSJA" >> "$GITHUB_OUTPUT"
+          echo "Wersja wydania: $WERSJA (kod ${{ github.run_number }})"
+
+      # Testy przed pakietem, nie po. Wydanie, którego testy nie przechodzą, nie ma prawa
+      # powstać — a przebieg weryfikacji dotyczy commita, niekoniecznie tego znacznika.
+      - name: Testy
+        run: |
+          for projekt in tests/*/*.csproj; do
+            dotnet test "$projekt" --configuration Release
+          done
+
+      # Blokada, nie ostrzeżenie. Testowe identyfikatory Google zawsze zwracają reklamę
+      # testową, więc pakiet z nimi wygląda w sklepie na sprawny i nie zarabia ani groszem —
+      # a zauważa się to po tygodniach. Pierwsze prawdziwe wydanie wymaga zdjęcia tej blokady
+      # razem z wpisaniem identyfikatorów z konta AdMob.
+      - name: Kontrola identyfikatorów reklam
+        run: |
+          if grep -rq 'ca-app-pub-3940256099942544' \
+               src/TwisterCompanion.App/Services/AdUnits.cs \
+               src/TwisterCompanion.App/Platforms/Android/AndroidManifest.xml; then
+            echo '::error::Pakiet wydania ma TESTOWE identyfikatory reklam Google.'
+            echo 'Wpisz identyfikatory z konta AdMob w AdUnits.cs i w AndroidManifest.xml,'
+            echo 'a potem usuń test IdentyfikatoryReklam_SaJeszczeTestowe.'
+            exit 1
+          fi
+
+      - name: Odtworzenie klucza podpisu
+        if: env.MAGAZYN_KLUCZY != ''
+        run: |
+          echo "$MAGAZYN_KLUCZY" | base64 --decode > "$RUNNER_TEMP/klucz.keystore"
+
+      - name: Pakiet AAB (podpisany)
+        if: env.MAGAZYN_KLUCZY != ''
+        run: >
+          dotnet publish src/TwisterCompanion.App/TwisterCompanion.App.csproj
+          --configuration Release
+          --framework net10.0-android
+          -p:AndroidPackageFormat=aab
+          -p:ApplicationDisplayVersion=${{ steps.wersja.outputs.numer }}
+          -p:ApplicationVersion=${{ github.run_number }}
+          -p:AndroidKeyStore=true
+          -p:AndroidSigningKeyStore=$RUNNER_TEMP/klucz.keystore
+          -p:AndroidSigningKeyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
+          -p:AndroidSigningKeyPass=${{ secrets.ANDROID_KEY_PASSWORD }}
+          -p:AndroidSigningStorePass=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+
+      # Bez sekretów też budujemy, ale pakietu bez podpisu nie da się wgrać do sklepu —
+      # nazwa artefaktu mówi to wprost, żeby nikt nie próbował.
+      - name: Pakiet AAB (bez podpisu)
+        if: env.MAGAZYN_KLUCZY == ''
+        run: >
+          dotnet publish src/TwisterCompanion.App/TwisterCompanion.App.csproj
+          --configuration Release
+          --framework net10.0-android
+          -p:AndroidPackageFormat=aab
+          -p:ApplicationDisplayVersion=${{ steps.wersja.outputs.numer }}
+          -p:ApplicationVersion=${{ github.run_number }}
+
+      - name: Usunięcie klucza podpisu
+        if: always() && env.MAGAZYN_KLUCZY != ''
+        run: rm -f "$RUNNER_TEMP/klucz.keystore"
+
+      - name: Pakiet jako artefakt
+        uses: actions/upload-artifact@v4
+        with:
+          name: twister-companion-${{ steps.wersja.outputs.numer }}-aab${{ env.MAGAZYN_KLUCZY == '' && '-bez-podpisu' || '' }}
+          path: '**/*.aab'
+          if-no-files-found: error
+
+      # Wydanie w GitHubie tworzymy wbudowanym narzędziem gh, a nie cudzą akcją: mniej
+      # zależności w łańcuchu, który ma dostęp do klucza podpisu.
+      - name: Wydanie w GitHubie
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "Twister Companion ${{ steps.wersja.outputs.numer }}" \
+            --generate-notes \
+            $(find . -name '*.aab' -print)

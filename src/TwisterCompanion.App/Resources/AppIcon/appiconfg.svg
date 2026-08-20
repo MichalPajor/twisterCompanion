@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    Znak aplikacji: tarcza spinnera. Cztery kropki w kolorach maty ustawione w romb, biała
+    igła wskazująca jedną z nich i piasta w środku.
+    Znaczenie jest dosłowne i o to chodzi: mata Twistera to te cztery kolory, a aplikacja
+    zastępuje spinner — czyli wskazuje, który z nich wypadł. Cztery kropki bez igły (znak
+    tymczasowy z Etapu 10) mówiły tylko pierwszą połowę tego zdania.
+    Wymiary nie są dobrane na oko:
+    - kadr 456, środek 228; ikona adaptacyjna pokazuje środkowe 2/3, czyli okrąg o promieniu
+      150 — najdalszy punkt znaku wypada na 142, więc żaden kształt systemowej maski
+      (koło, kwadrat zaokrąglony, kropla) go nie przycina;
+    - kropka r=54 to 11 px w ikonie 48 px, piasta r=30 to 6 px, klin igły ma 4 px u podstawy —
+      wszystko powyżej granicy widoczności przy najmniejszej gęstości ekranu;
+    - brak cienkich linii i obrysów: przy skali 1:9,5 każda linia poniżej 14 jednostek znika.
+-->
+<svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!--
+        Kolejność rysowania jest częścią projektu: kropki, potem igła, na końcu piasta.
+        Igła narysowana PRZED kropkami była w całości pod nimi i pod piastą — nie było jej
+        widać ani w podglądzie, ani na ekranie.
+        Klin, nie prostokąt: przy skali 1:9,5 zwężający się kształt czyta się jako wskazanie,
+        a pasek o stałej szerokości jako kreska.
+    -->
+    <circle cx="228" cy="140" r="54" fill="#EF5350" />
+    <circle cx="316" cy="228" r="54" fill="#E0B21E" />
+    <circle cx="228" cy="316" r="54" fill="#66BB6A" />
+    <circle cx="140" cy="228" r="54" fill="#42A5F5" />
+
+    <polygon points="228,104 248,236 208,236" fill="#FFFFFF" />
+
+    <circle cx="228" cy="228" r="30" fill="#FFFFFF" />
+</svg>

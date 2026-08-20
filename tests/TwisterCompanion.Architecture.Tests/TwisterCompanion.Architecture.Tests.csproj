@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <!--
+    Referencje do OBU zewnętrznych warstw, i to jest cały powód istnienia osobnego projektu
+    testowego: reguła „Presentation nie widzi Infrastructure" da się sprawdzić tylko tam,
+    gdzie widać jedno i drugie. Domain i Application dochodzą tranzytywnie.
+
+    Projekt aplikacji (TwisterCompanion.App) jest poza zasięgiem, bo celuje w Androida —
+    jego reguły sprawdzamy na pliku projektu, nie na zestawie.
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\TwisterCompanion.Infrastructure\TwisterCompanion.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\TwisterCompanion.Presentation\TwisterCompanion.Presentation.csproj" />
+  </ItemGroup>
+
+  <!--
+    Pomocnik odnajdujący katalog repozytorium. Dołączony linkiem, bo korzystają z niego trzy
+    projekty testowe, a trzy kopie tego samego pliku rozjechałyby się po cichu.
+  -->
+  <ItemGroup>
+    <Compile Include="..\Shared\KatalogRepozytorium.cs" Link="Shared\KatalogRepozytorium.cs" />
+  </ItemGroup>
+
+</Project>

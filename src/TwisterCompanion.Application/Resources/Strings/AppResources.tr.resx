@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Teksty interfejsu — język neutralny (angielski).
+
+    Konwencja kluczy: Ekran_Element_Przeznaczenie
+      Home_Button_Game        przycisk na ekranie startowym
+      Settings_Label_Language etykieta na ekranie ustawień
+      Common_*                teksty wspólne dla wielu ekranów
+      EventPack_*_Name        nazwy paczek wbudowanych
+      Event_*                 nazwy wydarzeń z paczek wbudowanych
+
+    Dodając klucz, dopisz go TAKŻE do AppResources.pl.resx — pilnuje tego test
+    LocalizationResourceTests.KazdyKluczNeutralny_MaOdpowiednikPolski.
+  -->
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="App_Name" xml:space="preserve">
+    <value>Twister Companion</value>
+  </data>
+  <data name="Common_Button_Back" xml:space="preserve">
+    <value>Geri</value>
+  </data>
+  <data name="Common_Button_Cancel" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="Common_Button_Ok" xml:space="preserve">
+    <value>Tamam</value>
+  </data>
+  <data name="Common_Error_Title" xml:space="preserve">
+    <value>Bir şeyler ters gitti</value>
+  </data>
+  <data name="Home_Title" xml:space="preserve">
+    <value>Twister Companion</value>
+  </data>
+  <data name="Home_Button_Game" xml:space="preserve">
+    <value>Oyna</value>
+  </data>
+  <data name="Home_Button_Players" xml:space="preserve">
+    <value>Oyuncular</value>
+  </data>
+  <data name="Home_Button_GameModes" xml:space="preserve">
+    <value>Oyun modları</value>
+  </data>
+  <data name="Home_Button_EventPacks" xml:space="preserve">
+    <value>Olaylar</value>
+  </data>
+  <data name="Home_Button_Settings" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="Game_Title" xml:space="preserve">
+    <value>Oyun</value>
+  </data>
+  <data name="Players_Title" xml:space="preserve">
+    <value>Oyuncular</value>
+  </data>
+  <data name="GameModes_Title" xml:space="preserve">
+    <value>Oyun modları</value>
+  </data>
+  <data name="GameModes_Button_Rules" xml:space="preserve">
+    <value>Kurallar</value>
+  </data>
+  <data name="EventPacks_Title" xml:space="preserve">
+    <value>Olaylar</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="Settings_Label_Language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="Settings_Label_Voice" xml:space="preserve">
+    <value>Ses</value>
+  </data>
+  <data name="Settings_Label_TextToSpeech" xml:space="preserve">
+    <value>Hareketleri sesli oku</value>
+  </data>
+  <data name="Settings_Label_SystemVoice" xml:space="preserve">
+    <value>Sistem sesi</value>
+  </data>
+  <data name="Settings_Label_SpeechRate" xml:space="preserve">
+    <value>Konuşma hızı</value>
+  </data>
+  <data name="Settings_Label_SpeechPitch" xml:space="preserve">
+    <value>Ses tonu</value>
+  </data>
+  <data name="Settings_Button_TestVoice" xml:space="preserve">
+    <value>Sesi dene</value>
+  </data>
+  <data name="Settings_Label_NoVoices" xml:space="preserve">
+    <value>Bu cihazda kurulu konuşma sesi yok.</value>
+  </data>
+  <data name="Rules_Title" xml:space="preserve">
+    <value>Kurallar</value>
+  </data>
+  <data name="EventPack_Party_Name" xml:space="preserve">
+    <value>Parti</value>
+  </data>
+  <data name="EventPack_Kids_Name" xml:space="preserve">
+    <value>Çocuklar için</value>
+  </data>
+  <data name="EventPack_Family_Name" xml:space="preserve">
+    <value>Ailece</value>
+  </data>
+  <data name="Event_SwapPlaces" xml:space="preserve">
+    <value>İkiniz de başarabilirseniz herhangi bir oyuncuyla yer değiştirin.</value>
+  </data>
+  <data name="Event_RepeatPreviousMove" xml:space="preserve">
+    <value>Kendi önceki hareketini tekrarla.</value>
+  </data>
+  <data name="Event_SlowMotionRound" xml:space="preserve">
+    <value>Ağır çekim tur</value>
+  </data>
+  <data name="Event_MakeAnimalSound" xml:space="preserve">
+    <value>Bir hayvan sesi çıkar</value>
+  </data>
+  <data name="Event_CountToFiveAloud" xml:space="preserve">
+    <value>Yüksek sesle beşe kadar say</value>
+  </data>
+  <data name="Event_HighFiveNeighbour" xml:space="preserve">
+    <value>Yanındaki oyuncuyla el çırp</value>
+  </data>
+  <data name="Event_SingChorus" xml:space="preserve">
+    <value>En sevdiğin şarkının nakaratını söyle.</value>
+  </data>
+  <data name="Event_ComplimentNeighbour" xml:space="preserve">
+    <value>Yanındaki oyuncuya bir iltifat et</value>
+  </data>
+  <data name="Event_TellShortJoke" xml:space="preserve">
+    <value>Kısa bir fıkra anlat</value>
+  </data>
+  <data name="Event_EyesClosedForTwoMoves" xml:space="preserve">
+    <value>Sonraki iki harekette gözlerin kapalı kalsın</value>
+  </data>
+  <data name="Common_Info_Title" xml:space="preserve">
+    <value>Bilgi</value>
+  </data>
+  <data name="Game_Label_Turn" xml:space="preserve">
+    <value>{0}. tur</value>
+  </data>
+  <data name="Game_Label_Paused" xml:space="preserve">
+    <value>Duraklatıldı</value>
+  </data>
+  <data name="Game_Label_AddPlayersFirst" xml:space="preserve">
+    <value>Önce «Oyuncular» ekranından oyuncu ekleyin.</value>
+  </data>
+  <data name="Game_Summary_Winner" xml:space="preserve">
+    <value>{1} turdan sonra kazanan: {0}.</value>
+  </data>
+  <data name="Game_Summary_NoWinner" xml:space="preserve">
+    <value>Oyun {0} turdan sonra bitti.</value>
+  </data>
+  <data name="Game_Button_Start" xml:space="preserve">
+    <value>Oyunu başlat</value>
+  </data>
+  <data name="Game_Button_Next" xml:space="preserve">
+    <value>Sonraki</value>
+  </data>
+  <data name="Game_Button_Repeat" xml:space="preserve">
+    <value>Tekrar</value>
+  </data>
+  <data name="Game_Button_Pause" xml:space="preserve">
+    <value>Duraklat</value>
+  </data>
+  <data name="Game_Button_Resume" xml:space="preserve">
+    <value>Devam</value>
+  </data>
+  <data name="Game_Button_End" xml:space="preserve">
+    <value>Bitir</value>
+  </data>
+  <data name="Players_Entry_Placeholder" xml:space="preserve">
+    <value>Oyuncu adı</value>
+  </data>
+  <data name="Players_Button_Add" xml:space="preserve">
+    <value>Ekle</value>
+  </data>
+  <data name="Players_Button_Remove" xml:space="preserve">
+    <value>Çıkar</value>
+  </data>
+  <data name="Players_Label_Empty" xml:space="preserve">
+    <value>Henüz oyuncu yok. İlkini ekleyin.</value>
+  </data>
+  <data name="EventPacks_Label_CopyNameFormat" xml:space="preserve">
+    <value>{0} (kopya)</value>
+  </data>
+  <data name="EventPacks_Label_BuiltInReadOnly" xml:space="preserve">
+    <value>Uygulamayla gelen paketler değiştirilemez. Paketi çoğaltın ve kopyayı düzenleyin.</value>
+  </data>
+  <data name="EventPacks_Confirm_DeleteTitle" xml:space="preserve">
+    <value>Paketi sil</value>
+  </data>
+  <data name="EventPacks_Confirm_DeleteMessage" xml:space="preserve">
+    <value>«{0}» paketi silinsin mi?</value>
+  </data>
+  <data name="EventPacks_Button_Delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="EventPacks_Label_TotalChanceFormat" xml:space="preserve">
+    <value>Toplam olasılık: %{0}</value>
+  </data>
+  <data name="EventPacks_Entry_PackName" xml:space="preserve">
+    <value>Paket adı</value>
+  </data>
+  <data name="EventPacks_Button_New" xml:space="preserve">
+    <value>Yeni paket</value>
+  </data>
+  <data name="EventPacks_Button_SetActive" xml:space="preserve">
+    <value>Seç</value>
+  </data>
+  <data name="EventPacks_Button_ClearActive" xml:space="preserve">
+    <value>Olaysız oyna</value>
+  </data>
+  <data name="EventPacks_Button_Duplicate" xml:space="preserve">
+    <value>Çoğalt</value>
+  </data>
+  <data name="EventPacks_Entry_EventName" xml:space="preserve">
+    <value>Olay adı</value>
+  </data>
+  <data name="EventPacks_Button_AddEvent" xml:space="preserve">
+    <value>Olay ekle</value>
+  </data>
+  <data name="EventPacks_Label_Active" xml:space="preserve">
+    <value>kullanımda</value>
+  </data>
+  <data name="EventPacks_Label_BuiltIn" xml:space="preserve">
+    <value>yerleşik</value>
+  </data>
+  <data name="EventPacks_Label_ChanceWarning" xml:space="preserve">
+    <value>Toplam olasılık %100 üzerinde: izin verilen her turda bir olay çıkacak.</value>
+  </data>
+  <data name="EventPacks_Label_Chance" xml:space="preserve">
+    <value>Olasılık</value>
+  </data>
+  <data name="Game_Label_VoiceListening" xml:space="preserve">
+    <value>Dinliyorum…</value>
+  </data>
+  <data name="Game_Label_VoiceWaiting" xml:space="preserve">
+    <value>Mikrofon kısa bir süre bekliyor</value>
+  </data>
+  <data name="Game_Label_VoiceIdle" xml:space="preserve">
+    <value>Mikrofon kapalı: sıra hareket etmekte</value>
+  </data>
+  <data name="Game_Label_VoiceDisabled" xml:space="preserve">
+    <value>Sesle kontrol kapalı</value>
+  </data>
+  <data name="Game_Label_VoiceUnavailable" xml:space="preserve">
+    <value>Sesle kontrol kullanılamıyor</value>
+  </data>
+  <data name="Game_Label_VoiceCommandHeard" xml:space="preserve">
+    <value>Duydum: {0}</value>
+  </data>
+  <data name="Game_VoiceCommand_Next" xml:space="preserve">
+    <value>Sonraki</value>
+  </data>
+  <data name="Game_VoiceCommand_Repeat" xml:space="preserve">
+    <value>Tekrar</value>
+  </data>
+  <data name="Game_VoiceCommand_Pause" xml:space="preserve">
+    <value>Duraklat</value>
+  </data>
+  <data name="Game_VoiceCommand_Resume" xml:space="preserve">
+    <value>Devam</value>
+  </data>
+  <data name="Game_VoiceCommand_EliminatePlayer" xml:space="preserve">
+    <value>Oyuncu elendi</value>
+  </data>
+  <data name="Settings_Label_VoiceControl" xml:space="preserve">
+    <value>Sesle kontrol</value>
+  </data>
+  <data name="Settings_Label_VoiceControlHint" xml:space="preserve">
+    <value>Oyun sırasında şunları söyleyebilirsiniz: sonraki, tekrar, duraklat, devam.</value>
+  </data>
+  <data name="Settings_Label_VoiceListeningDelay" xml:space="preserve">
+    <value>Dinlemeden önceki hareket süresi (sn)</value>
+  </data>
+  <data name="Settings_Label_MicrophoneDenied" xml:space="preserve">
+    <value>Mikrofon izni olmadan sesle kontrol kapalı kalır. Oyun düğmelerle çalışır.</value>
+  </data>
+  <data name="Settings_Label_VoiceControlUnavailable" xml:space="preserve">
+    <value>Bu cihazda konuşma tanıma yok.</value>
+  </data>
+  <data name="GameMode_Classic_Name" xml:space="preserve">
+    <value>Klasik</value>
+  </data>
+  <data name="GameMode_Classic_Description" xml:space="preserve">
+    <value>Bildiğiniz Twister. Olaylar yalnızca bir paket seçerseniz çıkar.</value>
+  </data>
+  <data name="GameMode_Classic_Rules" xml:space="preserve">
+    <value>Uygulama bir oyuncunun adını söyler, kısa bir an sonra da bir uzuv ile bir renk. O uzvu, o renkteki boş bir dairenin üstüne koyun ve orada tutun.
+
+Sonraki tura siz geçirirsiniz: «Sonraki» düğmesiyle ya da sesle. Otomatik modda (ayarlardan açın) tur belirlenen sürenin sonunda kendiliğinden değişir.
+
+Olaylar size bağlı: bir olay paketi seçerseniz oyun boyunca olaylar çıkar. Paket seçmezseniz klasik Twister oynarsınız, yalnızca hareketler.
+
+Uygulama kimseyi elemez: bir oyuncu düştüğünde adının yanındaki düğmeye dokunun. Ayakta kalan son kişi kazanır.</value>
+  </data>
+  <data name="GameMode_Hardcore_Name" xml:space="preserve">
+    <value>Hardcore</value>
+  </data>
+  <data name="GameMode_Hardcore_Description" xml:space="preserve">
+    <value>Daha zor diziler, sık olaylar ve yarı yarıya süre.</value>
+  </data>
+  <data name="GameMode_Hardcore_Rules" xml:space="preserve">
+    <value>Temel kurallar klasik modun aynısı, üç farkla.
+
+Hareketler olabildiğince rahatsız olacak şekilde seçilir: aynı uzuv neredeyse hiç iki kez üst üste gelmez, tekrarlar birbirinden uzak tutulur ve hiçbir şeyi değiştirmeyen hareket pratikte devre dışıdır.
+
+Olaylar çok daha sık çıkar ve üst üste turlarda gelebilir.
+
+Süre yarıya iner: bu mod hem hareket süresini hem görev süresini ayarlardaki değerin %50'sine düşürür. Manuel modda bu olay görevleri için geçerlidir, otomatik modda hareket süresi için de.
+
+Otomatik modu açmadıysanız sonraki tura düğmeyle ya da sesle geçersiniz.</value>
+  </data>
+  <data name="GameMode_Kids_Name" xml:space="preserve">
+    <value>Çocuklar için</value>
+  </data>
+  <data name="GameMode_Kids_Description" xml:space="preserve">
+    <value>Kolay hareketler, daha çok süre ve eleme yok.</value>
+  </data>
+  <data name="GameMode_Kids_Rules" xml:space="preserve">
+    <value>Temel kurallar klasik modun aynısı, ama önemli bir fark var: **kimse elenmiyor**. Düşmenin bir bedeli yok, oyun basitçe devam eder ve adların yanında eleme düğmesi görünmez.
+
+Hareketler daha kolay: aynı uzuv ve aynı renk tekrarlanabilir, böylece çocuk minderin bir ucundan öbürüne kıvrılmak zorunda kalmaz.
+
+Süre yarı yarıya artar: bu mod hem hareket süresini hem görev süresini ayarlardaki değerin %150'sine çıkarır.
+
+Otomatik modu açmadıysanız sonraki tura düğmeyle ya da sesle geçersiniz.</value>
+  </data>
+  <data name="GameMode_Party_Name" xml:space="preserve">
+    <value>Parti</value>
+  </data>
+  <data name="GameMode_Party_Description" xml:space="preserve">
+    <value>Eğlenmeye gelmiş bir grup için bol olay.</value>
+  </data>
+  <data name="GameMode_Party_Rules" xml:space="preserve">
+    <value>Temel kurallar klasik modun aynısı, olaylar çok sık çıkar.
+
+Hareketler normal kalır: eğlence, pozların zorluğundan değil olaylardan gelir. Süreler sizin belirlediğiniz gibidir.
+
+Başka bir paket seçmezseniz «Parti» paketini kullanır.
+
+Otomatik modu açmadıysanız sonraki tura düğmeyle ya da sesle geçersiniz.</value>
+  </data>
+  <data name="GameMode_Singing_Name" xml:space="preserve">
+    <value>Şarkılı</value>
+  </data>
+  <data name="GameMode_Singing_Description" xml:space="preserve">
+    <value>Şarkı çevresinde olaylar, görev için daha çok süre.</value>
+  </data>
+  <data name="GameMode_Singing_Rules" xml:space="preserve">
+    <value>Temel kurallar klasik modun aynısı, olaylar şarkı söylemeyi, mırıldanmayı ya da bir ses çıkarmayı ister.
+
+Görevin kendisi yarı yarıya daha çok süre alır (ayarlardaki değerin %150'si), çünkü bir nakarat söylemek elini bir yere koymaktan uzun sürer. Hareket süresi değişmez.
+
+Başka bir paket seçmezseniz «Ailece» paketini kullanır: içinde şarkı görevleri var. Baştan sona şarkıyla dolu bir paketle en iyi çalışır.
+
+Otomatik modu açmadıysanız sonraki tura düğmeyle ya da sesle geçersiniz.</value>
+  </data>
+  <data name="GameMode_Drinking_Name" xml:space="preserve">
+    <value>Parti 18+</value>
+  </data>
+  <data name="GameMode_Drinking_Description" xml:space="preserve">
+    <value>Yalnızca yetişkinler için. Şimdilik kullanılamıyor.</value>
+  </data>
+  <data name="GameMode_Drinking_Rules" xml:space="preserve">
+    <value>Bu mod hazır, ama uygulamanın bu sürümünde kullanılamıyor.</value>
+  </data>
+  <data name="GameModes_Label_Active" xml:space="preserve">
+    <value>Seçili</value>
+  </data>
+  <data name="GameModes_Button_Select" xml:space="preserve">
+    <value>Kullan</value>
+  </data>
+  <data name="GameModes_Label_Empty" xml:space="preserve">
+    <value>Kullanılabilir oyun modu yok.</value>
+  </data>
+  <data name="Rules_Label_Missing" xml:space="preserve">
+    <value>Bu modun kural açıklaması yok.</value>
+  </data>
+  <data name="Game_Label_CountdownTask" xml:space="preserve">
+    <value>Görev süresi</value>
+  </data>
+  <data name="Game_Label_CountdownMove" xml:space="preserve">
+    <value>Hareket süresi</value>
+  </data>
+  <data name="Settings_Label_TurnAdvance" xml:space="preserve">
+    <value>Otomatik turlar</value>
+  </data>
+  <data name="Settings_Label_TurnAdvanceHint" xml:space="preserve">
+    <value>Turlar belirlenen süreden sonra kendiliğinden geçer. Bu modda sesle kontrol kapanır: kontrol edilecek bir şey kalmaz.</value>
+  </data>
+  <data name="Settings_Label_MoveTime" xml:space="preserve">
+    <value>Hareket süresi (sn)</value>
+  </data>
+  <data name="Settings_Label_TaskTime" xml:space="preserve">
+    <value>Olay görevi süresi (sn)</value>
+  </data>
+  <data name="Settings_Label_Seconds" xml:space="preserve">
+    <value>sn</value>
+  </data>
+  <data name="Game_Button_PlayerEliminated" xml:space="preserve">
+    <value>Düştü</value>
+  </data>
+  <data name="Settings_Info_AutomaticTurnsOff" xml:space="preserve">
+    <value>Otomatik turlar kapatıldı: sesle kontrolde turun ne zaman geçeceğine siz karar verirsiniz.</value>
+  </data>
+  <data name="Settings_Info_VoiceControlOff" xml:space="preserve">
+    <value>Sesle kontrol kapatıldı: otomatik turlarda kontrol edilecek bir şey kalmıyor.</value>
+  </data>
+  <data name="Game_Button_PlayAgain" xml:space="preserve">
+    <value>Yeniden oyna</value>
+  </data>
+  <data name="Settings_Label_Theme" xml:space="preserve">
+    <value>Görünüm</value>
+  </data>
+  <data name="Settings_Theme_System" xml:space="preserve">
+    <value>Sistemden</value>
+  </data>
+  <data name="Settings_Theme_Light" xml:space="preserve">
+    <value>Açık</value>
+  </data>
+  <data name="Settings_Theme_Dark" xml:space="preserve">
+    <value>Koyu</value>
+  </data>
+  <data name="Common_Label_On" xml:space="preserve">
+    <value>Açık</value>
+  </data>
+  <data name="Common_Label_Off" xml:space="preserve">
+    <value>Kapalı</value>
+  </data>
+  <data name="Game_Setup_Title" xml:space="preserve">
+    <value>Oyun ayrıntıları</value>
+  </data>
+  <data name="Game_Setup_Mode" xml:space="preserve">
+    <value>Oyun modu</value>
+  </data>
+  <data name="Game_Setup_Events" xml:space="preserve">
+    <value>Olaylar</value>
+  </data>
+  <data name="Game_Setup_NoEvents" xml:space="preserve">
+    <value>Olay yok</value>
+  </data>
+  <data name="Game_Setup_EventPackFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Game_Setup_SecondsFormat" xml:space="preserve">
+    <value>{0} sn</value>
+  </data>
+  <data name="Game_Setup_TurnAdvance" xml:space="preserve">
+    <value>Tur geçişi</value>
+  </data>
+  <data name="Game_Setup_TurnManual" xml:space="preserve">
+    <value>Oyuncular karar verir</value>
+  </data>
+  <data name="Game_Setup_TurnAutomatic" xml:space="preserve">
+    <value>Otomatik</value>
+  </data>
+  <data name="Game_Setup_Elimination" xml:space="preserve">
+    <value>Eleme</value>
+  </data>
+  <data name="Game_Setup_EliminationManual" xml:space="preserve">
+    <value>Düşen elenir</value>
+  </data>
+  <data name="Game_Setup_EliminationNone" xml:space="preserve">
+    <value>Kimse elenmez</value>
+  </data>
+  <data name="Settings_Label_Animations" xml:space="preserve">
+    <value>Animasyonlar</value>
+  </data>
+  <data name="Settings_Label_AnimationsHint" xml:space="preserve">
+    <value>Ekranlardaki kısa efektler. Animasyonları sistem ayarlarından kapatırsanız burada da kapalı kalırlar.</value>
+  </data>
+  <data name="Players_Button_Rename" xml:space="preserve">
+    <value>Adı değiştir</value>
+  </data>
+  <data name="Players_Button_ConfirmRename" xml:space="preserve">
+    <value>Adı kaydet</value>
+  </data>
+  <data name="Players_Button_CancelRename" xml:space="preserve">
+    <value>Değişikliği iptal et</value>
+  </data>
+  <data name="Players_Button_MoveUp" xml:space="preserve">
+    <value>Yukarı</value>
+  </data>
+  <data name="Players_Button_MoveDown" xml:space="preserve">
+    <value>Aşağı</value>
+  </data>
+  <data name="Players_Label_Order" xml:space="preserve">
+    <value>Oyuncuların sırası, turların sırasıdır. Adı değiştirmek için üzerine dokunun.</value>
+  </data>
+  <data name="Players_Label_DuplicateName" xml:space="preserve">
+    <value>Listede {0} adlı bir oyuncu zaten var.</value>
+  </data>
+  <data name="Players_Confirm_DeleteTitle" xml:space="preserve">
+    <value>Oyuncu çıkarılsın mı?</value>
+  </data>
+  <data name="Players_Confirm_DeleteMessage" xml:space="preserve">
+    <value>{0} listeden çıkarılsın mı?</value>
+  </data>
+  <data name="Game_Summary_Turns" xml:space="preserve">
+    <value>Oynanan tur</value>
+  </data>
+  <data name="Game_Summary_Duration" xml:space="preserve">
+    <value>Oyun süresi</value>
+  </data>
+  <data name="Game_Summary_DurationFormat" xml:space="preserve">
+    <value>{0} dk {1} sn</value>
+  </data>
+  <data name="Game_Summary_Eliminated" xml:space="preserve">
+    <value>Elenenler, sırayla</value>
+  </data>
+  <data name="Game_Confirm_EndTitle" xml:space="preserve">
+    <value>Oyun bitirilsin mi?</value>
+  </data>
+  <data name="Game_Confirm_EndMessage" xml:space="preserve">
+    <value>Şu anki oyun kazanan olmadan duracak.</value>
+  </data>
+  <data name="Settings_Label_Sounds" xml:space="preserve">
+    <value>Sesler</value>
+  </data>
+  <data name="Settings_Label_SoundsHint" xml:space="preserve">
+    <value>Kısa efektler: seçilen hareket, olay, elenen oyuncu, sayan saat.</value>
+  </data>
+  <data name="Settings_Label_SoundVolume" xml:space="preserve">
+    <value>Efekt sesi</value>
+  </data>
+  <data name="Settings_Label_Haptics" xml:space="preserve">
+    <value>Titreşimler</value>
+  </data>
+  <data name="Settings_Label_HapticsHint" xml:space="preserve">
+    <value>Bir olay çıktığında ve bir oyuncu elendiğinde kısa titreşim. Telefon sessizdeyken de çalışır.</value>
+  </data>
+  <data name="Settings_Button_TestSound" xml:space="preserve">
+    <value>Sesi dene</value>
+  </data>
+  <data name="Home_Button_HowToPlay" xml:space="preserve">
+    <value>Nasıl oynanır</value>
+  </data>
+  <data name="Onboarding_Title" xml:space="preserve">
+    <value>Nasıl oynanır</value>
+  </data>
+  <data name="Onboarding_Label_ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Onboarding_Button_Skip" xml:space="preserve">
+    <value>Atla</value>
+  </data>
+  <data name="Onboarding_Button_Next" xml:space="preserve">
+    <value>Sonraki</value>
+  </data>
+  <data name="Onboarding_Button_Back" xml:space="preserve">
+    <value>Geri</value>
+  </data>
+  <data name="Onboarding_Button_Finish" xml:space="preserve">
+    <value>Oynayalım!</value>
+  </data>
+  <data name="Onboarding_Step1_Title" xml:space="preserve">
+    <value>Twister Companion'a hoş geldiniz</value>
+  </data>
+  <data name="Onboarding_Step1_Body" xml:space="preserve">
+    <value>Merhaba! Bu uygulama Twister oynarken yardımcınız: kartondan çarkın yerini alır ve oyunu baştan sona sizin için yürütür.
+
+Çark kayıp mı? Sorun değil. Uygulama hareketi seçer, oyuncuyu adıyla çağırır ve ne yapması gerektiğini sesli söyler, siz sadece oynarsınız.
+
+İki kişilik oyunu sonunda anlamlı kılan da bu: kimsenin kenarda oturup çark çevirmesi gerekmiyor. Oyunu yürütmenin üç yolu var: manuel, otomatik ve sesle kontrol. Telefon minderin dışında kalabilir, elinize almanız gerekmez.
+
+Kendi olaylarınızı da ekleyebilirsiniz: oyun sırasında rastgele düşen ve her şeyi tersine çeviren kısa görevler.
+
+Twister®, Hasbro'nun ticari markasıdır. Bu uygulama resmi değildir ve ne Hasbro ile ne de oyunu yayımlayanlarla bir bağlantısı yoktur.</value>
+  </data>
+  <data name="Onboarding_Step2_Title" xml:space="preserve">
+    <value>Başlamadan önce</value>
+  </data>
+  <data name="Onboarding_Step2_Body" xml:space="preserve">
+    <value>Oyuncular — oynayacak herkesin adını yazın. Uygulama her turda bu adları çağırır.
+
+Olaylar — hazır bir paket seçin ya da kendinizi kurun, ne sıklıkta çıkacaklarını belirleyin. Olaysız da oynayabilirsiniz.
+
+Oyun modları — klasik, çocuklar için, parti, hardcore. Her biri tempoyu ve zorluğu değiştirir; tam olarak ne yaptığı «Kurallar» bölümünde yazıyor.
+
+Ayarlar — ses ve konuşma hızı, efektler, hareket süresi ve turların nasıl geçtiği.
+
+Sonra «Oyna»yı açıp «Oyunu başlat»a basmanız yeter. Ayarladığınız her şey bir sonraki oyun için saklanır.</value>
+  </data>
+  <data name="Onboarding_Step3_Title" xml:space="preserve">
+    <value>Bir oyun nasıl geçer</value>
+  </data>
+  <data name="Onboarding_Step3_Body" xml:space="preserve">
+    <value>Uygulama bir oyuncuyu adıyla çağırır, kısa bir ara verir ve talimatı söyler: bir uzuv ve bir renk. Ekranın ortasında o renkte büyük bir daire görünür — söylenen eli ya da ayağı minderdeki boş bir dairenin üstüne koyun ve orada tutun.
+
+Dairenin altında geri sayım işler: hareket için kalan süre bu. Manuel modda sayım bittiğinde uygulama sizi bekler; sonraki tur «Sonraki» düğmesiyle başlar. Otomatik modda kendiliğinden devam eder.
+
+Düşen elenir: düğmelerin altındaki şeritte o kişinin adına dokunun, adı üstü çizilir. Minderde kalan son kişi kazanır.
+
+Sesle kontrol açıkken telefona dokunmanız gerekmez: «sonraki», «tekrar», «duraklat» ya da «devam» deyin. Mikrofonun dinlediğini kısa bir sinyal haber verir: açılışta bir ton, kapanışta inen bir ton.
+
+Talimatı duymadınız mı? «Tekrar» yeniden okur.</value>
+  </data>
+  <data name="Settings_Label_Data" xml:space="preserve">
+    <value>Veriler</value>
+  </data>
+  <data name="Settings_Button_Reset" xml:space="preserve">
+    <value>Ayarları sıfırla</value>
+  </data>
+  <data name="Settings_Confirm_ResetTitle" xml:space="preserve">
+    <value>Ayarlar sıfırlansın mı?</value>
+  </data>
+  <data name="Settings_Confirm_ResetMessage" xml:space="preserve">
+    <value>Tüm ayarlar başlangıç değerlerine döner. Oyuncular, olay paketleri ve kayıtlı oyun kalır.</value>
+  </data>
+  <data name="Settings_Button_Erase" xml:space="preserve">
+    <value>Verilerimi sil</value>
+  </data>
+  <data name="Settings_Confirm_EraseTitle" xml:space="preserve">
+    <value>Tüm veriler silinsin mi?</value>
+  </data>
+  <data name="Settings_Confirm_EraseMessage" xml:space="preserve">
+    <value>Bu işlem ayarları, oyuncu listesini, kendi olay paketlerinizi ve kayıtlı oyunu siler. Uygulamayla gelen paketler kalır. Geri alınamaz.</value>
+  </data>
+  <data name="Settings_Info_EraseDone" xml:space="preserve">
+    <value>Veriler silindi.</value>
+  </data>
+  <data name="Settings_Button_HowToPlay" xml:space="preserve">
+    <value>«Nasıl oynanır»ı göster</value>
+  </data>
+  <data name="Event_SwapRightHandWithOther" xml:space="preserve">
+    <value>Sağ elini başka bir oyuncunun sol eliyle değiştir.</value>
+  </data>
+  <data name="Event_RoarLikeLion" xml:space="preserve">
+    <value>Aslan gibi kükre, elinden geldiği kadar yüksek sesle.</value>
+  </data>
+  <data name="Event_SingOneLine" xml:space="preserve">
+    <value>Herhangi bir şarkıdan bir satır söyle.</value>
+  </data>
+  <data name="Event_SingYourNameOpera" xml:space="preserve">
+    <value>Adını opera gibi söyle.</value>
+  </data>
+  <data name="Event_TongueTwister" xml:space="preserve">
+    <value>«Bir berber bir berbere gel beraber bir berber dükkânı açalım dedi» de, hiç şaşırmadan.</value>
+  </data>
+  <data name="Event_ShoutChampion" xml:space="preserve">
+    <value>«Twister şampiyonu benim!» diye elinden geldiği kadar yüksek sesle bağır.</value>
+  </data>
+  <data name="Event_SingBirthdaySongFast" xml:space="preserve">
+    <value>«İyi ki doğdun»u iki kat hızlı söyle.</value>
+  </data>
+  <data name="Event_SpeakLikeRobot" xml:space="preserve">
+    <value>Herhangi bir cümleyi robot sesiyle söyle.</value>
+  </data>
+  <data name="Event_LaughLikeVillain" xml:space="preserve">
+    <value>Film kötüsü gibi gül.</value>
+  </data>
+  <data name="Event_FiveFruits" xml:space="preserve">
+    <value>Geri sayım bitmeden beş meyve say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterA" xml:space="preserve">
+    <value>Geri sayım bitmeden «A» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterK" xml:space="preserve">
+    <value>Geri sayım bitmeden «K» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterS" xml:space="preserve">
+    <value>Geri sayım bitmeden «S» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterD" xml:space="preserve">
+    <value>Geri sayım bitmeden «D» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterF" xml:space="preserve">
+    <value>Geri sayım bitmeden «F» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterW" xml:space="preserve">
+    <value>Geri sayım bitmeden «V» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterL" xml:space="preserve">
+    <value>Geri sayım bitmeden «L» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterP" xml:space="preserve">
+    <value>Geri sayım bitmeden «P» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterM" xml:space="preserve">
+    <value>Geri sayım bitmeden «M» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterE" xml:space="preserve">
+    <value>Geri sayım bitmeden «E» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterG" xml:space="preserve">
+    <value>Geri sayım bitmeden «G» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterI" xml:space="preserve">
+    <value>Geri sayım bitmeden «İ» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterZ" xml:space="preserve">
+    <value>Geri sayım bitmeden «Z» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterB" xml:space="preserve">
+    <value>Geri sayım bitmeden «B» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterR" xml:space="preserve">
+    <value>Geri sayım bitmeden «R» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_FiveWordsLetterU" xml:space="preserve">
+    <value>Geri sayım bitmeden «U» ile başlayan beş kelime say.</value>
+  </data>
+  <data name="Event_NamePlayersAlphabetically" xml:space="preserve">
+    <value>Bütün oyuncuların adını alfabe sırasıyla say.</value>
+  </data>
+  <data name="Event_FiveThingsInRoom" xml:space="preserve">
+    <value>Bu odada gördüğün beş şeyi say.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterW" xml:space="preserve">
+    <value>«V» ile başlayan üç şehir say.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterK" xml:space="preserve">
+    <value>«K» ile başlayan üç şehir say.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterR" xml:space="preserve">
+    <value>«R» ile başlayan üç şehir say.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterL" xml:space="preserve">
+    <value>«L» ile başlayan üç şehir say.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterS" xml:space="preserve">
+    <value>«S» ile başlayan üç şehir say.</value>
+  </data>
+  <data name="Event_StickOutTongue" xml:space="preserve">
+    <value>Dilini çıkar.</value>
+  </data>
+  <data name="Event_ScariestFace" xml:space="preserve">
+    <value>Yapabildiğin en korkutucu yüzü yap.</value>
+  </data>
+  <data name="Event_WinkAtEveryone" xml:space="preserve">
+    <value>Her oyuncuya tek tek göz kırp.</value>
+  </data>
+  <data name="Event_OneHandUpUntilCountdownEnds" xml:space="preserve">
+    <value>Bir elini kaldır ve geri sayım bitene kadar havada tut.</value>
+  </data>
+  <data name="Event_OneFootOffUntilCountdownEnds" xml:space="preserve">
+    <value>Bir ayağını minderden kaldır ve geri sayım bitene kadar öyle tut.</value>
+  </data>
+  <data name="Event_SwapOwnHands" xml:space="preserve">
+    <value>Ellerini değiştir: sol el sağın dairesine, sağ el solun dairesine.</value>
+  </data>
+  <data name="Event_SwapOwnFeet" xml:space="preserve">
+    <value>Ayaklarını değiştir: sol ayak sağın dairesine, sağ ayak solun dairesine.</value>
+  </data>
+  <data name="Event_SlowMotionNextMove" xml:space="preserve">
+    <value>Sonraki hareketi ağır çekimde yap.</value>
+  </data>
+  <data name="Event_NoseToKnee" xml:space="preserve">
+    <value>Burnunla dizine dokunmayı dene.</value>
+  </data>
+  <data name="Event_SwapLeftFootSpot" xml:space="preserve">
+    <value>Sol ayağının altındaki daireyi yanındaki oyuncuyla değiştir, mümkünse.</value>
+  </data>
+  <data name="Event_HoldStillUntilCountdownEnds" xml:space="preserve">
+    <value>Geri sayım bitene kadar hiç kıpırdamadan dur.</value>
+  </data>
+  <data name="Event_RiseTenCentimetres" xml:space="preserve">
+    <value>10 cm yüksel ve turunun sonuna kadar öyle kal.</value>
+  </data>
+  <data name="Event_WhisperUntilRoundEnds" xml:space="preserve">
+    <value>Turun sonuna kadar yalnızca fısıldayarak konuş.</value>
+  </data>
+  <data name="Event_NoLaughingUntilRoundEnds" xml:space="preserve">
+    <value>Turun sonuna kadar gülmek yasak.</value>
+  </data>
+  <data name="Event_OneEyeClosedUntilRoundEnds" xml:space="preserve">
+    <value>Turun sonuna kadar bir gözün kapalı kalsın.</value>
+  </data>
+  <data name="Event_ShoutHopEachMove" xml:space="preserve">
+    <value>Turun sonuna kadar her hareketinde «hop!» diye bağır.</value>
+  </data>
+  <data name="Event_AddressEveryoneAsHighness" xml:space="preserve">
+    <value>Turun sonuna kadar herkese «Majesteleri» diye seslen.</value>
+  </data>
+  <data name="Event_ThankSomeone" xml:space="preserve">
+    <value>Bu hafta senin için yaptığı bir şey için birine teşekkür et.</value>
+  </data>
+  <data name="Event_FavouriteThingWithRightNeighbour" xml:space="preserve">
+    <value>Sağındaki kişiyle birlikte yapmaktan en çok ne hoşlandığını söyle.</value>
+  </data>
+  <data name="Event_SayOneThingProudOf" xml:space="preserve">
+    <value>Gurur duyduğun bir şeyi yüksek sesle söyle.</value>
+  </data>
+  <data name="Event_AskForBalanceHelp" xml:space="preserve">
+    <value>Herhangi bir oyuncudan dengeni korumana yardım etmesini iste: yardım etmek zorunda.</value>
+  </data>
+  <data name="Event_TellOldestWhatYouLearned" xml:space="preserve">
+    <value>En yaşlı oyuncuya ondan öğrendiğin bir şeyi söyle.</value>
+  </data>
+  <data name="Event_NameRoundHero" xml:space="preserve">
+    <value>«Turun kahramanı» unvanını verdiğin oyuncuyu seç.</value>
+  </data>
+  <data name="Event_BestThingToday" xml:space="preserve">
+    <value>Bugünün en güzel şeyini tek cümleyle anlat.</value>
+  </data>
+  <data name="Event_ProposeGroupCheer" xml:space="preserve">
+    <value>Bir grup tezahüratı öner: herkes senden sonra bir kez tekrarlar.</value>
+  </data>
+  <data name="Event_MeowThreeTimes" xml:space="preserve">
+    <value>Kedi gibi üç kez miyavla.</value>
+  </data>
+  <data name="Event_BarkLikePuppy" xml:space="preserve">
+    <value>Köpek yavrusu gibi havla.</value>
+  </data>
+  <data name="Event_FireEngineSound" xml:space="preserve">
+    <value>İtfaiye arabası sesi çıkar.</value>
+  </data>
+  <data name="Event_RaceCarSound" xml:space="preserve">
+    <value>Yarış arabası sesi çıkar.</value>
+  </data>
+  <data name="Event_SingKittenSong" xml:space="preserve">
+    <value>Bir kedi şarkısı söyle.</value>
+  </data>
+  <data name="Event_SayHelloDeepVoice" xml:space="preserve">
+    <value>«Günaydın» de, çok kalın bir sesle.</value>
+  </data>
+  <data name="Event_SayHelloMouseVoice" xml:space="preserve">
+    <value>«Günaydın» de, çok ince bir fare sesiyle.</value>
+  </data>
+  <data name="Event_GhostSound" xml:space="preserve">
+    <value>Hayalet sesi çıkar: «uuuuh!».</value>
+  </data>
+  <data name="Event_SneezeLoudly" xml:space="preserve">
+    <value>Elinden geldiği kadar yüksek sesle hapşır.</value>
+  </data>
+  <data name="Event_SingYourNameThreeTimes" xml:space="preserve">
+    <value>Adını üç kez şarkı gibi söyle.</value>
+  </data>
+  <data name="Event_MonkeyFaceScratchHead" xml:space="preserve">
+    <value>Maymun yüzü yap ve kafanı kaşı.</value>
+  </data>
+  <data name="Event_TurtleNeck" xml:space="preserve">
+    <value>Boynunu kaplumbağa gibi öne uzat ve geri çek.</value>
+  </data>
+  <data name="Event_CountToTen" xml:space="preserve">
+    <value>Ona kadar say.</value>
+  </data>
+  <data name="Event_CountBackwardsFromFive" xml:space="preserve">
+    <value>Beşten bire kadar geriye say.</value>
+  </data>
+  <data name="Event_FiveLetters" xml:space="preserve">
+    <value>Alfabeden beş harf say.</value>
+  </data>
+  <data name="Event_ColoursOnMat" xml:space="preserve">
+    <value>Minderde gördüğün renkleri say.</value>
+  </data>
+  <data name="Event_ThreeAnimals" xml:space="preserve">
+    <value>Üç hayvan say.</value>
+  </data>
+  <data name="Event_TwoSweetThings" xml:space="preserve">
+    <value>İki tatlı şey say.</value>
+  </data>
+  <data name="Event_SayDayOfWeek" xml:space="preserve">
+    <value>Bugün haftanın hangi günü olduğunu söyle.</value>
+  </data>
+  <data name="Event_ThreeBlueThings" xml:space="preserve">
+    <value>Üç mavi şey say.</value>
+  </data>
+  <data name="Event_FavouriteFruitAndWhy" xml:space="preserve">
+    <value>En sevdiğin meyveyi ve neden sevdiğini söyle.</value>
+  </data>
+  <data name="Event_TongueOutOneEyeShut" xml:space="preserve">
+    <value>Dilini çıkar ve bir gözünü kapat.</value>
+  </data>
+  <data name="Event_SadThenHappyFace" xml:space="preserve">
+    <value>Çok çok üzgün bir yüz yap, sonra çok neşeli bir yüz.</value>
+  </data>
+  <data name="Event_BalloonCheeks" xml:space="preserve">
+    <value>Yanaklarını balon gibi şişir.</value>
+  </data>
+  <data name="Event_FunniestFace" xml:space="preserve">
+    <value>Bildiğin en komik yüzü yap.</value>
+  </data>
+  <data name="Event_SleepyBearFace" xml:space="preserve">
+    <value>Uykulu ayı yüzü yap ve gözlerini bir an kapat.</value>
+  </data>
+  <data name="Event_SmileAtEveryone" xml:space="preserve">
+    <value>Her oyuncuya tek tek gülümse.</value>
+  </data>
+  <data name="Event_WaveToEveryone" xml:space="preserve">
+    <value>Herkese elini sallayarak selam ver.</value>
+  </data>
+  <data name="Event_TapSpotThreeTimes" xml:space="preserve">
+    <value>Üstünde durduğun daireye parmağınla üç kez vur.</value>
+  </data>
+  <data name="Event_LiftFootCountToThree" xml:space="preserve">
+    <value>Bir ayağını kaldır ve üçe kadar say.</value>
+  </data>
+  <data name="Event_NodYesFiveTimes" xml:space="preserve">
+    <value>Beş kez başınla «evet» yap.</value>
+  </data>
+  <data name="Event_ShakeHeadNoFiveTimes" xml:space="preserve">
+    <value>Beş kez başınla «hayır» yap.</value>
+  </data>
+  <data name="Event_PianistFingers" xml:space="preserve">
+    <value>Parmaklarını piyanist gibi oynat.</value>
+  </data>
+  <data name="Event_StampFootThreeTimes" xml:space="preserve">
+    <value>Ayağını üç kez yere vur, ama minderden düşme.</value>
+  </data>
+  <data name="Event_MoveHandToSameColourSpot" xml:space="preserve">
+    <value>Elini yandaki aynı renkteki daireye geçir.</value>
+  </data>
+  <data name="Event_StandStillLikeStatue" xml:space="preserve">
+    <value>Beş saniye heykel gibi kıpırdamadan dur.</value>
+  </data>
+  <data name="Event_NoseToShoulder" xml:space="preserve">
+    <value>Burnunla omzuna dokunmayı dene.</value>
+  </data>
+  <data name="Event_ArmWindmill" xml:space="preserve">
+    <value>Bir kolunu havada yel değirmeni gibi çevir.</value>
+  </data>
+  <data name="Event_TongueOutUntilRoundEnds" xml:space="preserve">
+    <value>Turun sonuna kadar dilin dışarıda kalsın.</value>
+  </data>
+  <data name="Event_CallYourselfBigDragon" xml:space="preserve">
+    <value>Turun sonuna kadar kendine «kocaman ejderha» de.</value>
+  </data>
+  <data name="Event_SmileUntilRoundEnds" xml:space="preserve">
+    <value>Turun sonuna kadar durmadan gülümse.</value>
+  </data>
+  <data name="Event_HighFiveEveryone" xml:space="preserve">
+    <value>Bütün oyuncularla tek tek el çırp.</value>
+  </data>
+  <data name="Event_TellNeighbourWhatYouLike" xml:space="preserve">
+    <value>Yanındaki oyuncuya onun neyini sevdiğini söyle.</value>
+  </data>
+  <data name="Event_SayYouAreGreat" xml:space="preserve">
+    <value>Birine «sen harikasın!» de.</value>
+  </data>
+  <data name="Event_BlowAKiss" xml:space="preserve">
+    <value>En yakındaki oyuncuya havadan bir öpücük yolla.</value>
+  </data>
+  <data name="Event_ShoutHurray" xml:space="preserve">
+    <value>«Yaşa!» diye bağır.</value>
+  </data>
+  <data name="Event_RepeatPreviousPlayersMove" xml:space="preserve">
+    <value>Önceki oyuncunun son hareketini tekrarla.</value>
+  </data>
+  <data name="Event_TakeASip" xml:space="preserve">
+    <value>Bir yudum al.</value>
+  </data>
+  <data name="Event_TakeABite" xml:space="preserve">
+    <value>Bir şeyden bir lokma al.</value>
+  </data>
+  <data name="Event_FastMotionRound" xml:space="preserve">
+    <value>İki kat hızlı tur.</value>
+  </data>
+  <data name="Event_FiveCarBrands" xml:space="preserve">
+    <value>Geri sayım bitmeden beş araba markası say.</value>
+  </data>
+  <data name="Event_ThreeArtistsThisWeek" xml:space="preserve">
+    <value>Bu hafta dinlediğin üç sanatçıyı say.</value>
+  </data>
+  <data name="Event_FiveThingsInFridge" xml:space="preserve">
+    <value>Buzdolabında bulunan beş şey say.</value>
+  </data>
+  <data name="Event_FiveThingsInYourRoom" xml:space="preserve">
+    <value>Odanda bulunan beş şey say.</value>
+  </data>
+  <data name="Event_ThreeEuropeanCapitals" xml:space="preserve">
+    <value>Üç Avrupa başkenti say.</value>
+  </data>
+  <data name="Event_ThreeRhymesWithYourName" xml:space="preserve">
+    <value>Adınla uyaklı üç kelime söyle.</value>
+  </data>
+  <data name="Event_SentenceInForeignLanguage" xml:space="preserve">
+    <value>Yabancı bir dilde herhangi bir cümle söyle.</value>
+  </data>
+  <data name="Event_ImitateSomeoneInRoom" xml:space="preserve">
+    <value>Bu odadan birini taklit et: ötekiler kim olduğunu bilsin.</value>
+  </data>
+  <data name="Event_PartyTongueTwister" xml:space="preserve">
+    <value>«Şu köşe yaz köşesi, şu köşe kış köşesi» tekerlemesini üç kez söyle.</value>
+  </data>
+  <data name="Event_CopyRightNeighboursMove" xml:space="preserve">
+    <value>Sağındaki oyuncunun hareketini tekrarla.</value>
+  </data>
+  <data name="Event_NextMoveEyesClosed" xml:space="preserve">
+    <value>Sonraki hareketi gözlerin kapalı yap.</value>
+  </data>
+  <data name="Event_OneHandUpUntilTurnEnds" xml:space="preserve">
+    <value>Bir elini kaldır ve turunun sonuna kadar havada tut.</value>
+  </data>
+  <data name="Event_NextMoveEyesOnCeiling" xml:space="preserve">
+    <value>Sonraki hareketi gözlerini tavandan ayırmadan yap.</value>
+  </data>
+  <data name="Event_HoldStillUntilRoundEnds" xml:space="preserve">
+    <value>Turun sonuna kadar en küçük hareket olmadan dayan.</value>
+  </data>
+  <data name="Event_ComplimentAnyone" xml:space="preserve">
+    <value>İstediğin kişiye bir iltifat et.</value>
+  </data>
+  <data name="Event_ShareSecretFact" xml:space="preserve">
+    <value>Burada kimsenin bilmediği bir şeyini anlat.</value>
+  </data>
+  <data name="Event_PickPartnerForNextMove" xml:space="preserve">
+    <value>Sonraki hareketi seninle birlikte yapacak birini seç.</value>
+  </data>
+  <data name="Event_GuiltyPleasureSong" xml:space="preserve">
+    <value>Çalma listendeki en utandığın şarkıyı söyle.</value>
+  </data>
+  <data name="Event_AskOneHonestQuestion" xml:space="preserve">
+    <value>Bir oyuncu seç ve bir soru sor: dürüstçe cevap vermek zorunda.</value>
+  </data>
+  <data name="Event_HighFiveWithoutFalling" xml:space="preserve">
+    <value>Minderden düşmeden ulaşabildiğin herkesle el çırp.</value>
+  </data>
+  <data name="Event_MostAnnoyingAboutRightNeighbour" xml:space="preserve">
+    <value>Sağındaki kişinin en sinir bozucu yanını söyle.</value>
+  </data>
+  <data name="Event_MoneyWastedThisMonth" xml:space="preserve">
+    <value>Bu ay saçmalığa aşağı yukarı ne kadar para harcadığını itiraf et.</value>
+  </data>
+  <data name="Event_RoastSomeone" xml:space="preserve">
+    <value>İstediğin kişiyi iğneleyerek bir güzel geç.</value>
+  </data>
+  <data name="Event_ShowLastPhoto" xml:space="preserve">
+    <value>Galerindeki son fotoğrafı göster.</value>
+  </data>
+  <data name="Event_LastSearchQuery" xml:space="preserve">
+    <value>İnternette en son ne aradığını söyle.</value>
+  </data>
+  <data name="Event_WorstPickupLine" xml:space="preserve">
+    <value>Akla gelen en kötü muhabbet cümlesini birine söyle.</value>
+  </data>
+  <data name="Event_PickDateCandidate" xml:space="preserve">
+    <value>Buluşmaya gideceğin kişiyi göster.</value>
+  </data>
+  <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
+    <value>Seçtiğin kişinin kulağına bir şey fısılda: ötekiler duymayacak.</value>
+  </data>
+  <data name="Event_NextMoveHandOnShoulder" xml:space="preserve">
+    <value>Sonraki hareketi bir elin başka bir oyuncunun omzunda olacak şekilde yap.</value>
+  </data>
+  <data name="Event_NudgeAnotherPlayer" xml:space="preserve">
+    <value>Başka bir oyuncuyu hafifçe dürt, ama devirmeden.</value>
+  </data>
+  <data name="Event_GrabAnotherPlayersFoot" xml:space="preserve">
+    <value>Başka bir oyuncunun ayağını tut.</value>
+  </data>
+  <data name="Event_RightNeighbourAsDish" xml:space="preserve">
+    <value>Sağındaki kişi hangi yemek olurdu, söyle.</value>
+  </data>
+  <data name="Event_ProposePenaltyForNextFall" xml:space="preserve">
+    <value>Minderden düşecek bir sonraki kişi için bir ceza öner.</value>
+  </data>
+</root>

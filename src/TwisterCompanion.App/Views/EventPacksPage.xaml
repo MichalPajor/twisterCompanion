@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase
+    x:Class="TwisterCompanion.App.Views.EventPacksPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:TwisterCompanion.App.Localization"
+    xmlns:views="clr-namespace:TwisterCompanion.App.Views"
+    xmlns:vm="clr-namespace:TwisterCompanion.Presentation.ViewModels;assembly=TwisterCompanion.Presentation"
+    x:DataType="vm:EventPacksViewModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    Title="{loc:Translate EventPacks_Title}">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto,*,Auto"
+          Padding="{StaticResource PagePadding}"
+          RowSpacing="{StaticResource SpacingS}">
+
+        <views:PageHeader Grid.Row="0"
+                          Title="{loc:Translate EventPacks_Title}"
+                          Command="{Binding GoBackCommand}"
+                          BackDescription="{loc:Translate Common_Button_Back}" />
+
+        <!--
+            Nowa paczka. Siatka o stałych kolumnach, a nie układ poziomy: przycisk ma
+            zawsze to samo miejsce i nie da się go wypchnąć za krawędź ekranu
+            dłuższym tekstem w polu obok.
+        -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <Border Grid.Column="0" Style="{StaticResource FieldBorder}" VerticalOptions="Center">
+                <Entry
+                    Placeholder="{loc:Translate EventPacks_Entry_PackName}"
+                    Text="{Binding NewPackName}"
+                    FontSize="{StaticResource FontSizeBody}"
+                    ReturnCommand="{Binding CreatePackCommand}" />
+            </Border>
+            <views:GlyphButton
+                Grid.Column="1"
+                Glyph="＋"
+                Text="{loc:Translate EventPacks_Button_New}"
+                Command="{Binding CreatePackCommand}"
+                ButtonStyle="{StaticResource AccentButton}" />
+        </Grid>
+
+        <!--
+            Lista paczek. Karty, nie same napisy: wiersz z nazwą, liczbą wydarzeń i znakiem
+            używanej paczki to cztery informacje, a bez tła zlewały się w jeden ciąg tekstu.
+            <para>
+            Ten ekran ma <b>dwa</b> stany karty i one nie znaczą tego samego. Paczka
+            <b>używana w rozgrywce</b> dostaje pełne wyróżnienie: obwódkę w kolorze akcji,
+            jaśniejsze tło i znak „✓" — dokładnie to samo, co wybrany tryb gry, bo dla gracza
+            to ta sama informacja („tym grasz"). Paczka <b>zaznaczona</b> to tylko ta, na której
+            działają przyciski pod listą, więc dostaje słabszy znacznik: pionowy pasek przy
+            lewej krawędzi karty.
+            </para>
+            <para>
+            Oba stany maluje wiersz, nie tryb zaznaczania listy. Tryb listy podświetla wiersz
+            kolorem systemu (na Androidzie pomarańczowym, spoza palety aplikacji), a próba
+            nadpisania go stanami wizualnymi kolidowałaby z wyróżnieniem paczki używanej —
+            oba sięgałyby po tło i obrys tej samej karty, a o kolejność zapisów w takim
+            układzie nie da się ręczyć. Dotknięcie karty jest więc zwykłym gestem, tak samo
+            jak pigułka gracza na ekranie rozgrywki.
+            </para>
+        -->
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Packs}" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:PackListItem">
+                    <Border Style="{StaticResource CardBorder}" Padding="0">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding IsActive}" Value="True">
+                                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource SelectionLight}, Dark={StaticResource SelectionDark}}" />
+                                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource AccentAction}, Dark={StaticResource AccentActionDark}}" />
+                                <Setter Property="StrokeThickness" Value="2" />
+                            </DataTrigger>
+                        </Border.Triggers>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EventPacksViewModel}}, Path=SelectPackCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+                        <!--
+                            Pasek zaznaczenia jest osobną kolumną, a nie obwódką karty: obwódka
+                            jest już zajęta przez paczkę używaną w rozgrywce. Karta ma dlatego
+                            odstęp zerowy, a wnętrze własny — inaczej pasek nie dotykałby
+                            krawędzi i wyglądałby na przypadkowy.
+                        -->
+                        <Grid ColumnDefinitions="4,*,Auto" ColumnSpacing="{StaticResource SpacingS}">
+                            <BoxView
+                                Grid.Column="0"
+                                Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                IsVisible="{Binding IsSelected}" />
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" Padding="8,12" VerticalOptions="Center">
+                                <Label Style="{StaticResource BodyLabel}"
+                                       FontAttributes="Bold"
+                                       Text="{Binding DisplayName}" />
+                                <HorizontalStackLayout Spacing="6">
+                                    <Label Style="{StaticResource CaptionLabel}"
+                                           Text="{Binding EventCount, StringFormat='({0})'}" />
+                                    <Label
+                                        Style="{StaticResource CaptionLabel}"
+                                        Text="{loc:Translate EventPacks_Label_BuiltIn}"
+                                        FontAttributes="Italic"
+                                        IsVisible="{Binding IsBuiltIn}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <Label
+                                Grid.Column="2"
+                                Text="✓"
+                                FontSize="22"
+                                FontAttributes="Bold"
+                                Margin="0,0,12,0"
+                                TextColor="{AppThemeBinding Light={StaticResource AccentAction}, Dark={StaticResource AccentActionDark}}"
+                                VerticalOptions="Center"
+                                SemanticProperties.Description="{loc:Translate EventPacks_Label_Active}"
+                                IsVisible="{Binding IsActive}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--
+            Operacje na paczkach. Każda ma inną wagę, więc każda wygląda inaczej: użycie
+            w rozgrywce jest wypełnione kolorem akcji, kopiowanie zostaje grafitowe,
+            usuwanie ma czerwony obrys, a rezygnacja z wydarzeń sam obrys. Wcześniej cztery
+            identyczne prostokąty wyglądały jak jeden wybór podany cztery razy.
+        -->
+        <VerticalStackLayout Grid.Row="3" Spacing="{StaticResource SpacingS}">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="8" IsVisible="{Binding IsPackSelected}">
+                <views:GlyphButton
+                    Grid.Column="0"
+                    Glyph="▶"
+                    Text="{loc:Translate EventPacks_Button_SetActive}"
+                    Command="{Binding SetActivePackCommand}"
+                    ButtonStyle="{StaticResource AccentButton}" />
+                <views:GlyphButton
+                    Grid.Column="1"
+                    Text="{loc:Translate EventPacks_Button_Duplicate}"
+                    Command="{Binding DuplicatePackCommand}" />
+            </Grid>
+
+            <views:GlyphButton
+                Text="{loc:Translate EventPacks_Button_Delete}"
+                Command="{Binding DeletePackCommand}"
+                ButtonStyle="{StaticResource DestructiveButton}"
+                IsVisible="{Binding IsSelectedPackEditable}" />
+
+            <views:GlyphButton
+                Text="{loc:Translate EventPacks_Button_ClearActive}"
+                Command="{Binding ClearActivePackCommand}"
+                ButtonStyle="{StaticResource SubtleButton}" />
+        </VerticalStackLayout>
+
+        <!-- Suma szans i ostrzeżenie -->
+        <VerticalStackLayout Grid.Row="4" Spacing="2">
+            <Label Style="{StaticResource BodyLabel}" Text="{Binding TotalChanceText}" />
+            <Label
+                Style="{StaticResource CaptionLabel}"
+                Text="{loc:Translate EventPacks_Label_ChanceWarning}"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light={StaticResource WarningLight}, Dark={StaticResource WarningDark}}"
+                IsVisible="{Binding HasChanceWarning}" />
+        </VerticalStackLayout>
+
+        <!--
+            Wydarzenia wybranej paczki. Jeden rząd na wydarzenie, kolumny o stałej
+            szerokości — pole procentów i przycisk usuwania nie przesuwają się przy
+            zmianie wartości ani długości nazwy.
+        -->
+        <CollectionView Grid.Row="5" ItemsSource="{Binding Events}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:EventListItem">
+                    <Grid ColumnDefinitions="*,Auto,36,56,36,Auto" ColumnSpacing="4" Padding="0,6">
+                        <!--
+                            Dwa wiersze i mniejsze pismo, a nie jeden wiersz z kropkami: nazwy
+                            wydarzeń bywają całymi zdaniami („Zaśpiewaj refren ulubionej
+                            piosenki"), a w jednym wierszu przy tej szerokości urywały się po
+                            trzech słowach. Dwa wiersze pokazują ich zdecydowaną większość,
+                            a kropki zostają na naprawdę długie.
+                        -->
+                        <Label
+                            Grid.Column="0"
+                            Text="{Binding DisplayName}"
+                            FontSize="12"
+                            MaxLines="2"
+                            LineBreakMode="TailTruncation"
+                            VerticalOptions="Center" />
+                        <Switch
+                            Grid.Column="1"
+                            IsToggled="{Binding IsEnabled}"
+                            IsEnabled="{Binding IsEditable}"
+                            VerticalOptions="Center" />
+                        <Button
+                            Grid.Column="2"
+                            Text="−"
+                            Command="{Binding DecreaseChanceCommand}"
+                            IsEnabled="{Binding IsEditable}"
+                            Style="{StaticResource ChanceStepButton}" />
+                        <Entry
+                            Grid.Column="3"
+                            Text="{Binding ChanceText}"
+                            Keyboard="Numeric"
+                            MaxLength="3"
+                            HorizontalTextAlignment="Center"
+                            IsEnabled="{Binding IsEditable}"
+                            VerticalOptions="Center" />
+                        <Button
+                            Grid.Column="4"
+                            Text="+"
+                            Command="{Binding IncreaseChanceCommand}"
+                            IsEnabled="{Binding IsEditable}"
+                            Style="{StaticResource ChanceStepButton}" />
+                        <Button
+                            Grid.Column="5"
+                            Style="{StaticResource DestructiveIconButton}"
+                            Text="✕"
+                            SemanticProperties.Description="{loc:Translate EventPacks_Button_Delete}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EventPacksViewModel}}, Path=RemoveEventCommand}"
+                            CommandParameter="{Binding .}"
+                            IsVisible="{Binding IsEditable}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--
+            Nowe wydarzenie w dwóch wierszach, nie w jednym. W jednym pole na nazwę zostawało
+            z resztką szerokości po przyciskach szansy i przycisku dodawania — na wąskim ekranie
+            nie dało się w nim nic przeczytać ani wpisać. Nazwa dostaje własny wiersz na całą
+            szerokość, a szansa i zatwierdzenie stoją pod nią.
+            <para>
+            Przycisk zatwierdzenia jest bez podpisu i ma znak „✓", a nie „+": plus stoi
+            w tym samym wierszu przy szansie, więc dwa plusy obok siebie znaczyłyby dwie
+            różne rzeczy.
+            </para>
+        -->
+        <VerticalStackLayout
+            Grid.Row="6"
+            Spacing="{StaticResource SpacingS}"
+            IsVisible="{Binding IsSelectedPackEditable}">
+            <Border Style="{StaticResource FieldBorder}">
+                <Entry
+                    Placeholder="{loc:Translate EventPacks_Entry_EventName}"
+                    Text="{Binding NewEventName}"
+                    FontSize="{StaticResource FontSizeBody}"
+                    ReturnCommand="{Binding AddEventCommand}" />
+            </Border>
+
+            <Grid ColumnDefinitions="Auto,36,56,36,*,Auto" ColumnSpacing="4">
+                <Label
+                    Grid.Column="0"
+                    Style="{StaticResource CaptionLabel}"
+                    Text="{loc:Translate EventPacks_Label_Chance}"
+                    VerticalOptions="Center" />
+                <Button
+                    Grid.Column="1"
+                    Text="−"
+                    Command="{Binding DecreaseNewEventChanceCommand}"
+                    Style="{StaticResource ChanceStepButton}" />
+                <Entry
+                    Grid.Column="2"
+                    Text="{Binding NewEventChanceText}"
+                    Keyboard="Numeric"
+                    MaxLength="3"
+                    HorizontalTextAlignment="Center" />
+                <Button
+                    Grid.Column="3"
+                    Text="+"
+                    Command="{Binding IncreaseNewEventChanceCommand}"
+                    Style="{StaticResource ChanceStepButton}" />
+                <Button
+                    Grid.Column="5"
+                    Style="{StaticResource AccentIconButton}"
+                    Text="✓"
+                    SemanticProperties.Description="{loc:Translate EventPacks_Button_AddEvent}"
+                    Command="{Binding AddEventCommand}" />
+            </Grid>
+        </VerticalStackLayout>
+
+    </Grid>
+
+</views:ContentPageBase>

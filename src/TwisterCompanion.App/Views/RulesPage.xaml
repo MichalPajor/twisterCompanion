@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase
+    x:Class="TwisterCompanion.App.Views.RulesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:TwisterCompanion.App.Localization"
+    xmlns:views="clr-namespace:TwisterCompanion.App.Views"
+    xmlns:vm="clr-namespace:TwisterCompanion.Presentation.ViewModels;assembly=TwisterCompanion.Presentation"
+    x:DataType="vm:RulesViewModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    Title="{loc:Translate Rules_Title}">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="{StaticResource PagePadding}" RowSpacing="{StaticResource SpacingS}">
+
+        <views:PageHeader Grid.Row="0"
+                          Title="{loc:Translate Rules_Title}"
+                          Command="{Binding GoBackCommand}"
+                          BackDescription="{loc:Translate Common_Button_Back}" />
+
+        <Label Grid.Row="1"
+               Style="{StaticResource HeadlineLabel}"
+               Text="{Binding ModeName}"
+               FontSize="28"
+               Margin="0,0,0,8" />
+
+        <!--
+            Zasady to kilka akapitów, więc treść musi się przewijać — na małym ekranie
+            w orientacji poziomej nie zmieści się inaczej.
+        -->
+        <ScrollView Grid.Row="2">
+            <Label Style="{StaticResource BodyLabel}" Text="{Binding RulesText}" LineHeight="1.4" />
+        </ScrollView>
+
+    </Grid>
+
+</views:ContentPageBase>

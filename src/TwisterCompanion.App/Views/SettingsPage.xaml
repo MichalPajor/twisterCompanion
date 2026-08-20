@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase
+    x:Class="TwisterCompanion.App.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:TwisterCompanion.App.Localization"
+    xmlns:views="clr-namespace:TwisterCompanion.App.Views"
+    xmlns:vm="clr-namespace:TwisterCompanion.Presentation.ViewModels;assembly=TwisterCompanion.Presentation"
+    x:DataType="vm:SettingsViewModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    Title="{loc:Translate Settings_Title}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource PagePadding}" Spacing="{StaticResource SpacingM}">
+
+            <views:PageHeader Title="{loc:Translate Settings_Title}"
+                              Command="{Binding GoBackCommand}"
+                              BackDescription="{loc:Translate Common_Button_Back}" />
+
+            <views:SectionHeader Glyph="⇄" Text="{loc:Translate Settings_Label_Language}" />
+
+            <!--
+                Zmiana wyboru zapisuje język w ustawieniach, a serwis tłumaczeń sam go
+                stosuje. Wszystkie teksty na ekranie odświeżają się natychmiast, bez
+                restartu aplikacji. Nazwy języków zostają w swoich językach, więc nie
+                przechodzą przez tłumaczenie.
+                <para>
+                Ramka i znak „▾" są tu po to, żeby po polu było widać, że da się je nacisnąć:
+                domyślny <c>Picker</c> na Androidzie to sam napis z cienką kreską pod spodem
+                i niczym nie różni się od zwykłej etykiety.
+                </para>
+            -->
+            <Border Style="{StaticResource FieldBorder}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Picker
+                        Grid.Column="0"
+                        FontSize="{StaticResource FontSizeBody}"
+                        ItemsSource="{Binding AvailableLanguages}"
+                        ItemDisplayBinding="{Binding DisplayName}"
+                        SelectedItem="{Binding SelectedLanguage}"
+                        IsEnabled="{Binding IsNotBusy}"
+                        Title="{loc:Translate Settings_Label_Language}" />
+                    <Label Grid.Column="1"
+                           Text="▾"
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource MutedLight}, Dark={StaticResource MutedDark}}" />
+                </Grid>
+            </Border>
+
+            <views:SectionHeader Glyph="◐" Text="{loc:Translate Settings_Label_Theme}" />
+
+            <!--
+                Trzy pozycje, nie przełącznik: „jak w systemie" jest osobnym wyborem, a nie
+                brakiem wyboru. Zmiana działa od razu, bez restartu aplikacji.
+            -->
+            <Border Style="{StaticResource FieldBorder}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Picker Grid.Column="0"
+                            FontSize="{StaticResource FontSizeBody}"
+                            ItemsSource="{Binding AvailableThemes}"
+                            ItemDisplayBinding="{Binding DisplayName}"
+                            SelectedItem="{Binding SelectedTheme}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            Title="{loc:Translate Settings_Label_Theme}" />
+                    <Label Grid.Column="1"
+                           Text="▾"
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource MutedLight}, Dark={StaticResource MutedDark}}" />
+                </Grid>
+            </Border>
+
+            <!--
+                Animacje w tej samej sekcji co motyw, bo obie rzeczy dotyczą wyglądu.
+                Przełącznik jest dodatkiem do systemowego ograniczenia animacji, nie jego
+                zamiennikiem: system nadal wygrywa, a to jest wyłącznik dla kogoś, kto chce
+                spokojnego ekranu tylko w tej jednej aplikacji.
+            -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label Text="{loc:Translate Settings_Label_Animations}"
+                           Style="{StaticResource BodyLabel}" />
+                    <Label Text="{loc:Translate Settings_Label_AnimationsHint}"
+                           Style="{StaticResource CaptionLabel}" />
+                </VerticalStackLayout>
+                <Switch
+                    Grid.Column="1"
+                    IsToggled="{Binding AreAnimationsEnabled}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <views:SectionHeader Glyph="♪" Text="{loc:Translate Settings_Label_Voice}" />
+
+            <!--
+                Wyłączony odczyt nie wyłącza gry: komunikaty nadal pojawiają się na ekranie.
+                Dlatego suwaki i wybór głosu zostają widoczne — użytkownik może je ustawić
+                zanim włączy głos.
+            -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <Label
+                    Grid.Column="0"
+                    Text="{loc:Translate Settings_Label_TextToSpeech}"
+                    Style="{StaticResource BodyLabel}"
+                    VerticalOptions="Center" />
+                <Switch
+                    Grid.Column="1"
+                    IsToggled="{Binding IsTextToSpeechEnabled}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <Border Style="{StaticResource FieldBorder}" IsVisible="{Binding HasVoices}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Picker
+                        Grid.Column="0"
+                        FontSize="{StaticResource FontSizeBody}"
+                        ItemsSource="{Binding AvailableVoices}"
+                        ItemDisplayBinding="{Binding DisplayName}"
+                        SelectedItem="{Binding SelectedVoice}"
+                        IsEnabled="{Binding IsNotBusy}"
+                        Title="{loc:Translate Settings_Label_Voice}" />
+                    <Label Grid.Column="1"
+                           Text="▾"
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource MutedLight}, Dark={StaticResource MutedDark}}" />
+                </Grid>
+            </Border>
+
+            <Label Style="{StaticResource CaptionLabel}"
+                   Text="{loc:Translate Settings_Label_NoVoices}"
+                   IsVisible="{Binding HasNoVoices}" />
+
+            <Label Style="{StaticResource BodyLabel}"
+                   Text="{loc:Translate Settings_Label_SpeechRate}" />
+
+            <!--
+                Zapis po puszczeniu suwaka, a nie przy każdej zmianie wartości: przeciągnięcie
+                palcem daje kilkadziesiąt zmian, a każda z nich to zapis pliku ustawień.
+                Granice pochodzą z ViewModelu, a nie z liczb w XAML — pilnuje ich ta sama
+                walidacja, która odrzuca wartości spoza zakresu przy zapisie.
+            -->
+            <Slider
+                Value="{Binding SpeechRate}"
+                Minimum="{Binding MinSpeechRate}"
+                Maximum="{Binding MaxSpeechRate}"
+                DragCompletedCommand="{Binding SaveSpeechParametersCommand}" />
+
+            <Label Style="{StaticResource BodyLabel}"
+                   Text="{loc:Translate Settings_Label_SpeechPitch}" />
+
+            <Slider
+                Value="{Binding SpeechPitch}"
+                Minimum="{Binding MinSpeechPitch}"
+                Maximum="{Binding MaxSpeechPitch}"
+                DragCompletedCommand="{Binding SaveSpeechParametersCommand}" />
+
+            <views:GlyphButton Glyph="▶"
+                               Text="{loc:Translate Settings_Button_TestVoice}"
+                               Command="{Binding TestVoiceCommand}"
+                               IsEnabled="{Binding IsNotBusy}"
+                               ButtonStyle="{StaticResource SubtleButton}" />
+
+            <views:SectionHeader Glyph="♬" Text="{loc:Translate Settings_Label_Sounds}" />
+
+            <!--
+                Dźwięki i wibracje mają osobne przełączniki, bo służą do różnych rzeczy:
+                dźwięk informuje wszystkich w pokoju, a wibracja jest jedyną informacją, która
+                dochodzi przy wyciszonym telefonie. Wyciszenie dźwięków nie wyłącza wibracji.
+            -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label Text="{loc:Translate Settings_Label_Sounds}"
+                           Style="{StaticResource BodyLabel}" />
+                    <Label Text="{loc:Translate Settings_Label_SoundsHint}"
+                           Style="{StaticResource CaptionLabel}" />
+                </VerticalStackLayout>
+                <Switch
+                    Grid.Column="1"
+                    IsToggled="{Binding AreSoundsEnabled}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <Label Style="{StaticResource BodyLabel}"
+                   Text="{loc:Translate Settings_Label_SoundVolume}"
+                   IsVisible="{Binding AreSoundsEnabled}" />
+
+            <!--
+                Zapis i próbka po puszczeniu suwaka: przeciągnięcie palcem daje kilkadziesiąt
+                zmian wartości, a dźwięk przy każdej z nich byłby serią trzasków.
+            -->
+            <Slider
+                Value="{Binding SoundVolume}"
+                Minimum="0"
+                Maximum="1"
+                DragCompletedCommand="{Binding SaveSoundVolumeCommand}"
+                IsVisible="{Binding AreSoundsEnabled}" />
+
+            <views:GlyphButton Glyph="♪"
+                               Text="{loc:Translate Settings_Button_TestSound}"
+                               Command="{Binding TestSoundCommand}"
+                               IsEnabled="{Binding IsNotBusy}"
+                               IsVisible="{Binding AreSoundsEnabled}"
+                               ButtonStyle="{StaticResource SubtleButton}" />
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label Text="{loc:Translate Settings_Label_Haptics}"
+                           Style="{StaticResource BodyLabel}" />
+                    <Label Text="{loc:Translate Settings_Label_HapticsHint}"
+                           Style="{StaticResource CaptionLabel}" />
+                </VerticalStackLayout>
+                <Switch
+                    Grid.Column="1"
+                    IsToggled="{Binding AreHapticsEnabled}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <views:SectionHeader Glyph="◉" Text="{loc:Translate Settings_Label_VoiceControl}" />
+
+            <!--
+                Włączenie pyta o zgodę na mikrofon od razu: gracz właśnie sam poprosił
+                o tę funkcję, więc rozumie, po co pytanie. Odmowa cofa przełącznik.
+            -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <Label
+                    Grid.Column="0"
+                    Text="{loc:Translate Settings_Label_VoiceControlHint}"
+                    Style="{StaticResource CaptionLabel}"
+                    VerticalOptions="Center" />
+                <Switch
+                    Grid.Column="1"
+                    IsToggled="{Binding IsVoiceControlEnabled}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <Label Style="{StaticResource BodyLabel}"
+                   Text="{loc:Translate Settings_Label_VoiceListeningDelay}" />
+
+            <views:SecondsEntry BindingContext="{Binding VoiceListeningDelay}" />
+
+            <views:SectionHeader Glyph="↻" Text="{loc:Translate Settings_Label_TurnAdvance}" />
+
+            <!--
+                Tryb automatyczny wyłącza sterowanie głosem w działaniu, a nie w ustawieniach:
+                nasłuch się nie uruchamia, ale przełącznik głosu zostaje, żeby powrót do trybu
+                ręcznego go przywrócił.
+            -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <Label
+                    Grid.Column="0"
+                    Text="{loc:Translate Settings_Label_TurnAdvanceHint}"
+                    Style="{StaticResource CaptionLabel}"
+                    VerticalOptions="Center" />
+                <Switch
+                    Grid.Column="1"
+                    IsToggled="{Binding IsAutomaticTurnAdvance}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <Label Style="{StaticResource BodyLabel}"
+                   Text="{loc:Translate Settings_Label_MoveTime}" />
+
+            <views:SecondsEntry BindingContext="{Binding MoveTime}" />
+
+            <Label Style="{StaticResource BodyLabel}"
+                   Text="{loc:Translate Settings_Label_TaskTime}" />
+
+            <views:SecondsEntry BindingContext="{Binding TaskTime}" />
+
+            <views:SectionHeader Glyph="⛁" Text="{loc:Translate Settings_Label_Data}" />
+
+            <!--
+                Dwa wyjścia o różnej wadze i różnym wyglądzie: przywrócenie ustawień jest
+                odwracalne (wystarczy ustawić je z powrotem), a usunięcie danych nie jest
+                odwracalne w ogóle. Oba pytają o potwierdzenie, ale tylko drugie ma czerwień.
+            -->
+            <views:GlyphButton Glyph="?"
+                               Text="{loc:Translate Settings_Button_HowToPlay}"
+                               Command="{Binding GoToHowToPlayCommand}"
+                               IsEnabled="{Binding IsNotBusy}"
+                               ButtonStyle="{StaticResource SubtleButton}" />
+
+            <views:GlyphButton Glyph="⟲"
+                               Text="{loc:Translate Settings_Button_Reset}"
+                               Command="{Binding ResetSettingsCommand}"
+                               IsEnabled="{Binding IsNotBusy}"
+                               ButtonStyle="{StaticResource SubtleButton}" />
+
+            <views:GlyphButton Glyph="✕"
+                               Text="{loc:Translate Settings_Button_Erase}"
+                               Command="{Binding EraseDataCommand}"
+                               IsEnabled="{Binding IsNotBusy}"
+                               ButtonStyle="{StaticResource DestructiveButton}"
+                               Margin="0,0,0,24" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</views:ContentPageBase>

@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TwisterCompanion.App/TwisterCompanion.App.csproj" />
+    <Project Path="src/TwisterCompanion.Application/TwisterCompanion.Application.csproj" />
+    <Project Path="src/TwisterCompanion.Domain/TwisterCompanion.Domain.csproj" />
+    <Project Path="src/TwisterCompanion.Infrastructure/TwisterCompanion.Infrastructure.csproj" />
+    <Project Path="src/TwisterCompanion.Presentation/TwisterCompanion.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TwisterCompanion.Application.Tests/TwisterCompanion.Application.Tests.csproj" />
+    <Project Path="tests/TwisterCompanion.Architecture.Tests/TwisterCompanion.Architecture.Tests.csproj" />
+    <Project Path="tests/TwisterCompanion.Domain.Tests/TwisterCompanion.Domain.Tests.csproj" />
+    <Project Path="tests/TwisterCompanion.Infrastructure.Tests/TwisterCompanion.Infrastructure.Tests.csproj" />
+    <Project Path="tests/TwisterCompanion.Presentation.Tests/TwisterCompanion.Presentation.Tests.csproj" />
+  </Folder>
+</Solution>

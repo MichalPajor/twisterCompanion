@@ -1,0 +1,150 @@
+# ---------------------------------------------------------------------------
+# Twister Companion — weryfikacja każdej zmiany
+# ---------------------------------------------------------------------------
+# Zadanie 5 Etapu 14: restore → build → test → APK (debug) → artefakt.
+#
+# Podział na dwa zadania nie jest kosmetyczny. Warstwy rdzenia i testy celują w czysty
+# net10.0 i budują się bez workloadu MAUI, a workload to kilka minut instalacji i setki
+# megabajtów. Trzymanie testów w osobnym zadaniu daje odpowiedź „testy przechodzą" bez
+# czekania na cokolwiek androidowego. Zadanie androidowe rusza równolegle.
+# ---------------------------------------------------------------------------
+
+name: Weryfikacja
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Nowy commit na tej samej gałęzi unieważnia poprzedni przebieg — nie ma sensu weryfikować
+# stanu, którego już nikt nie zobaczy.
+concurrency:
+  group: weryfikacja-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  testy:
+    name: Testy i pokrycie
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pamięć podręczna paczek NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('Directory.Packages.props', '**/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      # Projekty testowe wymieniamy jawnie, zamiast budować całą solucję: solucja zawiera
+      # projekt aplikacji, a ten bez workloadu MAUI nie da się nawet wczytać.
+      - name: Odtworzenie paczek
+        run: |
+          for projekt in tests/*/*.csproj; do
+            dotnet restore "$projekt"
+          done
+
+      # Ostrzeżenia jako błędy dla całego rdzenia. W plikach projektów ten rygor mają tylko
+      # Domain, Application i Presentation — Infrastructure jest łagodniejsza, bo korzysta
+      # z API, które czasem ostrzega niezależnie od nas. W CI podnosimy poprzeczkę dla
+      # wszystkiego, co się tu buduje: łatwiej trzymać zero ostrzeżeń, niż wracać do stu.
+      - name: Build
+        run: |
+          for projekt in tests/*/*.csproj; do
+            dotnet build "$projekt" --configuration Release --no-restore -warnaserror
+          done
+
+      - name: Testy z pomiarem pokrycia
+        run: |
+          for projekt in tests/*/*.csproj; do
+            dotnet test "$projekt" \
+              --configuration Release \
+              --no-build \
+              --collect:"XPlat Code Coverage" \
+              --results-directory pokrycie \
+              --logger "console;verbosity=normal"
+          done
+
+      # Progi z planu: ≥ 80% w Domain i Application. Skrypt scala raporty ze wszystkich
+      # projektów testowych — bez scalania pokrycie Domain byłoby zaniżone, bo testy
+      # warstwy Application wykonują też jej kod.
+      - name: Próg pokrycia
+        run: python3 tools/pokrycie.py pokrycie --prog Domain=80 Application=80 --braki 5
+
+      - name: Raporty pokrycia jako artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pokrycie
+          path: pokrycie/**/*.cobertura.xml
+          if-no-files-found: warn
+
+  android:
+    name: Formatowanie i pakiet Android
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pamięć podręczna paczek NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-android-${{ runner.os }}-${{ hashFiles('Directory.Packages.props', '**/*.csproj') }}
+          restore-keys: nuget-android-${{ runner.os }}-
+
+      # Sam Android, bez iOS i Windows: tyle potrzebuje ten projekt i tyle się instaluje.
+      - name: Workload MAUI (Android)
+        run: dotnet workload install maui-android
+
+      - name: Odtworzenie paczek
+        run: dotnet restore TwisterCompanion.slnx
+
+      # Zadanie 6 Etapu 14. Sprawdzenie formatowania jest tutaj, a nie w zadaniu z testami,
+      # z jednego powodu: obejmuje całą solucję, a projekt aplikacji bez workloadu MAUI nie
+      # daje się wczytać przez MSBuild.
+      - name: Formatowanie i styl
+        run: dotnet format TwisterCompanion.slnx --verify-no-changes --no-restore
+
+      - name: Build solucji
+        run: dotnet build TwisterCompanion.slnx --configuration Release --no-restore
+
+      - name: Pakiet APK (debug)
+        run: >
+          dotnet build src/TwisterCompanion.App/TwisterCompanion.App.csproj
+          --configuration Debug
+          --framework net10.0-android
+          -p:AndroidPackageFormat=apk
+
+      # Katalog wyjściowy bywa przekierowany przez Directory.Build.local.props (którego w CI
+      # nie ma), więc szukamy pakietu, zamiast wpisywać ścieżkę na sztywno.
+      - name: APK jako artefakt
+        uses: actions/upload-artifact@v4
+        with:
+          name: twister-companion-debug-apk
+          path: '**/*-Signed.apk'
+          if-no-files-found: error

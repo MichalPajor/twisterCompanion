@@ -1,0 +1,69 @@
+<Project>
+
+  <!--
+    ========================================================================
+    WZORZEC konfiguracji lokalnej — skopiuj jako Directory.Build.local.props
+    ========================================================================
+    Linux / macOS:  cp Directory.Build.local.props.example Directory.Build.local.props
+    Windows:        copy Directory.Build.local.props.example Directory.Build.local.props
+
+    ------------------------------------------------------------------------
+    CZY TEN PLIK JEST MI POTRZEBNY?
+    ------------------------------------------------------------------------
+    Visual Studio (Windows) — NIE.
+        VS instaluje wlasny JDK i Android SDK i sam przekazuje ich sciezki
+        do buildu. Nie twórz tego pliku; jesli przyszedl razem z projektem,
+        mozesz go usunac (warunki Exists() sprawiaja, ze i tak nic nie robi).
+
+    Build z linii polecen na Linux / WSL — TAK.
+        Zmienne srodowiskowe JAVA_HOME / ANDROID_HOME NIE sa widoczne
+        w powlokach nieinteraktywnych — Ubuntu przerywa ~/.bashrc na samym
+        poczatku dla takich powlok. Skrypt CI, zadanie z crona albo build
+        uruchomiony przez narzedzie zobaczylby tylko:
+            error XA5300: The Java SDK directory could not be found
+        Wpisanie sciezek tutaj czyni build niezaleznym od powloki.
+
+    Plik jest wylaczony z gita (.gitignore), bo sciezki sa specyficzne
+    dla maszyny.
+  -->
+
+  <!-- ===== Toolchain Androida ===== -->
+  <PropertyGroup>
+    <!-- Katalog JDK 17 (musi zawierac bin/java) -->
+    <JavaSdkDirectory Condition="Exists('/home/uzytkownik/tools/jdk-17')">/home/uzytkownik/tools/jdk-17</JavaSdkDirectory>
+
+    <!-- Katalog Android SDK (musi zawierac platforms/ i build-tools/) -->
+    <AndroidSdkDirectory Condition="Exists('/home/uzytkownik/Android/Sdk')">/home/uzytkownik/Android/Sdk</AndroidSdkDirectory>
+  </PropertyGroup>
+
+  <!--
+    ===== OPCJONALNIE: wyjscie buildu poza katalog projektu =====
+
+    Potrzebne, gdy projekt lezy na filesystemie, ktory nie pozwala ustawiac
+    znacznikow czasu plikow (np. udzial 9p / drvfs w WSL zamontowany bez opcji
+    "metadata", gdzie pliki raportuja wlasciciela root). Objaw:
+
+        error MSB3374: The last access/last write time on file
+        "...<Projekt>.XXXXXXXX.Up2Date" cannot be set.
+        Access to the path ... is denied.
+
+    Blad dotyczy KAZDEGO projektu, ktory ma referencje do innego projektu,
+    wiec bez tego przekierowania build solucji jest niemozliwy.
+    Efekt uboczny jest korzystny: obj/ i bin/ trafiaja na szybszy dysk,
+    a katalog projektu pozostaje czysty.
+
+    Odkomentuj i popraw sciezke:
+  -->
+  <!--
+  <PropertyGroup Condition="Exists('/home/uzytkownik/build')">
+    <BaseIntermediateOutputPath>/home/uzytkownik/build/twister-companion/$(MSBuildProjectName)/obj/</BaseIntermediateOutputPath>
+    <BaseOutputPath>/home/uzytkownik/build/twister-companion/$(MSBuildProjectName)/bin/</BaseOutputPath>
+  </PropertyGroup>
+  -->
+
+  <!--
+    Warunki Exists() sa zalecane: dzieki nim plik przeniesiony na inna
+    maszyne nie psuje buildu, tylko przestaje dzialac po cichu.
+  -->
+
+</Project>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+    x:Class="TwisterCompanion.App.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    FlyoutBehavior="Disabled">
+
+    <!--
+        Zawartość i trasy są dodawane w kodzie (AppShell.xaml.cs), a nie tutaj.
+        Powód: strony mają konstruktory ze wstrzykiwanym ViewModelem, więc muszą
+        pochodzić z kontenera zależności. ContentTemplate w XAML tworzy stronę
+        samodzielnie i nie zna kontenera.
+    -->
+
+</Shell>

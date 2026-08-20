@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase
+    x:Class="TwisterCompanion.App.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:TwisterCompanion.App.Localization"
+    xmlns:views="clr-namespace:TwisterCompanion.App.Views"
+    xmlns:vm="clr-namespace:TwisterCompanion.Presentation.ViewModels;assembly=TwisterCompanion.Presentation"
+    x:DataType="vm:HomeViewModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    Title="{loc:Translate Home_Title}">
+
+    <!--
+        Jedna rzecz na tym ekranie jest ważna: rozpoczęcie gry. Dlatego „Graj" jest wysoki
+        i pisany dużą czcionką, a pozostałe wejścia są równorzędne między sobą i wyraźnie
+        drugoplanowe wobec niego.
+        <para>
+        Znak aplikacji to tarcza spinnera: cztery kropki w kolorach maty i igła wskazująca
+        jedną z nich. Mówi dokładnie to, czym jest ta aplikacja — zamiennikiem spinnera do
+        Twistera. Ten sam rysunek jest w ikonie i na ekranie powitalnym.
+        </para>
+    -->
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource PagePadding}" Spacing="{StaticResource SpacingM}">
+
+            <!--
+                Znak aplikacji z jednego pliku (Resources/Images/logo.svg), a nie składany
+                z czterech elipsy w XAML. Ten sam rysunek jest w ikonie i na ekranie powitalnym,
+                więc launcher, start aplikacji i ekran startowy pokazują to samo — a zmiana
+                znaku jest zmianą jednego pliku, nie trzech miejsc.
+            -->
+            <Image x:Name="LogoMark"
+                   Source="logo.png"
+                   WidthRequest="104"
+                   HeightRequest="104"
+                   HorizontalOptions="Center"
+                   Margin="0,24,0,0"
+                   SemanticProperties.Description="{loc:Translate App_Name}" />
+
+            <Label x:Name="AppNameLabel"
+                   Style="{StaticResource HeadlineLabel}"
+                   Text="{loc:Translate App_Name}"
+                   FontSize="38"
+                   CharacterSpacing="2"
+                   Margin="0,8,0,0" />
+
+            <!-- Kreska pod nazwą: zamyka znak aplikacji i oddziela go od menu. -->
+            <Border x:Name="Divider"
+                    HeightRequest="4"
+                    WidthRequest="56"
+                    StrokeThickness="0"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,20"
+                    Background="{AppThemeBinding Light={StaticResource AccentAction}, Dark={StaticResource AccentActionDark}}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="2" />
+                </Border.StrokeShape>
+            </Border>
+
+            <VerticalStackLayout x:Name="MenuStack" Spacing="{StaticResource SpacingM}">
+
+                <views:GlyphButton Glyph="▶"
+                                   Text="{loc:Translate Home_Button_Game}"
+                                   Command="{Binding GoToGameCommand}"
+                                   IsEnabled="{Binding IsNotBusy}"
+                                   ButtonStyle="{StaticResource PrimaryActionButton}" />
+
+                <views:GlyphButton Glyph="♟"
+                                   Text="{loc:Translate Home_Button_Players}"
+                                   Command="{Binding GoToPlayersCommand}"
+                                   IsEnabled="{Binding IsNotBusy}"
+                                   ButtonStyle="{StaticResource MenuRowButton}" />
+
+                <views:GlyphButton Glyph="☰"
+                                   Text="{loc:Translate Home_Button_GameModes}"
+                                   Command="{Binding GoToGameModesCommand}"
+                                   IsEnabled="{Binding IsNotBusy}"
+                                   ButtonStyle="{StaticResource MenuRowButton}" />
+
+                <views:GlyphButton Glyph="⚄"
+                                   Text="{loc:Translate Home_Button_EventPacks}"
+                                   Command="{Binding GoToEventPacksCommand}"
+                                   IsEnabled="{Binding IsNotBusy}"
+                                   ButtonStyle="{StaticResource MenuRowButton}" />
+
+                <views:GlyphButton Glyph="⚙"
+                                   Text="{loc:Translate Home_Button_Settings}"
+                                   Command="{Binding GoToSettingsCommand}"
+                                   IsEnabled="{Binding IsNotBusy}"
+                                   ButtonStyle="{StaticResource MenuRowButton}" />
+
+                <!--
+                    „Jak grać" na końcu menu, a nie na początku: przy pierwszym uruchomieniu
+                    wprowadzenie pokazuje się samo, więc ten przycisk jest dla kogoś, kto wraca
+                    po nie później — albo pokazuje grę komuś nowemu.
+                -->
+                <views:GlyphButton Glyph="?"
+                                   Text="{loc:Translate Home_Button_HowToPlay}"
+                                   Command="{Binding GoToHowToPlayCommand}"
+                                   IsEnabled="{Binding IsNotBusy}"
+                                   ButtonStyle="{StaticResource MenuRowButton}" />
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</views:ContentPageBase>

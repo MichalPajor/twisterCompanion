@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
+		<!--
+			Identyfikator aplikacji w AdMob (Etap 15). Musi tu być: jego brak nie daje
+			ostrzeżenia przy budowaniu, tylko wywala aplikację przy starcie, bo zestaw SDK
+			reklam czyta go z manifestu w swoim inicjalizatorze.
+
+			Wartość jest testowym identyfikatorem Google i musi zgadzać się z AdUnits.cs.
+			Prawdziwy wchodzi przy publikacji — patrz komentarz w tamtym pliku.
+		-->
+		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
+		           android:value="ca-app-pub-3940256099942544~3347511713" />
+	</application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<!-- Sterowanie głosem (Etap 8). Odmowa zgody nie wyłącza gry — zostaje sterowanie ręczne. -->
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+</manifest>

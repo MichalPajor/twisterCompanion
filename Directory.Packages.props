@@ -1,0 +1,89 @@
+<Project>
+
+  <!--
+    ========================================================================
+    Twister Companion — centralne zarzadzanie wersjami paczek NuGet
+    ========================================================================
+    Wersje sa deklarowane WYLACZNIE tutaj. Projekty podaja tylko nazwy paczek,
+    bez atrybutu Version:
+
+        PackageReference Include="xunit"
+
+    Po co: przed wprowadzeniem tego pliku solucja miala 33 deklaracje wersji
+    rozrzucone po 9 projektach, z czego 8 paczek powtarzalo sie w kilku
+    miejscach. Efektem byla juz pierwsza rozbieznosc — Microsoft.Extensions.
+    Logging.Debug w wersji 10.0.0, gdy pozostale Microsoft.Extensions.* byly
+    w 10.0.10. Taki dryf konczy sie bledem NU1605 albo, gorzej, dwiema
+    wersjami tej samej biblioteki w pakiecie aplikacji.
+
+    Podnoszac wersje, zmieniasz jedna linijke i dotyczy to calej solucji.
+  -->
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+
+    <!--
+      Zabezpieczenie: proba nadpisania wersji w pojedynczym projekcie przez
+      VersionOverride zakonczy sie bledem, a nie cichym wyjatkiem od reguly.
+    -->
+    <CentralPackageVersionOverrideEnabled>false</CentralPackageVersionOverrideEnabled>
+  </PropertyGroup>
+
+  <!-- ===================== MAUI i UI ===================== -->
+  <ItemGroup>
+    <!-- MauiVersion jest ustawiane w Directory.Build.props — patrz komentarz tam -->
+    <PackageVersion Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageVersion Include="CommunityToolkit.Maui" Version="15.0.0" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+  </ItemGroup>
+
+  <!-- ===================== Reklamy (Etap 15) =====================
+       Google nie wydaje SDK reklam dla .NET MAUI — jedyna droga to wiazanie androidowe
+       utrzymywane w ramach dotnet/android-libraries. Numeracja wiazania to numeracja
+       natywnego SDK z wiodaca jedynka: 125.4.0.2 wiaze Google Mobile Ads 25.4.0.
+
+       UserMessagingPlatform to zgoda na personalizacje reklam (UMP/CMP), wymagana w EEA.
+       Osobna paczka, bo Google wydaje ja osobno od samego SDK reklam.
+  -->
+  <ItemGroup>
+    <PackageVersion Include="Xamarin.GooglePlayServices.Ads" Version="125.4.0.2" />
+    <PackageVersion Include="Xamarin.Google.UserMessagingPlatform" Version="4.0.0.3" />
+  </ItemGroup>
+
+  <!--
+    Wyrownanie AndroidX. Wiazanie reklam ciagnie rodzine Lifecycle w wersji 2.9.2.x, a MAUI
+    rozwiazuje Lifecycle.Runtime do 2.11.0.1 — NuGet zglasza wtedy NU1608 (wersja poza
+    ograniczeniem zaleznosci) dla czterech paczek. To nie jest ostrzezenie do wyciszenia:
+    rozjechane wersje AndroidX konczyly sie w praktyce bledami dopiero na urzadzeniu, przy
+    ladowaniu klas. Podnosimy wiec cala rodzine do 2.11.0.1, zeby wszystkie paczki mowily
+    o tej samej wersji natywnej.
+  -->
+  <ItemGroup>
+    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.Process" Version="2.11.0.1" />
+    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx" Version="2.11.0.1" />
+    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx.Android" Version="2.11.0.1" />
+    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.ViewModel.Ktx" Version="2.11.0.1" />
+    <PackageVersion Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.9.3" />
+  </ItemGroup>
+
+  <!-- ===================== Rozszerzenia platformy .NET ===================== -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.10" />
+  </ItemGroup>
+
+  <!-- ===================== Testy ===================== -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="NSubstitute" Version="6.0.0" />
+    <!-- FakeTimeProvider: pozwala testowac timer trybu automatycznego bez czekania -->
+    <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="9.10.0" />
+  </ItemGroup>
+
+</Project>

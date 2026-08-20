@@ -1,0 +1,92 @@
+# ---------------------------------------------------------------------------
+# Twister Companion — .gitignore (.NET / MAUI / Android)
+# ---------------------------------------------------------------------------
+
+CHANGELOG.md
+CHECKLISTA_TESTOW.md
+PLAN_DZIALANIA.md
+zalozenia.txt
+README.md
+
+# --- Wyniki buildu ---
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+publish/
+*.binlog
+
+# --- Pliki uzytkownika / IDE ---
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+.vs/
+.vscode/
+.idea/
+*.swp
+*~
+
+# --- Konfiguracja lokalna maszyny (sciezki do JDK / Android SDK) ---
+# Kazdy deweloper ma wlasny plik; wzorzec jest w Directory.Build.local.props.example
+Directory.Build.local.props
+*.local.props
+!*.local.props.example
+
+# --- Android: artefakty i podpisywanie ---
+*.apk
+*.aab
+*.ap_
+*.aapt2
+*.dex
+*.class
+*.jar.md5
+local.properties
+
+# --- SEKRETY: keystore i haslo do podpisywania (NIGDY w repo) ---
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+keystore.properties
+signing.properties
+
+# --- NuGet ---
+*.nupkg
+*.snupkg
+packages/
+!packages/build/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+# --- Testy i pokrycie ---
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coverxml
+coverage*.json
+coverage*.xml
+coverage*.info
+.coverlet/
+
+# --- MAUI / Resizetizer cache ---
+*.designer.cs.bak
+Resources/**/*.g.cs
+.mauistate/
+
+# --- Systemowe ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Tymczasowe (probki, eksperymenty) ---
+_probe/
+_scratch/
+*.tmp

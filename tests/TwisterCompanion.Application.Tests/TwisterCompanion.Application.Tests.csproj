@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\TwisterCompanion.Application\TwisterCompanion.Application.csproj" />
+  </ItemGroup>
+
+  <!--
+    Pomocnik odnajdujący katalog repozytorium. Dołączony linkiem, bo korzystają z niego trzy
+    projekty testowe, a trzy kopie tego samego pliku rozjechałyby się po cichu.
+  -->
+  <ItemGroup>
+    <Compile Include="..\Shared\KatalogRepozytorium.cs" Link="Shared\KatalogRepozytorium.cs" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- ImplicitUsings i Nullable pochodzą z Directory.Build.props (cała solucja) -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TwisterCompanion.Application\TwisterCompanion.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Paczki wydarzeń dołączone do aplikacji. Osadzone w bibliotece, a nie kopiowane
+      do katalogu użytkownika: aktualizacja aplikacji od razu przynosi poprawione paczki,
+      użytkownik nie może ich uszkodzić, a odczyt nie wymaga API platformy.
+    -->
+    <EmbeddedResource Include="Resources\EventPacks\*.json" />
+
+    <!--
+      Definicje trybów gry. Osadzone z tych samych powodów co paczki, a dodatkowo dlatego,
+      że tryb bez wpisu w zasobach językowych i tak nie miałby czym się przedstawić —
+      plik i tłumaczenia muszą jechać razem z wersją aplikacji.
+    -->
+    <EmbeddedResource Include="Resources\GameModes\*.json" />
+  </ItemGroup>
+
+</Project>

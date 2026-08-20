@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase
+    x:Class="TwisterCompanion.App.Views.GamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:TwisterCompanion.App.Localization"
+    xmlns:views="clr-namespace:TwisterCompanion.App.Views"
+    xmlns:vm="clr-namespace:TwisterCompanion.Presentation.ViewModels;assembly=TwisterCompanion.Presentation"
+    x:DataType="vm:GameViewModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    Title="{loc:Translate Game_Title}">
+
+    <!--
+        Ekran jest czytany z dwóch metrów, z podłogi, przez ludzi w niewygodnych pozycjach.
+        Stąd trzy decyzje układu:
+
+        1. Kolor jest KOŁEM, a nie tłem całego ekranu. Kółko odpowiada kropce na macie, więc
+           gracz rozpoznaje cel bez czytania, a reszta ekranu zostaje czytelna — pełnoekranowe
+           tło wymuszałoby biały tekst na żółtym i zabrałoby miejsce na skład oraz odliczanie.
+        2. Kolejność pionowa idzie od najważniejszego: kto → co ma zrobić. Imię jest u góry,
+           bo gracz najpierw musi wiedzieć, że to jego tura, a CAŁE polecenie ruchu — kolor,
+           znak kończyny i jej nazwa — jest na kółku.
+        3. „Dalej" jest największym przyciskiem, bo jako jedyny jest używany co turę.
+
+        UKŁAD: trzy pasy, nie jedna przewijana kolumna.
+
+        Poprzednia wersja miała całą treść w jednym ScrollView i to był realny problem
+        zgłoszony z urządzenia: przy dołożeniu banera reklamowego (a na mniejszych telefonach
+        i bez niego) skład partii schodził pod krawędź ekranu, więc zgłoszenie upadku gracza
+        wymagało przewinięcia — w chwili, gdy ktoś leży na macie i czeka. Teraz:
+
+        - pasek górny (numer tury i powrót) stoi na miejscu,
+        - środek dostaje całą resztę wysokości i jako jedyny może się przewijać, ale w trakcie
+          partii nie ma czego przewijać, bo KOŁO DOPASOWUJE SIĘ do wolnego miejsca
+          (patrz GamePage.xaml.cs — średnica bierze się z faktycznej wysokości tego pasa,
+          a nie z progów zapisanych na sztywno),
+        - dolny pas ze składem, akcjami i banerem jest przyklejony do dołu i nigdy się nie
+          przewija, więc pigułka gracza jest zawsze pod palcem.
+    -->
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="{StaticResource PagePadding}"
+          RowSpacing="{StaticResource SpacingS}">
+
+        <!--
+            Numer tury jest w pasku górnym, obok strzałki powrotu, a nie w osobnym wierszu
+            pod nim: pasek stał pusty, a informacja o turze zabierała drugą linię — dwie
+            linie na jedną rzecz i cały widok zsunięty w dół.
+        -->
+        <views:PageHeader Grid.Row="0"
+                          Title="{Binding HeaderTitle}"
+                          TrailingText="{Binding CurrentPlayerName}"
+                          Command="{Binding GoBackCommand}"
+                          BackDescription="{loc:Translate Common_Button_Back}" />
+
+        <!--
+            TRWAJĄCA PARTIA — układ bez przewijania.
+
+            Koło siedzi w wierszu „*", czyli dostaje dokładnie tyle miejsca, ile zostało po
+            imieniu gracza i zarezerwowanych miejscach. Odstęp jest ciasny (4 zamiast 16), bo
+            imię gracza i koło to jedna informacja podana w dwóch kawałkach — rozstrzelone na
+            cały ekran wyglądały jak dwa osobne komunikaty.
+        -->
+        <Grid Grid.Row="1"
+              RowDefinitions="*,Auto,Auto,Auto"
+              RowSpacing="{StaticResource SpacingXs}"
+              IsVisible="{Binding IsRunning}">
+
+            <!--
+                Koło z kolorem ruchu. Odcień dobierany czterema wyzwalaczami, bo warstwa
+                prezentacji podaje nazwę koloru, a nie gotową wartość graficzną — dzięki temu
+                motyw jasny i ciemny mają własne odcienie.
+            -->
+            <Grid x:Name="CircleArea" Grid.Row="0">
+                <Border x:Name="ColorCircle"
+                        HeightRequest="200"
+                        WidthRequest="200"
+                        StrokeThickness="0"
+                        SemanticProperties.Description="{Binding MoveColorText}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        IsVisible="{Binding HasMove}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource OutlineLight}, Dark={StaticResource OutlineDark}}">
+                    <Border.StrokeShape>
+                        <RoundRectangle x:Name="CircleShape" CornerRadius="100" />
+                    </Border.StrokeShape>
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding MoveColorName}" Value="Red">
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource TwisterRed}, Dark={StaticResource TwisterRedDark}}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border" Binding="{Binding MoveColorName}" Value="Yellow">
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource TwisterYellow}, Dark={StaticResource TwisterYellowDark}}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border" Binding="{Binding MoveColorName}" Value="Blue">
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource TwisterBlue}, Dark={StaticResource TwisterBlueDark}}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border" Binding="{Binding MoveColorName}" Value="Green">
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource TwisterGreen}, Dark={StaticResource TwisterGreenDark}}" />
+                        </DataTrigger>
+                    </Border.Triggers>
+
+                    <!--
+                        Polecenie ruchu na kółku: nazwa kończyny, a pod nią jej znak. Kolejność
+                        jest odwrotna niż na początku (najpierw znak, potem napis) i wynika
+                        z tego, jak się to czyta z dwóch metrów: napis niesie treść, znak ją
+                        potwierdza — więc znak stoi pod napisem jak podpis pod zdaniem.
+
+                        Nazwy koloru tu nie ma. Kolor widać wprost z tła kółka, a przy włączonym
+                        odczycie pada też w komunikacie — napis powtarzał więc to samo trzeci
+                        raz i zabierał miejsce, które należy się nazwie kończyny. Dla czytnika
+                        ekranu kolor zostaje: jest w opisie całego kółka.
+
+                        Rozmiary pisma są proporcjonalne do średnicy koła i wyliczane
+                        w GamePage.xaml.cs — dzięki temu napis mieści się w kole niezależnie od
+                        tego, ile miejsca zostało na ekranie.
+
+                        Kolor napisu bierze się z pary OnMatLight/OnMatDark, a nie z bieli na
+                        sztywno: w motywie ciemnym kolory maty są rozjaśnione i biały napis
+                        miał na nich kontrast 2:1. Żółty jest jasny w obu motywach, więc ma
+                        własny wyzwalacz.
+                    -->
+                    <VerticalStackLayout x:Name="MoveTextStack"
+                                         Spacing="0"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Center">
+                        <Label x:Name="BodyPartName"
+                               Text="{Binding MoveBodyPartText}"
+                               TextTransform="Uppercase"
+                               FontSize="30"
+                               FontAutoScalingEnabled="False"
+                               FontAttributes="Bold"
+                               MaxLines="2"
+                               LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource OnMatLight}, Dark={StaticResource OnMatDark}}"
+                               HorizontalTextAlignment="Center">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding MoveColorName}" Value="Yellow">
+                                    <Setter Property="TextColor" Value="{StaticResource OnMatDark}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+
+                        <Label x:Name="BodyPartSymbol"
+                               Text="{Binding MoveBodyPartSymbol}"
+                               FontSize="34"
+                               FontAutoScalingEnabled="False"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!--
+                Wydarzenie i odliczanie mają <b>zarezerwowane miejsce</b>, a nie pojawiają się
+                i znikają razem z układem. Powód zgłoszony z urządzenia: odliczanie wchodzi
+                i wychodzi co turę, a wraz z nim skakała cała reszta ekranu — przyciski
+                przesuwały się w dół i w górę pod palcem, który już zmierzał w ich stronę.
+                Miejsce jest więc trzymane zawsze, a zmienia się tylko to, czy stoi w nim treść.
+            -->
+            <Grid Grid.Row="1"
+                  HeightRequest="{StaticResource EventSlotHeight}"
+                  IsVisible="{Binding IsEventSlotVisible}">
+                <Border Style="{StaticResource CardBorder}"
+                        Padding="12,6"
+                        VerticalOptions="Fill"
+                        IsVisible="{Binding HasEventText}">
+                    <Label Style="{StaticResource BodyLabel}"
+                           Text="{Binding EventText}"
+                           FontAttributes="Bold"
+                           MaxLines="2"
+                           LineBreakMode="TailTruncation"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center" />
+                </Border>
+            </Grid>
+
+            <!--
+                Odliczanie: czas na zadanie z wydarzenia (w obu trybach) albo czas na ruch.
+                W ostatnich pięciu sekundach liczba zmienia kolor — jedyny moment, w którym
+                warto odciągnąć wzrok od koła.
+            -->
+            <Grid Grid.Row="2" HeightRequest="{StaticResource CountdownSlotHeight}">
+                <VerticalStackLayout x:Name="CountdownPanel"
+                                     Spacing="0"
+                                     VerticalOptions="Center"
+                                     IsVisible="{Binding HasCountdown}">
+                    <Label Style="{StaticResource CaptionLabel}"
+                           Text="{Binding CountdownText}"
+                           HorizontalOptions="Center" />
+                    <Label x:Name="CountdownValue"
+                           Style="{StaticResource DisplayLabel}"
+                           FontSize="44"
+                           Text="{Binding CountdownSeconds}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsCountdownUrgent}" Value="True">
+                                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource WarningLight}, Dark={StaticResource WarningDark}}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!--
+                Stan mikrofonu i ostatnia rozpoznana komenda — też w stałym miejscu, bo oba
+                napisy pojawiają się i znikają w trakcie tury. Sygnał dźwiękowy jest dla graczy
+                ważniejszy, ale ekran mówi to samo.
+            -->
+            <Grid Grid.Row="3" HeightRequest="{StaticResource VoiceSlotHeight}">
+                <Label Style="{StaticResource CaptionLabel}"
+                       Text="{Binding VoiceLineText}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       IsVisible="{Binding IsVoiceLineVisible}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsListening}" Value="True">
+                            <Setter Property="FontAttributes" Value="Bold" />
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TwisterGreen}, Dark={StaticResource TwisterGreenDark}}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Grid>
+        </Grid>
+
+        <!--
+            PRZED PARTIĄ I PO NIEJ — tu wolno przewijać, bo karta zasad przy pięciu graczach
+            i podsumowanie ze statystykami bywają dłuższe od ekranu. W trakcie partii ten pas
+            jest niewidoczny i nie ma z czym kolidować.
+        -->
+        <ScrollView Grid.Row="1" IsVisible="{Binding IsNotRunning}">
+            <VerticalStackLayout Spacing="{StaticResource SpacingS}">
+
+                <!--
+                    Karta przed partią: na jakich zasadach zagracie. Wcześniej ten ekran wypisywał
+                    tylko imiona i przycisk startu, więc nie odpowiadał na żadne z pytań, które
+                    zadaje się przed grą — jaki tryb, jakie wydarzenia, ile czasu na ruch. Wybory
+                    z trzech innych ekranów widać tu w jednym miejscu, zanim ruszy pierwsza tura.
+                -->
+                <Border Style="{StaticResource CardBorder}" IsVisible="{Binding IsBeforeGame}">
+                    <VerticalStackLayout Spacing="{StaticResource SpacingS}">
+                        <VerticalStackLayout Spacing="6" BindableLayout.ItemsSource="{Binding SetupItems}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:GameSetupItem">
+                                    <Grid ColumnDefinitions="28,*,Auto" ColumnSpacing="8">
+                                        <Label Grid.Column="0"
+                                               Style="{StaticResource CaptionLabel}"
+                                               Text="{Binding Glyph}"
+                                               FontSize="22"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalOptions="Center" />
+                                        <Label Grid.Column="1"
+                                               Style="{StaticResource CaptionLabel}"
+                                               Text="{Binding Label}"
+                                               VerticalOptions="Center" />
+                                        <Label Grid.Column="2"
+                                               Style="{StaticResource BodyLabel}"
+                                               Text="{Binding Value}"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="End"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+
+                        <Label Style="{StaticResource CaptionLabel}"
+                               Text="{loc:Translate Game_Label_AddPlayersFirst}"
+                               IsVisible="{Binding HasNoPlayers}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!--
+                    Koniec partii: wynik, statystyki i dwa wyjścia — „jeszcze raz" albo poprawienie
+                    ustawień. Statystyki liczy silnik i tak, więc pokazanie ich nic nie kosztuje,
+                    a odpowiadają na pytania, które padają zaraz po ostatniej turze („ile to
+                    trwało?", „kto odpadł pierwszy?").
+                -->
+                <Border Style="{StaticResource CardBorder}" IsVisible="{Binding IsFinished}">
+                    <VerticalStackLayout Spacing="{StaticResource SpacingM}">
+                        <Label Style="{StaticResource TitleLabel}"
+                               Text="{Binding SummaryText}"
+                               HorizontalTextAlignment="Center" />
+
+                        <VerticalStackLayout Spacing="6" BindableLayout.ItemsSource="{Binding SummaryItems}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:GameSetupItem">
+                                    <Grid ColumnDefinitions="28,*,Auto" ColumnSpacing="8">
+                                        <Label Grid.Column="0"
+                                               Style="{StaticResource CaptionLabel}"
+                                               Text="{Binding Glyph}"
+                                               FontSize="22"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalOptions="Center" />
+                                        <Label Grid.Column="1"
+                                               Style="{StaticResource CaptionLabel}"
+                                               Text="{Binding Label}"
+                                               VerticalOptions="Center" />
+                                        <Label Grid.Column="2"
+                                               Style="{StaticResource BodyLabel}"
+                                               Text="{Binding Value}"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="End"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+
+                        <views:GlyphButton Glyph="⟳"
+                                           Text="{loc:Translate Game_Button_PlayAgain}"
+                                           Command="{Binding PlayAgainCommand}"
+                                           IsEnabled="{Binding IsNotBusy}"
+                                           ButtonStyle="{StaticResource PrimaryActionButton}" />
+
+                        <views:GlyphButton Glyph="⚙"
+                                           Text="{loc:Translate Settings_Title}"
+                                           Command="{Binding GoToSettingsCommand}"
+                                           IsEnabled="{Binding IsNotBusy}"
+                                           ButtonStyle="{StaticResource SubtleButton}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!--
+                    Skład przed partią: karty, bo miejsca jest tu dużo, a nazwiska mają się czytać
+                    bez wysiłku. Ten sam skład w trakcie partii jest wierszem pigułek w dolnym
+                    pasie — tam liczy się każda jednostka wysokości.
+                -->
+                <CollectionView ItemsSource="{Binding Players}" IsVisible="{Binding IsBeforeGame}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:PlayerListItem">
+                            <Border Style="{StaticResource CardBorder}" Padding="12">
+                                <Label Style="{StaticResource BodyLabel}"
+                                       Text="{Binding Name}"
+                                       VerticalOptions="Center" />
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!--
+            DOLNY PAS — skład, akcje i baner. Nigdy się nie przewija: to tutaj są rzeczy,
+            których gracz potrzebuje natychmiast, więc muszą być pod palcem, a nie „gdzieś
+            niżej". Kolejność nie jest przypadkowa i wynika z dwóch rzeczy naraz — z tego, jak
+            często się czegoś używa, i z zasad umieszczania reklam.
+        -->
+        <VerticalStackLayout Grid.Row="2" Spacing="{StaticResource SpacingS}">
+
+            <!--
+                Skład w trakcie partii: wiersz pigułek, a nie lista kart. Karta z przyciskiem po
+                72 jednostki na gracza spychała przyciski poza ekran przy czterech osobach,
+                a skład jest tu rzeczą drugorzędną — patrzy się na niego przy upadku, nie co turę.
+                <para>
+                Cała pigułka jest celem dotknięcia, więc zgłoszenie upadku nie potrzebuje
+                osobnego, małego przycisku. Gracz, który odpadł, zostaje przekreślony: skład
+                partii to też jej historia.
+                </para>
+                <para>
+                Lista pozioma, a nie <c>FlexLayout</c> z zawijaniem — i to nie jest kwestia
+                gustu. <c>FlexLayout</c> wypełniany wiązaniem wywracał aplikację przy pomiarze
+                układu (<c>NullReferenceException</c> w <c>InitItemProperties</c>), bo elementy
+                dołożone po utworzeniu układu nie dostawały właściwości flex. Lista pozioma robi
+                to samo, a przy większej liczbie graczy po prostu się przesuwa.
+                </para>
+            -->
+            <CollectionView ItemsSource="{Binding Players}"
+                            HeightRequest="{StaticResource PlayerChipRowHeight}"
+                            IsVisible="{Binding IsRunning}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="6" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:PlayerListItem">
+                        <Border Style="{StaticResource PlayerChip}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GameViewModel}}, Path=EliminatePlayerCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                            <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource CaptionLabel}"
+                                       Text="{Binding Name}"
+                                       FontSize="14"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                                       VerticalOptions="Center">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsEliminated}" Value="True">
+                                            <Setter Property="TextDecorations" Value="Strikethrough" />
+                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MutedLight}, Dark={StaticResource MutedDark}}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <!--
+                                    Znak „⊘" — wyłączony z gry, nie usunięty. Krzyżyk czytał się
+                                    jak „skasuj gracza", a upadek nie usuwa nikogo ze składu:
+                                    gracz zostaje w partii jako ten, który już nie gra.
+                                -->
+                                <Label Text="⊘"
+                                       FontSize="15"
+                                       FontAutoScalingEnabled="False"
+                                       VerticalOptions="Center"
+                                       SemanticProperties.Description="{loc:Translate Game_Button_PlayerEliminated}"
+                                       TextColor="{AppThemeBinding Light={StaticResource DangerLight}, Dark={StaticResource DangerDark}}"
+                                       IsVisible="{Binding CanEliminate}" />
+                            </HorizontalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--
+                Rozpoczęcie partii tylko przed grą. Po zakończeniu tę samą rolę pełni
+                „Zagraj ponownie" w karcie podsumowania — dwa jednakowe przyciski na jednym
+                ekranie znaczyłyby to samo i wyglądałyby identycznie.
+            -->
+            <views:GlyphButton Glyph="▶"
+                               Text="{loc:Translate Game_Button_Start}"
+                               Command="{Binding StartGameCommand}"
+                               IsEnabled="{Binding CanStart}"
+                               IsVisible="{Binding IsBeforeGame}"
+                               ButtonStyle="{StaticResource PrimaryActionButton}" />
+
+            <!-- „Dalej" jest największy: to jedyny przycisk używany co turę. -->
+            <views:GlyphButton Glyph="▶"
+                               Text="{loc:Translate Game_Button_Next}"
+                               Command="{Binding NextTurnCommand}"
+                               IsEnabled="{Binding IsNotBusy}"
+                               IsVisible="{Binding CanPlayTurn}"
+                               ButtonStyle="{StaticResource PrimaryActionButton}" />
+
+            <!--
+                Trzy akcje partii w jednym rzędzie, każda o innej wadze i innym wyglądzie:
+                „Pauza" wypełniona grafitem (zatrzymuje partię), „Powtórz" z samym obrysem
+                krawędzi (czyta jeszcze raz to samo), „Zakończ" z obrysem grafitowym — nie jest
+                tak niewinna jak powtórzenie, ale nie jest też akcją niszczącą w czerwieni.
+                Zakończenie pyta o potwierdzenie, bo stoi obok przycisku używanego co turę.
+                <para>
+                Ten rząd stoi najniżej z akcji świadomie: sąsiaduje z banerem, a używa się go
+                rzadko. „Dalej", naciskane co turę, jest wyżej — dalej od reklamy.
+                </para>
+            -->
+            <Grid ColumnDefinitions="*,*,*"
+                  ColumnSpacing="{StaticResource SpacingXs}"
+                  IsVisible="{Binding CanPlayTurn}">
+                <views:GlyphButton Grid.Column="0"
+                                   Glyph="⟳"
+                                   FontSize="15"
+                                   Text="{loc:Translate Game_Button_Repeat}"
+                                   Command="{Binding RepeatCommand}"
+                                   IsEnabled="{Binding IsNotBusy}"
+                                   ButtonStyle="{StaticResource SubtleButton}" />
+                <views:GlyphButton Grid.Column="1"
+                                   Glyph="❚❚"
+                                   FontSize="15"
+                                   Text="{loc:Translate Game_Button_Pause}"
+                                   Command="{Binding TogglePauseCommand}"
+                                   IsEnabled="{Binding IsNotBusy}" />
+                <views:GlyphButton Grid.Column="2"
+                                   Glyph="■"
+                                   FontSize="15"
+                                   Text="{loc:Translate Game_Button_End}"
+                                   Command="{Binding EndGameCommand}"
+                                   IsEnabled="{Binding IsNotBusy}"
+                                   ButtonStyle="{StaticResource OutlinedPrimaryButton}" />
+            </Grid>
+
+            <views:GlyphButton Glyph="▶"
+                               Text="{loc:Translate Game_Button_Resume}"
+                               Command="{Binding TogglePauseCommand}"
+                               IsEnabled="{Binding IsNotBusy}"
+                               IsVisible="{Binding IsPaused}"
+                               ButtonStyle="{StaticResource PrimaryActionButton}" />
+
+            <!--
+                BANER REKLAMOWY (Etap 15) — i cztery zasady, z których wynika, dlaczego stoi
+                dokładnie tutaj i wygląda dokładnie tak:
+
+                1. Na samym dole i poza obszarem, po którym błądzi palec. Reklama sąsiadująca
+                   z przyciskiem naciskanym co turę zbierałaby przypadkowe kliknięcia, a to
+                   naruszenie zasad AdMob, nie tylko irytacja gracza. Nad banerem stoi rząd
+                   akcji używanych rzadko, nie „Dalej".
+                2. Odkreślony linią i odsunięty. Reklama nie może być pomylona z elementem
+                   aplikacji — krawędź mówi, gdzie kończy się gra, a zaczyna cudza treść.
+                3. Stała wysokość, zarezerwowana z góry. Baner wchodzący w gotowy układ
+                   przesunąłby przyciski w chwili, gdy palec już do nich zmierza — czyli znowu
+                   przypadkowe kliknięcia. Miejsce jest trzymane od wejścia na ekran.
+                4. Miejsce jest trzymane TYLKO wtedy, gdy reklamy w tym wydaniu istnieją
+                   i wolno je pokazać (zgoda). W buildzie bez reklam pas w ogóle nie powstaje,
+                   bo pusty pas na dole ekranu zabierałby wysokość za nic.
+
+                Baner jest tylko na tym ekranie — na startowym, w ustawieniach i w paczkach
+                wydarzeń nie ma żadnego (decyzja użytkownika).
+            -->
+            <VerticalStackLayout Spacing="{StaticResource SpacingS}" IsVisible="{Binding IsBannerVisible}">
+                <BoxView HeightRequest="1"
+                         Color="{AppThemeBinding Light={StaticResource OutlineLight}, Dark={StaticResource OutlineDark}}" />
+
+                <Grid HeightRequest="{StaticResource BannerSlotHeight}">
+                    <views:BannerAdView HorizontalOptions="Center" VerticalOptions="Center" />
+                </Grid>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+
+</views:ContentPageBase>

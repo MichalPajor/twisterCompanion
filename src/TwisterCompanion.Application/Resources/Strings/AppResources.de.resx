@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Teksty interfejsu — język neutralny (angielski).
+
+    Konwencja kluczy: Ekran_Element_Przeznaczenie
+      Home_Button_Game        przycisk na ekranie startowym
+      Settings_Label_Language etykieta na ekranie ustawień
+      Common_*                teksty wspólne dla wielu ekranów
+      EventPack_*_Name        nazwy paczek wbudowanych
+      Event_*                 nazwy wydarzeń z paczek wbudowanych
+
+    Dodając klucz, dopisz go TAKŻE do AppResources.pl.resx — pilnuje tego test
+    LocalizationResourceTests.KazdyKluczNeutralny_MaOdpowiednikPolski.
+  -->
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="App_Name" xml:space="preserve">
+    <value>Twister Companion</value>
+  </data>
+  <data name="Common_Button_Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="Common_Button_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Common_Button_Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Common_Error_Title" xml:space="preserve">
+    <value>Etwas ist schiefgelaufen</value>
+  </data>
+  <data name="Home_Title" xml:space="preserve">
+    <value>Twister Companion</value>
+  </data>
+  <data name="Home_Button_Game" xml:space="preserve">
+    <value>Spielen</value>
+  </data>
+  <data name="Home_Button_Players" xml:space="preserve">
+    <value>Spieler</value>
+  </data>
+  <data name="Home_Button_GameModes" xml:space="preserve">
+    <value>Spielmodi</value>
+  </data>
+  <data name="Home_Button_EventPacks" xml:space="preserve">
+    <value>Ereignisse</value>
+  </data>
+  <data name="Home_Button_Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Game_Title" xml:space="preserve">
+    <value>Spiel</value>
+  </data>
+  <data name="Players_Title" xml:space="preserve">
+    <value>Spieler</value>
+  </data>
+  <data name="GameModes_Title" xml:space="preserve">
+    <value>Spielmodi</value>
+  </data>
+  <data name="GameModes_Button_Rules" xml:space="preserve">
+    <value>Regeln</value>
+  </data>
+  <data name="EventPacks_Title" xml:space="preserve">
+    <value>Ereignisse</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Settings_Label_Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="Settings_Label_Voice" xml:space="preserve">
+    <value>Stimme</value>
+  </data>
+  <data name="Settings_Label_TextToSpeech" xml:space="preserve">
+    <value>Züge laut vorlesen</value>
+  </data>
+  <data name="Settings_Label_SystemVoice" xml:space="preserve">
+    <value>Systemstimme</value>
+  </data>
+  <data name="Settings_Label_SpeechRate" xml:space="preserve">
+    <value>Sprechtempo</value>
+  </data>
+  <data name="Settings_Label_SpeechPitch" xml:space="preserve">
+    <value>Tonhöhe</value>
+  </data>
+  <data name="Settings_Button_TestVoice" xml:space="preserve">
+    <value>Stimme testen</value>
+  </data>
+  <data name="Settings_Label_NoVoices" xml:space="preserve">
+    <value>Auf diesem Gerät sind keine Sprachstimmen installiert.</value>
+  </data>
+  <data name="Rules_Title" xml:space="preserve">
+    <value>Regeln</value>
+  </data>
+  <data name="EventPack_Party_Name" xml:space="preserve">
+    <value>Party</value>
+  </data>
+  <data name="EventPack_Kids_Name" xml:space="preserve">
+    <value>Für Kinder</value>
+  </data>
+  <data name="EventPack_Family_Name" xml:space="preserve">
+    <value>Familie</value>
+  </data>
+  <data name="Event_SwapPlaces" xml:space="preserve">
+    <value>Tausche den Platz mit einem beliebigen Spieler, wenn ihr beide es schafft.</value>
+  </data>
+  <data name="Event_RepeatPreviousMove" xml:space="preserve">
+    <value>Wiederhole deinen eigenen letzten Zug.</value>
+  </data>
+  <data name="Event_SlowMotionRound" xml:space="preserve">
+    <value>Runde in Zeitlupe</value>
+  </data>
+  <data name="Event_MakeAnimalSound" xml:space="preserve">
+    <value>Mach ein Tiergeräusch</value>
+  </data>
+  <data name="Event_CountToFiveAloud" xml:space="preserve">
+    <value>Zähle laut bis fünf</value>
+  </data>
+  <data name="Event_HighFiveNeighbour" xml:space="preserve">
+    <value>Klatsche den Spieler neben dir ab</value>
+  </data>
+  <data name="Event_SingChorus" xml:space="preserve">
+    <value>Singe den Refrain deines Lieblingsliedes.</value>
+  </data>
+  <data name="Event_ComplimentNeighbour" xml:space="preserve">
+    <value>Mach dem Spieler neben dir ein Kompliment</value>
+  </data>
+  <data name="Event_TellShortJoke" xml:space="preserve">
+    <value>Erzähle einen kurzen Witz</value>
+  </data>
+  <data name="Event_EyesClosedForTwoMoves" xml:space="preserve">
+    <value>Halte die Augen für die nächsten zwei Züge geschlossen</value>
+  </data>
+  <data name="Common_Info_Title" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Game_Label_Turn" xml:space="preserve">
+    <value>Zug {0}</value>
+  </data>
+  <data name="Game_Label_Paused" xml:space="preserve">
+    <value>Pausiert</value>
+  </data>
+  <data name="Game_Label_AddPlayersFirst" xml:space="preserve">
+    <value>Füge zuerst Spieler im Bildschirm „Spieler“ hinzu.</value>
+  </data>
+  <data name="Game_Summary_Winner" xml:space="preserve">
+    <value>{0} gewinnt nach {1} Zügen.</value>
+  </data>
+  <data name="Game_Summary_NoWinner" xml:space="preserve">
+    <value>Spiel vorbei nach {0} Zügen.</value>
+  </data>
+  <data name="Game_Button_Start" xml:space="preserve">
+    <value>Spiel starten</value>
+  </data>
+  <data name="Game_Button_Next" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="Game_Button_Repeat" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="Game_Button_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Game_Button_Resume" xml:space="preserve">
+    <value>Fortsetzen</value>
+  </data>
+  <data name="Game_Button_End" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="Players_Entry_Placeholder" xml:space="preserve">
+    <value>Name des Spielers</value>
+  </data>
+  <data name="Players_Button_Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="Players_Button_Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Players_Label_Empty" xml:space="preserve">
+    <value>Noch keine Spieler. Füge den ersten hinzu.</value>
+  </data>
+  <data name="EventPacks_Label_CopyNameFormat" xml:space="preserve">
+    <value>{0} (Kopie)</value>
+  </data>
+  <data name="EventPacks_Label_BuiltInReadOnly" xml:space="preserve">
+    <value>Mitgelieferte Sets lassen sich nicht ändern. Dupliziere das Set und bearbeite die Kopie.</value>
+  </data>
+  <data name="EventPacks_Confirm_DeleteTitle" xml:space="preserve">
+    <value>Set löschen</value>
+  </data>
+  <data name="EventPacks_Confirm_DeleteMessage" xml:space="preserve">
+    <value>Das Set „{0}“ löschen?</value>
+  </data>
+  <data name="EventPacks_Button_Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="EventPacks_Label_TotalChanceFormat" xml:space="preserve">
+    <value>Gesamtchance: {0} %</value>
+  </data>
+  <data name="EventPacks_Entry_PackName" xml:space="preserve">
+    <value>Name des Sets</value>
+  </data>
+  <data name="EventPacks_Button_New" xml:space="preserve">
+    <value>Neues Set</value>
+  </data>
+  <data name="EventPacks_Button_SetActive" xml:space="preserve">
+    <value>Wählen</value>
+  </data>
+  <data name="EventPacks_Button_ClearActive" xml:space="preserve">
+    <value>Ohne Ereignisse spielen</value>
+  </data>
+  <data name="EventPacks_Button_Duplicate" xml:space="preserve">
+    <value>Duplizieren</value>
+  </data>
+  <data name="EventPacks_Entry_EventName" xml:space="preserve">
+    <value>Name des Ereignisses</value>
+  </data>
+  <data name="EventPacks_Button_AddEvent" xml:space="preserve">
+    <value>Ereignis hinzufügen</value>
+  </data>
+  <data name="EventPacks_Label_Active" xml:space="preserve">
+    <value>in Gebrauch</value>
+  </data>
+  <data name="EventPacks_Label_BuiltIn" xml:space="preserve">
+    <value>mitgeliefert</value>
+  </data>
+  <data name="EventPacks_Label_ChanceWarning" xml:space="preserve">
+    <value>Gesamtchance über 100 % – in jedem erlaubten Zug kommt ein Ereignis.</value>
+  </data>
+  <data name="EventPacks_Label_Chance" xml:space="preserve">
+    <value>Chance</value>
+  </data>
+  <data name="Game_Label_VoiceListening" xml:space="preserve">
+    <value>Hört zu …</value>
+  </data>
+  <data name="Game_Label_VoiceWaiting" xml:space="preserve">
+    <value>Mikrofon kurz pausiert</value>
+  </data>
+  <data name="Game_Label_VoiceIdle" xml:space="preserve">
+    <value>Mikrofon aus – jetzt wird gestellt</value>
+  </data>
+  <data name="Game_Label_VoiceDisabled" xml:space="preserve">
+    <value>Sprachsteuerung aus</value>
+  </data>
+  <data name="Game_Label_VoiceUnavailable" xml:space="preserve">
+    <value>Sprachsteuerung nicht verfügbar</value>
+  </data>
+  <data name="Game_Label_VoiceCommandHeard" xml:space="preserve">
+    <value>Gehört: {0}</value>
+  </data>
+  <data name="Game_VoiceCommand_Next" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="Game_VoiceCommand_Repeat" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="Game_VoiceCommand_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Game_VoiceCommand_Resume" xml:space="preserve">
+    <value>Fortsetzen</value>
+  </data>
+  <data name="Game_VoiceCommand_EliminatePlayer" xml:space="preserve">
+    <value>Spieler ausgeschieden</value>
+  </data>
+  <data name="Settings_Label_VoiceControl" xml:space="preserve">
+    <value>Sprachsteuerung</value>
+  </data>
+  <data name="Settings_Label_VoiceControlHint" xml:space="preserve">
+    <value>Während der Partie kannst du sagen: weiter, wiederhole, pause, fortsetzen.</value>
+  </data>
+  <data name="Settings_Label_VoiceListeningDelay" xml:space="preserve">
+    <value>Zeit für den Zug, bevor zugehört wird (s)</value>
+  </data>
+  <data name="Settings_Label_MicrophoneDenied" xml:space="preserve">
+    <value>Ohne Zugriff auf das Mikrofon bleibt die Sprachsteuerung aus. Das Spiel läuft über die Tasten.</value>
+  </data>
+  <data name="Settings_Label_VoiceControlUnavailable" xml:space="preserve">
+    <value>Dieses Gerät hat keine Spracherkennung.</value>
+  </data>
+  <data name="GameMode_Classic_Name" xml:space="preserve">
+    <value>Klassisch</value>
+  </data>
+  <data name="GameMode_Classic_Description" xml:space="preserve">
+    <value>Twister, wie du es kennst. Ereignisse nur, wenn du ein Set wählst.</value>
+  </data>
+  <data name="GameMode_Classic_Rules" xml:space="preserve">
+    <value>Die App ruft einen Spieler auf und nennt kurz darauf ein Körperteil und eine Farbe. Setze dieses Körperteil auf einen freien Kreis dieser Farbe und halte es dort.
+
+Zum nächsten Zug gehst du selbst über – mit der Taste „Weiter“ oder per Sprache. Im automatischen Modus (in den Einstellungen aktivierbar) wechselt der Zug nach der eingestellten Zeit von allein.
+
+Die Ereignisse liegen bei dir: Hast du ein Ereignis-Set gewählt, kommen während der Partie Ereignisse. Ohne Set spielst du klassisches Twister, nur Züge.
+
+Die App wirft niemanden raus – wenn ein Spieler fällt, tippe auf die Taste neben seinem Namen. Es gewinnt, wer als Letzter steht.</value>
+  </data>
+  <data name="GameMode_Hardcore_Name" xml:space="preserve">
+    <value>Hardcore</value>
+  </data>
+  <data name="GameMode_Hardcore_Description" xml:space="preserve">
+    <value>Schwierigere Folgen, häufige Ereignisse und die halbe Zeit.</value>
+  </data>
+  <data name="GameMode_Hardcore_Rules" xml:space="preserve">
+    <value>Dieselben Grundregeln wie im klassischen Modus, mit drei Unterschieden.
+
+Die Züge werden so gewählt, dass sie möglichst unbequem sind: dasselbe Körperteil kommt fast nie zweimal hintereinander, Wiederholungen liegen weit auseinander und ein Zug, der nichts ändert, ist praktisch ausgeschlossen.
+
+Ereignisse kommen viel häufiger und können in aufeinanderfolgenden Zügen fallen.
+
+Es gibt die halbe Zeit: dieser Modus kürzt die Zeit für den Zug und für die Aufgabe auf 50 % des Werts aus den Einstellungen. Im manuellen Modus betrifft das die Ereignisaufgaben, im automatischen auch die Zugzeit.
+
+Zum nächsten Zug gehst du per Taste oder Sprache über – es sei denn, du schaltest den automatischen Modus ein.</value>
+  </data>
+  <data name="GameMode_Kids_Name" xml:space="preserve">
+    <value>Für Kinder</value>
+  </data>
+  <data name="GameMode_Kids_Description" xml:space="preserve">
+    <value>Sanfte Züge, mehr Zeit und niemand scheidet aus.</value>
+  </data>
+  <data name="GameMode_Kids_Rules" xml:space="preserve">
+    <value>Dieselben Grundregeln wie im klassischen Modus, mit einem wichtigen Unterschied: **niemand scheidet aus**. Ein Sturz kostet nichts, die Partie läuft einfach weiter, und neben den Namen gibt es keine Taste zum Ausscheiden.
+
+Die Züge sind leichter: dasselbe Körperteil und dieselbe Farbe dürfen sich wiederholen, ein Kind muss sich also nicht über die ganze Matte verrenken.
+
+Es gibt die Hälfte mehr Zeit: dieser Modus verlängert die Zeit für den Zug und für die Aufgabe auf 150 % des Werts aus den Einstellungen.
+
+Zum nächsten Zug gehst du per Taste oder Sprache über – es sei denn, du schaltest den automatischen Modus ein.</value>
+  </data>
+  <data name="GameMode_Party_Name" xml:space="preserve">
+    <value>Party</value>
+  </data>
+  <data name="GameMode_Party_Description" xml:space="preserve">
+    <value>Viele Ereignisse für eine Runde, die zum Spaß gekommen ist.</value>
+  </data>
+  <data name="GameMode_Party_Rules" xml:space="preserve">
+    <value>Dieselben Grundregeln wie im klassischen Modus, mit häufigen Ereignissen.
+
+Die Züge bleiben normal – der Spaß kommt aus den Ereignissen, nicht aus der Schwierigkeit der Posen. Die Zeiten sind so, wie du sie einstellst.
+
+Nutzt das Set „Party“, sofern du kein anderes wählst.
+
+Zum nächsten Zug gehst du per Taste oder Sprache über – es sei denn, du schaltest den automatischen Modus ein.</value>
+  </data>
+  <data name="GameMode_Singing_Name" xml:space="preserve">
+    <value>Singen</value>
+  </data>
+  <data name="GameMode_Singing_Description" xml:space="preserve">
+    <value>Ereignisse rund ums Singen, mit mehr Zeit pro Aufgabe.</value>
+  </data>
+  <data name="GameMode_Singing_Rules" xml:space="preserve">
+    <value>Dieselben Grundregeln wie im klassischen Modus, mit Ereignissen, die zum Singen, Summen oder zu einem Geräusch auffordern.
+
+Die Aufgabe selbst bekommt die Hälfte mehr Zeit (150 % des Werts aus den Einstellungen), denn einen Refrain zu singen dauert länger, als eine Hand zu setzen. Die Zugzeit bleibt unverändert.
+
+Nutzt das Set „Familie“, sofern du kein anderes wählst – dort stecken Singaufgaben drin. Am besten läuft es mit einem Set, das voll davon ist.
+
+Zum nächsten Zug gehst du per Taste oder Sprache über – es sei denn, du schaltest den automatischen Modus ein.</value>
+  </data>
+  <data name="GameMode_Drinking_Name" xml:space="preserve">
+    <value>Party ab 18</value>
+  </data>
+  <data name="GameMode_Drinking_Description" xml:space="preserve">
+    <value>Nur für Erwachsene. Derzeit nicht verfügbar.</value>
+  </data>
+  <data name="GameMode_Drinking_Rules" xml:space="preserve">
+    <value>Dieser Modus ist vorbereitet, in dieser Version der App aber nicht verfügbar.</value>
+  </data>
+  <data name="GameModes_Label_Active" xml:space="preserve">
+    <value>Gewählt</value>
+  </data>
+  <data name="GameModes_Button_Select" xml:space="preserve">
+    <value>Nutzen</value>
+  </data>
+  <data name="GameModes_Label_Empty" xml:space="preserve">
+    <value>Keine Spielmodi verfügbar.</value>
+  </data>
+  <data name="Rules_Label_Missing" xml:space="preserve">
+    <value>Für diesen Modus gibt es keine Regelbeschreibung.</value>
+  </data>
+  <data name="Game_Label_CountdownTask" xml:space="preserve">
+    <value>Zeit für die Aufgabe</value>
+  </data>
+  <data name="Game_Label_CountdownMove" xml:space="preserve">
+    <value>Zeit für den Zug</value>
+  </data>
+  <data name="Settings_Label_TurnAdvance" xml:space="preserve">
+    <value>Automatische Züge</value>
+  </data>
+  <data name="Settings_Label_TurnAdvanceHint" xml:space="preserve">
+    <value>Die Züge folgen von selbst nach der eingestellten Zeit. Die Sprachsteuerung ist in diesem Modus aus – es bleibt nichts mehr zu steuern.</value>
+  </data>
+  <data name="Settings_Label_MoveTime" xml:space="preserve">
+    <value>Zeit für den Zug (s)</value>
+  </data>
+  <data name="Settings_Label_TaskTime" xml:space="preserve">
+    <value>Zeit für eine Ereignisaufgabe (s)</value>
+  </data>
+  <data name="Settings_Label_Seconds" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="Game_Button_PlayerEliminated" xml:space="preserve">
+    <value>Gefallen</value>
+  </data>
+  <data name="Settings_Info_AutomaticTurnsOff" xml:space="preserve">
+    <value>Automatische Züge wurden ausgeschaltet – mit Sprachsteuerung entscheidest du, wann der Zug wechselt.</value>
+  </data>
+  <data name="Settings_Info_VoiceControlOff" xml:space="preserve">
+    <value>Die Sprachsteuerung wurde ausgeschaltet – bei automatischen Zügen bleibt nichts zu steuern.</value>
+  </data>
+  <data name="Game_Button_PlayAgain" xml:space="preserve">
+    <value>Noch einmal spielen</value>
+  </data>
+  <data name="Settings_Label_Theme" xml:space="preserve">
+    <value>Aussehen</value>
+  </data>
+  <data name="Settings_Theme_System" xml:space="preserve">
+    <value>Wie im System</value>
+  </data>
+  <data name="Settings_Theme_Light" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="Settings_Theme_Dark" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="Common_Label_On" xml:space="preserve">
+    <value>An</value>
+  </data>
+  <data name="Common_Label_Off" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="Game_Setup_Title" xml:space="preserve">
+    <value>Details der Partie</value>
+  </data>
+  <data name="Game_Setup_Mode" xml:space="preserve">
+    <value>Spielmodus</value>
+  </data>
+  <data name="Game_Setup_Events" xml:space="preserve">
+    <value>Ereignisse</value>
+  </data>
+  <data name="Game_Setup_NoEvents" xml:space="preserve">
+    <value>Keine Ereignisse</value>
+  </data>
+  <data name="Game_Setup_EventPackFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Game_Setup_SecondsFormat" xml:space="preserve">
+    <value>{0} s</value>
+  </data>
+  <data name="Game_Setup_TurnAdvance" xml:space="preserve">
+    <value>Zugwechsel</value>
+  </data>
+  <data name="Game_Setup_TurnManual" xml:space="preserve">
+    <value>Durch die Spieler</value>
+  </data>
+  <data name="Game_Setup_TurnAutomatic" xml:space="preserve">
+    <value>Automatisch</value>
+  </data>
+  <data name="Game_Setup_Elimination" xml:space="preserve">
+    <value>Ausscheiden</value>
+  </data>
+  <data name="Game_Setup_EliminationManual" xml:space="preserve">
+    <value>Wer fällt, ist raus</value>
+  </data>
+  <data name="Game_Setup_EliminationNone" xml:space="preserve">
+    <value>Niemand fliegt raus</value>
+  </data>
+  <data name="Settings_Label_Animations" xml:space="preserve">
+    <value>Animationen</value>
+  </data>
+  <data name="Settings_Label_AnimationsHint" xml:space="preserve">
+    <value>Kurze Effekte auf den Bildschirmen. Wenn du Animationen in den Systemeinstellungen abschaltest, bleiben sie ohnehin aus.</value>
+  </data>
+  <data name="Players_Button_Rename" xml:space="preserve">
+    <value>Namen ändern</value>
+  </data>
+  <data name="Players_Button_ConfirmRename" xml:space="preserve">
+    <value>Namen speichern</value>
+  </data>
+  <data name="Players_Button_CancelRename" xml:space="preserve">
+    <value>Änderung abbrechen</value>
+  </data>
+  <data name="Players_Button_MoveUp" xml:space="preserve">
+    <value>Nach oben</value>
+  </data>
+  <data name="Players_Button_MoveDown" xml:space="preserve">
+    <value>Nach unten</value>
+  </data>
+  <data name="Players_Label_Order" xml:space="preserve">
+    <value>Die Reihenfolge der Spieler ist die Reihenfolge der Züge. Tippe auf einen Namen, um ihn zu ändern.</value>
+  </data>
+  <data name="Players_Label_DuplicateName" xml:space="preserve">
+    <value>Ein Spieler namens {0} steht schon auf der Liste.</value>
+  </data>
+  <data name="Players_Confirm_DeleteTitle" xml:space="preserve">
+    <value>Spieler entfernen?</value>
+  </data>
+  <data name="Players_Confirm_DeleteMessage" xml:space="preserve">
+    <value>{0} aus der Liste entfernen?</value>
+  </data>
+  <data name="Game_Summary_Turns" xml:space="preserve">
+    <value>Gespielte Züge</value>
+  </data>
+  <data name="Game_Summary_Duration" xml:space="preserve">
+    <value>Spieldauer</value>
+  </data>
+  <data name="Game_Summary_DurationFormat" xml:space="preserve">
+    <value>{0} Min. {1} s</value>
+  </data>
+  <data name="Game_Summary_Eliminated" xml:space="preserve">
+    <value>Ausgeschieden, der Reihe nach</value>
+  </data>
+  <data name="Game_Confirm_EndTitle" xml:space="preserve">
+    <value>Spiel beenden?</value>
+  </data>
+  <data name="Game_Confirm_EndMessage" xml:space="preserve">
+    <value>Die laufende Partie endet ohne Gewinner.</value>
+  </data>
+  <data name="Settings_Label_Sounds" xml:space="preserve">
+    <value>Töne</value>
+  </data>
+  <data name="Settings_Label_SoundsHint" xml:space="preserve">
+    <value>Kurze Effekte: der gezogene Zug, ein Ereignis, ein Spieler scheidet aus, die tickende Uhr.</value>
+  </data>
+  <data name="Settings_Label_SoundVolume" xml:space="preserve">
+    <value>Lautstärke der Effekte</value>
+  </data>
+  <data name="Settings_Label_Haptics" xml:space="preserve">
+    <value>Vibrationen</value>
+  </data>
+  <data name="Settings_Label_HapticsHint" xml:space="preserve">
+    <value>Kurze Vibrationen bei einem Ereignis und wenn ein Spieler ausscheidet. Sie funktionieren auch bei stummgeschaltetem Telefon.</value>
+  </data>
+  <data name="Settings_Button_TestSound" xml:space="preserve">
+    <value>Ton testen</value>
+  </data>
+  <data name="Home_Button_HowToPlay" xml:space="preserve">
+    <value>So wird gespielt</value>
+  </data>
+  <data name="Onboarding_Title" xml:space="preserve">
+    <value>So wird gespielt</value>
+  </data>
+  <data name="Onboarding_Label_ProgressFormat" xml:space="preserve">
+    <value>{0} von {1}</value>
+  </data>
+  <data name="Onboarding_Button_Skip" xml:space="preserve">
+    <value>Überspringen</value>
+  </data>
+  <data name="Onboarding_Button_Next" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="Onboarding_Button_Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="Onboarding_Button_Finish" xml:space="preserve">
+    <value>Los geht’s</value>
+  </data>
+  <data name="Onboarding_Step1_Title" xml:space="preserve">
+    <value>Willkommen bei Twister Companion</value>
+  </data>
+  <data name="Onboarding_Step1_Body" xml:space="preserve">
+    <value>Hallo! Diese App ist dein Helfer beim Twister-Spielen – sie ersetzt den Pappdrehteller und führt die ganze Partie für euch.
+
+Der Drehteller ist verschwunden? Kein Problem. Die App zieht den Zug, ruft den Spieler beim Namen und sagt laut, was zu tun ist – und ihr spielt einfach.
+
+Deshalb ergibt eine Partie zu zweit endlich Sinn: niemand muss danebenstehen und drehen. Es gibt drei Arten, die Partie zu führen – manuell, automatisch und per Sprachsteuerung. Das Telefon darf neben der Matte liegen bleiben, ihr müsst es nicht anfassen.
+
+Du kannst auch eigene Ereignisse ergänzen: kurze Aufgaben, die während der Partie zufällig hereinplatzen und alles auf den Kopf stellen.
+
+Twister® ist eine Marke von Hasbro. Diese App ist inoffiziell und steht in keiner Verbindung zu Hasbro oder zum Verlag des Spiels.</value>
+  </data>
+  <data name="Onboarding_Step2_Title" xml:space="preserve">
+    <value>Bevor ihr anfangt</value>
+  </data>
+  <data name="Onboarding_Step2_Body" xml:space="preserve">
+    <value>Spieler – trage die Namen aller ein, die mitspielen. Mit diesen Namen ruft die App jeden Zug auf.
+
+Ereignisse – wähle ein fertiges Set oder stelle dein eigenes zusammen und lege fest, wie oft sie kommen sollen. Ihr könnt auch ganz ohne sie spielen.
+
+Spielmodi – klassisch, für Kinder, Party, Hardcore. Jeder ändert Tempo und Schwierigkeit; was er genau tut, steht unter „Regeln“.
+
+Einstellungen – Stimme und Sprechtempo, Töne, Zeit für den Zug und die Art des Zugwechsels.
+
+Danach genügt es, „Spielen“ zu öffnen und „Spiel starten“ zu drücken. Alles, was du einstellst, bleibt für das nächste Mal gespeichert.</value>
+  </data>
+  <data name="Onboarding_Step3_Title" xml:space="preserve">
+    <value>So läuft eine Partie</value>
+  </data>
+  <data name="Onboarding_Step3_Body" xml:space="preserve">
+    <value>Die App ruft einen Spieler beim Namen, macht eine kurze Pause und gibt die Anweisung: ein Körperteil und eine Farbe. In der Mitte des Bildschirms erscheint ein großer Kreis in dieser Farbe – setze die genannte Hand oder den genannten Fuß auf einen freien Kreis der Matte und halte ihn dort.
+
+Unter dem Kreis läuft der Countdown: so viel Zeit bleibt für den Zug. Im manuellen Modus wartet die App danach auf euch – den nächsten Zug startet die Taste „Weiter“. Im automatischen Modus macht sie allein weiter.
+
+Wer fällt, ist raus – tippe auf seinen Namen in der Leiste unter den Tasten, und er wird durchgestrichen. Es gewinnt, wer als Letzter auf der Matte bleibt.
+
+Mit eingeschalteter Sprachsteuerung musst du das Telefon gar nicht anfassen: sage „weiter“, „wiederhole“, „pause“ oder „fortsetzen“. Ein kurzes Signal sagt dir, wann das Mikrofon zuhört – ein Ton beim Öffnen, ein fallender beim Schließen.
+
+Die Anweisung nicht verstanden? „Wiederhole“ liest sie noch einmal vor.</value>
+  </data>
+  <data name="Settings_Label_Data" xml:space="preserve">
+    <value>Daten</value>
+  </data>
+  <data name="Settings_Button_Reset" xml:space="preserve">
+    <value>Standardeinstellungen wiederherstellen</value>
+  </data>
+  <data name="Settings_Confirm_ResetTitle" xml:space="preserve">
+    <value>Einstellungen zurücksetzen?</value>
+  </data>
+  <data name="Settings_Confirm_ResetMessage" xml:space="preserve">
+    <value>Alle Einstellungen kehren zu ihren Standardwerten zurück. Spieler, Ereignis-Sets und das gespeicherte Spiel bleiben erhalten.</value>
+  </data>
+  <data name="Settings_Button_Erase" xml:space="preserve">
+    <value>Meine Daten löschen</value>
+  </data>
+  <data name="Settings_Confirm_EraseTitle" xml:space="preserve">
+    <value>Alle Daten löschen?</value>
+  </data>
+  <data name="Settings_Confirm_EraseMessage" xml:space="preserve">
+    <value>Das löscht die Einstellungen, die Spielerliste, deine Ereignis-Sets und das gespeicherte Spiel. Mitgelieferte Sets bleiben. Das lässt sich nicht rückgängig machen.</value>
+  </data>
+  <data name="Settings_Info_EraseDone" xml:space="preserve">
+    <value>Die Daten wurden gelöscht.</value>
+  </data>
+  <data name="Settings_Button_HowToPlay" xml:space="preserve">
+    <value>„So wird gespielt“ ansehen</value>
+  </data>
+  <data name="Event_SwapRightHandWithOther" xml:space="preserve">
+    <value>Tausche deine rechte Hand mit der linken Hand eines anderen Spielers.</value>
+  </data>
+  <data name="Event_RoarLikeLion" xml:space="preserve">
+    <value>Brülle wie ein Löwe – so laut du kannst.</value>
+  </data>
+  <data name="Event_SingOneLine" xml:space="preserve">
+    <value>Singe eine Zeile aus irgendeinem Lied.</value>
+  </data>
+  <data name="Event_SingYourNameOpera" xml:space="preserve">
+    <value>Singe deinen Namen wie in der Oper.</value>
+  </data>
+  <data name="Event_TongueTwister" xml:space="preserve">
+    <value>Sag „Fischers Fritz fischt frische Fische“ ohne Stolpern.</value>
+  </data>
+  <data name="Event_ShoutChampion" xml:space="preserve">
+    <value>Rufe „Ich bin der Twister-Champion!“ so laut du kannst.</value>
+  </data>
+  <data name="Event_SingBirthdaySongFast" xml:space="preserve">
+    <value>Singe „Happy Birthday“ im Schnelldurchlauf.</value>
+  </data>
+  <data name="Event_SpeakLikeRobot" xml:space="preserve">
+    <value>Sag einen beliebigen Satz mit Roboterstimme.</value>
+  </data>
+  <data name="Event_LaughLikeVillain" xml:space="preserve">
+    <value>Lache wie ein Filmbösewicht.</value>
+  </data>
+  <data name="Event_FiveFruits" xml:space="preserve">
+    <value>Nenne fünf Obstsorten, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterA" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „A“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterK" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „K“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterS" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „S“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterD" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „D“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterF" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „F“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterW" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „W“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterL" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „L“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterP" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „P“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterM" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „M“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterE" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „E“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterG" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „G“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterI" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „I“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterZ" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „Z“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterB" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „B“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterR" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „R“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_FiveWordsLetterU" xml:space="preserve">
+    <value>Nenne fünf Wörter mit „U“, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_NamePlayersAlphabetically" xml:space="preserve">
+    <value>Nenne die Namen aller Spieler in alphabetischer Reihenfolge.</value>
+  </data>
+  <data name="Event_FiveThingsInRoom" xml:space="preserve">
+    <value>Nenne fünf Dinge, die du in diesem Raum siehst.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterW" xml:space="preserve">
+    <value>Nenne drei Städte mit „W“.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterK" xml:space="preserve">
+    <value>Nenne drei Städte mit „K“.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterR" xml:space="preserve">
+    <value>Nenne drei Städte mit „R“.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterL" xml:space="preserve">
+    <value>Nenne drei Städte mit „L“.</value>
+  </data>
+  <data name="Event_ThreeCitiesLetterS" xml:space="preserve">
+    <value>Nenne drei Städte mit „S“.</value>
+  </data>
+  <data name="Event_StickOutTongue" xml:space="preserve">
+    <value>Streck die Zunge heraus.</value>
+  </data>
+  <data name="Event_ScariestFace" xml:space="preserve">
+    <value>Zieh die gruseligste Grimasse, die du kannst.</value>
+  </data>
+  <data name="Event_WinkAtEveryone" xml:space="preserve">
+    <value>Zwinkere jedem Spieler der Reihe nach zu.</value>
+  </data>
+  <data name="Event_OneHandUpUntilCountdownEnds" xml:space="preserve">
+    <value>Heb eine Hand und halte sie oben, bis der Countdown abläuft.</value>
+  </data>
+  <data name="Event_OneFootOffUntilCountdownEnds" xml:space="preserve">
+    <value>Heb einen Fuß von der Matte und halte ihn so, bis der Countdown abläuft.</value>
+  </data>
+  <data name="Event_SwapOwnHands" xml:space="preserve">
+    <value>Tausche deine Hände: die linke auf den Kreis der rechten und umgekehrt.</value>
+  </data>
+  <data name="Event_SwapOwnFeet" xml:space="preserve">
+    <value>Tausche deine Füße: den linken auf den Kreis des rechten und umgekehrt.</value>
+  </data>
+  <data name="Event_SlowMotionNextMove" xml:space="preserve">
+    <value>Mach deinen nächsten Zug in Zeitlupe.</value>
+  </data>
+  <data name="Event_NoseToKnee" xml:space="preserve">
+    <value>Versuche, mit der Nase dein eigenes Knie zu berühren.</value>
+  </data>
+  <data name="Event_SwapLeftFootSpot" xml:space="preserve">
+    <value>Tausche den Kreis unter deinem linken Fuß mit dem Spieler neben dir – wenn es geht.</value>
+  </data>
+  <data name="Event_HoldStillUntilCountdownEnds" xml:space="preserve">
+    <value>Halte völlig still, bis der Countdown abläuft.</value>
+  </data>
+  <data name="Event_RiseTenCentimetres" xml:space="preserve">
+    <value>Geh 10 cm höher und halte das bis zum Ende deines Zuges.</value>
+  </data>
+  <data name="Event_WhisperUntilRoundEnds" xml:space="preserve">
+    <value>Sprich bis zum Ende der Runde nur im Flüsterton.</value>
+  </data>
+  <data name="Event_NoLaughingUntilRoundEnds" xml:space="preserve">
+    <value>Bis zum Ende der Runde darfst du nicht lachen.</value>
+  </data>
+  <data name="Event_OneEyeClosedUntilRoundEnds" xml:space="preserve">
+    <value>Halte bis zum Ende der Runde ein Auge geschlossen.</value>
+  </data>
+  <data name="Event_ShoutHopEachMove" xml:space="preserve">
+    <value>Rufe bei jedem deiner Züge „hopp!“, bis die Runde endet.</value>
+  </data>
+  <data name="Event_AddressEveryoneAsHighness" xml:space="preserve">
+    <value>Sprich alle bis zum Ende der Runde mit „Eure Hoheit“ an.</value>
+  </data>
+  <data name="Event_ThankSomeone" xml:space="preserve">
+    <value>Bedanke dich bei jemandem für etwas, das er diese Woche für dich getan hat.</value>
+  </data>
+  <data name="Event_FavouriteThingWithRightNeighbour" xml:space="preserve">
+    <value>Sag, was du am liebsten mit der Person rechts von dir machst.</value>
+  </data>
+  <data name="Event_SayOneThingProudOf" xml:space="preserve">
+    <value>Sag laut eine Sache, auf die du stolz bist.</value>
+  </data>
+  <data name="Event_AskForBalanceHelp" xml:space="preserve">
+    <value>Bitte einen beliebigen Spieler, dir beim Gleichgewicht zu helfen – er muss helfen.</value>
+  </data>
+  <data name="Event_TellOldestWhatYouLearned" xml:space="preserve">
+    <value>Sag dem ältesten Spieler etwas, das du von ihm gelernt hast.</value>
+  </data>
+  <data name="Event_NameRoundHero" xml:space="preserve">
+    <value>Wähle den Spieler, der von dir den Titel „Held der Runde“ bekommt.</value>
+  </data>
+  <data name="Event_BestThingToday" xml:space="preserve">
+    <value>Erzähle in einem Satz, was heute am schönsten war.</value>
+  </data>
+  <data name="Event_ProposeGroupCheer" xml:space="preserve">
+    <value>Schlage einen gemeinsamen Ruf vor – alle wiederholen ihn einmal nach dir.</value>
+  </data>
+  <data name="Event_MeowThreeTimes" xml:space="preserve">
+    <value>Miaue dreimal wie eine Katze.</value>
+  </data>
+  <data name="Event_BarkLikePuppy" xml:space="preserve">
+    <value>Belle wie ein kleiner Hund.</value>
+  </data>
+  <data name="Event_FireEngineSound" xml:space="preserve">
+    <value>Mach das Geräusch eines Feuerwehrautos.</value>
+  </data>
+  <data name="Event_RaceCarSound" xml:space="preserve">
+    <value>Mach das Geräusch eines Rennwagens.</value>
+  </data>
+  <data name="Event_SingKittenSong" xml:space="preserve">
+    <value>Singe „Alle meine Entchen“.</value>
+  </data>
+  <data name="Event_SayHelloDeepVoice" xml:space="preserve">
+    <value>Sag „guten Tag“ mit ganz tiefer Stimme.</value>
+  </data>
+  <data name="Event_SayHelloMouseVoice" xml:space="preserve">
+    <value>Sag „guten Tag“ mit ganz feiner Stimme, wie eine Maus.</value>
+  </data>
+  <data name="Event_GhostSound" xml:space="preserve">
+    <value>Mach ein Gespenstergeräusch: „huuuuh!“.</value>
+  </data>
+  <data name="Event_SneezeLoudly" xml:space="preserve">
+    <value>Niese so laut du kannst.</value>
+  </data>
+  <data name="Event_SingYourNameThreeTimes" xml:space="preserve">
+    <value>Singe deinen Namen dreimal.</value>
+  </data>
+  <data name="Event_MonkeyFaceScratchHead" xml:space="preserve">
+    <value>Zieh ein Affengesicht und kratz dich am Kopf.</value>
+  </data>
+  <data name="Event_TurtleNeck" xml:space="preserve">
+    <value>Streck den Hals wie eine Schildkröte vor und zieh ihn wieder ein.</value>
+  </data>
+  <data name="Event_CountToTen" xml:space="preserve">
+    <value>Zähle bis zehn.</value>
+  </data>
+  <data name="Event_CountBackwardsFromFive" xml:space="preserve">
+    <value>Zähle rückwärts von fünf bis eins.</value>
+  </data>
+  <data name="Event_FiveLetters" xml:space="preserve">
+    <value>Nenne fünf Buchstaben aus dem Alphabet.</value>
+  </data>
+  <data name="Event_ColoursOnMat" xml:space="preserve">
+    <value>Nenne die Farben, die du auf der Matte siehst.</value>
+  </data>
+  <data name="Event_ThreeAnimals" xml:space="preserve">
+    <value>Nenne drei Tiere.</value>
+  </data>
+  <data name="Event_TwoSweetThings" xml:space="preserve">
+    <value>Nenne zwei Dinge, die süß sind.</value>
+  </data>
+  <data name="Event_SayDayOfWeek" xml:space="preserve">
+    <value>Sag, welcher Wochentag heute ist.</value>
+  </data>
+  <data name="Event_ThreeBlueThings" xml:space="preserve">
+    <value>Nenne drei Dinge, die blau sind.</value>
+  </data>
+  <data name="Event_FavouriteFruitAndWhy" xml:space="preserve">
+    <value>Sag deine Lieblingsfrucht und warum du sie magst.</value>
+  </data>
+  <data name="Event_TongueOutOneEyeShut" xml:space="preserve">
+    <value>Streck die Zunge heraus und kneif ein Auge zu.</value>
+  </data>
+  <data name="Event_SadThenHappyFace" xml:space="preserve">
+    <value>Mach ein ganz, ganz trauriges Gesicht und danach ein ganz fröhliches.</value>
+  </data>
+  <data name="Event_BalloonCheeks" xml:space="preserve">
+    <value>Blas die Backen auf wie einen Luftballon.</value>
+  </data>
+  <data name="Event_FunniestFace" xml:space="preserve">
+    <value>Zieh die lustigste Grimasse, die du kannst.</value>
+  </data>
+  <data name="Event_SleepyBearFace" xml:space="preserve">
+    <value>Mach ein Gesicht wie ein schläfriger Bär und schließ kurz die Augen.</value>
+  </data>
+  <data name="Event_SmileAtEveryone" xml:space="preserve">
+    <value>Lächle jeden Spieler der Reihe nach an.</value>
+  </data>
+  <data name="Event_WaveToEveryone" xml:space="preserve">
+    <value>Winke allen zu.</value>
+  </data>
+  <data name="Event_TapSpotThreeTimes" xml:space="preserve">
+    <value>Tippe dreimal mit dem Finger auf den Kreis, auf dem du stehst.</value>
+  </data>
+  <data name="Event_LiftFootCountToThree" xml:space="preserve">
+    <value>Heb einen Fuß und zähle bis drei.</value>
+  </data>
+  <data name="Event_NodYesFiveTimes" xml:space="preserve">
+    <value>Nicke fünfmal „ja“ mit dem Kopf.</value>
+  </data>
+  <data name="Event_ShakeHeadNoFiveTimes" xml:space="preserve">
+    <value>Schüttle fünfmal „nein“ mit dem Kopf.</value>
+  </data>
+  <data name="Event_PianistFingers" xml:space="preserve">
+    <value>Bewege die Finger wie ein Pianist.</value>
+  </data>
+  <data name="Event_StampFootThreeTimes" xml:space="preserve">
+    <value>Stampfe dreimal mit dem Fuß, aber fall nicht von der Matte.</value>
+  </data>
+  <data name="Event_MoveHandToSameColourSpot" xml:space="preserve">
+    <value>Setz die Hand auf den nächsten Kreis derselben Farbe.</value>
+  </data>
+  <data name="Event_StandStillLikeStatue" xml:space="preserve">
+    <value>Halte fünf Sekunden still – wie eine Statue.</value>
+  </data>
+  <data name="Event_NoseToShoulder" xml:space="preserve">
+    <value>Versuche, mit der Nase deine eigene Schulter zu berühren.</value>
+  </data>
+  <data name="Event_ArmWindmill" xml:space="preserve">
+    <value>Kreise mit einem Arm durch die Luft wie eine Windmühle.</value>
+  </data>
+  <data name="Event_TongueOutUntilRoundEnds" xml:space="preserve">
+    <value>Halte die Zunge draußen, bis die Runde endet.</value>
+  </data>
+  <data name="Event_CallYourselfBigDragon" xml:space="preserve">
+    <value>Nenne dich bis zum Ende der Runde „der große Drache“.</value>
+  </data>
+  <data name="Event_SmileUntilRoundEnds" xml:space="preserve">
+    <value>Lächle ohne Pause, bis die Runde endet.</value>
+  </data>
+  <data name="Event_HighFiveEveryone" xml:space="preserve">
+    <value>Klatsche alle Spieler der Reihe nach ab.</value>
+  </data>
+  <data name="Event_TellNeighbourWhatYouLike" xml:space="preserve">
+    <value>Sag dem Spieler neben dir, was du an ihm magst.</value>
+  </data>
+  <data name="Event_SayYouAreGreat" xml:space="preserve">
+    <value>Sag zu jemandem: „du bist super!“.</value>
+  </data>
+  <data name="Event_BlowAKiss" xml:space="preserve">
+    <value>Wirf dem nächsten Spieler ein Luftküsschen zu.</value>
+  </data>
+  <data name="Event_ShoutHurray" xml:space="preserve">
+    <value>Rufe „hurra!“.</value>
+  </data>
+  <data name="Event_RepeatPreviousPlayersMove" xml:space="preserve">
+    <value>Wiederhole den letzten Zug des vorherigen Spielers.</value>
+  </data>
+  <data name="Event_TakeASip" xml:space="preserve">
+    <value>Trink einen Schluck.</value>
+  </data>
+  <data name="Event_TakeABite" xml:space="preserve">
+    <value>Beiß in etwas hinein.</value>
+  </data>
+  <data name="Event_FastMotionRound" xml:space="preserve">
+    <value>Runde im Schnelldurchlauf.</value>
+  </data>
+  <data name="Event_FiveCarBrands" xml:space="preserve">
+    <value>Nenne fünf Automarken, bevor der Countdown abläuft.</value>
+  </data>
+  <data name="Event_ThreeArtistsThisWeek" xml:space="preserve">
+    <value>Nenne drei Künstler, die du diese Woche gehört hast.</value>
+  </data>
+  <data name="Event_FiveThingsInFridge" xml:space="preserve">
+    <value>Nenne fünf Dinge, die man im Kühlschrank findet.</value>
+  </data>
+  <data name="Event_FiveThingsInYourRoom" xml:space="preserve">
+    <value>Nenne fünf Dinge, die man in deinem Zimmer findet.</value>
+  </data>
+  <data name="Event_ThreeEuropeanCapitals" xml:space="preserve">
+    <value>Nenne drei europäische Hauptstädte.</value>
+  </data>
+  <data name="Event_ThreeRhymesWithYourName" xml:space="preserve">
+    <value>Nenne drei Wörter, die sich auf deinen Namen reimen.</value>
+  </data>
+  <data name="Event_SentenceInForeignLanguage" xml:space="preserve">
+    <value>Sag einen beliebigen Satz in einer Fremdsprache.</value>
+  </data>
+  <data name="Event_ImitateSomeoneInRoom" xml:space="preserve">
+    <value>Ahme jemanden aus diesem Raum nach – die anderen raten, wen.</value>
+  </data>
+  <data name="Event_PartyTongueTwister" xml:space="preserve">
+    <value>Sag den Zungenbrecher „Blaukraut bleibt Blaukraut“ dreimal.</value>
+  </data>
+  <data name="Event_CopyRightNeighboursMove" xml:space="preserve">
+    <value>Wiederhole den Zug des Spielers rechts von dir.</value>
+  </data>
+  <data name="Event_NextMoveEyesClosed" xml:space="preserve">
+    <value>Mach deinen nächsten Zug mit geschlossenen Augen.</value>
+  </data>
+  <data name="Event_OneHandUpUntilTurnEnds" xml:space="preserve">
+    <value>Heb eine Hand und halte sie oben bis zum Ende deines Zuges.</value>
+  </data>
+  <data name="Event_NextMoveEyesOnCeiling" xml:space="preserve">
+    <value>Mach deinen nächsten Zug, ohne den Blick von der Decke zu nehmen.</value>
+  </data>
+  <data name="Event_HoldStillUntilRoundEnds" xml:space="preserve">
+    <value>Halte bis zum Ende der Runde still, ohne die kleinste Regung.</value>
+  </data>
+  <data name="Event_ComplimentAnyone" xml:space="preserve">
+    <value>Mach einer beliebigen Person ein Kompliment.</value>
+  </data>
+  <data name="Event_ShareSecretFact" xml:space="preserve">
+    <value>Verrate eine Sache, die hier niemand über dich weiß.</value>
+  </data>
+  <data name="Event_PickPartnerForNextMove" xml:space="preserve">
+    <value>Wähle jemanden, der den nächsten Zug zusammen mit dir macht.</value>
+  </data>
+  <data name="Event_GuiltyPleasureSong" xml:space="preserve">
+    <value>Sag, welches Lied in deiner Playlist dir am peinlichsten ist.</value>
+  </data>
+  <data name="Event_AskOneHonestQuestion" xml:space="preserve">
+    <value>Wähle einen Spieler und stelle ihm eine Frage – er muss ehrlich antworten.</value>
+  </data>
+  <data name="Event_HighFiveWithoutFalling" xml:space="preserve">
+    <value>Klatsche jeden ab, den du erreichst, ohne von der Matte zu fallen.</value>
+  </data>
+  <data name="Event_MostAnnoyingAboutRightNeighbour" xml:space="preserve">
+    <value>Sag, was dich an der Person rechts von dir am meisten nervt.</value>
+  </data>
+  <data name="Event_MoneyWastedThisMonth" xml:space="preserve">
+    <value>Verrate, wie viel du diesen Monat ungefähr für Unsinn ausgegeben hast.</value>
+  </data>
+  <data name="Event_RoastSomeone" xml:space="preserve">
+    <value>Mach einen Roast über eine beliebige Person.</value>
+  </data>
+  <data name="Event_ShowLastPhoto" xml:space="preserve">
+    <value>Zeig das letzte Foto in deiner Galerie.</value>
+  </data>
+  <data name="Event_LastSearchQuery" xml:space="preserve">
+    <value>Sag, wonach du zuletzt im Internet gesucht hast.</value>
+  </data>
+  <data name="Event_WorstPickupLine" xml:space="preserve">
+    <value>Probiere den schlechtesten Anmachspruch aus, der dir einfällt.</value>
+  </data>
+  <data name="Event_PickDateCandidate" xml:space="preserve">
+    <value>Zeig auf die Person, mit der du auf ein Date gehen würdest.</value>
+  </data>
+  <data name="Event_WhisperSecretToSomeone" xml:space="preserve">
+    <value>Flüstere jemandem etwas ins Ohr – die anderen erfahren es nicht.</value>
+  </data>
+  <data name="Event_NextMoveHandOnShoulder" xml:space="preserve">
+    <value>Mach deinen nächsten Zug mit einer Hand auf der Schulter eines anderen Spielers.</value>
+  </data>
+  <data name="Event_NudgeAnotherPlayer" xml:space="preserve">
+    <value>Stupse einen anderen Spieler leicht an – aber so, dass er nicht fällt.</value>
+  </data>
+  <data name="Event_GrabAnotherPlayersFoot" xml:space="preserve">
+    <value>Pack den Fuß eines anderen Spielers.</value>
+  </data>
+  <data name="Event_RightNeighbourAsDish" xml:space="preserve">
+    <value>Sag, welches Gericht die Person rechts von dir wäre.</value>
+  </data>
+  <data name="Event_ProposePenaltyForNextFall" xml:space="preserve">
+    <value>Schlage eine Strafe für die nächste Person vor, die von der Matte fällt.</value>
+  </data>
+</root>

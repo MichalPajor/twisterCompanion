@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    Ekran powitalny: ten sam znak co w ikonie i na ekranie startowym — tarcza spinnera.
+    Tło daje atrybut Color z pliku projektu (grafit #2A2E35), dlatego samo SVG jest
+    przezroczyste.
+    Znak trzyma się tej samej strefy bezpiecznej co ikona (okrąg o promieniu 150 w kadrze 456),
+    bo ekran powitalny Androida 12 i nowszego przycina obrazek do koła — bez tego skrajne
+    kropki wychodziłyby za maskę i znikały.
+-->
+<svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!--
+        Kolejność rysowania jest częścią projektu: kropki, potem igła, na końcu piasta.
+        Igła narysowana PRZED kropkami była w całości pod nimi i pod piastą — nie było jej
+        widać ani w podglądzie, ani na ekranie.
+        Klin, nie prostokąt: przy skali 1:9,5 zwężający się kształt czyta się jako wskazanie,
+        a pasek o stałej szerokości jako kreska.
+    -->
+    <circle cx="228" cy="140" r="54" fill="#EF5350" />
+    <circle cx="316" cy="228" r="54" fill="#E0B21E" />
+    <circle cx="228" cy="316" r="54" fill="#66BB6A" />
+    <circle cx="140" cy="228" r="54" fill="#42A5F5" />
+
+    <polygon points="228,104 248,236 208,236" fill="#FFFFFF" />
+
+    <circle cx="228" cy="228" r="30" fill="#FFFFFF" />
+</svg>

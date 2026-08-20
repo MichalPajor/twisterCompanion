@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Teksty przeznaczone do odczytu na głos — język neutralny (angielski).
+
+    Zbiór jest oddzielony od tekstów interfejsu, bo rządzą nim inne zasady: liczy się
+    brzmienie w mowie, a nie długość etykiety. Wzorzec komunikatu o ruchu jest tutaj
+    pełnym wzorcem formatowania, żeby kolejność i interpunkcja mogły się różnić między
+    językami — a nie były zaszyte w kodzie.
+
+    Odmiana w języku polskim: wszystkie cztery części ciała są rodzaju żeńskiego
+    („ręka", „noga"), więc kolory nie muszą mieć wariantów rodzajowych. Zapisane są
+    w formie nazwy koloru („czerwony"), zgodnie z przykładami z założeń projektu.
+    Gdyby preferowana była forma uzgodniona („prawa ręka — czerwona"), wystarczy zmienić
+    wartości w tym pliku — kod nie wymaga żadnej zmiany.
+  -->
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Voice_Announce_Move" xml:space="preserve">
+    <value>{0} — {1}.</value>
+    <comment>{0} część ciała, {1} kolor</comment>
+  </data>
+  <data name="Voice_Announce_Event" xml:space="preserve">
+    <value>Event: {0}.</value>
+    <comment>{0} nazwa wydarzenia</comment>
+  </data>
+  <data name="Voice_Announce_GameStart" xml:space="preserve">
+    <value>The game begins.</value>
+  </data>
+  <data name="Voice_Announce_GameEnd" xml:space="preserve">
+    <value>The game is over.</value>
+  </data>
+  <data name="Voice_Announce_PlayerEliminated" xml:space="preserve">
+    <value>{0} is out.</value>
+    <comment>{0} nazwa gracza</comment>
+  </data>
+  <data name="Voice_Announce_Winner" xml:space="preserve">
+    <value>{0} wins.</value>
+    <comment>{0} nazwa gracza</comment>
+  </data>
+  <data name="Voice_Announce_Paused" xml:space="preserve">
+    <value>Game paused.</value>
+  </data>
+  <data name="Voice_Announce_Resumed" xml:space="preserve">
+    <value>We are back.</value>
+  </data>
+
+  <data name="Voice_BodyPart_RightHand" xml:space="preserve">
+    <value>right hand</value>
+  </data>
+  <data name="Voice_BodyPart_LeftHand" xml:space="preserve">
+    <value>left hand</value>
+  </data>
+  <data name="Voice_BodyPart_RightFoot" xml:space="preserve">
+    <value>right foot</value>
+  </data>
+  <data name="Voice_BodyPart_LeftFoot" xml:space="preserve">
+    <value>left foot</value>
+  </data>
+
+  <data name="Voice_Color_Red" xml:space="preserve">
+    <value>red</value>
+  </data>
+  <data name="Voice_Color_Yellow" xml:space="preserve">
+    <value>yellow</value>
+  </data>
+  <data name="Voice_Color_Blue" xml:space="preserve">
+    <value>blue</value>
+  </data>
+  <data name="Voice_Color_Green" xml:space="preserve">
+    <value>green</value>
+  </data>
+  <data name="Voice_Sample" xml:space="preserve">
+    <value>Right hand, red. This is how I will read the moves.</value>
+    <comment>Próbka głosu na ekranie ustawień — zdanie w formie polecenia ruchu</comment>
+  </data>
+
+  <data name="Voice_Command_Next" xml:space="preserve">
+    <value>next|go on|go ahead|continue turn</value>
+    <comment>Frazy komendy „następna tura”, rozdzielone znakiem |</comment>
+  </data>
+  <data name="Voice_Command_Repeat" xml:space="preserve">
+    <value>repeat|say again|again please</value>
+    <comment>Frazy komendy „powtórz”</comment>
+  </data>
+  <data name="Voice_Command_Pause" xml:space="preserve">
+    <value>pause|pause the game|hold on</value>
+    <comment>Frazy komendy „pauza”</comment>
+  </data>
+  <data name="Voice_Command_Resume" xml:space="preserve">
+    <value>resume|resume the game|carry on</value>
+    <comment>Frazy komendy „wznów”</comment>
+  </data>
+
+  <data name="Voice_Announce_PlayerTurn" xml:space="preserve">
+    <value>{0}.</value>
+    <comment>{0} imię gracza</comment>
+  </data>
+</root>

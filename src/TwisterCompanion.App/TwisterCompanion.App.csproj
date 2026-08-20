@@ -1,0 +1,133 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--
+      Wyłącznie Android — zgodnie z planem (Etapy 0-16). Celowo BEZ warunków
+      na system operacyjny, jakie generuje szablon MAUI: build w Visual Studio
+      na Windows ma zachowywać się identycznie jak build w WSL, bez cichego
+      dokładania celów iOS / MacCatalyst / Windows.
+      iOS zostanie dodany w Etapie 17, po publikacji wersji Androidowej.
+    -->
+    <TargetFrameworks>net10.0-android</TargetFrameworks>
+
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TwisterCompanion.App</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+
+    <!--
+      MauiVersion, Nullable i ImplicitUsings pochodzą z Directory.Build.props.
+      Wersje paczek NuGet są w Directory.Packages.props (centralne zarządzanie).
+    -->
+
+    <!-- Generowanie C# z XAML w czasie kompilacji zamiast inflacji w runtime -->
+    <MauiXamlInflator>SourceGen</MauiXamlInflator>
+
+    <!--
+        Nazwa widoczna dla użytkownika — trafia pod ikonę w launcherze i na listę aplikacji
+        w ustawieniach systemu. Pełna, mimo że launchery skracają dłuższe nazwy: „Twister"
+        samo w sobie jest znakiem towarowym cudzej gry, a ta aplikacja jest do niej dodatkiem
+        i ma to mówić wprost.
+    -->
+    <ApplicationTitle>Twister Companion</ApplicationTitle>
+
+    <!--
+        Identyfikator paczki. Po pierwszym wgraniu pakietu do sklepu jest <b>nieodwracalny</b>:
+        jest tożsamością aplikacji w systemie i w adresie strony w sklepie, wiąże wszystkie
+        instalacje i oceny, a jego zmiana to dla urządzenia inna aplikacja — z osobnymi danymi
+        i bez ścieżki aktualizacji.
+
+        Nie zawiera cudzego znaku towarowego, i to jest celowe. Tytuł w sklepie („Twister
+        Companion") używa znaku Hasbro, więc gdyby kiedyś przyszło zgłoszenie od właściciela
+        znaku, wystarczy zmienić tytuł listingu — aplikacja, jej oceny i instalacje zostają.
+        Z „twistercompanion" wbitym w identyfikator na zawsze taka zmiana byłaby połowiczna.
+        Poprzednia wartość, „pl.ymp.twistercompanion", nie zdążyła trafić do sklepu.
+    -->
+    <ApplicationId>place.yourmoment.gamecaller</ApplicationId>
+
+    <!--
+        Wersja widoczna dla użytkownika: jedno źródło prawdy w Directory.Build.props.
+
+        ApplicationVersion to kod wersji dla sklepu. MUSI rosnąć z każdym wgraniem, więc
+        w wydaniach nadaje go przebieg CI (numer przebiegu), a nie ta linia — patrz
+        .github/workflows/release.yml. Jedynka jest po to, żeby build lokalny się złożył.
+    -->
+    <ApplicationDisplayVersion>$(VersionPrefix)</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <!-- Android 8.0 (API 26): stabilne API mowy i audio, pokrycie rynku > 95% -->
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
+
+    <!--
+      Architektury: sterowane przez RuntimeIdentifiers (AndroidSupportedAbis
+      jest w .NET 10 wycofane - warning XA0036). Domyślnie build Debug tworzy
+      arm64-v8a + x86_64. Zawężenie do samego telefonu:
+        dotnet build ... -p:RuntimeIdentifiers=android-arm64
+    -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Ikona aplikacji -->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#2A2E35" />
+
+    <!-- Splashscreen -->
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#2A2E35" BaseSize="128,128" />
+
+    <!--
+        Obrazy. Jedyny obraz aplikacji to znak firmowy (logo.svg) — ten sam kształt, który
+        MAUI generuje dla ikony i ekranu powitalnego. Obrazek z szablonu (dotnet_bot.png)
+        został usunięty w Etapie 13: to logo narzędzia, a nie tej aplikacji, i nic go nie
+        używało.
+    -->
+    <MauiImage Include="Resources\Images\*" />
+
+    <!-- Czcionki -->
+    <MauiFont Include="Resources\Fonts\*" />
+
+    <!-- Zasoby surowe (paczki Eventów, definicje trybów gry - Etapy 6 i 9) -->
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Maui" />
+    <PackageReference Include="Microsoft.Maui.Controls" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
+  </ItemGroup>
+
+  <!--
+    Reklamy (Etap 15). Tylko dla Androida, bo to wiązanie natywnego SDK Google — przy porcie
+    na iOS (Etap 17) dojdzie osobna paczka, a warstwy rdzenia i tak widzą wyłącznie port
+    IAdService i nic o tych paczkach nie wiedzą.
+  -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <PackageReference Include="Xamarin.GooglePlayServices.Ads" />
+    <PackageReference Include="Xamarin.Google.UserMessagingPlatform" />
+
+    <!-- Wyrównanie rodziny AndroidX Lifecycle — patrz komentarz w Directory.Packages.props -->
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx.Android" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel.Ktx" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Ten projekt to HOST aplikacji: Views (XAML), kod platformowy, zasoby
+      i złożenie kontenera DI w MauiProgram.cs. Logiki tu nie ma.
+
+      - Presentation  - ViewModele (osobny projekt net10.0, bo tylko wtedy
+                        dają się testować jednostkowo; projekt testowy net10.0
+                        nie może referować projektu net10.0-android)
+      - Application   - kontrakty portów i przypadki użycia do rejestracji w DI
+      - Infrastructure - implementacje portów do rejestracji w DI
+
+      Domain jest widoczny tranzytywnie. Jedyne miejsce w solucji, które zna
+      Infrastructure, to MauiProgram.cs - reszta korzysta z interfejsów.
+    -->
+    <ProjectReference Include="..\TwisterCompanion.Application\TwisterCompanion.Application.csproj" />
+    <ProjectReference Include="..\TwisterCompanion.Infrastructure\TwisterCompanion.Infrastructure.csproj" />
+    <ProjectReference Include="..\TwisterCompanion.Presentation\TwisterCompanion.Presentation.csproj" />
+  </ItemGroup>
+
+</Project>

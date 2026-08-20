@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "id": "a0000000-0000-4000-8000-000000000001",
+  "name": "Party",
+  "nameKey": "EventPack_Party_Name",
+  "events": [
+    {
+      "id": "a0000000-0000-4000-8000-000000000601",
+      "nameKey": "Event_RepeatPreviousPlayersMove",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000014",
+      "nameKey": "Event_RepeatPreviousMove",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000603",
+      "nameKey": "Event_TakeASip",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000604",
+      "nameKey": "Event_TakeABite",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000015",
+      "nameKey": "Event_SlowMotionRound",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "Round"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000606",
+      "nameKey": "Event_FastMotionRound",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "Round"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000607",
+      "nameKey": "Event_FiveCarBrands",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000608",
+      "nameKey": "Event_ThreeArtistsThisWeek",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000609",
+      "nameKey": "Event_FiveThingsInFridge",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000610",
+      "nameKey": "Event_FiveThingsInYourRoom",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000611",
+      "nameKey": "Event_ThreeEuropeanCapitals",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000612",
+      "nameKey": "Event_ThreeRhymesWithYourName",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000613",
+      "nameKey": "Event_SingChorus",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000614",
+      "nameKey": "Event_SentenceInForeignLanguage",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000615",
+      "nameKey": "Event_ImitateSomeoneInRoom",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000616",
+      "nameKey": "Event_PartyTongueTwister",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000617",
+      "nameKey": "Event_CopyRightNeighboursMove",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000618",
+      "nameKey": "Event_NextMoveEyesClosed",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000011",
+      "nameKey": "Event_SwapPlaces",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000620",
+      "nameKey": "Event_OneHandUpUntilTurnEnds",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000621",
+      "nameKey": "Event_NextMoveEyesOnCeiling",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000622",
+      "nameKey": "Event_HoldStillUntilRoundEnds",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "Round"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000623",
+      "nameKey": "Event_SwapOwnHands",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000624",
+      "nameKey": "Event_SwapOwnFeet",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000625",
+      "nameKey": "Event_ComplimentAnyone",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000626",
+      "nameKey": "Event_ShareSecretFact",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000627",
+      "nameKey": "Event_PickPartnerForNextMove",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000628",
+      "nameKey": "Event_GuiltyPleasureSong",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000629",
+      "nameKey": "Event_AskOneHonestQuestion",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000630",
+      "nameKey": "Event_HighFiveWithoutFalling",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000631",
+      "nameKey": "Event_MostAnnoyingAboutRightNeighbour",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000632",
+      "nameKey": "Event_MoneyWastedThisMonth",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000633",
+      "nameKey": "Event_RoastSomeone",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000634",
+      "nameKey": "Event_ShowLastPhoto",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000635",
+      "nameKey": "Event_LastSearchQuery",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000636",
+      "nameKey": "Event_WorstPickupLine",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000637",
+      "nameKey": "Event_PickDateCandidate",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000638",
+      "nameKey": "Event_WhisperSecretToSomeone",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000639",
+      "nameKey": "Event_NextMoveHandOnShoulder",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000640",
+      "nameKey": "Event_NudgeAnotherPlayer",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000641",
+      "nameKey": "Event_GrabAnotherPlayersFoot",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000642",
+      "nameKey": "Event_RightNeighbourAsDish",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000643",
+      "nameKey": "Event_ProposePenaltyForNextFall",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    }
+  ]
+}

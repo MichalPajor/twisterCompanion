@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase
+    x:Class="TwisterCompanion.App.Views.PlayersPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:TwisterCompanion.App.Localization"
+    xmlns:views="clr-namespace:TwisterCompanion.App.Views"
+    xmlns:vm="clr-namespace:TwisterCompanion.Presentation.ViewModels;assembly=TwisterCompanion.Presentation"
+    x:DataType="vm:PlayersViewModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    Title="{loc:Translate Players_Title}">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*"
+          Padding="{StaticResource PagePadding}"
+          RowSpacing="{StaticResource SpacingM}">
+
+        <views:PageHeader Grid.Row="0"
+                          Title="{loc:Translate Players_Title}"
+                          Command="{Binding GoBackCommand}"
+                          BackDescription="{loc:Translate Common_Button_Back}" />
+
+        <!--
+            Pole i przycisk w siatce o stałych kolumnach, a nie w układzie poziomym ze stałą
+            szerokością pola: na wąskim ekranie „Dodaj" wypadało wcześniej za krawędź.
+        -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="{StaticResource SpacingS}">
+            <Border Grid.Column="0" Style="{StaticResource FieldBorder}" VerticalOptions="Center">
+                <Entry Placeholder="{loc:Translate Players_Entry_Placeholder}"
+                       Text="{Binding NewPlayerName}"
+                       FontSize="{StaticResource FontSizeBody}"
+                       ReturnCommand="{Binding AddPlayerCommand}" />
+            </Border>
+            <views:GlyphButton Grid.Column="1"
+                               Glyph="＋"
+                               Text="{loc:Translate Players_Button_Add}"
+                               Command="{Binding AddPlayerCommand}"
+                               ButtonStyle="{StaticResource AccentButton}" />
+        </Grid>
+
+        <Label Grid.Row="2"
+               Style="{StaticResource CaptionLabel}"
+               Text="{loc:Translate Players_Label_Empty}"
+               IsVisible="{Binding HasNoPlayers}" />
+
+        <!--
+            Podpowiedź o kolejności jest przy liście, a nie w instrukcji: kolejność wierszy
+            jest kolejnością tur, a to nie wynika z samego wyglądu listy.
+        -->
+        <Label Grid.Row="2"
+               Style="{StaticResource CaptionLabel}"
+               Text="{loc:Translate Players_Label_Order}"
+               IsVisible="{Binding HasPlayers}" />
+
+        <CollectionView Grid.Row="3" ItemsSource="{Binding Players}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:PlayerRowItem">
+                    <Border Style="{StaticResource CardBorder}" Padding="12">
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="{StaticResource SpacingXs}">
+
+                            <!--
+                                Imię i pole edycji zajmują to samo miejsce — widoczne jest
+                                zawsze jedno z nich. Znak „✏" przy imieniu mówi, że wiersz
+                                da się zmienić: osobny przycisk zabrałby czwartą kolumnę,
+                                a imię i tak jest największym celem dotknięcia w wierszu.
+                            -->
+                            <!--
+                                Siatka, nie układ poziomy — i to jest poprawka po uwadze
+                                z urządzenia: układ poziomy nie ogranicza dzieci, więc długie
+                                imię wychodziło pod przyciski przenoszenia i usuwania. Kolumna
+                                „*" daje imieniu dokładnie tyle miejsca, ile zostało w wierszu,
+                                a dwa wiersze pisma podstawowego mieszczą imiona, które
+                                w jednym wierszu urywały się w połowie.
+                            -->
+                            <Grid Grid.Column="0"
+                                  ColumnDefinitions="*,Auto"
+                                  ColumnSpacing="8"
+                                  VerticalOptions="Center"
+                                  IsVisible="{Binding IsNotEditing}">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlayersViewModel}}, Path=BeginEditCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <Label Grid.Column="0"
+                                       Style="{StaticResource BodyLabel}"
+                                       Text="{Binding Name}"
+                                       FontAttributes="Bold"
+                                       MaxLines="2"
+                                       LineBreakMode="TailTruncation"
+                                       VerticalOptions="Center"
+                                       SemanticProperties.Hint="{loc:Translate Players_Button_Rename}" />
+                                <Label Grid.Column="1"
+                                       Text="✏"
+                                       FontSize="14"
+                                       FontAutoScalingEnabled="False"
+                                       VerticalOptions="Center"
+                                       TextColor="{AppThemeBinding Light={StaticResource MutedLight}, Dark={StaticResource MutedDark}}" />
+                            </Grid>
+
+                            <Border Grid.Column="0"
+                                    Style="{StaticResource FieldBorder}"
+                                    VerticalOptions="Center"
+                                    IsVisible="{Binding IsEditing}">
+                                <Entry Text="{Binding EditedName}"
+                                       FontSize="{StaticResource FontSizeBody}"
+                                       ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:PlayersViewModel}}, Path=CommitEditCommand}"
+                                       ReturnCommandParameter="{Binding .}" />
+                            </Border>
+
+                            <!-- Tryb podglądu: przenoszenie w kolejce i usunięcie. -->
+                            <Button Grid.Column="1"
+                                    Style="{StaticResource PrimaryIconButton}"
+                                    Text="↑"
+                                    SemanticProperties.Description="{loc:Translate Players_Button_MoveUp}"
+                                    IsVisible="{Binding IsNotEditing}"
+                                    IsEnabled="{Binding CanMoveUp}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlayersViewModel}}, Path=MoveUpCommand}"
+                                    CommandParameter="{Binding .}" />
+                            <Button Grid.Column="2"
+                                    Style="{StaticResource PrimaryIconButton}"
+                                    Text="↓"
+                                    SemanticProperties.Description="{loc:Translate Players_Button_MoveDown}"
+                                    IsVisible="{Binding IsNotEditing}"
+                                    IsEnabled="{Binding CanMoveDown}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlayersViewModel}}, Path=MoveDownCommand}"
+                                    CommandParameter="{Binding .}" />
+                            <Button Grid.Column="3"
+                                    Style="{StaticResource DestructiveIconButton}"
+                                    Text="✕"
+                                    SemanticProperties.Description="{loc:Translate Players_Button_Remove}"
+                                    IsVisible="{Binding IsNotEditing}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlayersViewModel}}, Path=RemovePlayerCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                            <!-- Tryb edycji: zapis albo porzucenie zmiany. -->
+                            <Button Grid.Column="1"
+                                    Style="{StaticResource AccentIconButton}"
+                                    Text="✓"
+                                    SemanticProperties.Description="{loc:Translate Players_Button_ConfirmRename}"
+                                    IsVisible="{Binding IsEditing}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlayersViewModel}}, Path=CommitEditCommand}"
+                                    CommandParameter="{Binding .}" />
+                            <Button Grid.Column="2"
+                                    Style="{StaticResource IconButton}"
+                                    Text="⟲"
+                                    SemanticProperties.Description="{loc:Translate Players_Button_CancelRename}"
+                                    IsVisible="{Binding IsEditing}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlayersViewModel}}, Path=CancelEditCommand}"
+                                    CommandParameter="{Binding .}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</views:ContentPageBase>

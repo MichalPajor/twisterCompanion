@@ -1,0 +1,102 @@
+<Project>
+
+  <!--
+    ========================================================================
+    Twister Companion — wspolne wlasciwosci dla wszystkich projektow
+    ========================================================================
+    Plik jest automatycznie importowany przez MSBuild dla kazdego projektu
+    w tym drzewie katalogow. Zmiany tutaj dotycza calej solucji.
+  -->
+
+  <!--
+    KROK 1: konfiguracja lokalna maszyny (sciezki do JDK / Android SDK).
+    Importowana PIERWSZA, zeby jej wartosci mialy pierwszenstwo nad fallbackami ponizej.
+    Plik jest wylaczony z gita — wzorzec: Directory.Build.local.props.example
+  -->
+  <Import Project="$(MSBuildThisFileDirectory)Directory.Build.local.props"
+          Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build.local.props')" />
+
+  <!-- ===================== Wspolne dla wszystkich projektow ===================== -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+
+    <!-- Analizatory .NET wlaczone wszedzie. EnforceCodeStyleInBuild=false swiadomie:
+         reguly stylu (IDE*) maja byc podpowiedzia w IDE, a nie czescia buildu.
+         Reguly poprawnosci (CS*, CA*) i tak dzialaja. -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+
+    <!--
+      Wersjonowanie: jedno zrodlo prawdy dla calej solucji. SemVer, bez sufiksu
+      przedpremierowego. Wydanie nadaje ta wartosc ze znacznika gita (v1.0.0 -> 1.0.0),
+      wiec ta linia jest wartoscia domyslna dla buildow lokalnych i musi byc rowna
+      najnowszemu wpisowi w CHANGELOG.md - pilnuje tego test.
+    -->
+    <VersionPrefix>1.0.0</VersionPrefix>
+
+    <!--
+      Wersja MAUI. Ustawiana tutaj, a nie w projekcie aplikacji, bo odwoluje sie do niej
+      Directory.Packages.props przy deklaracji wersji Microsoft.Maui.Controls.
+
+      Przypieta jawnie, zamiast brac ja z workloadu: workload dla pasma SDK 10.0.100
+      dostarcza 10.0.20, a KAZDA wersja CommunityToolkit.Maui wspierajaca .NET 10 wymaga
+      co najmniej 10.0.30 (blad NU1605: package downgrade). Przypiecie ma tez druga zalete
+      w ukladzie dwoch maszyn: WSL i Visual Studio uzywaja identycznych paczek MAUI,
+      a nie tej, ktora akurat przyniosl lokalny workload.
+
+      Podnoszac wersje, sprawdz zgodnosc z CommunityToolkit.Maui.
+    -->
+    <MauiVersion>10.0.90</MauiVersion>
+
+    <!-- Jezyk neutralny zasobow = angielski (AppResources.resx bez sufiksu).
+         Polski trafi do AppResources.pl.resx — patrz Etap 2 planu. -->
+    <NeutralLanguage>en</NeutralLanguage>
+
+    <!-- UWAGA: NIE ustawiamy InvariantGlobalization=true.
+         Aplikacja przelacza kultury w czasie dzialania (PL/EN) i potrzebuje
+         pelnych danych ICU. Wlaczenie tej flagi zepsuje lokalizacje. -->
+  </PropertyGroup>
+
+  <!-- ===================== Warstwy z rygorem (Domain / Application / Presentation) =====
+       Czysty C#, zero zaleznosci platformowych, pelne pokrycie testami.
+       Tutaj kazde ostrzezenie traktujemy jako blad — nie chcemy dlugu technicznego
+       w rdzeniu aplikacji.
+
+       Presentation jest w tej grupie od Etapu 1: to rowniez nasz kod, ktory nie zna
+       zadnego API platformy (nawigacja i dialogi za interfejsami), wiec nie ma powodu
+       traktowac go lagodniej. Infrastructure i App zostaja poza rygorem, bo korzystaja
+       z API platformy, ktore czasem generuje ostrzezenia niezalezne od nas.
+  -->
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'TwisterCompanion.Domain' Or '$(MSBuildProjectName)' == 'TwisterCompanion.Application' Or '$(MSBuildProjectName)' == 'TwisterCompanion.Presentation'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <!-- Dokumentacja XML publicznego API jest wymagana (zalozenia projektu),
+         ale brak komentarza (CS1591) zostaje OSTRZEZENIEM, nie bledem.
+         Inaczej nie da sie normalnie pracowac nad kodem w trakcie pisania. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <WarningsNotAsErrors>CS1591</WarningsNotAsErrors>
+  </PropertyGroup>
+
+  <!-- ===================== Projekty testowe ===================== -->
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- ===================== Fallback sciezek toolchainu =====================
+       Uzywane tylko wtedy, gdy Directory.Build.local.props nie ustawil sciezek.
+       MSBuild udostepnia zmienne srodowiskowe jako wlasciwosci, wiec dziala to
+       dla powloki, w ktorej JAVA_HOME/ANDROID_HOME sa wyeksportowane.
+  -->
+  <PropertyGroup>
+    <JavaSdkDirectory Condition="'$(JavaSdkDirectory)' == '' And '$(JAVA_HOME)' != ''">$(JAVA_HOME)</JavaSdkDirectory>
+    <AndroidSdkDirectory Condition="'$(AndroidSdkDirectory)' == '' And '$(ANDROID_HOME)' != ''">$(ANDROID_HOME)</AndroidSdkDirectory>
+    <AndroidSdkDirectory Condition="'$(AndroidSdkDirectory)' == '' And '$(ANDROID_SDK_ROOT)' != ''">$(ANDROID_SDK_ROOT)</AndroidSdkDirectory>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Ekran powitalny Androida 12 i nowszego.
+
+    Nadpisujemy motyw powitalny MAUI, bo jego wersja wskazuje jako znak ekranu powitalnego
+    warstwę złożoną z koloru tła i obrazka (`@drawable/maui_splash`). System przycina ten znak
+    do koła i skaluje go po swojemu, a warstwa z wypełnieniem kolorem nie ma własnych wymiarów —
+    efekt na urządzeniu to jednolite tło bez rysunku, dokładnie to, co zgłosił użytkownik.
+
+    Wskazujemy zamiast tego ikonę adaptacyjną aplikacji. To kanoniczny wybór z dokumentacji
+    Androida: ikona adaptacyjna ma jawnie rozdzielone warstwy i zadaną strefę bezpieczną, więc
+    system wie, jak ją zmniejszyć i zamaskować. Przy okazji ekran powitalny pokazuje dokładnie
+    to samo, co launcher — o co w brandingu chodzi.
+
+    Reszta motywu zostaje z MAUI przez dziedziczenie po `Maui.MainTheme.NoActionBar`; atrybut
+    `maui_splash` musi tu być, bo po nim MAUI rozpoznaje, że aktywność wystartowała z motywem
+    powitalnym.
+-->
+<resources>
+    <style name="Maui.SplashTheme" parent="Maui.MainTheme.NoActionBar">
+        <item name="maui_splash">true</item>
+        <item name="android:windowBackground">@drawable/maui_splash</item>
+        <item name="android:windowSplashScreenBackground">@color/maui_splash_color</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@mipmap/appicon</item>
+        <item name="android:windowSplashScreenAnimationDuration">400</item>
+    </style>
+</resources>

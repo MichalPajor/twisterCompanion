@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase
+    x:Class="TwisterCompanion.App.Views.GameModesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:TwisterCompanion.App.Localization"
+    xmlns:views="clr-namespace:TwisterCompanion.App.Views"
+    xmlns:vm="clr-namespace:TwisterCompanion.Presentation.ViewModels;assembly=TwisterCompanion.Presentation"
+    x:DataType="vm:GameModesViewModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    Title="{loc:Translate GameModes_Title}">
+
+    <Grid RowDefinitions="Auto,*" Padding="{StaticResource PagePadding}" RowSpacing="{StaticResource SpacingM}">
+
+        <views:PageHeader Grid.Row="0"
+                          Title="{loc:Translate GameModes_Title}"
+                          Command="{Binding GoBackCommand}"
+                          BackDescription="{loc:Translate Common_Button_Back}" />
+
+        <Label
+            Grid.Row="1"
+            Text="{loc:Translate GameModes_Label_Empty}"
+            FontSize="14"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            IsVisible="{Binding IsEmpty}" />
+
+        <!--
+            Karta na tryb: nazwa, opis i dwa wyjścia — wybór albo zasady. Wybór zapisuje się
+            od razu, bez zatwierdzania, i obowiązuje od następnej partii.
+            <para>
+            Wybrany tryb poznaje się po samej karcie — obwódka w kolorze akcji, jaśniejsze tło
+            i znak „✓" przy nazwie. Napis „Wybrany" obok nazwy trzeba było przeczytać, żeby
+            wiedzieć, na czym się gra; obwódkę widać, zanim wzrok trafi na tekst.
+            </para>
+            <para>
+            Dwa wyjścia z karty mają różną wagę, więc mają różny wygląd: „Użyj" jest
+            wypełniony kolorem akcji, „Zasady" tylko obrysowany. Wcześniej oba były
+            identycznymi grafitowymi prostokątami i nic nie podpowiadało, który wybrać.
+            </para>
+        -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Modes}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:GameModeListItem">
+                    <Border Style="{StaticResource CardBorder}">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding IsActive}" Value="True">
+                                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource SelectionLight}, Dark={StaticResource SelectionDark}}" />
+                                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource AccentAction}, Dark={StaticResource AccentActionDark}}" />
+                                <Setter Property="StrokeThickness" Value="2" />
+                            </DataTrigger>
+                        </Border.Triggers>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="{StaticResource SpacingS}">
+                                <Label Grid.Column="0"
+                                       Style="{StaticResource TitleLabel}"
+                                       Text="{Binding Name}" />
+                                <Label
+                                    Grid.Column="1"
+                                    Text="✓"
+                                    FontSize="22"
+                                    FontAttributes="Bold"
+                                    TextColor="{AppThemeBinding Light={StaticResource AccentAction}, Dark={StaticResource AccentActionDark}}"
+                                    VerticalOptions="Center"
+                                    SemanticProperties.Description="{loc:Translate GameModes_Label_Active}"
+                                    IsVisible="{Binding IsActive}" />
+                            </Grid>
+
+                            <Label Style="{StaticResource BodyLabel}" Text="{Binding Description}" />
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                <views:GlyphButton
+                                    Grid.Column="0"
+                                    Glyph="▶"
+                                    Text="{loc:Translate GameModes_Button_Select}"
+                                    ButtonStyle="{StaticResource AccentButton}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GameModesViewModel}}, Path=SelectModeCommand}"
+                                    CommandParameter="{Binding .}"
+                                    IsEnabled="{Binding IsNotActive}" />
+                                <views:GlyphButton
+                                    Grid.Column="1"
+                                    Text="{loc:Translate GameModes_Button_Rules}"
+                                    ButtonStyle="{StaticResource SubtleButton}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GameModesViewModel}}, Path=GoToRulesCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</views:ContentPageBase>

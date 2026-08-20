@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    Znak aplikacji do pokazania wewnątrz aplikacji — ten sam kształt co w ikonie i na ekranie
+    powitalnym, ale z własnym grafitowym tłem.
+    Tło jest tu konieczne, a nie ozdobne: igła i piasta są białe, więc na jasnym tle ekranu
+    startowego zniknęłyby całkowicie. Grafitowy kwadrat daje im kontrast i przy okazji sprawia,
+    że ekran startowy pokazuje dokładnie to, co widać w launcherze.
+    Kadr jest wypełniony ciaśniej niż w ikonie: tutaj nie ma systemowej maski, która przycina
+    zewnętrzną trzecią część, więc znak może być większy względem tła.
+-->
+<svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="456" height="456" rx="104" fill="#2A2E35" />
+
+    <circle cx="228" cy="120" r="64" fill="#EF5350" />
+    <circle cx="336" cy="228" r="64" fill="#E0B21E" />
+    <circle cx="228" cy="336" r="64" fill="#66BB6A" />
+    <circle cx="120" cy="228" r="64" fill="#42A5F5" />
+
+    <polygon points="228,78 251,238 205,238" fill="#FFFFFF" />
+
+    <circle cx="228" cy="228" r="34" fill="#FFFFFF" />
+</svg>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Kolory systemowe: pasek stanu i akcent platformy. Muszą zgadzać się z paletą
+        aplikacji (Resources/Styles/Colors.xaml) — inaczej pasek stanu zostaje fioletowy
+        z szablonu MAUI, mimo że cała aplikacja jest już grafitowa.
+    -->
+    <color name="colorPrimary">#2A2E35</color>
+    <color name="colorPrimaryDark">#1A1D22</color>
+    <color name="colorAccent">#B4155C</color>
+</resources>

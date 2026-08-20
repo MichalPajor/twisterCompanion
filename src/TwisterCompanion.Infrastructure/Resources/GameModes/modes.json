@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "modes": [
+    {
+      "key": "classic",
+      "nameKey": "GameMode_Classic_Name",
+      "descriptionKey": "GameMode_Classic_Description",
+      "rulesKey": "GameMode_Classic_Rules",
+      "eliminationRule": "Manual",
+      "eventChanceMultiplier": 1.0,
+      "moveTimeMultiplier": 1.0,
+      "taskTimeMultiplier": 1.0,
+      "moveSelection": {
+        "tabooWindowSize": 3,
+        "recencyDecay": 0.6,
+        "maxSameBodyPartStreak": 2,
+        "maxSameColorStreak": 2
+      }
+    },
+    {
+      "key": "hardcore",
+      "nameKey": "GameMode_Hardcore_Name",
+      "descriptionKey": "GameMode_Hardcore_Description",
+      "rulesKey": "GameMode_Hardcore_Rules",
+      "eliminationRule": "Manual",
+      "eventChanceMultiplier": 2.5,
+      "defaultEventPackNameKey": "EventPack_Party_Name",
+      "moveTimeMultiplier": 0.5,
+      "taskTimeMultiplier": 0.5,
+      "moveSelection": {
+        "tabooWindowSize": 5,
+        "recencyDecay": 0.8,
+        "maxSameBodyPartStreak": 1,
+        "sameBodyPartStreakMultiplier": 0.4,
+        "maxSameColorStreak": 1,
+        "sameColorStreakMultiplier": 0.5,
+        "redundantMoveMultiplier": 0.02
+      }
+    },
+    {
+      "key": "kids",
+      "nameKey": "GameMode_Kids_Name",
+      "descriptionKey": "GameMode_Kids_Description",
+      "rulesKey": "GameMode_Kids_Rules",
+      "eliminationRule": "NoElimination",
+      "eventChanceMultiplier": 0.8,
+      "defaultEventPackNameKey": "EventPack_Kids_Name",
+      "moveTimeMultiplier": 1.5,
+      "taskTimeMultiplier": 1.5,
+      "moveSelection": {
+        "tabooWindowSize": 2,
+        "recencyDecay": 0.4,
+        "maxSameBodyPartStreak": 3,
+        "sameBodyPartStreakMultiplier": 0.6,
+        "maxSameColorStreak": 3,
+        "sameColorStreakMultiplier": 0.7,
+        "redundantMoveMultiplier": 0.5
+      }
+    },
+    {
+      "key": "party",
+      "nameKey": "GameMode_Party_Name",
+      "descriptionKey": "GameMode_Party_Description",
+      "rulesKey": "GameMode_Party_Rules",
+      "eliminationRule": "Manual",
+      "eventChanceMultiplier": 1.8,
+      "defaultEventPackNameKey": "EventPack_Party_Name",
+      "moveTimeMultiplier": 1.0,
+      "taskTimeMultiplier": 1.0
+    },
+    {
+      "key": "singing",
+      "nameKey": "GameMode_Singing_Name",
+      "descriptionKey": "GameMode_Singing_Description",
+      "rulesKey": "GameMode_Singing_Rules",
+      "eliminationRule": "Manual",
+      "eventChanceMultiplier": 1.5,
+      "defaultEventPackNameKey": "EventPack_Family_Name",
+      "moveTimeMultiplier": 1.0,
+      "taskTimeMultiplier": 1.5
+    },
+    {
+      "key": "drinking",
+      "nameKey": "GameMode_Drinking_Name",
+      "descriptionKey": "GameMode_Drinking_Description",
+      "rulesKey": "GameMode_Drinking_Rules",
+      "eliminationRule": "Manual",
+      "eventChanceMultiplier": 2.0,
+      "moveTimeMultiplier": 1.0,
+      "taskTimeMultiplier": 1.0,
+      "isEnabled": false
+    }
+  ]
+}

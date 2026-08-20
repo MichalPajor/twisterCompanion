@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "id": "a0000000-0000-4000-8000-000000000002",
+  "name": "Kids",
+  "nameKey": "EventPack_Kids_Name",
+  "events": [
+    {
+      "id": "a0000000-0000-4000-8000-000000000021",
+      "nameKey": "Event_MakeAnimalSound",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000022",
+      "nameKey": "Event_CountToFiveAloud",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000023",
+      "nameKey": "Event_HighFiveNeighbour",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000504",
+      "nameKey": "Event_SlowMotionNextMove",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000505",
+      "nameKey": "Event_MeowThreeTimes",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000506",
+      "nameKey": "Event_BarkLikePuppy",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000507",
+      "nameKey": "Event_FireEngineSound",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000508",
+      "nameKey": "Event_RaceCarSound",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000509",
+      "nameKey": "Event_SingKittenSong",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000510",
+      "nameKey": "Event_SayHelloDeepVoice",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000511",
+      "nameKey": "Event_SayHelloMouseVoice",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000512",
+      "nameKey": "Event_GhostSound",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000513",
+      "nameKey": "Event_SneezeLoudly",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000514",
+      "nameKey": "Event_SingYourNameThreeTimes",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000515",
+      "nameKey": "Event_MonkeyFaceScratchHead",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000516",
+      "nameKey": "Event_TurtleNeck",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000517",
+      "nameKey": "Event_CountToTen",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000518",
+      "nameKey": "Event_CountBackwardsFromFive",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000519",
+      "nameKey": "Event_FiveLetters",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000520",
+      "nameKey": "Event_ColoursOnMat",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000521",
+      "nameKey": "Event_ThreeAnimals",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000522",
+      "nameKey": "Event_TwoSweetThings",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000523",
+      "nameKey": "Event_SayDayOfWeek",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000524",
+      "nameKey": "Event_ThreeBlueThings",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000525",
+      "nameKey": "Event_FavouriteFruitAndWhy",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000526",
+      "nameKey": "Event_TongueOutOneEyeShut",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000527",
+      "nameKey": "Event_SadThenHappyFace",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000528",
+      "nameKey": "Event_BalloonCheeks",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000529",
+      "nameKey": "Event_FunniestFace",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000530",
+      "nameKey": "Event_SleepyBearFace",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000531",
+      "nameKey": "Event_SmileAtEveryone",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000532",
+      "nameKey": "Event_WaveToEveryone",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000533",
+      "nameKey": "Event_TapSpotThreeTimes",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000534",
+      "nameKey": "Event_LiftFootCountToThree",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000535",
+      "nameKey": "Event_NodYesFiveTimes",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000536",
+      "nameKey": "Event_ShakeHeadNoFiveTimes",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000537",
+      "nameKey": "Event_PianistFingers",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000538",
+      "nameKey": "Event_StampFootThreeTimes",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000539",
+      "nameKey": "Event_MoveHandToSameColourSpot",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000540",
+      "nameKey": "Event_StandStillLikeStatue",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000541",
+      "nameKey": "Event_NoseToShoulder",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000542",
+      "nameKey": "Event_ArmWindmill",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000543",
+      "nameKey": "Event_WhisperUntilRoundEnds",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "Round"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000544",
+      "nameKey": "Event_ShoutHopEachMove",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "Round"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000545",
+      "nameKey": "Event_TongueOutUntilRoundEnds",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "Round"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000546",
+      "nameKey": "Event_CallYourselfBigDragon",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "Round"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000547",
+      "nameKey": "Event_SmileUntilRoundEnds",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "Round"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000548",
+      "nameKey": "Event_HighFiveEveryone",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "AllPlayers"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000549",
+      "nameKey": "Event_TellNeighbourWhatYouLike",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000550",
+      "nameKey": "Event_SayYouAreGreat",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000551",
+      "nameKey": "Event_BlowAKiss",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000552",
+      "nameKey": "Event_BestThingToday",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    },
+    {
+      "id": "a0000000-0000-4000-8000-000000000553",
+      "nameKey": "Event_ShoutHurray",
+      "chancePercent": 0.5,
+      "isEnabled": true,
+      "scope": "CurrentPlayer"
+    }
+  ]
+}

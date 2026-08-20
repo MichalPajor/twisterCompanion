@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
+
+    <!--
+        Paleta Twistera. Cztery kolory maty są tożsamością tej gry, więc są tu wartościami
+        pierwszej kategorii, a nie odcieniami dobranymi „na oko": każdy ma wariant jasny
+        i ciemny, bo na czarnym tle nasycony czerwony razi, a na białym blednie.
+
+        UWAGA co do kontrastu — poprzednia wersja tego komentarza twierdziła, że biały napis
+        spełnia WCAG AA na każdym z tych odcieni. To było nieprawdziwe i wyszło przy
+        przenoszeniu nazwy kończyny na kółko: warianty ciemne są JAŚNIEJSZE od podstawowych
+        (mają rozjaśniać się na czarnym tle), więc biały napis daje na nich 2,0–3,5:1, a na
+        żółtym z wariantu jasnego 3,4:1. Napis na macie bierze więc kolor z pary
+        OnMatLight/OnMatDark, a nie biel na sztywno — patrz komentarz przy tych wartościach.
+    -->
+    <Color x:Key="TwisterRed">#D32F2F</Color>
+    <Color x:Key="TwisterRedDark">#EF5350</Color>
+    <Color x:Key="TwisterYellow">#B08600</Color>
+    <Color x:Key="TwisterYellowDark">#E0B21E</Color>
+    <Color x:Key="TwisterBlue">#1565C0</Color>
+    <Color x:Key="TwisterBlueDark">#42A5F5</Color>
+    <Color x:Key="TwisterGreen">#2E7D32</Color>
+    <Color x:Key="TwisterGreenDark">#66BB6A</Color>
+
+    <!--
+        Napis na macie, czyli na kolorowym kole ekranu rozgrywki. Dwie wartości, bo problem
+        jest dwustronny: w motywie jasnym kolory maty są nasycone i biel czyta się na nich
+        najlepiej (4,98–5,75:1), a w ciemnym są rozjaśnione i biel na nich niemal znika —
+        tam wygrywa napis ciemny (4,99–8,75:1). Wyjątkiem jest żółty, który jest jasny w obu
+        motywach i zawsze dostaje napis ciemny (5,18:1); robi to wyzwalacz w GamePage.xaml.
+
+        Wartości policzone, nie dobrane na oko — kontrast liczony wzorem WCAG dla wszystkich
+        ośmiu odcieni maty.
+    -->
+    <Color x:Key="OnMatLight">#FFFFFF</Color>
+    <Color x:Key="OnMatDark">#1A1A1A</Color>
+
+    <!--
+        Tła i teksty. Nazwy mówią o roli, nie o odcieniu — dzięki temu zmiana motywu jest
+        zmianą dwóch wartości, a nie polowaniem na „szary numer 300" po wszystkich ekranach.
+    -->
+    <Color x:Key="SurfaceLight">#FFFBFE</Color>
+    <Color x:Key="SurfaceDark">#121212</Color>
+    <Color x:Key="CardLight">#FFFFFF</Color>
+    <Color x:Key="CardDark">#1E1E1E</Color>
+    <Color x:Key="OnSurfaceLight">#1A1A1A</Color>
+    <Color x:Key="OnSurfaceDark">#F2F2F2</Color>
+    <Color x:Key="MutedLight">#5F5F5F</Color>
+    <Color x:Key="MutedDark">#B3B3B3</Color>
+    <Color x:Key="OutlineLight">#DDDDDD</Color>
+    <Color x:Key="OutlineDark">#3A3A3A</Color>
+
+    <!-- Kolor ostrzeżenia: ostatnie sekundy odliczania i sumy szans powyżej 100%. -->
+    <Color x:Key="WarningLight">#C62828</Color>
+    <Color x:Key="WarningDark">#FF7043</Color>
+
+    <!--
+        Barwy interfejsu. Wartości zastępują domyślną paletę szablonu MAUI (fiolet #512BD4),
+        bo kolorem tej aplikacji są cztery kolory maty, a nie znak firmowy narzędzia.
+        <para>
+        Przyciski są <b>grafitowe</b>, nie kolorowe, i to jest decyzja, nie brak pomysłu:
+        każdy nasycony odcień na przyciskach konkurowałby z kołem koloru — jedyną rzeczą,
+        którą gracz ma zobaczyć z dwóch metrów. Kolor niesie w tej aplikacji znaczenie
+        („czerwony"), więc nie może jednocześnie znaczyć „to jest przycisk".
+        </para>
+        <para>
+        Wyjątkiem jest jedna akcja główna na ekranie („Graj", „Dalej") w kolorze jagodowym.
+        Odcień wybrany tak, żeby nie dał się pomylić z żadnym z czterech kolorów maty.
+        </para>
+    -->
+    <Color x:Key="Primary">#2A2E35</Color>
+    <Color x:Key="PrimaryDark">#E4E7EB</Color>
+    <Color x:Key="PrimaryDarkText">#1A1A1A</Color>
+    <Color x:Key="Secondary">#EDEFF2</Color>
+    <Color x:Key="SecondaryDarkText">#2A2E35</Color>
+    <Color x:Key="Tertiary">#4A5058</Color>
+
+    <!-- Akcja główna: jedna na ekranie, żeby zachowała znaczenie. -->
+    <Color x:Key="AccentAction">#B4155C</Color>
+    <Color x:Key="AccentActionDark">#F06292</Color>
+    <Color x:Key="AccentActionText">#FFFFFF</Color>
+
+    <!--
+        Zaznaczenie na liście. Własne wartości, bo domyślne zaznaczenie listy na Androidzie
+        podświetla wiersz kolorem systemowym — pomarańczowym, niezależnym od palety
+        aplikacji. Odcień jest tłem akcji rozjaśnionym do poziomu, na którym tekst nadal
+        czyta się bez wysiłku.
+    -->
+    <Color x:Key="SelectionLight">#FBE4EE</Color>
+    <Color x:Key="SelectionDark">#3B1327</Color>
+
+    <!--
+        Akcja niszcząca: usunięcie paczki, zakończenie partii. Czerwień jest tu jedynym
+        dopuszczalnym wyjątkiem od zasady „kolor niesie znaczenie na macie", bo „usuń"
+        też jest znaczeniem — i to takim, którego nie wolno pomylić z „duplikuj".
+    -->
+    <Color x:Key="DangerLight">#B3261E</Color>
+    <Color x:Key="DangerDark">#F2B8B5</Color>
+
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">Black</Color>
+    <Color x:Key="Magenta">#D600AA</Color>
+    <Color x:Key="MidnightBlue">#190649</Color>
+    <Color x:Key="OffBlack">#1f1f1f</Color>
+
+    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray200">#C8C8C8</Color>
+    <Color x:Key="Gray300">#ACACAC</Color>
+    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="Gray500">#6E6E6E</Color>
+    <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#141414</Color>
+
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
+    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+
+    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
+    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
+    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
+    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
+    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
+    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
+    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
+    <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+</ResourceDictionary>

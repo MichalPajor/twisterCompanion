@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase
+    x:Class="TwisterCompanion.App.Views.OnboardingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:TwisterCompanion.App.Localization"
+    xmlns:views="clr-namespace:TwisterCompanion.App.Views"
+    xmlns:vm="clr-namespace:TwisterCompanion.Presentation.ViewModels;assembly=TwisterCompanion.Presentation"
+    x:DataType="vm:OnboardingViewModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    Title="{loc:Translate Onboarding_Title}">
+
+    <!--
+        Trzy kroki w jednym ekranie, przełączane przyciskami i przesunięciem palca. Karuzela
+        z osobnym układem byłaby tu wygodniejsza w kodzie, ale gorsza w skutkach: układy MAUI
+        wypełniane wiązaniem już raz wywróciły tę aplikację, a tutaj wystarczy pokazać jeden
+        z trzech tekstów i zmienić liczbę.
+        <para>
+        Treść jest w karcie, a nie na tle strony: krok wprowadzenia to jedna rzecz do
+        przeczytania, więc ma mieć wyraźne granice.
+        </para>
+    -->
+    <Grid RowDefinitions="Auto,*,Auto,Auto"
+          Padding="{StaticResource PagePadding}"
+          RowSpacing="{StaticResource SpacingM}">
+
+        <views:PageHeader Grid.Row="0"
+                          Title="{loc:Translate Onboarding_Title}"
+                          Command="{Binding FinishCommand}"
+                          BackDescription="{loc:Translate Common_Button_Back}" />
+
+        <ScrollView Grid.Row="1">
+            <Border Style="{StaticResource CardBorder}">
+                <Border.GestureRecognizers>
+                    <SwipeGestureRecognizer Direction="Left" Command="{Binding NextCommand}" />
+                    <SwipeGestureRecognizer Direction="Right" Command="{Binding BackCommand}" />
+                </Border.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="{StaticResource SpacingM}">
+                    <Label Text="{Binding Current.Glyph}"
+                           FontSize="44"
+                           FontAutoScalingEnabled="False"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource AccentAction}, Dark={StaticResource AccentActionDark}}" />
+
+                    <Label Style="{StaticResource TitleLabel}"
+                           Text="{Binding Current.Title}"
+                           HorizontalTextAlignment="Center" />
+
+                    <Label Style="{StaticResource BodyLabel}"
+                           Text="{Binding Current.Body}"
+                           LineHeight="1.4" />
+                </VerticalStackLayout>
+            </Border>
+        </ScrollView>
+
+        <!-- Który to krok: liczba, bo trzy kropki na tym ekranie i tak trzeba by policzyć. -->
+        <Label Grid.Row="2"
+               Style="{StaticResource CaptionLabel}"
+               Text="{Binding ProgressText}"
+               HorizontalOptions="Center" />
+
+        <Grid Grid.Row="3" ColumnDefinitions="*,*" ColumnSpacing="{StaticResource SpacingS}">
+            <!--
+                Na pierwszym kroku po lewej stoi „Pomiń", dalej „Wstecz". Oba prowadzą do tego
+                samego miejsca w układzie, więc palec nie musi szukać.
+            -->
+            <views:GlyphButton Grid.Column="0"
+                               Text="{loc:Translate Onboarding_Button_Skip}"
+                               Command="{Binding FinishCommand}"
+                               IsVisible="{Binding IsFirstStep}"
+                               ButtonStyle="{StaticResource SubtleButton}" />
+
+            <views:GlyphButton Grid.Column="0"
+                               Text="{loc:Translate Onboarding_Button_Back}"
+                               Command="{Binding BackCommand}"
+                               IsVisible="{Binding IsNotFirstStep}"
+                               ButtonStyle="{StaticResource SubtleButton}" />
+
+            <views:GlyphButton Grid.Column="1"
+                               Glyph="▶"
+                               Text="{loc:Translate Onboarding_Button_Next}"
+                               Command="{Binding NextCommand}"
+                               IsVisible="{Binding IsNotLastStep}"
+                               ButtonStyle="{StaticResource AccentButton}" />
+
+            <views:GlyphButton Grid.Column="1"
+                               Glyph="✓"
+                               Text="{loc:Translate Onboarding_Button_Finish}"
+                               Command="{Binding FinishCommand}"
+                               IsVisible="{Binding IsLastStep}"
+                               ButtonStyle="{StaticResource AccentButton}" />
+        </Grid>
+
+    </Grid>
+
+</views:ContentPageBase>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    x:Class="TwisterCompanion.App.Views.SecondsEntry"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:TwisterCompanion.App.Localization"
+    xmlns:vm="clr-namespace:TwisterCompanion.Presentation.ViewModels;assembly=TwisterCompanion.Presentation"
+    x:DataType="vm:SecondsSetting"
+    ColumnDefinitions="36,76,Auto,36,*"
+    ColumnSpacing="6">
+
+    <!--
+        Pole z liczbą sekund zamiast suwaka: suwak nie pokazywał, ile właściwie ustawia,
+        a przy wartości w sekundach to jedyna informacja, która się liczy. Przyciski dają
+        zmianę o pięć sekund bez sięgania po klawiaturę.
+    -->
+    <Button
+        Grid.Column="0"
+        Text="−"
+        Command="{Binding DecreaseCommand}"
+        Style="{StaticResource ChanceStepButton}" />
+
+    <!-- Ramka wokół pola: bez niej liczba wyglądała jak zwykły napis między przyciskami. -->
+    <Border Grid.Column="1" Style="{StaticResource FieldBorder}" Padding="4,0" VerticalOptions="Center">
+        <Entry
+            Text="{Binding Text}"
+            Keyboard="Numeric"
+            MaxLength="3"
+            FontSize="{StaticResource FontSizeBody}"
+            HorizontalTextAlignment="Center" />
+    </Border>
+
+    <Label
+        Grid.Column="2"
+        Text="{loc:Translate Settings_Label_Seconds}"
+        FontSize="14"
+        VerticalOptions="Center" />
+
+    <Button
+        Grid.Column="3"
+        Text="+"
+        Command="{Binding IncreaseCommand}"
+        Style="{StaticResource ChanceStepButton}" />
+
+</Grid>
