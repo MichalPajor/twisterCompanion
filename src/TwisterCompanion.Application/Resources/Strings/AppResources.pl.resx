@@ -649,6 +649,9 @@ Nie dosłyszeliście polecenia? „Powtórz" przeczyta je jeszcze raz.</value>
   <data name="Settings_Info_EraseDone" xml:space="preserve">
     <value>Dane zostały usunięte.</value>
   </data>
+  <data name="Settings_Button_PrivacyPolicy" xml:space="preserve">
+    <value>Polityka prywatności</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Pokaż „Jak grać"</value>
   </data>

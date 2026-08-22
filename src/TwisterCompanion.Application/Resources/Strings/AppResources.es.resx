@@ -631,6 +631,9 @@ Con el control por voz activado no hace falta tocar el teléfono: di «siguiente
   <data name="Settings_Info_EraseDone" xml:space="preserve">
     <value>Los datos se han borrado.</value>
   </data>
+  <data name="Settings_Button_PrivacyPolicy" xml:space="preserve">
+    <value>Política de privacidad</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Ver «Cómo jugar»</value>
   </data>

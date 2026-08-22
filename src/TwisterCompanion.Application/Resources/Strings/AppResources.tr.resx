@@ -631,6 +631,9 @@ Talimatı duymadınız mı? «Tekrar» yeniden okur.</value>
   <data name="Settings_Info_EraseDone" xml:space="preserve">
     <value>Veriler silindi.</value>
   </data>
+  <data name="Settings_Button_PrivacyPolicy" xml:space="preserve">
+    <value>Gizlilik politikası</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>«Nasıl oynanır»ı göster</value>
   </data>

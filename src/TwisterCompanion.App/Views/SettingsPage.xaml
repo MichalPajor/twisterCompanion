@@ -287,6 +287,17 @@
                                IsEnabled="{Binding IsNotBusy}"
                                ButtonStyle="{StaticResource SubtleButton}" />
 
+            <!--
+                Odnośnik, a nie ekran z tekstem: Google Play wymaga dostępu do polityki
+                z wnętrza aplikacji, a dokument żyje pod adresem, który wskazuje też karta
+                sklepu. Kopia w zasobach rozjechałaby się z opublikowaną przy pierwszej zmianie.
+            -->
+            <views:GlyphButton Glyph="§"
+                               Text="{loc:Translate Settings_Button_PrivacyPolicy}"
+                               Command="{Binding OpenPrivacyPolicyCommand}"
+                               IsEnabled="{Binding IsNotBusy}"
+                               ButtonStyle="{StaticResource SubtleButton}" />
+
             <views:GlyphButton Glyph="⟲"
                                Text="{loc:Translate Settings_Button_Reset}"
                                Command="{Binding ResetSettingsCommand}"

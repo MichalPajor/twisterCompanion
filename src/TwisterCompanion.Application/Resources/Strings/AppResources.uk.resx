@@ -631,6 +631,9 @@ Twister® — торгова марка Hasbro. Цей застосунок не
   <data name="Settings_Info_EraseDone" xml:space="preserve">
     <value>Дані видалено.</value>
   </data>
+  <data name="Settings_Button_PrivacyPolicy" xml:space="preserve">
+    <value>Політика конфіденційності</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Показати «Як грати»</value>
   </data>

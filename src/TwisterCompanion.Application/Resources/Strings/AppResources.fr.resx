@@ -631,6 +631,9 @@ Vous n’avez pas entendu la consigne ? « Répète » la relit.</value>
   <data name="Settings_Info_EraseDone" xml:space="preserve">
     <value>Les données ont été supprimées.</value>
   </data>
+  <data name="Settings_Button_PrivacyPolicy" xml:space="preserve">
+    <value>Politique de confidentialité</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Voir « Comment jouer »</value>
   </data>

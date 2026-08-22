@@ -658,6 +658,9 @@ Did not catch the instruction? “Repeat” will read it out again.</value>
   <data name="Settings_Info_EraseDone" xml:space="preserve">
     <value>The data has been deleted.</value>
   </data>
+  <data name="Settings_Button_PrivacyPolicy" xml:space="preserve">
+    <value>Privacy policy</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Show „How to play"</value>
   </data>

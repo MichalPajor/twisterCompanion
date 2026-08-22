@@ -631,6 +631,9 @@ Non avete sentito l’istruzione? «Ripeti» la legge di nuovo.</value>
   <data name="Settings_Info_EraseDone" xml:space="preserve">
     <value>I dati sono stati cancellati.</value>
   </data>
+  <data name="Settings_Button_PrivacyPolicy" xml:space="preserve">
+    <value>Informativa sulla privacy</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Vedi «Come si gioca»</value>
   </data>

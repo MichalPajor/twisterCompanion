@@ -29,6 +29,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
     private readonly IVoiceControlService _voiceControl;
     private readonly IGameFeedback _feedback;
     private readonly IUserDataService _userData;
+    private readonly IExternalBrowser _browser;
 
     /// <summary>
     /// Blokuje zapis ustawień w czasie wczytywania stanu do formularza.
@@ -53,6 +54,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
     /// <param name="localization">Serwis tłumaczeń — źródło listy dostępnych języków.</param>
     /// <param name="logger">Logger tego ViewModelu.</param>
     /// <param name="dialogService">Serwis komunikatów dla użytkownika.</param>
+    /// <param name="browser">Przeglądarka systemowa — otwiera politykę prywatności.</param>
     public SettingsViewModel(
         INavigationService navigation,
         ISettingsService settingsService,
@@ -64,9 +66,12 @@ public partial class SettingsViewModel : NavigableViewModelBase
         IUserDataService userData,
         ILocalizationService localization,
         ILogger<SettingsViewModel> logger,
-        IDialogService dialogService)
+        IDialogService dialogService,
+        IExternalBrowser browser)
         : base(navigation, logger, dialogService, localization)
     {
+        ArgumentNullException.ThrowIfNull(browser);
+
         ArgumentNullException.ThrowIfNull(settingsService);
         ArgumentNullException.ThrowIfNull(textToSpeech);
         ArgumentNullException.ThrowIfNull(speaker);
@@ -82,6 +87,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
         _textToSpeech = textToSpeech;
         _speaker = speaker;
         _announcementBuilder = announcementBuilder;
+        _browser = browser;
 
         MoveTime = new SecondsSetting(
             AppSettings.MinMoveTime,
@@ -659,6 +665,17 @@ public partial class SettingsViewModel : NavigableViewModelBase
     /// </remarks>
     [RelayCommand]
     private Task GoToHowToPlayAsync() => ExecuteSafeAsync(() => Navigation.GoToAsync(Routes.Onboarding));
+
+    /// <summary>Otwiera politykę prywatności w przeglądarce systemowej.</summary>
+    /// <remarks>
+    /// Google Play wymaga dostępu do polityki <b>z wnętrza aplikacji</b>, nie tylko z karty
+    /// sklepu. Odnośnik, a nie ekran z pełnym tekstem: dokument prawny trzeba by wtedy
+    /// utrzymywać w dziesięciu językach w plikach zasobów i pilnować, żeby nie rozjechał się
+    /// z wersją opublikowaną, którą sklep i tak wskazuje.
+    /// </remarks>
+    [RelayCommand]
+    private Task OpenPrivacyPolicyAsync() =>
+        ExecuteSafeAsync(() => _browser.OpenAsync(AppLinks.PrivacyPolicy));
 
     /// <summary>
     /// Wczytuje listę głosów z syntezatora, zawężoną do języka aplikacji.

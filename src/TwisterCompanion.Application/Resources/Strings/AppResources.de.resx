@@ -631,6 +631,9 @@ Die Anweisung nicht verstanden? „Wiederhole“ liest sie noch einmal vor.</val
   <data name="Settings_Info_EraseDone" xml:space="preserve">
     <value>Die Daten wurden gelöscht.</value>
   </data>
+  <data name="Settings_Button_PrivacyPolicy" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>„So wird gespielt“ ansehen</value>
   </data>

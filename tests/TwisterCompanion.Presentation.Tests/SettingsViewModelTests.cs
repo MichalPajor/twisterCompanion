@@ -6,6 +6,7 @@ using TwisterCompanion.Application.Localization;
 using TwisterCompanion.Application.Settings;
 using TwisterCompanion.Application.Voice;
 using TwisterCompanion.Application.VoiceControl;
+using TwisterCompanion.Presentation;
 using TwisterCompanion.Presentation.Abstractions;
 using TwisterCompanion.Presentation.Tests.Fakes;
 using TwisterCompanion.Presentation.ViewModels;
@@ -593,6 +594,21 @@ public class SettingsViewModelTests
     private readonly FakeGameFeedback _feedback = new();
     private readonly IUserDataService _userData = Substitute.For<IUserDataService>();
 
+    [Fact]
+    public async Task PolitykaPrywatnosci_OtwieraAdresWskazanyWKarcieSklepu()
+    {
+        // Google Play wymaga dostępu do polityki z wnętrza aplikacji, a adres musi być ten
+        // sam, który podano w karcie sklepu — rozjechanie się ich jest naruszeniem zasad,
+        // nie usterką kosmetyczną. Test pilnuje, że przycisk prowadzi dokładnie tam.
+        SettingsViewModel viewModel = CreateViewModel();
+
+        await viewModel.OpenPrivacyPolicyCommand.ExecuteAsync(null);
+
+        await _browser.Received(1).OpenAsync(AppLinks.PrivacyPolicy);
+    }
+
+    private readonly IExternalBrowser _browser = Substitute.For<IExternalBrowser>();
+
     private SettingsViewModel CreateViewModel() => new(
         Substitute.For<INavigationService>(),
         _settings,
@@ -604,5 +620,6 @@ public class SettingsViewModelTests
         _userData,
         _localization,
         NullLogger<SettingsViewModel>.Instance,
-        Substitute.For<IDialogService>());
+        Substitute.For<IDialogService>(),
+        _browser);
 }

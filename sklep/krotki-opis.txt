@@ -1,0 +1,2 @@
+EN: Voice game master for Twister: picks the moves, calls your name, keeps time.
+PL: Głosowy prowadzący do Twistera: losuje ruchy, woła po imieniu, odlicza czas.

@@ -72,6 +72,7 @@ public class DependencyInjectionTests
         services.AddLogging();
         services.AddSingleton(Substitute.For<INavigationService>());
         services.AddSingleton(Substitute.For<IDialogService>());
+        services.AddSingleton(Substitute.For<IExternalBrowser>());
         services.AddSingleton<ILocalizationService>(new FakeLocalizationService());
         services.AddSingleton<ISettingsService>(new FakeSettingsService());
         services.AddSingleton(Substitute.For<IPlayerRosterRepository>());
