@@ -153,11 +153,35 @@ jobs:
         if: always() && env.MAGAZYN_KLUCZY != ''
         run: rm -f "$RUNNER_TEMP/klucz.keystore"
 
+      # Jeden plik, nie caly katalog wynikowy. Wzorzec '**/*.aab' pakowal piec plikow
+      # z zachowaniem drzewa katalogow: podpisany i niepodpisany, kazdy w dwoch miejscach,
+      # plus polprodukt z obj/. Czlowiek stojacy przed konsola Play musial zgadywac, ktory
+      # z nich wgrac — a wgranie niepodpisanego konczy sie odrzuceniem.
+      - name: Przygotowanie pakietu do wydania
+        id: pakiet
+        run: |
+          KATALOG=src/TwisterCompanion.App/bin/Release/net10.0-android/publish
+          mkdir -p pakiet
+
+          PLIK=$(ls "$KATALOG"/*-Signed.aab 2>/dev/null | head -1)
+
+          if [ -n "$PLIK" ]; then
+            NAZWA="twister-companion-${{ steps.wersja.outputs.numer }}.aab"
+          else
+            PLIK=$(ls "$KATALOG"/*.aab | head -1)
+            NAZWA="twister-companion-${{ steps.wersja.outputs.numer }}-BEZ-PODPISU.aab"
+            echo '::warning::Pakiet nie jest podpisany — Google Play go odrzuci.'
+          fi
+
+          cp "$PLIK" "pakiet/$NAZWA"
+          echo "nazwa=$NAZWA" >> "$GITHUB_OUTPUT"
+          echo "Do wydania: $NAZWA ($(du -h "pakiet/$NAZWA" | cut -f1))"
+
       - name: Pakiet jako artefakt
         uses: actions/upload-artifact@v7
         with:
           name: twister-companion-${{ steps.wersja.outputs.numer }}-aab${{ env.MAGAZYN_KLUCZY == '' && '-bez-podpisu' || '' }}
-          path: '**/*.aab'
+          path: pakiet/*.aab
           if-no-files-found: error
 
       # Wydanie w GitHubie tworzymy wbudowanym narzędziem gh, a nie cudzą akcją: mniej
@@ -170,4 +194,4 @@ jobs:
           gh release create "$GITHUB_REF_NAME" \
             --title "Twister Companion ${{ steps.wersja.outputs.numer }}" \
             --generate-notes \
-            $(find . -name '*.aab' -print)
+            pakiet/*.aab
