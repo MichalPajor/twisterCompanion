@@ -29,6 +29,12 @@ public static class StringKeys
         /// <summary>Etykieta przycisku anulowania.</summary>
         public const string ButtonCancel = "Common_Button_Cancel";
 
+        /// <summary>Etykieta przycisku potwierdzenia w pytaniu zamkniętym.</summary>
+        public const string ButtonYes = "Common_Button_Yes";
+
+        /// <summary>Etykieta przycisku odmowy w pytaniu zamkniętym.</summary>
+        public const string ButtonNo = "Common_Button_No";
+
         /// <summary>Wartość „włączone" w podsumowaniach ustawień.</summary>
         public const string LabelOn = "Common_Label_On";
 
@@ -137,6 +143,16 @@ public static class StringKeys
     }
 
     /// <summary>Teksty ekranu graczy używane z kodu.</summary>
+    /// <summary>Klucze ekranu startowego.</summary>
+    public static class Home
+    {
+        /// <summary>Tytuł pytania zadawanego, gdy skład graczy jest pusty.</summary>
+        public const string NoPlayersTitle = "Home_Confirm_NoPlayersTitle";
+
+        /// <summary>Treść pytania zadawanego, gdy skład graczy jest pusty.</summary>
+        public const string NoPlayersMessage = "Home_Confirm_NoPlayersMessage";
+    }
+
     public static class Players
     {
         /// <summary>Tytuł ekranu, używany też jako podpis w podsumowaniu partii.</summary>

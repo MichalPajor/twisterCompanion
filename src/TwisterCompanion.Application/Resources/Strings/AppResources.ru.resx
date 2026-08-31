@@ -35,6 +35,12 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <data name="Common_Button_No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="Common_Button_Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
   <data name="Common_Button_Ok" xml:space="preserve">
     <value>ОК</value>
   </data>
@@ -46,6 +52,12 @@
   </data>
   <data name="Home_Button_Game" xml:space="preserve">
     <value>Играть</value>
+  </data>
+  <data name="Home_Confirm_NoPlayersMessage" xml:space="preserve">
+    <value>Перед началом игры добавьте минимум двух игроков. Хотите добавить их сейчас?</value>
+  </data>
+  <data name="Home_Confirm_NoPlayersTitle" xml:space="preserve">
+    <value>Игроков ещё нет</value>
   </data>
   <data name="Home_Button_Players" xml:space="preserve">
     <value>Игроки</value>

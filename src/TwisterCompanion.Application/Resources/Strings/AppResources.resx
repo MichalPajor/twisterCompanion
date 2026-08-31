@@ -36,6 +36,12 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Common_Button_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Common_Button_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
   <data name="Common_Button_Ok" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -48,6 +54,12 @@
   </data>
   <data name="Home_Button_Game" xml:space="preserve">
     <value>Play</value>
+  </data>
+  <data name="Home_Confirm_NoPlayersMessage" xml:space="preserve">
+    <value>Add at least two players before starting a game. Do you want to add them now?</value>
+  </data>
+  <data name="Home_Confirm_NoPlayersTitle" xml:space="preserve">
+    <value>No players yet</value>
   </data>
   <data name="Home_Button_Players" xml:space="preserve">
     <value>Players</value>

@@ -27,6 +27,12 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Anuluj</value>
   </data>
+  <data name="Common_Button_No" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="Common_Button_Yes" xml:space="preserve">
+    <value>Tak</value>
+  </data>
   <data name="Common_Button_Ok" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -39,6 +45,12 @@
   </data>
   <data name="Home_Button_Game" xml:space="preserve">
     <value>Rozgrywka</value>
+  </data>
+  <data name="Home_Confirm_NoPlayersMessage" xml:space="preserve">
+    <value>Przed rozpoczęciem gry dodaj minimum 2 graczy. Czy chcesz ich teraz dodać?</value>
+  </data>
+  <data name="Home_Confirm_NoPlayersTitle" xml:space="preserve">
+    <value>Brak graczy</value>
   </data>
   <data name="Home_Button_Players" xml:space="preserve">
     <value>Gracze</value>

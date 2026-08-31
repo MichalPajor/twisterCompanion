@@ -35,6 +35,12 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Скасувати</value>
   </data>
+  <data name="Common_Button_No" xml:space="preserve">
+    <value>Ні</value>
+  </data>
+  <data name="Common_Button_Yes" xml:space="preserve">
+    <value>Так</value>
+  </data>
   <data name="Common_Button_Ok" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -46,6 +52,12 @@
   </data>
   <data name="Home_Button_Game" xml:space="preserve">
     <value>Грати</value>
+  </data>
+  <data name="Home_Confirm_NoPlayersMessage" xml:space="preserve">
+    <value>Перед початком гри додайте щонайменше двох гравців. Хочете додати їх зараз?</value>
+  </data>
+  <data name="Home_Confirm_NoPlayersTitle" xml:space="preserve">
+    <value>Гравців ще немає</value>
   </data>
   <data name="Home_Button_Players" xml:space="preserve">
     <value>Гравці</value>

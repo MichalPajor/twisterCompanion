@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using TwisterCompanion.Application.Abstractions;
+using TwisterCompanion.Application.Localization;
+using TwisterCompanion.Domain.Entities;
 using TwisterCompanion.Presentation.Abstractions;
 using TwisterCompanion.Presentation.Navigation;
 
@@ -17,24 +19,29 @@ namespace TwisterCompanion.Presentation.ViewModels;
 public partial class HomeViewModel : NavigableViewModelBase
 {
     private readonly ISettingsService _settingsService;
+    private readonly IPlayerRosterRepository _playerRoster;
 
     /// <summary>Tworzy ViewModel ekranu startowego.</summary>
     /// <param name="navigation">Serwis nawigacji.</param>
     /// <param name="settingsService">Ustawienia — źródło informacji o pokazanym wprowadzeniu.</param>
+    /// <param name="playerRoster">Skład graczy — sprawdzany przed wejściem na ekran rozgrywki.</param>
     /// <param name="logger">Logger tego ViewModelu.</param>
     /// <param name="dialogService">Serwis komunikatów dla użytkownika.</param>
     /// <param name="localization">Serwis tłumaczeń.</param>
     public HomeViewModel(
         INavigationService navigation,
         ISettingsService settingsService,
+        IPlayerRosterRepository playerRoster,
         ILogger<HomeViewModel> logger,
         IDialogService dialogService,
         ILocalizationService localization)
         : base(navigation, logger, dialogService, localization)
     {
         ArgumentNullException.ThrowIfNull(settingsService);
+        ArgumentNullException.ThrowIfNull(playerRoster);
 
         _settingsService = settingsService;
+        _playerRoster = playerRoster;
     }
 
     /// <inheritdoc />
@@ -68,8 +75,43 @@ public partial class HomeViewModel : NavigableViewModelBase
     }
 
     /// <summary>Przechodzi do ekranu rozgrywki.</summary>
+    /// <summary>
+    /// Wchodzi na ekran rozgrywki, a przy pustym składzie najpierw pyta o dodanie graczy.
+    /// </summary>
+    /// <remarks>
+    /// Bez tego pytania pierwsze uruchomienie kończyło się ślepym zaułkiem: gracz wchodził
+    /// w „Rozgrywkę", widział nieaktywny przycisk startu i nie miał żadnej wskazówki, czego
+    /// brakuje ani gdzie to uzupełnić. Pytanie pada <b>przed</b> przejściem, bo dopiero wtedy
+    /// odpowiedź „tak" może zaprowadzić wprost tam, gdzie trzeba.
+    /// <para>
+    /// Sprawdzany jest skład <b>pusty</b>, a nie mniejszy niż dwa. Silnik startuje partię
+    /// z jednym graczem — to sensowny trening solo, tylko bez zwycięzcy — więc blokowanie
+    /// wejścia przy jednym graczu odbierałoby coś, co dziś działa.
+    /// </para>
+    /// </remarks>
     [RelayCommand]
-    private Task GoToGameAsync() => ExecuteSafeAsync(() => Navigation.GoToAsync(Routes.Game));
+    private Task GoToGameAsync() => ExecuteSafeAsync(async () =>
+    {
+        IReadOnlyList<Player> players = await _playerRoster.GetAsync();
+
+        if (players.Count > 0)
+        {
+            await Navigation.GoToAsync(Routes.Game);
+
+            return;
+        }
+
+        bool dodajemy = await Dialogs.ConfirmAsync(
+            Localization[StringKeys.Home.NoPlayersTitle],
+            Localization[StringKeys.Home.NoPlayersMessage],
+            Localization[StringKeys.Common.ButtonYes],
+            Localization[StringKeys.Common.ButtonNo]);
+
+        if (dodajemy)
+        {
+            await Navigation.GoToAsync(Routes.Players);
+        }
+    });
 
     /// <summary>Przechodzi do zarządzania graczami.</summary>
     [RelayCommand]
