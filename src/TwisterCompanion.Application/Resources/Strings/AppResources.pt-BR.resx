@@ -478,6 +478,12 @@ Você passa para a rodada seguinte com um botão ou por voz, a não ser que ligu
   <data name="Game_Setup_TurnAutomatic" xml:space="preserve">
     <value>Automática</value>
   </data>
+  <data name="Game_Label_ControlMode" xml:space="preserve">
+    <value>Controle: {0}</value>
+  </data>
+  <data name="Game_Control_Voice" xml:space="preserve">
+    <value>Por voz</value>
+  </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Eliminação</value>
   </data>

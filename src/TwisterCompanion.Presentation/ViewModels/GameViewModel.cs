@@ -147,6 +147,22 @@ public partial class GameViewModel : NavigableViewModelBase
     public ObservableCollection<GameSetupItem> SummaryItems { get; } = [];
 
     /// <summary>Ostatni komunikat — polecenie ruchu albo informacja o zdarzeniu.</summary>
+    /// <summary>Sposób prowadzenia rozgrywki, przełączany przyciskiem przy kole ruchu.</summary>
+    [ObservableProperty]
+    private GameControlMode _controlMode = GameControlMode.Manual;
+
+    /// <summary>Nazwa bieżącego sposobu sterowania — dla czytnika ekranu i testów.</summary>
+    [ObservableProperty]
+    private string _controlModeText = string.Empty;
+
+    /// <summary>Znak na przycisku sterowania.</summary>
+    [ObservableProperty]
+    private string _controlModeGlyph = string.Empty;
+
+    /// <summary>Opis przycisku sterowania dla czytnika ekranu.</summary>
+    [ObservableProperty]
+    private string _controlModeDescription = string.Empty;
+
     [ObservableProperty]
     private string _announcementText = string.Empty;
 
@@ -422,6 +438,7 @@ public partial class GameViewModel : NavigableViewModelBase
 
         RefreshFromEngine();
         RefreshVoiceStatus(_voiceControl.State);
+        RefreshControlMode();
 
         // Skład i zasady wczytujemy przy każdym wejściu na ekran, a nie raz przy pierwszym:
         // gracze idą stąd do ustawień, trybów i wydarzeń właśnie po to, żeby coś zmienić,
@@ -982,6 +999,96 @@ public partial class GameViewModel : NavigableViewModelBase
         {
             ReplacePlayers(_engine.Session.Players);
         }
+    }
+
+    /// <summary>
+    /// Przełącza sposób sterowania na następny w kolejności: ręczny, automatyczny, głosowy.
+    /// </summary>
+    /// <remarks>
+    /// Przełącznik, nie lista wyboru. Okno z trzema opcjami zasłoniłoby koło ruchu dokładnie
+    /// w chwili, w której gracz na nie patrzy — a sięga po ten przycisk właśnie wtedy, gdy
+    /// bieżący sposób zawodzi. Trzy stany oznaczają najwyżej dwa dotknięcia do dowolnego
+    /// z nich, a ikona mówi, gdzie się jest.
+    /// </remarks>
+    [RelayCommand]
+    private Task CycleControlModeAsync() =>
+        ExecuteSafeAsync(() => ApplyControlModeAsync(GameControlModes.Next(ControlMode)));
+
+    /// <summary>
+    /// Zapisuje wybrany sposób sterowania i stosuje go do trwającej partii.
+    /// </summary>
+    /// <param name="mode">Nowy sposób sterowania.</param>
+    /// <remarks>
+    /// Kolejność jest istotna. Najpierw ustawienia, bo one są jedynym źródłem prawdy i to
+    /// z nich ekran ustawień odczyta ten sam stan. Potem silnik, żeby odliczanie ruszyło od
+    /// nowa pod nową wartością. Na końcu mikrofon, bo dopiero wtedy wiadomo, czy w ogóle da
+    /// się go otworzyć.
+    /// <para>
+    /// Gdy mikrofon odmówi — brak zgody albo urządzenie bez rozpoznawania mowy — tryb
+    /// <b>wraca na ręczny</b>. Zostawienie napisu „głosowo" nad grą, której nikt nie słucha,
+    /// byłoby gorsze niż samo niepowodzenie: gracz czekałby na reakcję, która nie nadejdzie.
+    /// </para>
+    /// </remarks>
+    private async Task ApplyControlModeAsync(GameControlMode mode)
+    {
+        await _settingsService.UpdateAsync(settings => GameControlModes.Apply(settings, mode));
+
+        AppSettings settingsPoZmianie = _settingsService.Current;
+        GameModeDefinition tryb = await _gameModes.GetActiveAsync();
+
+        await _engine.ChangeTurnControlAsync(
+            settingsPoZmianie.TurnAdvanceMode,
+            GameSetup.MoveTimeFor(settingsPoZmianie, tryb));
+
+        if (mode == GameControlMode.Voice)
+        {
+            await ActivateVoiceControlAsync();
+
+            if (_voiceControl.State is VoiceControlState.Unavailable or VoiceControlState.Disabled)
+            {
+                Logger.LogInformation(
+                    "Sterowanie głosem niedostępne ({State}) — wracam na sterowanie ręczne.",
+                    _voiceControl.State);
+
+                await ApplyControlModeAsync(GameControlMode.Manual);
+
+                return;
+            }
+        }
+        else
+        {
+            await _voiceCoordinator.DeactivateAsync();
+            RefreshVoiceStatus(_voiceControl.State);
+        }
+
+        RefreshControlMode();
+    }
+
+    /// <summary>Odczytuje sposób sterowania z ustawień i odświeża napisy na przycisku.</summary>
+    private void RefreshControlMode()
+    {
+        ControlMode = GameControlModes.From(_settingsService.Current);
+
+        ControlModeText = Localization[ControlMode switch
+        {
+            GameControlMode.Automatic => StringKeys.Game.SetupTurnAutomatic,
+            GameControlMode.Voice => StringKeys.Game.ControlVoice,
+            _ => StringKeys.Game.SetupTurnManual,
+        }];
+
+        // Znaki podaje warstwa prezentacji, nie pliki tłumaczeń — są identyczne w każdym
+        // języku, więc w zasobach byłyby dziesięcioma kopiami tej samej wartości.
+        ControlModeGlyph = ControlMode switch
+        {
+            GameControlMode.Automatic => "↻",
+            GameControlMode.Voice => "◉",
+            _ => "▶",
+        };
+
+        ControlModeDescription = Localization.GetFormattedString(
+            StringKeys.Game.ControlModeDescription,
+            StringCatalog.Ui,
+            ControlModeText);
     }
 
     /// <summary>

@@ -497,6 +497,12 @@ You move to the next turn with a button or by voice — unless you switch on aut
   <data name="Game_Setup_TurnAutomatic" xml:space="preserve">
     <value>Automatic</value>
   </data>
+  <data name="Game_Label_ControlMode" xml:space="preserve">
+    <value>Control: {0}</value>
+  </data>
+  <data name="Game_Control_Voice" xml:space="preserve">
+    <value>By voice</value>
+  </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Elimination</value>
   </data>

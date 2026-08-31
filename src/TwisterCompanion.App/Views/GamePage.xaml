@@ -71,6 +71,25 @@
                 motyw jasny i ciemny mają własne odcienie.
             -->
             <Grid x:Name="CircleArea" Grid.Row="0">
+                <!--
+                    Przełącznik sposobu sterowania: ręczny, automatyczny, głosowy. Leży w tym
+                    samym Gridzie co koło, nałożony na prawy górny róg — a nie w osobnym
+                    wierszu — bo średnica koła liczy się z rozmiaru TEGO kontenera
+                    (GamePage.xaml.cs). Wiersz nad kołem odebrałby mu wysokość, a koło jest
+                    jedyną rzeczą na tym ekranie, którą widać z dwóch metrów.
+
+                    Róg prostokąta opisanego na kole jest wizualnie pusty, więc przycisk nie
+                    zasłania niczego.
+                -->
+                <Button x:Name="ControlModeButton"
+                        Style="{StaticResource IconButton}"
+                        Text="{Binding ControlModeGlyph}"
+                        Command="{Binding CycleControlModeCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Margin="0,4,4,0"
+                        SemanticProperties.Description="{Binding ControlModeDescription}" />
+
                 <Border x:Name="ColorCircle"
                         HeightRequest="200"
                         WidthRequest="200"

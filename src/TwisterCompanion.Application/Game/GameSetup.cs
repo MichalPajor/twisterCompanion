@@ -94,6 +94,23 @@ public sealed record GameSetup
     }
 
     /// <summary>
+    /// Zwraca czas, jaki ma odmierzać odliczanie ruchu przy danych ustawieniach i trybie gry.
+    /// </summary>
+    /// <param name="settings">Ustawienia aplikacji.</param>
+    /// <param name="mode">Tryb gry — źródło mnożnika czasu.</param>
+    /// <remarks>
+    /// Udostępnione osobno dla przełącznika sterowania na ekranie rozgrywki. Ten zmienia tryb
+    /// na trwającej partii i musi podać silnikowi nową wartość, a nie ma po co składać całych
+    /// nastaw partii tylko po to, żeby wyjąć z nich jedną liczbę.
+    /// </remarks>
+    public static TimeSpan MoveTimeFor(AppSettings settings, GameModeDefinition? mode)
+    {
+        ArgumentNullException.ThrowIfNull(settings);
+
+        return ResolveMoveTime(settings, mode);
+    }
+
+    /// <summary>
     /// Ustala, co odmierza odliczanie po odczytaniu polecenia ruchu.
     /// </summary>
     /// <remarks>

@@ -381,6 +381,55 @@ internal sealed class GameEngine : IGameEngine, IDisposable
     }
 
     /// <inheritdoc />
+    public async Task ChangeTurnControlAsync(
+        TurnAdvanceMode turnAdvanceMode,
+        TimeSpan moveTime,
+        CancellationToken cancellationToken = default)
+    {
+        await _gate.WaitAsync(cancellationToken);
+        try
+        {
+            if (_configuration is null)
+            {
+                return;
+            }
+
+            if (_configuration.TurnAdvanceMode == turnAdvanceMode && _configuration.MoveTime == moveTime)
+            {
+                return;
+            }
+
+            // Odliczanie ruchu restartujemy tylko wtedy, gdy to ono właśnie biegnie. Gdy trwa
+            // odliczanie zadania z wydarzenia, tryb wchodzi w życie po jego zakończeniu —
+            // ScheduleMoveCountdown weźmie już nową wartość. Przerwanie zadania w połowie
+            // odebrałoby graczowi czas, który dostał na jego wykonanie.
+            bool restartuj = Countdown?.Kind == TurnCountdownKind.Move;
+
+            _configuration = _configuration with
+            {
+                TurnAdvanceMode = turnAdvanceMode,
+                MoveTime = moveTime,
+            };
+
+            _logger.LogInformation(
+                "Sposób prowadzenia tury zmieniony na {Mode}, czas na ruch {MoveTime}. Restart odliczania: {Restart}.",
+                turnAdvanceMode,
+                moveTime,
+                restartuj);
+
+            if (restartuj)
+            {
+                StopMoveCountdown();
+                ScheduleMoveCountdown();
+            }
+        }
+        finally
+        {
+            _gate.Release();
+        }
+    }
+
+    /// <inheritdoc />
     public async Task PauseAsync(bool announce = true, CancellationToken cancellationToken = default)
     {
         Announcement? announcement = null;

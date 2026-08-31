@@ -478,6 +478,12 @@ Tu passes au tour suivant avec un bouton ou à la voix, sauf si tu actives le mo
   <data name="Game_Setup_TurnAutomatic" xml:space="preserve">
     <value>Automatique</value>
   </data>
+  <data name="Game_Label_ControlMode" xml:space="preserve">
+    <value>Commande : {0}</value>
+  </data>
+  <data name="Game_Control_Voice" xml:space="preserve">
+    <value>À la voix</value>
+  </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Élimination</value>
   </data>

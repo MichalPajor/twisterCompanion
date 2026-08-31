@@ -488,6 +488,12 @@ Do następnej tury przechodzisz przyciskiem albo komendą głosową — chyba ż
   <data name="Game_Setup_TurnAutomatic" xml:space="preserve">
     <value>Automatycznie</value>
   </data>
+  <data name="Game_Label_ControlMode" xml:space="preserve">
+    <value>Sterowanie: {0}</value>
+  </data>
+  <data name="Game_Control_Voice" xml:space="preserve">
+    <value>Głosowo</value>
+  </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Odpadanie</value>
   </data>

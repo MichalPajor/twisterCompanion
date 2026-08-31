@@ -6,6 +6,7 @@ using TwisterCompanion.Application.Feedback;
 using TwisterCompanion.Application.Game;
 using TwisterCompanion.Application.GameModes;
 using TwisterCompanion.Application.Localization;
+using TwisterCompanion.Application.Settings;
 using TwisterCompanion.Application.Voice;
 using TwisterCompanion.Application.VoiceControl;
 using TwisterCompanion.Domain.Entities;
@@ -791,6 +792,48 @@ public class GameViewModelTests
         _ads.BannerAllowedChanged += Raise.Event<EventHandler<bool>>(_ads, true);
 
         Assert.True(viewModel.IsBannerVisible);
+    }
+
+    [Fact]
+    public async Task PrzelacznikSterowania_ZapisujeTrybWUstawieniachIStosujeGoDoPartii()
+    {
+        // Ustawienia są jedynym źródłem prawdy — ekran ustawień musi pokazać to samo, co
+        // przycisk na ekranie rozgrywki, bo inaczej gracz zobaczy dwie różne odpowiedzi
+        // na to samo pytanie.
+        FakeSettingsService ustawienia = new();
+        GameViewModel viewModel = CreateSubscribedViewModel(ustawienia);
+
+        Assert.Equal(GameControlMode.Manual, viewModel.ControlMode);
+
+        await viewModel.CycleControlModeCommand.ExecuteAsync(null);
+
+        Assert.Equal(GameControlMode.Automatic, viewModel.ControlMode);
+        Assert.Equal(TurnAdvanceMode.Automatic, ustawienia.Current.TurnAdvanceMode);
+
+        await _engine.Received(1).ChangeTurnControlAsync(
+            TurnAdvanceMode.Automatic,
+            Arg.Any<TimeSpan>(),
+            Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public async Task PrzelacznikSterowania_GdyMikrofonNiedostepny_WracaNaReczny()
+    {
+        // Napis „głosowo" nad grą, której nikt nie słucha, jest gorszy niż samo
+        // niepowodzenie: gracz czeka wtedy na reakcję, która nie nadejdzie.
+        _voiceControl.CanPrepare = false;
+        _voiceControl.StateAfterFailedPrepare = VoiceControlState.Unavailable;
+
+        FakeSettingsService ustawienia = new();
+        GameViewModel viewModel = CreateSubscribedViewModel(ustawienia);
+
+        // Ręczny -> automatyczny -> głosowy, czyli dwa dotknięcia.
+        await viewModel.CycleControlModeCommand.ExecuteAsync(null);
+        await viewModel.CycleControlModeCommand.ExecuteAsync(null);
+
+        Assert.Equal(GameControlMode.Manual, viewModel.ControlMode);
+        Assert.False(ustawienia.Current.IsVoiceControlEnabled);
+        Assert.Equal(TurnAdvanceMode.Manual, ustawienia.Current.TurnAdvanceMode);
     }
 
     private GameViewModel CreateSubscribedViewModel(FakeSettingsService? settings = null)

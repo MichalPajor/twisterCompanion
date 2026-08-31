@@ -1,3 +1,4 @@
+using TwisterCompanion.Application.Settings;
 using TwisterCompanion.Application.Voice;
 using TwisterCompanion.Domain.Entities;
 using TwisterCompanion.Domain.Enums;
@@ -83,6 +84,32 @@ public interface IGameEngine
     /// <summary>Powtarza komunikat ostatniej tury.</summary>
     /// <param name="cancellationToken">Token anulowania.</param>
     Task RepeatAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Zmienia sposób prowadzenia tury na <b>trwającej</b> partii.
+    /// </summary>
+    /// <param name="turnAdvanceMode">Nowy tryb zmiany tury.</param>
+    /// <param name="moveTime">Czas, jaki ma odmierzać odliczanie ruchu w nowym trybie.</param>
+    /// <param name="cancellationToken">Token anulowania.</param>
+    /// <remarks>
+    /// Tryb był dotąd zamrażany w chwili startu partii, bo zmiana ustawień w trakcie gry nie
+    /// miała jak do silnika dotrzeć. Przycisk na ekranie rozgrywki to zmienia.
+    /// <para>
+    /// <b>Czas na ruch jest osobnym parametrem, a nie wyliczeniem z trybu</b>, bo znaczy co
+    /// innego w każdym z nich: przy sterowaniu głosem odmierza chwilę otwarcia mikrofonu,
+    /// w pozostałych czas na wykonanie ruchu, przeskalowany mnożnikiem trybu gry. Silnik nie
+    /// zna ani ustawień, ani trybów gry — wartość podaje wywołujący.
+    /// </para>
+    /// <para>
+    /// Jeśli w chwili wywołania biegnie odliczanie ruchu, <b>startuje od nowa</b> pod nową
+    /// wartością. Gracz sięga po ten przełącznik, gdy bieżący sposób nie działa, więc zmiana
+    /// od następnej tury wyglądałaby jak przycisk, który nic nie robi.
+    /// </para>
+    /// </remarks>
+    Task ChangeTurnControlAsync(
+        TurnAdvanceMode turnAdvanceMode,
+        TimeSpan moveTime,
+        CancellationToken cancellationToken = default);
 
     /// <summary>Wstrzymuje rozgrywkę, przerywając trwający odczyt i odliczanie.</summary>
     /// <param name="announce">Czy ogłosić wstrzymanie na głos.</param>

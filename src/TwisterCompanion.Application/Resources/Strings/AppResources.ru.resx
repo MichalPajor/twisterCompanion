@@ -478,6 +478,12 @@
   <data name="Game_Setup_TurnAutomatic" xml:space="preserve">
     <value>Автоматически</value>
   </data>
+  <data name="Game_Label_ControlMode" xml:space="preserve">
+    <value>Управление: {0}</value>
+  </data>
+  <data name="Game_Control_Voice" xml:space="preserve">
+    <value>Голосом</value>
+  </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Выход из игры</value>
   </data>
