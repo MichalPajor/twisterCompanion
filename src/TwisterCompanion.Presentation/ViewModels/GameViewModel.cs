@@ -1086,11 +1086,20 @@ public partial class GameViewModel : NavigableViewModelBase
 
         // Znaki podaje warstwa prezentacji, nie pliki tłumaczeń — są identyczne w każdym
         // języku, więc w zasobach byłyby dziesięcioma kopiami tej samej wartości.
+        //
+        // Jednobarwne, nie emotki. Kolorowa emotka bierze się z osobnej czcionki systemowej
+        // i świeci własnym kolorem na tle, które ma własną paletę — reszta symboli
+        // w interfejsie jest jednobarwna, bo znak tekstowy przyjmuje kolor tekstu.
+        //
+        // Dwa z tych trzech znaków to <b>własne słownictwo tej aplikacji</b>: ◉ oznacza
+        // sterowanie głosem w ustawieniach i w podsumowaniu zasad partii, ◷ oznacza czas.
+        // Przełącznik mówi więc tym samym językiem, co ekrany, z których gracz już te
+        // symbole zna. Dłoń jest nowa, bo na „ręcznie" aplikacja nie miała dotąd znaku.
         ControlModeGlyph = ControlMode switch
         {
-            GameControlMode.Automatic => "⏱",
-            GameControlMode.Voice => "🔊",
-            _ => "✋",
+            GameControlMode.Automatic => "◷",
+            GameControlMode.Voice => "◉",
+            _ => "☛",
         };
 
         ControlModeDescription = Localization.GetFormattedString(
