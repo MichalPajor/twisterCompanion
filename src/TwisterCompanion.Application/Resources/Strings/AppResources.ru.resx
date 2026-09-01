@@ -479,10 +479,19 @@
     <value>Автоматически</value>
   </data>
   <data name="Game_Label_ControlMode" xml:space="preserve">
-    <value>Управление: {0}</value>
+    <value>Режим управления: {0}</value>
   </data>
   <data name="Game_Control_Voice" xml:space="preserve">
-    <value>Голосом</value>
+    <value>голосовое</value>
+  </data>
+  <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
+    <value>Управление переключено на: {0}</value>
+  </data>
+  <data name="Game_Control_Automatic" xml:space="preserve">
+    <value>автоматическое</value>
+  </data>
+  <data name="Game_Control_Manual" xml:space="preserve">
+    <value>ручное</value>
   </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Выход из игры</value>

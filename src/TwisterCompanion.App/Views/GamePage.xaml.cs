@@ -140,6 +140,8 @@ public partial class GamePage : ContentPageBase
 
         double diameter = Math.Clamp(available, CircleDiameterMin, CircleDiameterMax);
 
+        PinControlButtonToCircle(diameter);
+
         // Bez tego warunku zmiana rozmiaru wywoływałaby kolejny pomiar i kolejne zdarzenie.
         if (Math.Abs(ColorCircle.HeightRequest - diameter) < 0.5)
         {
@@ -153,6 +155,31 @@ public partial class GamePage : ContentPageBase
         MoveTextStack.Margin = new Thickness(diameter * TextMarginRatio, 0);
 
         FitMoveTextToCircle(diameter);
+    }
+
+    /// <summary>
+    /// Przesuwa przełącznik sterowania do prawego górnego rogu <b>koła</b>.
+    /// </summary>
+    /// <param name="diameter">Aktualna średnica koła.</param>
+    /// <remarks>
+    /// Przycisk leży w tym samym kontenerze co koło i zawsze leżał — nakładają się w jednej
+    /// komórce siatki, więc jego obecność nigdy nie zmieniała średnicy. Przypięty jednak do
+    /// rogu <i>kontenera</i>, a ten w wierszu gwiazdkowym bywa znacznie wyższy od koła,
+    /// odpływał w górę i wyglądał, jakby spychał koło w dół.
+    /// <para>
+    /// Margines liczy połowę wolnej przestrzeni, więc róg przycisku siada dokładnie na rogu
+    /// prostokąta opisanego na kole — wizualnie pustym, bo kształt jest okrągły. Wyliczenie
+    /// idzie <b>przed</b> zabezpieczeniem przed pętlą pomiarów: przy średnicy obciętej do
+    /// wartości granicznej sama średnica się nie zmienia, ale wolna przestrzeń wokół niej już
+    /// tak — na przykład przy obrocie ekranu.
+    /// </para>
+    /// </remarks>
+    private void PinControlButtonToCircle(double diameter)
+    {
+        double gora = Math.Max(0, (CircleArea.Height - diameter) / 2);
+        double prawo = Math.Max(0, (CircleArea.Width - diameter) / 2);
+
+        ControlModeButton.Margin = new Thickness(0, gora, prawo, 0);
     }
 
     /// <summary>

@@ -479,10 +479,19 @@ Otomatik modu açmadıysanız sonraki tura düğmeyle ya da sesle geçersiniz.</
     <value>Otomatik</value>
   </data>
   <data name="Game_Label_ControlMode" xml:space="preserve">
-    <value>Kontrol: {0}</value>
+    <value>Kontrol modu: {0}</value>
   </data>
   <data name="Game_Control_Voice" xml:space="preserve">
-    <value>Sesle</value>
+    <value>sesle</value>
+  </data>
+  <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
+    <value>Kontrol modu değiştirildi: {0}</value>
+  </data>
+  <data name="Game_Control_Automatic" xml:space="preserve">
+    <value>otomatik</value>
+  </data>
+  <data name="Game_Control_Manual" xml:space="preserve">
+    <value>elle</value>
   </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Eleme</value>

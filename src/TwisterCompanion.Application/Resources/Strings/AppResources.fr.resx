@@ -479,10 +479,19 @@ Tu passes au tour suivant avec un bouton ou à la voix, sauf si tu actives le mo
     <value>Automatique</value>
   </data>
   <data name="Game_Label_ControlMode" xml:space="preserve">
-    <value>Commande : {0}</value>
+    <value>Mode de commande : {0}</value>
   </data>
   <data name="Game_Control_Voice" xml:space="preserve">
-    <value>À la voix</value>
+    <value>vocal</value>
+  </data>
+  <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
+    <value>Mode de commande changé en : {0}</value>
+  </data>
+  <data name="Game_Control_Automatic" xml:space="preserve">
+    <value>automatique</value>
+  </data>
+  <data name="Game_Control_Manual" xml:space="preserve">
+    <value>manuel</value>
   </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Élimination</value>

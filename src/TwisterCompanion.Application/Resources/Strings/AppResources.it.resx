@@ -479,10 +479,19 @@ Al turno successivo passi con un pulsante o a voce, a meno che non attivi la mod
     <value>Automatico</value>
   </data>
   <data name="Game_Label_ControlMode" xml:space="preserve">
-    <value>Controllo: {0}</value>
+    <value>Modalità di controllo: {0}</value>
   </data>
   <data name="Game_Control_Voice" xml:space="preserve">
-    <value>A voce</value>
+    <value>vocale</value>
+  </data>
+  <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
+    <value>Modalità di controllo cambiata in: {0}</value>
+  </data>
+  <data name="Game_Control_Automatic" xml:space="preserve">
+    <value>automatico</value>
+  </data>
+  <data name="Game_Control_Manual" xml:space="preserve">
+    <value>manuale</value>
   </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Eliminazione</value>

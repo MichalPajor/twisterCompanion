@@ -479,10 +479,19 @@
     <value>Автоматично</value>
   </data>
   <data name="Game_Label_ControlMode" xml:space="preserve">
-    <value>Керування: {0}</value>
+    <value>Режим керування: {0}</value>
   </data>
   <data name="Game_Control_Voice" xml:space="preserve">
-    <value>Голосом</value>
+    <value>голосове</value>
+  </data>
+  <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
+    <value>Керування перемкнено на: {0}</value>
+  </data>
+  <data name="Game_Control_Automatic" xml:space="preserve">
+    <value>автоматичне</value>
+  </data>
+  <data name="Game_Control_Manual" xml:space="preserve">
+    <value>ручне</value>
   </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Вихід із гри</value>

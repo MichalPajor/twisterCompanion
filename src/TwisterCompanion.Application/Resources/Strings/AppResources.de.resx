@@ -482,7 +482,16 @@ Zum nächsten Zug gehst du per Taste oder Sprache über – es sei denn, du scha
     <value>Steuerung: {0}</value>
   </data>
   <data name="Game_Control_Voice" xml:space="preserve">
-    <value>Per Sprache</value>
+    <value>Sprache</value>
+  </data>
+  <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
+    <value>Steuerung geändert auf: {0}</value>
+  </data>
+  <data name="Game_Control_Automatic" xml:space="preserve">
+    <value>automatisch</value>
+  </data>
+  <data name="Game_Control_Manual" xml:space="preserve">
+    <value>manuell</value>
   </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Ausscheiden</value>

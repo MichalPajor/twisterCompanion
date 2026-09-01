@@ -24,6 +24,15 @@ public interface IDialogService
     /// <returns><see langword="true"/>, jeśli użytkownik potwierdził.</returns>
     Task<bool> ConfirmAsync(string title, string message, string accept, string cancel);
 
+    /// <summary>Pokazuje krótki komunikat znikający sam, bez przycisku.</summary>
+    /// <param name="message">Treść komunikatu.</param>
+    /// <remarks>
+    /// Do potwierdzeń zmiany, które gracz właśnie sam wywołał — okno z przyciskiem byłoby
+    /// wtedy przeszkodą, bo pyta o zgodę na coś, na co zgoda już padła. Na ekranie rozgrywki
+    /// dochodzi drugi powód: okno zasłania koło ruchu.
+    /// </remarks>
+    Task ShowToastAsync(string message);
+
     /// <summary>Prosi użytkownika o wpisanie tekstu.</summary>
     /// <param name="title">Tytuł okna.</param>
     /// <param name="message">Treść prośby.</param>

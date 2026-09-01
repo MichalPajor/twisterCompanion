@@ -489,10 +489,19 @@ Do następnej tury przechodzisz przyciskiem albo komendą głosową — chyba ż
     <value>Automatycznie</value>
   </data>
   <data name="Game_Label_ControlMode" xml:space="preserve">
-    <value>Sterowanie: {0}</value>
+    <value>Tryb sterowania: {0}</value>
   </data>
   <data name="Game_Control_Voice" xml:space="preserve">
-    <value>Głosowo</value>
+    <value>głosowy</value>
+  </data>
+  <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
+    <value>Zmieniono tryb sterowania na: {0}</value>
+  </data>
+  <data name="Game_Control_Automatic" xml:space="preserve">
+    <value>automatyczny</value>
+  </data>
+  <data name="Game_Control_Manual" xml:space="preserve">
+    <value>manualny</value>
   </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Odpadanie</value>

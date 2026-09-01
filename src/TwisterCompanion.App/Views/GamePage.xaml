@@ -87,7 +87,6 @@
                         Command="{Binding CycleControlModeCommand}"
                         HorizontalOptions="End"
                         VerticalOptions="Start"
-                        Margin="0,4,4,0"
                         SemanticProperties.Description="{Binding ControlModeDescription}" />
 
                 <Border x:Name="ColorCircle"

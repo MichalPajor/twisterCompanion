@@ -45,8 +45,17 @@ public static class StringKeys
     /// <summary>Teksty ekranu rozgrywki używane z kodu.</summary>
     public static class Game
     {
-        /// <summary>Etykieta trybu sterowania głosem na przełączniku ekranu rozgrywki.</summary>
+        /// <summary>Nazwa sterowania ręcznego — w formie pasującej do komunikatu o zmianie.</summary>
+        public const string ControlManual = "Game_Control_Manual";
+
+        /// <summary>Nazwa sterowania automatycznego.</summary>
+        public const string ControlAutomatic = "Game_Control_Automatic";
+
+        /// <summary>Nazwa sterowania głosowego.</summary>
         public const string ControlVoice = "Game_Control_Voice";
+
+        /// <summary>Wzorzec komunikatu o zmianie sposobu sterowania.</summary>
+        public const string ControlModeChanged = "Game_Toast_ControlModeChanged";
 
         /// <summary>Opis przełącznika sterowania dla czytnika ekranu — z nazwą trybu.</summary>
         public const string ControlModeDescription = "Game_Label_ControlMode";

@@ -814,6 +814,10 @@ public class GameViewModelTests
             TurnAdvanceMode.Automatic,
             Arg.Any<TimeSpan>(),
             Arg.Any<CancellationToken>());
+
+        // Jedno dotknięcie, jeden komunikat. Treść składa się z ControlModeText, który
+        // sprawdza asercja wyżej przez ControlMode.
+        await _dialogs.Received(1).ShowToastAsync(Arg.Any<string>());
     }
 
     [Fact]
@@ -834,6 +838,11 @@ public class GameViewModelTests
         Assert.Equal(GameControlMode.Manual, viewModel.ControlMode);
         Assert.False(ustawienia.Current.IsVoiceControlEnabled);
         Assert.Equal(TurnAdvanceMode.Manual, ustawienia.Current.TurnAdvanceMode);
+
+        // Dwa dotknięcia, dokładnie dwa komunikaty. To jest sedno: nieudane przejście na
+        // sterowanie głosem NIE pokazuje najpierw „głosowy", a potem „manualny". Komunikat
+        // pada raz, na końcu, i mówi o stanie faktycznym, nie zamierzonym.
+        await _dialogs.Received(2).ShowToastAsync(Arg.Any<string>());
     }
 
     private GameViewModel CreateSubscribedViewModel(FakeSettingsService? settings = null)

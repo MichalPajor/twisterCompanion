@@ -1062,6 +1062,14 @@ public partial class GameViewModel : NavigableViewModelBase
         }
 
         RefreshControlMode();
+
+        // Komunikat pada na końcu, a nie od razu po dotknięciu: tryb głosowy potrafi wrócić
+        // na ręczny, gdy mikrofon odmówi, a wtedy gracz musi zobaczyć stan faktyczny,
+        // nie zamierzony.
+        await Dialogs.ShowToastAsync(Localization.GetFormattedString(
+            StringKeys.Game.ControlModeChanged,
+            StringCatalog.Ui,
+            ControlModeText));
     }
 
     /// <summary>Odczytuje sposób sterowania z ustawień i odświeża napisy na przycisku.</summary>
@@ -1071,18 +1079,18 @@ public partial class GameViewModel : NavigableViewModelBase
 
         ControlModeText = Localization[ControlMode switch
         {
-            GameControlMode.Automatic => StringKeys.Game.SetupTurnAutomatic,
+            GameControlMode.Automatic => StringKeys.Game.ControlAutomatic,
             GameControlMode.Voice => StringKeys.Game.ControlVoice,
-            _ => StringKeys.Game.SetupTurnManual,
+            _ => StringKeys.Game.ControlManual,
         }];
 
         // Znaki podaje warstwa prezentacji, nie pliki tłumaczeń — są identyczne w każdym
         // języku, więc w zasobach byłyby dziesięcioma kopiami tej samej wartości.
         ControlModeGlyph = ControlMode switch
         {
-            GameControlMode.Automatic => "↻",
-            GameControlMode.Voice => "◉",
-            _ => "▶",
+            GameControlMode.Automatic => "⏱",
+            GameControlMode.Voice => "🔊",
+            _ => "✋",
         };
 
         ControlModeDescription = Localization.GetFormattedString(

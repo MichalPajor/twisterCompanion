@@ -479,10 +479,19 @@ Al siguiente turno pasas con un botón o por voz, salvo que actives el modo auto
     <value>Automático</value>
   </data>
   <data name="Game_Label_ControlMode" xml:space="preserve">
-    <value>Control: {0}</value>
+    <value>Modo de control: {0}</value>
   </data>
   <data name="Game_Control_Voice" xml:space="preserve">
-    <value>Por voz</value>
+    <value>por voz</value>
+  </data>
+  <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
+    <value>Modo de control cambiado a: {0}</value>
+  </data>
+  <data name="Game_Control_Automatic" xml:space="preserve">
+    <value>automático</value>
+  </data>
+  <data name="Game_Control_Manual" xml:space="preserve">
+    <value>manual</value>
   </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Eliminación</value>

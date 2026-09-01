@@ -498,10 +498,19 @@ You move to the next turn with a button or by voice — unless you switch on aut
     <value>Automatic</value>
   </data>
   <data name="Game_Label_ControlMode" xml:space="preserve">
-    <value>Control: {0}</value>
+    <value>Control mode: {0}</value>
   </data>
   <data name="Game_Control_Voice" xml:space="preserve">
-    <value>By voice</value>
+    <value>Voice</value>
+  </data>
+  <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
+    <value>Control mode changed to: {0}</value>
+  </data>
+  <data name="Game_Control_Automatic" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="Game_Control_Manual" xml:space="preserve">
+    <value>Manual</value>
   </data>
   <data name="Game_Setup_Elimination" xml:space="preserve">
     <value>Elimination</value>

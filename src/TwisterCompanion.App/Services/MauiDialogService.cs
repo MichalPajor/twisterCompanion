@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using TwisterCompanion.Presentation.Abstractions;
 
 namespace TwisterCompanion.App.Services;
@@ -34,6 +36,19 @@ internal sealed class MauiDialogService : IDialogService
             cancel,
             placeholder,
             initialValue: initialValue ?? string.Empty))!;
+
+    /// <inheritdoc />
+    /// <remarks>
+    /// Toast pochodzi z zestawu narzędzi społeczności, a nie z samego MAUI — MAUI nie ma
+    /// własnego krótkiego komunikatu. Na Androidzie ląduje na natywnym <c>Toast</c>, więc
+    /// pokazuje się nad aplikacją i nie odbiera jej dotknięć.
+    /// </remarks>
+    public Task ShowToastAsync(string message)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(message);
+
+        return MainThread.InvokeOnMainThreadAsync(() => Toast.Make(message, ToastDuration.Short).Show());
+    }
 
     /// <summary>Strona aktywnego okna — właścicielka okien dialogowych.</summary>
     private static Page CurrentPage =>
