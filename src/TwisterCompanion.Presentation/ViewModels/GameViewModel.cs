@@ -524,8 +524,19 @@ public partial class GameViewModel : NavigableViewModelBase
             await _voiceCoordinator.DeactivateAsync();
             await _ads.DeactivateAsync();
 
-            // Silnik sam pomija wstrzymanie, gdy nie ma czego wstrzymywać (partia nierozpoczęta,
-            // już wstrzymana albo zakończona), więc nie powtarzamy tu tego warunku.
+            // Partia zakończona nie ma czego wznawiać, więc znika z pamięci silnika.
+            // Bez tego powrót na ekran rozgrywki pokazywał podsumowanie poprzedniej gry
+            // zamiast zasad nowej — silnik żyje tyle, co aplikacja, a zapisu zakończonej
+            // partii nigdy nie było, bo takich się nie zapisuje.
+            if (_engine.State == GameState.Finished)
+            {
+                await _engine.ResetAsync();
+
+                return;
+            }
+
+            // Silnik sam pomija wstrzymanie, gdy nie ma czego wstrzymywać (partia nierozpoczęta
+            // albo już wstrzymana), więc nie powtarzamy tu tego warunku.
             //
             // Bez zapowiedzi: ekranu już nie ma, a gracz właśnie świadomie poszedł gdzie
             // indziej — „Pauza" wypowiedziana w ustawieniach albo po powrocie na ekran
@@ -1239,7 +1250,17 @@ public partial class GameViewModel : NavigableViewModelBase
     private void RefreshVoiceStatus(VoiceControlState state)
     {
         IsListening = state == VoiceControlState.Listening;
-        IsVoiceStatusVisible = state != VoiceControlState.Disabled;
+
+        // Pasek stanu mikrofonu należy do trybu głosowego, więc pyta o tryb, a nie tylko
+        // o stan serwisu. Po wyłączeniu sterowania głosem serwis schodzi na „bezczynny",
+        // a nie „wyłączony" — i pasek zostawał na ekranie z napisem o wyłączonym mikrofonie
+        // w partii, w której mikrofon nie ma już nic do roboty.
+        //
+        // Źródłem jest tu ustawienie, a nie właściwość ControlMode, bo ta bywa odświeżana
+        // po tej metodzie — kolejność wywołań nie może decydować o tym, co widać.
+        IsVoiceStatusVisible =
+            GameControlModes.From(_settingsService.Current) == GameControlMode.Voice
+            && state != VoiceControlState.Disabled;
 
         VoiceStatusText = Localization[state switch
         {

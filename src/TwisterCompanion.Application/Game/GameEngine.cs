@@ -601,6 +601,38 @@ internal sealed class GameEngine : IGameEngine, IDisposable
     }
 
     /// <inheritdoc />
+    public async Task ResetAsync(CancellationToken cancellationToken = default)
+    {
+        await InterruptTurnSequenceAsync();
+
+        await _gate.WaitAsync(cancellationToken);
+        try
+        {
+            if (Session is null)
+            {
+                return;
+            }
+
+            StopMoveCountdown();
+            SetCountdown(null);
+
+            Session = null;
+            _configuration = null;
+            LastAnnouncement = null;
+        }
+        finally
+        {
+            _gate.Release();
+        }
+
+        await ClearSnapshotSafelyAsync(cancellationToken);
+
+        _logger.LogInformation("Stan partii wyczyszczony — ekran rozgrywki zacznie od zasad.");
+
+        RaiseStateChanged();
+    }
+
+    /// <inheritdoc />
     public async Task SaveSnapshotAsync(CancellationToken cancellationToken = default)
     {
         GameSessionSnapshot? snapshot;

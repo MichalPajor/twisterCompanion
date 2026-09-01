@@ -152,6 +152,22 @@ public interface IGameEngine
     /// <param name="cancellationToken">Token anulowania.</param>
     Task EndAsync(CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Zapomina zakończoną partię i wraca do stanu sprzed rozpoczęcia gry.
+    /// </summary>
+    /// <param name="cancellationToken">Token anulowania.</param>
+    /// <remarks>
+    /// Silnik żyje tyle, co aplikacja, więc zakończona partia zostawała w jego pamięci
+    /// i po powrocie na ekran rozgrywki gracz zamiast zasad nowej gry widział podsumowanie
+    /// poprzedniej. Zapis na dysku był akurat w porządku — zakończonej partii nigdy się nie
+    /// zapisuje — ale pamięć trzeba wyczyścić osobno.
+    /// <para>
+    /// Nie dotyczy partii wstrzymanej: tę wolno wznowić i właśnie po to jest wstrzymywana
+    /// przy zejściu z ekranu.
+    /// </para>
+    /// </remarks>
+    Task ResetAsync(CancellationToken cancellationToken = default);
+
     /// <summary>Zapisuje stan partii, żeby dało się ją wznowić.</summary>
     /// <param name="cancellationToken">Token anulowania.</param>
     Task SaveSnapshotAsync(CancellationToken cancellationToken = default);

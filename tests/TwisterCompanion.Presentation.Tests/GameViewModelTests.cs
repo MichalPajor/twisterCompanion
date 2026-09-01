@@ -845,6 +845,62 @@ public class GameViewModelTests
         await _dialogs.Received(2).ShowToastAsync(Arg.Any<string>());
     }
 
+    [Fact]
+    public void ZejscieZEkranu_PoZakonczonejPartii_ZapominaJa()
+    {
+        // Zgłoszone z fazy testów: po zakończeniu gry i powrocie na ekran rozgrywki nadal
+        // widniało podsumowanie poprzedniej partii zamiast zasad nowej.
+        _engine.State.Returns(GameState.Finished);
+
+        GameViewModel viewModel = CreateSubscribedViewModel();
+        viewModel.OnDisappearing();
+
+        _engine.Received(1).ResetAsync(Arg.Any<CancellationToken>());
+        _engine.DidNotReceive().PauseAsync(Arg.Any<bool>(), Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public void ZejscieZEkranu_PrzyTrwajacejPartii_WstrzymujeJaZamiastZapominac()
+    {
+        // Druga strona tej samej reguły: partii wstrzymanej wolno się wznowić i właśnie po to
+        // jest wstrzymywana przy zejściu z ekranu.
+        _engine.State.Returns(GameState.AwaitingPlayerAction);
+
+        GameViewModel viewModel = CreateSubscribedViewModel();
+        viewModel.OnDisappearing();
+
+        _engine.Received(1).PauseAsync(false, Arg.Any<CancellationToken>());
+        _engine.DidNotReceive().ResetAsync(Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public async Task PasekMikrofonu_PoWyjsciuZTrybuGlosowego_Znika()
+    {
+        // Serwis mowy po dezaktywacji schodzi na „bezczynny", a nie „wyłączony", więc pasek
+        // zostawał na ekranie z napisem o wyłączonym mikrofonie w partii, w której mikrofon
+        // nie ma już nic do roboty.
+        FakeSettingsService ustawienia = new();
+        await ustawienia.UpdateAsync(s => s with { IsVoiceControlEnabled = true });
+
+        GameViewModel viewModel = CreateSubscribedViewModel(ustawienia);
+
+        Assert.Equal(GameControlMode.Voice, viewModel.ControlMode);
+
+        // Tak wygląda serwis mowy w trakcie partii z włączonym sterowaniem głosem:
+        // bezczynny między oknami nasłuchu, a nie wyłączony.
+        _voiceControl.SetState(VoiceControlState.Idle);
+
+        Assert.True(viewModel.IsVoiceStatusVisible);
+
+        // Głosowy -> manualny to jedno przejście w kolejności przełączania. Serwis zostaje
+        // bezczynny, bo dezaktywacja nie zmienia go na wyłączony — i to jest cały błąd.
+        await viewModel.CycleControlModeCommand.ExecuteAsync(null);
+
+        Assert.Equal(GameControlMode.Manual, viewModel.ControlMode);
+        Assert.Equal(VoiceControlState.Idle, _voiceControl.State);
+        Assert.False(viewModel.IsVoiceStatusVisible);
+    }
+
     private GameViewModel CreateSubscribedViewModel(FakeSettingsService? settings = null)
     {
         GameViewModel viewModel = new(
