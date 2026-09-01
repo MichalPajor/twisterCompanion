@@ -158,28 +158,32 @@ public partial class GamePage : ContentPageBase
     }
 
     /// <summary>
-    /// Przesuwa przełącznik sterowania do prawego górnego rogu <b>koła</b>.
+    /// Ustawia przełącznik sterowania na wysokości górnej krawędzi koła.
     /// </summary>
     /// <param name="diameter">Aktualna średnica koła.</param>
     /// <remarks>
     /// Przycisk leży w tym samym kontenerze co koło i zawsze leżał — nakładają się w jednej
     /// komórce siatki, więc jego obecność nigdy nie zmieniała średnicy. Przypięty jednak do
-    /// rogu <i>kontenera</i>, a ten w wierszu gwiazdkowym bywa znacznie wyższy od koła,
+    /// góry <i>kontenera</i>, a ten w wierszu gwiazdkowym bywa znacznie wyższy od koła,
     /// odpływał w górę i wyglądał, jakby spychał koło w dół.
     /// <para>
-    /// Margines liczy połowę wolnej przestrzeni, więc róg przycisku siada dokładnie na rogu
-    /// prostokąta opisanego na kole — wizualnie pustym, bo kształt jest okrągły. Wyliczenie
-    /// idzie <b>przed</b> zabezpieczeniem przed pętlą pomiarów: przy średnicy obciętej do
-    /// wartości granicznej sama średnica się nie zmienia, ale wolna przestrzeń wokół niej już
-    /// tak — na przykład przy obrocie ekranu.
+    /// <b>Liczony jest tylko margines górny</b>, jako połowa wolnej przestrzeni w pionie.
+    /// W poziomie przycisk trzyma się prawej krawędzi treści, tak jak wszystkie pozostałe
+    /// przyciski tego ekranu — odstęp od krawędzi ekranu daje im wspólnie
+    /// <c>PagePadding</c> strony. Liczenie marginesu prawego od koła wsuwało przycisk pod
+    /// jego górny łuk i łamało pion, w którym stoją pozostałe elementy.
+    /// </para>
+    /// <para>
+    /// Wyliczenie idzie <b>przed</b> zabezpieczeniem przed pętlą pomiarów: przy średnicy
+    /// obciętej do wartości granicznej sama średnica się nie zmienia, ale wolna przestrzeń
+    /// nad kołem już tak — na przykład przy obrocie ekranu.
     /// </para>
     /// </remarks>
     private void PinControlButtonToCircle(double diameter)
     {
         double gora = Math.Max(0, (CircleArea.Height - diameter) / 2);
-        double prawo = Math.Max(0, (CircleArea.Width - diameter) / 2);
 
-        ControlModeButton.Margin = new Thickness(0, gora, prawo, 0);
+        ControlModeButton.Margin = new Thickness(0, gora, 0, 0);
     }
 
     /// <summary>
