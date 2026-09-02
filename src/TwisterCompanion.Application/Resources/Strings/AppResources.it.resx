@@ -487,6 +487,9 @@ Al turno successivo passi con un pulsante o a voce, a meno che non attivi la mod
   <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
     <value>Modalità di controllo cambiata in: {0}</value>
   </data>
+  <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
+    <value>Dal microfono non arriva nulla. Controlla se l'accesso al microfono è disattivato nelle impostazioni rapide di sistema.</value>
+  </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>automatico</value>
   </data>

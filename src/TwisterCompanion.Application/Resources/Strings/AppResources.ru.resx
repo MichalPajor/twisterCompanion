@@ -487,6 +487,9 @@
   <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
     <value>Управление переключено на: {0}</value>
   </data>
+  <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
+    <value>С микрофона ничего не поступает. Проверьте, не выключен ли доступ к микрофону в быстрых настройках системы.</value>
+  </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>автоматическое</value>
   </data>

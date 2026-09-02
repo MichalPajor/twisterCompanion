@@ -487,6 +487,9 @@ Al siguiente turno pasas con un botón o por voz, salvo que actives el modo auto
   <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
     <value>Modo de control cambiado a: {0}</value>
   </data>
+  <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
+    <value>No llega nada por el micrófono. Comprueba si el acceso al micrófono está desactivado en los ajustes rápidos del sistema.</value>
+  </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>automático</value>
   </data>

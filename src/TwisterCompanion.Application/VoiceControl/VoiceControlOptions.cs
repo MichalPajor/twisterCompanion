@@ -65,4 +65,14 @@ public sealed record VoiceControlOptions
 
     /// <summary>Po ilu odmowach z rzędu przestać próbować w tej turze.</summary>
     public int MaxThrottleStrikes { get; init; } = 3;
+
+    /// <summary>
+    /// Ile sesji nasłuchu z rzędu musi skończyć się ciszą, zanim padnie podpowiedź.
+    /// </summary>
+    /// <remarks>
+    /// Trzy, a nie jedna: pojedyncza sesja bez słowa jest zupełnie normalna — gracz akurat
+    /// szukał równowagi albo się śmiał. Dopiero trzy z rzędu znaczą, że mikrofon nie dociera
+    /// do aplikacji w ogóle.
+    /// </remarks>
+    public int SilentSessionsBeforeHint { get; init; } = 3;
 }

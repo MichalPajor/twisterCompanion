@@ -210,7 +210,11 @@ internal sealed class ToolkitSpeechRecognitionService : ISpeechRecognitionServic
             $"Android {Android.OS.Build.VERSION.Release} (API {(int)Android.OS.Build.VERSION.SdkInt})",
             $"{Android.OS.Build.Manufacturer} {Android.OS.Build.Model}");
 
-        return new SpeechRecognitionCapabilities(system, onDevice, description);
+        return new SpeechRecognitionCapabilities(
+            system,
+            onDevice,
+            description,
+            IsMicrophoneBlockedBySystem());
 #else
         // Pozostałe platformy dostaną własne odczyty razem z Etapem 16 (iOS).
         return new SpeechRecognitionCapabilities(
@@ -219,6 +223,65 @@ internal sealed class ToolkitSpeechRecognitionService : ISpeechRecognitionServic
             PlatformDescription: DeviceInfo.Current.Platform.ToString());
 #endif
     }
+
+#if ANDROID
+    /// <summary>
+    /// Czy mikrofon jest odcięty globalnym przełącznikiem prywatności Androida.
+    /// </summary>
+    /// <remarks>
+    /// Nie da się tego odczytać wprost: <c>SensorPrivacyManager.IsSensorPrivacyEnabled</c>
+    /// jest zarezerwowane dla systemu i nie ma go w wiązaniach. Pytamy więc okrężnie, przez
+    /// rejestr operacji: przy wyłączonym przełączniku operacja nagrywania dźwięku jest dla
+    /// tej aplikacji <b>ignorowana</b>, mimo że uprawnienie pozostaje przyznane. To właśnie
+    /// ta rozbieżność — zgoda jest, a dźwięku nie ma — odróżnia przełącznik systemowy od
+    /// zwykłego braku zgody.
+    /// <para>
+    /// Wynik jest <b>wskazówką, nie pewnikiem</b>. Producenci zmieniają zachowanie warstwy
+    /// prywatności, a niepewny odczyt nie może zablokować sterowania głosem — dlatego każdy
+    /// błąd oznacza „nie zablokowany" i decyzję podejmuje dalej sam nasłuch.
+    /// </para>
+    /// </remarks>
+    private bool IsMicrophoneBlockedBySystem()
+    {
+        // Rejestr operacji odpowiada na to pytanie dopiero od API 29.
+        if (!OperatingSystem.IsAndroidVersionAtLeast(29))
+        {
+            return false;
+        }
+
+        try
+        {
+            Android.Content.Context context = Android.App.Application.Context;
+
+            if (context.GetSystemService(Android.Content.Context.AppOpsService)
+                is not Android.App.AppOpsManager operacje)
+            {
+                return false;
+            }
+
+            // Wycofane w API 36, ale nadal działa i nie ma następcy dostępnego dla zwykłych
+            // aplikacji: SensorPrivacyManager.IsSensorPrivacyEnabled jest zarezerwowane dla
+            // systemu. Wynik i tak jest tylko wskazówką — każde niepowodzenie oznacza
+            // „nie zablokowany", więc zniknięcie tej metody w przyszłej wersji Androida
+            // najwyżej wyłączy podpowiedź, a nie zepsuje sterowania głosem.
+#pragma warning disable CA1422
+            Android.App.AppOpsManagerMode tryb = operacje.UnsafeCheckOpNoThrow(
+                Android.App.AppOpsManager.OpstrRecordAudio,
+                Android.OS.Process.MyUid(),
+                context.PackageName!);
+#pragma warning restore CA1422
+
+            return tryb == Android.App.AppOpsManagerMode.Ignored;
+        }
+        catch (Exception exception)
+        {
+            _logger.LogDebug(exception, "Nie udało się odczytać stanu przełącznika mikrofonu.");
+
+            return false;
+        }
+    }
+
+#endif
 
     private async Task DetachAsync(CancellationToken cancellationToken)
     {

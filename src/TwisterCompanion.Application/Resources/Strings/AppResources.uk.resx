@@ -487,6 +487,9 @@
   <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
     <value>Керування перемкнено на: {0}</value>
   </data>
+  <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
+    <value>З мікрофона нічого не надходить. Перевірте, чи не вимкнено доступ до мікрофона у швидких налаштуваннях системи.</value>
+  </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>автоматичне</value>
   </data>

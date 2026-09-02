@@ -487,6 +487,9 @@ Otomatik modu açmadıysanız sonraki tura düğmeyle ya da sesle geçersiniz.</
   <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
     <value>Kontrol modu değiştirildi: {0}</value>
   </data>
+  <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
+    <value>Mikrofondan hiçbir şey gelmiyor. Sistem hızlı ayarlarında mikrofon erişiminin kapalı olup olmadığını kontrol et.</value>
+  </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>otomatik</value>
   </data>

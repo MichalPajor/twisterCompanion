@@ -497,6 +497,9 @@ Do następnej tury przechodzisz przyciskiem albo komendą głosową — chyba ż
   <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
     <value>Zmieniono tryb sterowania na: {0}</value>
   </data>
+  <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
+    <value>Mikrofon nic nie przekazuje. Sprawdź, czy dostęp do mikrofonu nie jest wyłączony w szybkich ustawieniach systemu.</value>
+  </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>automatyczny</value>
   </data>

@@ -29,6 +29,12 @@ internal sealed class FakeVoiceControlService : IVoiceControlService
     public event EventHandler<VoiceControlState>? StateChanged;
 
     /// <inheritdoc />
+    public event EventHandler? SilenceDetected;
+
+    /// <summary>Udaje wykrycie ciszy w nasłuchu.</summary>
+    public void RaiseSilence() => SilenceDetected?.Invoke(this, EventArgs.Empty);
+
+    /// <inheritdoc />
     public Task<bool> PrepareAsync(CancellationToken cancellationToken = default)
     {
         SetState(CanPrepare ? VoiceControlState.Idle : StateAfterFailedPrepare);

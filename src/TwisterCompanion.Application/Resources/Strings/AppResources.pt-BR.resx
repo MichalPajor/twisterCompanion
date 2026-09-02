@@ -487,6 +487,9 @@ Você passa para a rodada seguinte com um botão ou por voz, a não ser que ligu
   <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
     <value>Modo de controle alterado para: {0}</value>
   </data>
+  <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
+    <value>Nada está chegando pelo microfone. Verifique se o acesso ao microfone está desativado nas configurações rápidas do sistema.</value>
+  </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>automático</value>
   </data>

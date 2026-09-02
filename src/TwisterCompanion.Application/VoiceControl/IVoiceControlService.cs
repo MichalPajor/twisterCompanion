@@ -21,6 +21,20 @@ public interface IVoiceControlService
     /// <summary>Zgłaszane po rozpoznaniu komendy.</summary>
     event EventHandler<VoiceCommandType>? CommandRecognized;
 
+    /// <summary>
+    /// Zgłaszane, gdy kilka sesji nasłuchu z rzędu nie usłyszało <b>nic</b>.
+    /// </summary>
+    /// <remarks>
+    /// Cisza sesja po sesji ma zwykle przyczynę poza aplikacją: globalny przełącznik
+    /// mikrofonu w szybkich ustawieniach Androida, wyciszony zestaw słuchawkowy, zepsuty
+    /// mikrofon. Aplikacja nie potrafi ich rozróżnić i nie musi — wystarczy, że przestanie
+    /// milczeć razem z mikrofonem i podpowie, gdzie szukać.
+    /// <para>
+    /// Zgłaszane <b>raz</b> na aktywację, żeby podpowiedź nie wracała co kilka sekund.
+    /// </para>
+    /// </remarks>
+    event EventHandler? SilenceDetected;
+
     /// <summary>Zgłaszane przy każdej zmianie stanu nasłuchu.</summary>
     event EventHandler<VoiceControlState>? StateChanged;
 

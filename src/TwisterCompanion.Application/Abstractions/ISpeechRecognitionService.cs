@@ -113,10 +113,21 @@ public sealed record SpeechRecognitionRequest(
 /// Opis platformy do wpisania w log i na ekran diagnostyczny — wersja systemu i nazwa
 /// urządzenia.
 /// </param>
+/// <param name="IsMicrophoneBlockedBySystem">
+/// Czy mikrofon jest odcięty <b>przełącznikiem systemowym</b>, mimo przyznanej zgody.
+/// </param>
+/// <remarks>
+/// Ostatnia wartość opisuje coś innego niż uprawnienie aplikacji. Android od wersji 12 ma
+/// globalny przełącznik prywatności — ten w szybkich ustawieniach, obok latarki. Gdy jest
+/// wyłączony, aplikacja <b>nadal ma zgodę</b> na mikrofon, a system podaje jej ciszę.
+/// Sprawdzenie samego uprawnienia przechodzi wtedy pomyślnie i nic nie zapowiada, że
+/// rozpoznawanie nie usłyszy ani słowa.
+/// </remarks>
 public sealed record SpeechRecognitionCapabilities(
     bool IsSystemRecognitionAvailable,
     bool IsOnDeviceRecognitionAvailable,
-    string PlatformDescription);
+    string PlatformDescription,
+    bool IsMicrophoneBlockedBySystem = false);
 
 /// <summary>
 /// Zakończenie sesji rozpoznawania.

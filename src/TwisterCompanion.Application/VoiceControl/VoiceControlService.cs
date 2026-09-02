@@ -97,6 +97,9 @@ internal sealed class VoiceControlService : IVoiceControlService, IDisposable, I
     public event EventHandler<VoiceCommandType>? CommandRecognized;
 
     /// <inheritdoc />
+    public event EventHandler? SilenceDetected;
+
+    /// <inheritdoc />
     public event EventHandler<VoiceControlState>? StateChanged;
 
     /// <inheritdoc />
@@ -150,9 +153,11 @@ internal sealed class VoiceControlService : IVoiceControlService, IDisposable, I
             : SpeechRecognitionMode.System;
 
         _logger.LogInformation(
-            "Sterowanie głosem gotowe. Tryb: {Mode}. Urządzenie: {Platform}.",
+            "Sterowanie głosem gotowe. Tryb: {Mode}. Urządzenie: {Platform}."
+            + " Mikrofon zablokowany przełącznikiem systemowym: {Blocked}.",
             _mode,
-            capabilities.PlatformDescription);
+            capabilities.PlatformDescription,
+            capabilities.IsMicrophoneBlockedBySystem);
 
         SetState(VoiceControlState.Idle);
 
@@ -287,6 +292,8 @@ internal sealed class VoiceControlService : IVoiceControlService, IDisposable, I
     private async Task RunWindowAsync(CancellationToken cancellationToken)
     {
         int throttleStrikes = 0;
+        int silentSessions = 0;
+        bool hintRaised = false;
 
         try
         {
@@ -316,6 +323,27 @@ internal sealed class VoiceControlService : IVoiceControlService, IDisposable, I
 
                 await _audioCues.PlayAsync(AudioCue.ListeningStopped, cancellationToken);
                 SetState(VoiceControlState.Waiting);
+
+                // Cisza liczona osobno od błędów usługi: „nie usłyszałem nic" i „usługa
+                // odmówiła" to dwie różne przypadłości i tylko pierwsza wskazuje na mikrofon.
+                bool cisza = result.Error
+                    is SpeechRecognitionError.NoMatch
+                    or SpeechRecognitionError.SpeechTimeout
+                    or SpeechRecognitionError.None;
+
+                silentSessions = cisza ? silentSessions + 1 : 0;
+
+                if (!hintRaised && silentSessions >= _options.SilentSessionsBeforeHint)
+                {
+                    hintRaised = true;
+
+                    _logger.LogWarning(
+                        "Nasłuch nie usłyszał nic w {Count} sesjach z rzędu — mikrofon może być"
+                        + " odcięty poza aplikacją.",
+                        silentSessions);
+
+                    SilenceDetected?.Invoke(this, EventArgs.Empty);
+                }
 
                 // Brak obsługi języka nie minie z czasem: model dla tego języka albo jest
                 // na urządzeniu, albo go nie ma. Ponawianie co dwie sekundy dawało mikrofon,

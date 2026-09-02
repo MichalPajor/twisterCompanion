@@ -433,6 +433,7 @@ public partial class GameViewModel : NavigableViewModelBase
         _engine.AnnouncementRaised += OnAnnouncementRaised;
         _engine.GameFinished += OnGameFinished;
         _voiceControl.StateChanged += OnVoiceStateChanged;
+        _voiceControl.SilenceDetected += OnSilenceDetected;
         _voiceControl.CommandRecognized += OnVoiceCommandRecognized;
         _isSubscribed = true;
 
@@ -471,6 +472,7 @@ public partial class GameViewModel : NavigableViewModelBase
         _engine.AnnouncementRaised -= OnAnnouncementRaised;
         _engine.GameFinished -= OnGameFinished;
         _voiceControl.StateChanged -= OnVoiceStateChanged;
+        _voiceControl.SilenceDetected -= OnSilenceDetected;
         _voiceControl.CommandRecognized -= OnVoiceCommandRecognized;
         _ads.BannerAllowedChanged -= OnBannerAllowedChanged;
         IsBannerVisible = false;
@@ -1271,6 +1273,19 @@ public partial class GameViewModel : NavigableViewModelBase
             _ => StringKeys.Game.VoiceDisabled,
         }];
     }
+
+    /// <summary>
+    /// Podpowiada, gdzie szukać, gdy mikrofon milczy sesja po sesji.
+    /// </summary>
+    /// <remarks>
+    /// Toast, nie okno: gracz leży na macie i nie ma czym odklikać komunikatu, a partia ma
+    /// iść dalej. Podpowiedź nie zatrzymuje nasłuchu — najczęstszą przyczyną jest globalny
+    /// przełącznik mikrofonu w szybkich ustawieniach Androida, który gracz może włączyć bez
+    /// wychodzenia z gry, i wtedy komendy zaczynają działać same.
+    /// </remarks>
+    private void OnSilenceDetected(object? sender, EventArgs e) =>
+        _dispatcher.Post(async () =>
+            await Dialogs.ShowToastAsync(Localization[StringKeys.Game.MicrophoneSilent]));
 
     private void OnGameFinished(object? sender, GameSummary summary)
     {

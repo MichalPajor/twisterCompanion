@@ -304,6 +304,44 @@ public class VoiceControlServiceTests
         Assert.Single(harness.Recognition.StartedSessions);
     }
 
+    [Fact]
+    public async Task TrzySesjeCiszy_ZglaszajaPodpowiedzRaz()
+    {
+        // Mikrofon odciety globalnym przelacznikiem prywatnosci Androida podaje aplikacji
+        // cisze: uprawnienie jest przyznane, sesje startuja, a nie slychac nic. Aplikacja
+        // nie odrozni tego od zepsutego mikrofonu i nie musi — ma przestac milczec razem
+        // z nim i podpowiedziec, gdzie szukac.
+        using GameTestHarness harness = CreateHarness();
+        await PrepareAsync(harness);
+
+        int podpowiedzi = 0;
+        harness.VoiceControl.SilenceDetected += (_, _) => podpowiedzi++;
+
+        await harness.VoiceControl.OpenWindowAsync();
+
+        // Kazda sesja konczy sie brakiem dopasowania — tak wyglada cisza z mikrofonu.
+        for (int proba = 0; proba < 3; proba++)
+        {
+            int oczekiwane = proba + 1;
+            await WaitUntilAsync(() => harness.Recognition.StartedSessions.Count >= oczekiwane);
+            harness.Recognition.CompleteWithError(SpeechRecognitionError.NoMatch);
+        }
+
+        await WaitUntilAsync(() => podpowiedzi > 0);
+
+        Assert.Equal(1, podpowiedzi);
+
+        // Sesje leca dalej, a podpowiedz nie wraca co kilka sekund.
+        for (int proba = 3; proba < 6; proba++)
+        {
+            int oczekiwane = proba + 1;
+            await WaitUntilAsync(() => harness.Recognition.StartedSessions.Count >= oczekiwane);
+            harness.Recognition.CompleteWithError(SpeechRecognitionError.NoMatch);
+        }
+
+        Assert.Equal(1, podpowiedzi);
+    }
+
     private static GameTestHarness CreateHarness() =>
         new(useResourceLocalization: true, voiceControlOptions: FastOptions, useRealTime: true);
 

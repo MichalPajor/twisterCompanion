@@ -487,6 +487,9 @@ Zum nächsten Zug gehst du per Taste oder Sprache über – es sei denn, du scha
   <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
     <value>Steuerung geändert auf: {0}</value>
   </data>
+  <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
+    <value>Über das Mikrofon kommt nichts an. Prüfe, ob der Mikrofonzugriff in den Schnelleinstellungen des Systems deaktiviert ist.</value>
+  </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>automatisch</value>
   </data>

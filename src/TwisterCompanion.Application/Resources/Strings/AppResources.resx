@@ -506,6 +506,9 @@ You move to the next turn with a button or by voice — unless you switch on aut
   <data name="Game_Toast_ControlModeChanged" xml:space="preserve">
     <value>Control mode changed to: {0}</value>
   </data>
+  <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
+    <value>Nothing is coming through the microphone. Check whether microphone access is turned off in the system quick settings.</value>
+  </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>Automatic</value>
   </data>

@@ -57,6 +57,9 @@ public static class StringKeys
         /// <summary>Wzorzec komunikatu o zmianie sposobu sterowania.</summary>
         public const string ControlModeChanged = "Game_Toast_ControlModeChanged";
 
+        /// <summary>Podpowiedź, gdy nasłuch nie słyszy nic sesja po sesji.</summary>
+        public const string MicrophoneSilent = "Game_Toast_MicrophoneSilent";
+
         /// <summary>Opis przełącznika sterowania dla czytnika ekranu — z nazwą trybu.</summary>
         public const string ControlModeDescription = "Game_Label_ControlMode";
 
@@ -157,7 +160,6 @@ public static class StringKeys
         public const string ButtonEnd = "Game_Button_End";
     }
 
-    /// <summary>Teksty ekranu graczy używane z kodu.</summary>
     /// <summary>Klucze ekranu startowego.</summary>
     public static class Home
     {
@@ -168,6 +170,7 @@ public static class StringKeys
         public const string NoPlayersMessage = "Home_Confirm_NoPlayersMessage";
     }
 
+    /// <summary>Teksty ekranu graczy używane z kodu.</summary>
     public static class Players
     {
         /// <summary>Tytuł ekranu, używany też jako podpis w podsumowaniu partii.</summary>
