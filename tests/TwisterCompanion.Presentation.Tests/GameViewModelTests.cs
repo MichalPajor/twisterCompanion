@@ -32,6 +32,8 @@ public class GameViewModelTests
     private readonly FakeAudioCueService _audioCues = new();
     private readonly FakeGameFeedback _feedback = new();
     private readonly IVoiceControlCoordinator _voiceCoordinator = Substitute.For<IVoiceControlCoordinator>();
+
+    private readonly ISystemSettings _systemSettings = Substitute.For<ISystemSettings>();
     private readonly IAdCoordinator _ads = Substitute.For<IAdCoordinator>();
     private readonly IDialogService _dialogs = Substitute.For<IDialogService>();
 
@@ -901,6 +903,42 @@ public class GameViewModelTests
         Assert.False(viewModel.IsVoiceStatusVisible);
     }
 
+    [Fact]
+    public async Task ZablokowanyMikrofon_WTrybieGlosowym_OstrzegaIProwadziDoUstawien()
+    {
+        // Zgloszone z urzadzenia: sterowanie glosem nie dzialalo, bo w szybkich ustawieniach
+        // Androida byl wylaczony globalny przelacznik mikrofonu. Uprawnienie bylo przyznane,
+        // wiec nic tego nie zapowiadalo — gracz mowil „dalej" i czekal na reakcje.
+        _voiceControl.IsMicrophoneBlockedBySystem = true;
+        _dialogs.ConfirmAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>())
+            .Returns(true);
+
+        FakeSettingsService ustawienia = new();
+        await ustawienia.UpdateAsync(s => s with { IsVoiceControlEnabled = true });
+
+        CreateSubscribedViewModel(ustawienia);
+
+        await Task.Delay(50);
+
+        await _systemSettings.Received(1).OpenPrivacySettingsAsync();
+    }
+
+    [Fact]
+    public async Task ZablokowanyMikrofon_PozaTrybemGlosowym_NieOstrzega()
+    {
+        // Poza trybem glosowym mikrofon nie ma nic do roboty, wiec jego stan nie jest
+        // problemem gracza — okno byloby tylko przeszkoda przy wejsciu na ekran.
+        _voiceControl.IsMicrophoneBlockedBySystem = true;
+
+        CreateSubscribedViewModel();
+
+        await Task.Delay(50);
+
+        await _dialogs.DidNotReceive().ConfirmAsync(
+            Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+        await _systemSettings.DidNotReceive().OpenPrivacySettingsAsync();
+    }
+
     private GameViewModel CreateSubscribedViewModel(FakeSettingsService? settings = null)
     {
         GameViewModel viewModel = new(
@@ -912,6 +950,7 @@ public class GameViewModelTests
             _gameModes,
             _voiceControl,
             _voiceCoordinator,
+            _systemSettings,
             _ads,
             new ImmediateUiDispatcher(),
             _audioCues,

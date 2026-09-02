@@ -35,6 +35,9 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Annulla</value>
   </data>
+  <data name="Common_Button_OpenSettings" xml:space="preserve">
+    <value>Apri impostazioni</value>
+  </data>
   <data name="Common_Button_No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -489,6 +492,12 @@ Al turno successivo passi con un pulsante o a voce, a meno che non attivi la mod
   </data>
   <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
     <value>Dal microfono non arriva nulla. Controlla se l'accesso al microfono è disattivato nelle impostazioni rapide di sistema.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
+    <value>L'accesso al microfono è disattivato nelle impostazioni di sistema, quindi il controllo vocale non funzionerà. L'interruttore è nelle impostazioni rapide: scorri dall'alto dello schermo.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
+    <value>Microfono disattivato nel sistema</value>
   </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>automatico</value>

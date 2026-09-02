@@ -33,6 +33,7 @@ internal static class AppServiceCollectionExtensions
         services.AddSingleton<INavigationService, ShellNavigationService>();
         services.AddSingleton<IDialogService, MauiDialogService>();
         services.AddSingleton<IExternalBrowser, MauiExternalBrowser>();
+        services.AddSingleton<ISystemSettings, MauiSystemSettings>();
 
         // Odliczanie czasu tury tyka na wątku puli, a widok wolno zmieniać tylko z wątku
         // interfejsu — ten port jest jedynym miejscem, które o tym wie.

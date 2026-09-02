@@ -46,6 +46,7 @@ public partial class GameViewModel : NavigableViewModelBase
     private readonly IGameModeService _gameModes;
     private readonly IVoiceControlService _voiceControl;
     private readonly IVoiceControlCoordinator _voiceCoordinator;
+    private readonly ISystemSettings _systemSettings;
     private readonly IAdCoordinator _ads;
     private readonly IUiDispatcher _dispatcher;
     private readonly IAudioCueService _audioCues;
@@ -68,6 +69,7 @@ public partial class GameViewModel : NavigableViewModelBase
     /// <param name="gameModes">Tryby gry — źródło zasad rozpoczynanej partii.</param>
     /// <param name="voiceControl">Nasłuch komend — źródło stanu mikrofonu.</param>
     /// <param name="voiceCoordinator">Sterowanie głosem włączane na czas rozgrywki.</param>
+    /// <param name="systemSettings">Ustawienia systemu — otwierają ekran prywatności.</param>
     /// <param name="ads">Reklamy — baner na czas rozgrywki i reklama po zakończeniu partii.</param>
     /// <param name="dispatcher">Przeniesienie odliczania na wątek interfejsu.</param>
     /// <param name="audioCues">Sygnały dźwiękowe — tykanie odliczania.</param>
@@ -85,6 +87,7 @@ public partial class GameViewModel : NavigableViewModelBase
         IGameModeService gameModes,
         IVoiceControlService voiceControl,
         IVoiceControlCoordinator voiceCoordinator,
+        ISystemSettings systemSettings,
         IAdCoordinator ads,
         IUiDispatcher dispatcher,
         IAudioCueService audioCues,
@@ -115,6 +118,7 @@ public partial class GameViewModel : NavigableViewModelBase
         _gameModes = gameModes;
         _voiceControl = voiceControl;
         _voiceCoordinator = voiceCoordinator;
+        _systemSettings = systemSettings;
         _ads = ads;
         _dispatcher = dispatcher;
         _audioCues = audioCues;
@@ -1140,6 +1144,42 @@ public partial class GameViewModel : NavigableViewModelBase
         }
 
         RefreshVoiceStatus(_voiceControl.State);
+
+        await WarnIfMicrophoneBlockedAsync();
+    }
+
+    /// <summary>
+    /// Ostrzega, gdy mikrofon jest odcięty przełącznikiem systemowym.
+    /// </summary>
+    /// <remarks>
+    /// Odrębne od braku zgody: uprawnienie jest przyznane, nasłuch startuje, a system podaje
+    /// aplikacji ciszę. Bez tego okna gracz włącza sterowanie głosem, mówi „dalej" i czeka
+    /// na reakcję, której nie będzie — nie mając żadnej wskazówki, gdzie szukać.
+    /// <para>
+    /// Okno, nie powiadomienie: to jedyny przypadek, w którym sterowanie głosem <b>na pewno</b>
+    /// nie zadziała, a naprawa jest o dwa dotknięcia. Przycisk prowadzi do ustawień
+    /// prywatności, a treść mówi też o szybkich ustawieniach, bo tam przełącznik jest bliżej
+    /// i nie każde urządzenie ma ten sam ekran.
+    /// </para>
+    /// </remarks>
+    private async Task WarnIfMicrophoneBlockedAsync()
+    {
+        if (!_voiceControl.IsMicrophoneBlockedBySystem
+            || GameControlModes.From(_settingsService.Current) != GameControlMode.Voice)
+        {
+            return;
+        }
+
+        bool otworz = await Dialogs.ConfirmAsync(
+            Localization[StringKeys.Game.MicrophoneBlockedTitle],
+            Localization[StringKeys.Game.MicrophoneBlockedMessage],
+            Localization[StringKeys.Common.ButtonOpenSettings],
+            Localization[StringKeys.Common.ButtonCancel]);
+
+        if (otworz)
+        {
+            await _systemSettings.OpenPrivacySettingsAsync();
+        }
     }
 
     /// <summary>

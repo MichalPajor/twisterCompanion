@@ -35,6 +35,9 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <data name="Common_Button_OpenSettings" xml:space="preserve">
+    <value>Открыть настройки</value>
+  </data>
   <data name="Common_Button_No" xml:space="preserve">
     <value>Нет</value>
   </data>
@@ -489,6 +492,12 @@
   </data>
   <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
     <value>С микрофона ничего не поступает. Проверьте, не выключен ли доступ к микрофону в быстрых настройках системы.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
+    <value>Доступ к микрофону выключен в настройках системы, поэтому голосовое управление не заработает. Переключатель находится в быстрых настройках — проведите пальцем сверху вниз.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
+    <value>Микрофон выключен в системе</value>
   </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>автоматическое</value>

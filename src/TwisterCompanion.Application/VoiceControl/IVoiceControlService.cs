@@ -18,6 +18,17 @@ public interface IVoiceControlService
     /// <summary>Aktualny stan nasłuchu.</summary>
     VoiceControlState State { get; }
 
+    /// <summary>
+    /// Czy mikrofon jest odcięty <b>przełącznikiem systemowym</b>, mimo przyznanej zgody.
+    /// </summary>
+    /// <remarks>
+    /// Odczytane przy ostatnim przygotowaniu nasłuchu. Osobno od stanu, bo to nie jest stan
+    /// nasłuchu, tylko powód, dla którego nasłuch nic nie usłyszy: uprawnienie jest
+    /// przyznane, sesje startują, a system podaje ciszę. Ekran rozgrywki pyta o to, żeby
+    /// powiedzieć graczowi, gdzie szukać, zamiast pozwolić mu czekać na reakcję.
+    /// </remarks>
+    bool IsMicrophoneBlockedBySystem { get; }
+
     /// <summary>Zgłaszane po rozpoznaniu komendy.</summary>
     event EventHandler<VoiceCommandType>? CommandRecognized;
 

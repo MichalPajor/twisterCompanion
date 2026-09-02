@@ -23,6 +23,9 @@ internal sealed class FakeVoiceControlService : IVoiceControlService
     public VoiceControlState State { get; private set; } = VoiceControlState.Disabled;
 
     /// <inheritdoc />
+    public bool IsMicrophoneBlockedBySystem { get; set; }
+
+    /// <inheritdoc />
     public event EventHandler<VoiceCommandType>? CommandRecognized;
 
     /// <inheritdoc />

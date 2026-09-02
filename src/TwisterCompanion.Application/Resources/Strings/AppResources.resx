@@ -36,6 +36,9 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Common_Button_OpenSettings" xml:space="preserve">
+    <value>Open settings</value>
+  </data>
   <data name="Common_Button_No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -508,6 +511,12 @@ You move to the next turn with a button or by voice — unless you switch on aut
   </data>
   <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
     <value>Nothing is coming through the microphone. Check whether microphone access is turned off in the system quick settings.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
+    <value>Microphone access is switched off in the system settings, so voice control will not work. The switch is in the quick settings — swipe down from the top of the screen.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
+    <value>Microphone is off in the system</value>
   </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>Automatic</value>

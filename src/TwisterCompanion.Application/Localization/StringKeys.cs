@@ -35,6 +35,9 @@ public static class StringKeys
         /// <summary>Etykieta przycisku odmowy w pytaniu zamkniętym.</summary>
         public const string ButtonNo = "Common_Button_No";
 
+        /// <summary>Etykieta przycisku otwierającego ustawienia systemu.</summary>
+        public const string ButtonOpenSettings = "Common_Button_OpenSettings";
+
         /// <summary>Wartość „włączone" w podsumowaniach ustawień.</summary>
         public const string LabelOn = "Common_Label_On";
 
@@ -59,6 +62,12 @@ public static class StringKeys
 
         /// <summary>Podpowiedź, gdy nasłuch nie słyszy nic sesja po sesji.</summary>
         public const string MicrophoneSilent = "Game_Toast_MicrophoneSilent";
+
+        /// <summary>Tytuł ostrzeżenia o mikrofonie odciętym przełącznikiem systemowym.</summary>
+        public const string MicrophoneBlockedTitle = "Game_Confirm_MicrophoneBlockedTitle";
+
+        /// <summary>Treść ostrzeżenia o mikrofonie odciętym przełącznikiem systemowym.</summary>
+        public const string MicrophoneBlockedMessage = "Game_Confirm_MicrophoneBlockedMessage";
 
         /// <summary>Opis przełącznika sterowania dla czytnika ekranu — z nazwą trybu.</summary>
         public const string ControlModeDescription = "Game_Label_ControlMode";

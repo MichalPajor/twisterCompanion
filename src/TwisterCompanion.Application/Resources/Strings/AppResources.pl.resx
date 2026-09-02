@@ -27,6 +27,9 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Anuluj</value>
   </data>
+  <data name="Common_Button_OpenSettings" xml:space="preserve">
+    <value>Otwórz ustawienia</value>
+  </data>
   <data name="Common_Button_No" xml:space="preserve">
     <value>Nie</value>
   </data>
@@ -499,6 +502,12 @@ Do następnej tury przechodzisz przyciskiem albo komendą głosową — chyba ż
   </data>
   <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
     <value>Mikrofon nic nie przekazuje. Sprawdź, czy dostęp do mikrofonu nie jest wyłączony w szybkich ustawieniach systemu.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
+    <value>Dostęp do mikrofonu jest wyłączony w ustawieniach systemu, więc sterowanie głosem nie zadziała. Przełącznik znajdziesz w szybkich ustawieniach — przeciągnij palcem od góry ekranu.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
+    <value>Mikrofon wyłączony w systemie</value>
   </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>automatyczny</value>

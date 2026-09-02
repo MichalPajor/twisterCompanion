@@ -35,6 +35,9 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>İptal</value>
   </data>
+  <data name="Common_Button_OpenSettings" xml:space="preserve">
+    <value>Ayarları aç</value>
+  </data>
   <data name="Common_Button_No" xml:space="preserve">
     <value>Hayır</value>
   </data>
@@ -489,6 +492,12 @@ Otomatik modu açmadıysanız sonraki tura düğmeyle ya da sesle geçersiniz.</
   </data>
   <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
     <value>Mikrofondan hiçbir şey gelmiyor. Sistem hızlı ayarlarında mikrofon erişiminin kapalı olup olmadığını kontrol et.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
+    <value>Mikrofon erişimi sistem ayarlarında kapalı, bu yüzden sesle kontrol çalışmaz. Anahtar hızlı ayarlarda — ekranın üstünden aşağı kaydır.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
+    <value>Mikrofon sistemde kapalı</value>
   </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>otomatik</value>

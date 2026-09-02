@@ -35,6 +35,9 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="Common_Button_OpenSettings" xml:space="preserve">
+    <value>Abrir configurações</value>
+  </data>
   <data name="Common_Button_No" xml:space="preserve">
     <value>Não</value>
   </data>
@@ -489,6 +492,12 @@ Você passa para a rodada seguinte com um botão ou por voz, a não ser que ligu
   </data>
   <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
     <value>Nada está chegando pelo microfone. Verifique se o acesso ao microfone está desativado nas configurações rápidas do sistema.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
+    <value>O acesso ao microfone está desligado nas configurações do sistema, então o controle por voz não vai funcionar. A chave fica nas configurações rápidas — deslize a partir do topo da tela.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
+    <value>Microfone desligado no sistema</value>
   </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>automático</value>

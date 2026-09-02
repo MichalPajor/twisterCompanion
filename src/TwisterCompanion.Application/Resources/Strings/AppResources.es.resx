@@ -35,6 +35,9 @@
   <data name="Common_Button_Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="Common_Button_OpenSettings" xml:space="preserve">
+    <value>Abrir ajustes</value>
+  </data>
   <data name="Common_Button_No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -489,6 +492,12 @@ Al siguiente turno pasas con un botón o por voz, salvo que actives el modo auto
   </data>
   <data name="Game_Toast_MicrophoneSilent" xml:space="preserve">
     <value>No llega nada por el micrófono. Comprueba si el acceso al micrófono está desactivado en los ajustes rápidos del sistema.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
+    <value>El acceso al micrófono está desactivado en los ajustes del sistema, así que el control por voz no funcionará. El interruptor está en los ajustes rápidos: desliza desde la parte superior de la pantalla.</value>
+  </data>
+  <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
+    <value>El micrófono está desactivado en el sistema</value>
   </data>
   <data name="Game_Control_Automatic" xml:space="preserve">
     <value>automático</value>

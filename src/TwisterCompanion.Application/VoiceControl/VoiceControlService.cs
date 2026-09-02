@@ -94,6 +94,9 @@ internal sealed class VoiceControlService : IVoiceControlService, IDisposable, I
     public VoiceControlState State { get; private set; } = VoiceControlState.Disabled;
 
     /// <inheritdoc />
+    /// <inheritdoc />
+    public bool IsMicrophoneBlockedBySystem { get; private set; }
+
     public event EventHandler<VoiceCommandType>? CommandRecognized;
 
     /// <inheritdoc />
@@ -126,6 +129,8 @@ internal sealed class VoiceControlService : IVoiceControlService, IDisposable, I
 
         SpeechRecognitionCapabilities capabilities =
             await _recognition.GetCapabilitiesAsync(cancellationToken);
+
+        IsMicrophoneBlockedBySystem = capabilities.IsMicrophoneBlockedBySystem;
 
         if (!capabilities.IsSystemRecognitionAvailable && !capabilities.IsOnDeviceRecognitionAvailable)
         {
