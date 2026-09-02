@@ -1,3 +1,4 @@
+using System.Globalization;
 using TwisterCompanion.Application.Abstractions;
 using TwisterCompanion.Application.Tests.Fakes;
 using TwisterCompanion.Application.VoiceControl;
@@ -262,6 +263,45 @@ public class VoiceControlServiceTests
         await WaitUntilAsync(() => !harness.Recognition.IsListening);
 
         Assert.False(harness.Recognition.IsListening);
+    }
+
+    [Fact]
+    public async Task Nasluch_ProsiOKultureSzczegolowa_NieNeutralna()
+    {
+        // Przyczyna zgloszenia „sterowanie glosem nie dziala na Androidzie 15". Jezyki
+        // aplikacji sa neutralne (pl), a rozpoznawanie mowy oczekuje wariantu (pl-PL)
+        // i na neutralny odpowiada wyjatkiem, zanim w ogole zapyta system.
+        using GameTestHarness harness = CreateHarness();
+        harness.Localization.SetLanguage("pl");
+        await PrepareAsync(harness);
+
+        await harness.VoiceControl.OpenWindowAsync();
+        await WaitUntilAsync(() => harness.Recognition.StartedSessions.Count > 0);
+
+        CultureInfo poproszona = harness.Recognition.StartedSessions[0].Culture;
+
+        Assert.False(poproszona.IsNeutralCulture);
+        Assert.Equal("pl", poproszona.TwoLetterISOLanguageName);
+    }
+
+    [Fact]
+    public async Task BrakObslugiJezyka_KonczyNasluchZamiastPonawiac()
+    {
+        // Bez tego rozroznienia brak jezyka wygladal jak „cos poszlo nie tak" i nasluch
+        // ponawial sie co dwie sekundy bez konca: mikrofon otwieral sie i zamykal, a gracz
+        // widzial tylko, ze komendy nie dzialaja.
+        using GameTestHarness harness = CreateHarness();
+        await PrepareAsync(harness);
+
+        harness.Recognition.StartException = new NotSupportedException("Culture 'pl' is not supported");
+
+        await harness.VoiceControl.OpenWindowAsync();
+        await WaitUntilAsync(() => harness.VoiceControl.State == VoiceControlState.Unavailable);
+
+        Assert.Equal(VoiceControlState.Unavailable, harness.VoiceControl.State);
+
+        // Jedna proba, nie petla.
+        Assert.Single(harness.Recognition.StartedSessions);
     }
 
     private static GameTestHarness CreateHarness() =>

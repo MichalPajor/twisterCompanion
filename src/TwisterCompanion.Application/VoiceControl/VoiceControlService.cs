@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.Extensions.Logging;
 using TwisterCompanion.Application.Abstractions;
 using TwisterCompanion.Application.Voice;
@@ -316,6 +317,23 @@ internal sealed class VoiceControlService : IVoiceControlService, IDisposable, I
                 await _audioCues.PlayAsync(AudioCue.ListeningStopped, cancellationToken);
                 SetState(VoiceControlState.Waiting);
 
+                // Brak obsługi języka nie minie z czasem: model dla tego języka albo jest
+                // na urządzeniu, albo go nie ma. Ponawianie co dwie sekundy dawało mikrofon,
+                // który otwiera się i zamyka bez końca, a gracz widział tylko, że komendy
+                // nie działają — bez żadnej wskazówki dlaczego.
+                if (result.Error == SpeechRecognitionError.LanguageUnavailable)
+                {
+                    _logger.LogWarning(
+                        "Rozpoznawanie mowy nie obsługuje języka {Culture} w trybie {Mode}."
+                        + " Sterowanie głosem wyłączone do następnej aktywacji.",
+                        _localization.CurrentCulture.Name,
+                        _mode);
+
+                    SetState(VoiceControlState.Unavailable);
+
+                    return;
+                }
+
                 bool throttled = result.Error
                     is SpeechRecognitionError.TooManyRequests
                     or SpeechRecognitionError.RecognizerBusy;
@@ -394,7 +412,7 @@ internal sealed class VoiceControlService : IVoiceControlService, IDisposable, I
         {
             await _recognition.StartAsync(
                 new SpeechRecognitionRequest(
-                    _localization.CurrentCulture,
+                    ToSpecific(_localization.CurrentCulture),
                     _mode ?? SpeechRecognitionMode.System,
                     ReportPartialResults: true,
                     AutoStopSilenceTimeout: _options.SilenceTimeout),
@@ -403,12 +421,56 @@ internal sealed class VoiceControlService : IVoiceControlService, IDisposable, I
         catch (Exception exception)
         {
             _session = null;
-            _logger.LogWarning(exception, "Nie udało się otworzyć sesji rozpoznawania mowy.");
 
-            return new SessionResult(null, SpeechRecognitionError.Other);
+            // Usługa rozpoznawania odmawia obsługi języka wyjątkiem, a nie kodem błędu
+            // Androida — więc bez tego rozróżnienia brak języka wyglądał jak „coś poszło
+            // nie tak" i wpadał w pętlę ponawiania.
+            SpeechRecognitionError error = exception is NotSupportedException
+                ? SpeechRecognitionError.LanguageUnavailable
+                : SpeechRecognitionError.Other;
+
+            _logger.LogWarning(
+                exception,
+                "Nie udało się otworzyć sesji rozpoznawania mowy. Rozpoznano jako {Error}.",
+                error);
+
+            return new SessionResult(null, error);
         }
 
         return await session.Task.WaitAsync(cancellationToken);
+    }
+
+    /// <summary>
+    /// Zamienia kulturę neutralną na szczegółową, wymaganą przez rozpoznawanie mowy.
+    /// </summary>
+    /// <param name="culture">Kultura interfejsu aplikacji.</param>
+    /// <remarks>
+    /// <b>To była przyczyna „sterowanie głosem nie działa" na Androidzie 15.</b> Języki
+    /// aplikacji są zadeklarowane jako neutralne — <c>pl</c>, <c>de</c>, <c>ru</c> — bo do
+    /// wyboru plików tłumaczeń region jest zbędny. Rozpoznawanie mowy oczekuje jednak
+    /// konkretnego wariantu, <c>pl-PL</c>, i na neutralny odpowiada wyjątkiem „Culture 'pl'
+    /// is not supported", jeszcze zanim zapyta o cokolwiek system.
+    /// <para>
+    /// Kultura już szczegółowa (jak <c>pt-BR</c>) przechodzi bez zmian. Gdy dla danego
+    /// języka nie da się wskazać wariantu domyślnego, zostaje wartość wejściowa — sesja
+    /// padnie, ale na błędzie usługi, a nie na wyjątku z konwersji.
+    /// </para>
+    /// </remarks>
+    private static CultureInfo ToSpecific(CultureInfo culture)
+    {
+        if (!culture.IsNeutralCulture)
+        {
+            return culture;
+        }
+
+        try
+        {
+            return CultureInfo.CreateSpecificCulture(culture.Name);
+        }
+        catch (CultureNotFoundException)
+        {
+            return culture;
+        }
     }
 
     private void OnPartialRecognized(object? sender, string text)

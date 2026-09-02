@@ -16,6 +16,13 @@ internal sealed class FakeSpeechRecognitionService : ISpeechRecognitionService
     /// <summary>Ile razy zamknięto nasłuch.</summary>
     public int StopCount { get; private set; }
 
+    /// <summary>Wyjątek, którym ma się skończyć otwarcie sesji — albo <c>null</c>.</summary>
+    /// <remarks>
+    /// Usługa rozpoznawania odmawia obsługi języka wyjątkiem, a nie wynikiem sesji, więc
+    /// bez tego nie da się odtworzyć błędu „Culture 'pl' is not supported".
+    /// </remarks>
+    public Exception? StartException { get; set; }
+
     /// <summary>Czy zgoda na mikrofon ma być przyznana.</summary>
     public bool IsPermissionGranted { get; set; } = true;
 
@@ -48,6 +55,12 @@ internal sealed class FakeSpeechRecognitionService : ISpeechRecognitionService
         ArgumentNullException.ThrowIfNull(request);
 
         _startedSessions.Add(request);
+
+        if (StartException is not null)
+        {
+            return Task.FromException(StartException);
+        }
+
         IsListening = true;
 
         return Task.CompletedTask;
