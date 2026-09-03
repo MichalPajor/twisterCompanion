@@ -36,7 +36,7 @@
       wiec ta linia jest wartoscia domyslna dla buildow lokalnych i musi byc rowna
       najnowszemu wpisowi w CHANGELOG.md - pilnuje tego test.
     -->
-    <VersionPrefix>1.0.1</VersionPrefix>
+    <VersionPrefix>1.0.2</VersionPrefix>
 
     <!--
       Wersja MAUI. Ustawiana tutaj, a nie w projekcie aplikacji, bo odwoluje sie do niej
