@@ -494,7 +494,7 @@ Você passa para a rodada seguinte com um botão ou por voz, a não ser que ligu
     <value>Nada está chegando pelo microfone. Verifique se o acesso ao microfone está desativado nas configurações rápidas do sistema.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
-    <value>O acesso ao microfone está desligado nas configurações do sistema, então o controle por voz não vai funcionar. A chave fica nas configurações rápidas — deslize a partir do topo da tela.</value>
+    <value>O acesso ao microfone está desligado nas configurações do sistema, então o controle por voz não vai funcionar. Ative “Acesso ao microfone” — o mais rápido é nas configurações rápidas, deslizando a partir do topo da tela; nas configurações do sistema fica na seção de privacidade.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
     <value>Microfone desligado no sistema</value>

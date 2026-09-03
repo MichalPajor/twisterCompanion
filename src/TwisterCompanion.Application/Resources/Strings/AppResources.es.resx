@@ -494,7 +494,7 @@ Al siguiente turno pasas con un botón o por voz, salvo que actives el modo auto
     <value>No llega nada por el micrófono. Comprueba si el acceso al micrófono está desactivado en los ajustes rápidos del sistema.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
-    <value>El acceso al micrófono está desactivado en los ajustes del sistema, así que el control por voz no funcionará. El interruptor está en los ajustes rápidos: desliza desde la parte superior de la pantalla.</value>
+    <value>El acceso al micrófono está desactivado en los ajustes del sistema, así que el control por voz no funcionará. Activa «Acceso al micrófono»: lo más rápido es en los ajustes rápidos, deslizando desde arriba; en los ajustes del sistema está en la sección de privacidad.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
     <value>El micrófono está desactivado en el sistema</value>

@@ -494,7 +494,7 @@ Zum nächsten Zug gehst du per Taste oder Sprache über – es sei denn, du scha
     <value>Über das Mikrofon kommt nichts an. Prüfe, ob der Mikrofonzugriff in den Schnelleinstellungen des Systems deaktiviert ist.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
-    <value>Der Mikrofonzugriff ist in den Systemeinstellungen ausgeschaltet, deshalb funktioniert die Sprachsteuerung nicht. Der Schalter liegt in den Schnelleinstellungen — wische vom oberen Bildschirmrand nach unten.</value>
+    <value>Der Mikrofonzugriff ist in den Systemeinstellungen ausgeschaltet, deshalb funktioniert die Sprachsteuerung nicht. Schalte „Mikrofonzugriff“ ein — am schnellsten in den Schnelleinstellungen nach dem Wischen vom oberen Rand; in den Systemeinstellungen steht es im Bereich Datenschutz.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
     <value>Mikrofon im System ausgeschaltet</value>

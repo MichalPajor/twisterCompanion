@@ -513,7 +513,7 @@ You move to the next turn with a button or by voice — unless you switch on aut
     <value>Nothing is coming through the microphone. Check whether microphone access is turned off in the system quick settings.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
-    <value>Microphone access is switched off in the system settings, so voice control will not work. The switch is in the quick settings — swipe down from the top of the screen.</value>
+    <value>Microphone access is switched off in the system settings, so voice control will not work. Turn on “Microphone access” — fastest in the quick settings, after swiping down from the top of the screen; in the system settings it is in the privacy section.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
     <value>Microphone is off in the system</value>

@@ -494,7 +494,7 @@ Tu passes au tour suivant avec un bouton ou à la voix, sauf si tu actives le mo
     <value>Rien n'arrive par le micro. Vérifie si l'accès au micro est désactivé dans les réglages rapides du système.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedMessage" xml:space="preserve">
-    <value>L'accès au micro est désactivé dans les réglages du système, la commande vocale ne fonctionnera donc pas. L'interrupteur se trouve dans les réglages rapides : balaie depuis le haut de l'écran.</value>
+    <value>L'accès au micro est désactivé dans les réglages du système, la commande vocale ne fonctionnera donc pas. Active « Accès au micro » — au plus vite dans les réglages rapides, en balayant depuis le haut de l'écran ; dans les réglages du système, c'est dans la section confidentialité.</value>
   </data>
   <data name="Game_Confirm_MicrophoneBlockedTitle" xml:space="preserve">
     <value>Micro désactivé dans le système</value>
