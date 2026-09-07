@@ -36,6 +36,13 @@ internal sealed class GuardedAdService(
     public bool IsAvailable => platform.IsAvailable;
 
     /// <inheritdoc />
+    public bool IsPrivacyOptionsRequired => platform.IsPrivacyOptionsRequired;
+
+    /// <inheritdoc />
+    public Task ShowPrivacyOptionsAsync(CancellationToken cancellationToken = default) =>
+        platform.ShowPrivacyOptionsAsync(cancellationToken);
+
+    /// <inheritdoc />
     public Task<bool> PrepareAsync(CancellationToken cancellationToken = default) =>
         platform.PrepareAsync(cancellationToken);
 

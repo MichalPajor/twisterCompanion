@@ -16,6 +16,12 @@ internal sealed class NoOpAdPlatform(ILogger<NoOpAdPlatform> logger) : IAdPlatfo
     public bool IsAvailable => false;
 
     /// <inheritdoc />
+    public bool IsPrivacyOptionsRequired => false;
+
+    /// <inheritdoc />
+    public Task ShowPrivacyOptionsAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+
+    /// <inheritdoc />
     public Task<bool> PrepareAsync(CancellationToken cancellationToken = default) =>
         Task.FromResult(false);
 

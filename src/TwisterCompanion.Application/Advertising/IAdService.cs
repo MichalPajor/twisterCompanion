@@ -32,4 +32,17 @@ public interface IAdService
     /// <param name="cancellationToken">Token anulowania.</param>
     /// <returns><see langword="true"/>, gdy reklama została pokazana.</returns>
     Task<bool> ShowInterstitialAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>Czy ekran ustawień ma pokazać wejście do zmiany zgody na reklamy.</summary>
+    /// <remarks>Przekazane wprost z platformy — to nie jest decyzja gry, tylko regionu.</remarks>
+    bool IsPrivacyOptionsRequired { get; }
+
+    /// <summary>Pokazuje formularz zmiany decyzji o zgodzie na reklamy.</summary>
+    /// <param name="cancellationToken">Token anulowania.</param>
+    /// <remarks>
+    /// Jedyna operacja reklamowa, której <b>nie</b> pilnuje stan partii: to użytkownik ją wywołuje,
+    /// świadomie, z ekranu ustawień — a odmowa pokazania formularza tam byłaby łamaniem zasad, przed
+    /// którymi ten serwis ma chronić.
+    /// </remarks>
+    Task ShowPrivacyOptionsAsync(CancellationToken cancellationToken = default);
 }

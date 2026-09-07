@@ -1,6 +1,7 @@
 using System.Globalization;
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
+using TwisterCompanion.Application.Advertising;
 using TwisterCompanion.Application.Feedback;
 using TwisterCompanion.Application.Localization;
 using TwisterCompanion.Application.Settings;
@@ -607,7 +608,36 @@ public class SettingsViewModelTests
         await _browser.Received(1).OpenAsync(AppLinks.PrivacyPolicy);
     }
 
+    [Fact]
+    public void OpcjePrywatnosciReklam_WidoczneTylkoGdyRegionWymaga()
+    {
+        // Zasady certyfikowanego CMP: tam, gdzie pytano o zgode, musi byc droga powrotu do niej.
+        // Poza tymi regionami przycisk bylby atrapa, za ktora nic nie ma.
+        _ads.IsPrivacyOptionsRequired.Returns(false);
+        SettingsViewModel poza = CreateViewModel();
+        poza.OnAppearing();
+
+        Assert.False(poza.IsAdPrivacyOptionsVisible);
+
+        _ads.IsPrivacyOptionsRequired.Returns(true);
+        SettingsViewModel wEog = CreateViewModel();
+        wEog.OnAppearing();
+
+        Assert.True(wEog.IsAdPrivacyOptionsVisible);
+    }
+
+    [Fact]
+    public async Task OpcjePrywatnosciReklam_OtwierajaFormularzPlatformy()
+    {
+        SettingsViewModel viewModel = CreateViewModel();
+
+        await viewModel.OpenAdPrivacyOptionsCommand.ExecuteAsync(null);
+
+        await _ads.Received(1).ShowPrivacyOptionsAsync(Arg.Any<CancellationToken>());
+    }
+
     private readonly IExternalBrowser _browser = Substitute.For<IExternalBrowser>();
+    private readonly IAdService _ads = Substitute.For<IAdService>();
 
     private SettingsViewModel CreateViewModel() => new(
         Substitute.For<INavigationService>(),
@@ -621,5 +651,6 @@ public class SettingsViewModelTests
         _localization,
         NullLogger<SettingsViewModel>.Instance,
         Substitute.For<IDialogService>(),
-        _browser);
+        _browser,
+        _ads);
 }

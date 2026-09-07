@@ -16,6 +16,20 @@ internal sealed class FakeAdPlatform : IAdPlatform
     /// <inheritdoc />
     public bool IsAvailable { get; set; } = true;
 
+    /// <summary>Czy region wymaga wejścia do zmiany zgody — ustawia test.</summary>
+    public bool IsPrivacyOptionsRequired { get; set; }
+
+    /// <summary>Ile razy poproszono o formularz opcji prywatności.</summary>
+    public int PrivacyOptionsShownCount { get; private set; }
+
+    /// <inheritdoc />
+    public Task ShowPrivacyOptionsAsync(CancellationToken cancellationToken = default)
+    {
+        PrivacyOptionsShownCount++;
+
+        return Task.CompletedTask;
+    }
+
     /// <summary>Czy przygotowanie ma zakończyć się zgodą na żądanie reklam.</summary>
     public bool CanRequestAds { get; set; } = true;
 

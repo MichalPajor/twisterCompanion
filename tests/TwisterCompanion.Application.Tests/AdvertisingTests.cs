@@ -206,6 +206,26 @@ public class AdvertisingTests
         Assert.False(harness.AdCoordinator.IsBannerAllowed);
     }
 
+    [Fact]
+    public async Task OpcjePrywatnosci_PrzechodzaPrzezStraznikaBezPytaniaOStanPartii()
+    {
+        // Straznik odmawia reklamy pelnoekranowej poza zakonczona partia — i slusznie. Ale
+        // formularz zmiany zgody to nie reklama: wywoluje go uzytkownik, swiadomie, z ekranu
+        // ustawien, a odmowa pokazania go bylaby lamaniem zasad CMP, przed ktorymi ten serwis
+        // ma chronic. Dlatego przechodzi zawsze, takze w trakcie partii.
+        using GameTestHarness harness = new();
+        harness.Ads.IsPrivacyOptionsRequired = true;
+
+        await harness.Engine.StartAsync(GameTestHarness.Configuration(2));
+        await harness.Engine.NextTurnAsync();
+
+        Assert.True(harness.AdService.IsPrivacyOptionsRequired);
+
+        await harness.AdService.ShowPrivacyOptionsAsync();
+
+        Assert.Equal(1, harness.Ads.PrivacyOptionsShownCount);
+    }
+
     private static async Task WaitUntilAsync(Func<bool> condition)
     {
         for (int attempt = 0; attempt < 200; attempt++)

@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using TwisterCompanion.Application.Abstractions;
+using TwisterCompanion.Application.Advertising;
 using TwisterCompanion.Application.Feedback;
 using TwisterCompanion.Application.Localization;
 using TwisterCompanion.Application.Settings;
@@ -30,6 +31,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
     private readonly IGameFeedback _feedback;
     private readonly IUserDataService _userData;
     private readonly IExternalBrowser _browser;
+    private readonly IAdService _ads;
 
     /// <summary>
     /// Blokuje zapis ustawień w czasie wczytywania stanu do formularza.
@@ -55,6 +57,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
     /// <param name="logger">Logger tego ViewModelu.</param>
     /// <param name="dialogService">Serwis komunikatów dla użytkownika.</param>
     /// <param name="browser">Przeglądarka systemowa — otwiera politykę prywatności.</param>
+    /// <param name="ads">Reklamy — wejście do zmiany zgody, gdy region tego wymaga.</param>
     public SettingsViewModel(
         INavigationService navigation,
         ISettingsService settingsService,
@@ -67,10 +70,12 @@ public partial class SettingsViewModel : NavigableViewModelBase
         ILocalizationService localization,
         ILogger<SettingsViewModel> logger,
         IDialogService dialogService,
-        IExternalBrowser browser)
+        IExternalBrowser browser,
+        IAdService ads)
         : base(navigation, logger, dialogService, localization)
     {
         ArgumentNullException.ThrowIfNull(browser);
+        ArgumentNullException.ThrowIfNull(ads);
 
         ArgumentNullException.ThrowIfNull(settingsService);
         ArgumentNullException.ThrowIfNull(textToSpeech);
@@ -88,6 +93,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
         _speaker = speaker;
         _announcementBuilder = announcementBuilder;
         _browser = browser;
+        _ads = ads;
 
         MoveTime = new SecondsSetting(
             AppSettings.MinMoveTime,
@@ -255,6 +261,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
     /// </remarks>
     public override void OnAppearing()
     {
+        RefreshAdPrivacyOptions();
         if (_isSubscribed)
         {
             return;
@@ -676,6 +683,30 @@ public partial class SettingsViewModel : NavigableViewModelBase
     [RelayCommand]
     private Task OpenPrivacyPolicyAsync() =>
         ExecuteSafeAsync(() => _browser.OpenAsync(AppLinks.PrivacyPolicy));
+
+    /// <summary>
+    /// Czy pokazać wejście do zmiany zgody na reklamy.
+    /// </summary>
+    /// <remarks>
+    /// Tylko w regionach, w których pytano o zgodę (EOG, Wielka Brytania, Szwajcaria) — decyduje
+    /// zestaw SDK reklam po odczycie regionu. Poza nimi przycisk byłby atrapą: nie ma czego
+    /// zmieniać. Odświeżane przy każdym pokazaniu ekranu, bo reklamy przygotowują się
+    /// asynchronicznie przy starcie aplikacji i przy pierwszym wejściu odczyt może jeszcze nie być.
+    /// </remarks>
+    [ObservableProperty]
+    private bool _isAdPrivacyOptionsVisible;
+
+    /// <summary>Otwiera formularz zmiany decyzji o zgodzie na reklamy.</summary>
+    /// <remarks>
+    /// Wymóg zasad certyfikowanego CMP od dnia opublikowania komunikatu o zgodzie: użytkownik musi
+    /// móc wrócić do swojej decyzji z poziomu aplikacji. Polityka prywatności odsyła do ustawień
+    /// Androida, ale to dotyczy personalizacji na poziomie systemu, nie tej zgody.
+    /// </remarks>
+    [RelayCommand]
+    private Task OpenAdPrivacyOptionsAsync() => ExecuteSafeAsync(() => _ads.ShowPrivacyOptionsAsync());
+
+    /// <summary>Odczytuje z platformy reklam, czy region wymaga wejścia do zmiany zgody.</summary>
+    private void RefreshAdPrivacyOptions() => IsAdPrivacyOptionsVisible = _ads.IsPrivacyOptionsRequired;
 
     /// <summary>
     /// Wczytuje listę głosów z syntezatora, zawężoną do języka aplikacji.

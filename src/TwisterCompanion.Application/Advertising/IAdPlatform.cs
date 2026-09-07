@@ -42,4 +42,19 @@ public interface IAdPlatform
     /// <param name="cancellationToken">Token anulowania.</param>
     /// <returns><see langword="true"/>, gdy reklama została pokazana.</returns>
     Task<bool> ShowInterstitialAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Czy użytkownik musi mieć w aplikacji drogę do zmiany swojej decyzji o zgodzie na reklamy.
+    /// </summary>
+    /// <remarks>
+    /// Zasady certyfikowanego CMP: tam, gdzie pytano o zgodę (EOG, Wielka Brytania, Szwajcaria),
+    /// użytkownik musi móc do niej wrócić. Poza tymi regionami przycisk byłby atrapą — nie ma
+    /// czego zmieniać — więc ekran ustawień go wtedy nie pokazuje. Wartość znana po
+    /// <see cref="PrepareAsync"/>; przed nim <see langword="false"/>.
+    /// </remarks>
+    bool IsPrivacyOptionsRequired { get; }
+
+    /// <summary>Pokazuje formularz zmiany decyzji o zgodzie na reklamy.</summary>
+    /// <param name="cancellationToken">Token anulowania.</param>
+    Task ShowPrivacyOptionsAsync(CancellationToken cancellationToken = default);
 }

@@ -298,6 +298,18 @@
                                IsEnabled="{Binding IsNotBusy}"
                                ButtonStyle="{StaticResource SubtleButton}" />
 
+            <!--
+                Wejście do zmiany zgody na reklamy — wymóg zasad certyfikowanego CMP tam, gdzie
+                o zgodę pytano. Widoczne tylko wtedy, gdy zestaw SDK reklam mówi, że region tego
+                wymaga; poza EOG byłby to przycisk, za którym nic nie ma.
+            -->
+            <views:GlyphButton Glyph="◐"
+                               Text="{loc:Translate Settings_Button_AdPrivacyOptions}"
+                               Command="{Binding OpenAdPrivacyOptionsCommand}"
+                               IsEnabled="{Binding IsNotBusy}"
+                               IsVisible="{Binding IsAdPrivacyOptionsVisible}"
+                               ButtonStyle="{StaticResource SubtleButton}" />
+
             <views:GlyphButton Glyph="⟲"
                                Text="{loc:Translate Settings_Button_Reset}"
                                Command="{Binding ResetSettingsCommand}"

@@ -673,6 +673,9 @@ Vous n’avez pas entendu la consigne ? « Répète » la relit.</value>
   <data name="Settings_Button_PrivacyPolicy" xml:space="preserve">
     <value>Politique de confidentialité</value>
   </data>
+  <data name="Settings_Button_AdPrivacyOptions" xml:space="preserve">
+    <value>Confidentialité des publicités</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Voir « Comment jouer »</value>
   </data>

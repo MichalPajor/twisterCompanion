@@ -164,6 +164,40 @@ internal sealed class AdMobService(ILogger<AdMobService> logger) : IAdPlatform
         return await loaded.Task.WaitAsync(cancellationToken);
     }
 
+    /// <inheritdoc />
+    public bool IsPrivacyOptionsRequired { get; private set; }
+
+    /// <inheritdoc />
+    /// <remarks>
+    /// Formularz opcji prywatności to ten sam komunikat, który użytkownik widział przy pierwszym
+    /// uruchomieniu — tylko otwierany na jego życzenie. Brak aktywności to nie błąd, tylko brak
+    /// okna, w którym dałoby się go pokazać; wtedy nic się nie dzieje, a przycisk zostaje.
+    /// </remarks>
+    public async Task ShowPrivacyOptionsAsync(CancellationToken cancellationToken = default)
+    {
+        if (Platform.CurrentActivity is not { } activity)
+        {
+            logger.LogWarning("Brak aktywności — nie ma gdzie pokazać formularza opcji prywatności.");
+
+            return;
+        }
+
+        TaskCompletionSource closed = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        await MainThread.InvokeOnMainThreadAsync(() =>
+            UserMessagingPlatform.ShowPrivacyOptionsForm(
+                activity,
+                new ConsentFormDismissedListener(closed, logger)));
+
+        await closed.Task.WaitAsync(cancellationToken);
+
+        // Po zmianie decyzji status wymagalności może się nie zmienić, ale zgoda tak —
+        // odczyt na świeżo, żeby stan serwisu nie został z poprzedniej odpowiedzi.
+        IConsentInformation consent = UserMessagingPlatform.GetConsentInformation(activity);
+        IsPrivacyOptionsRequired = consent.PrivacyOptionsRequirementStatus
+            == ConsentInformationPrivacyOptionsRequirementStatus.Required;
+    }
+
     /// <summary>
     /// Pyta o zgodę na personalizację reklam i zwraca odpowiedź na pytanie, czy wolno żądać
     /// reklam.
@@ -188,6 +222,11 @@ internal sealed class AdMobService(ILogger<AdMobService> logger) : IAdPlatform
             new ConsentUpdateFailureListener(updated, logger)));
 
         await updated.Task.WaitAsync(cancellationToken);
+
+        // Odczyt zaraz po aktualizacji informacji o zgodzie — dopiero wtedy zestaw SDK wie,
+        // w jakim regionie jest użytkownik i czy zasady wymagają wejścia do zmiany decyzji.
+        IsPrivacyOptionsRequired = consent.PrivacyOptionsRequirementStatus
+            == ConsentInformationPrivacyOptionsRequirementStatus.Required;
 
         TaskCompletionSource formClosed = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
