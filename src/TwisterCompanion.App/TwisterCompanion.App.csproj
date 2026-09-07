@@ -130,4 +130,20 @@
     <ProjectReference Include="..\TwisterCompanion.Presentation\TwisterCompanion.Presentation.csproj" />
   </ItemGroup>
 
+  <!--
+    Jednostki reklamowe zależą od konfiguracji: Debug bierze przykładowe jednostki testowe
+    Google (zawsze reklama testowa, na każdym emulatorze i telefonie), Release — produkcyjne
+    z konta AdMob. Wybór jest tu, w projekcie, a nie w #if w kodzie, bo testy konfiguracji
+    wydania i kontrola w przebiegu wydania czytają pliki źródłowe i muszą wiedzieć, który
+    plik trafia do pakietu, bez rozumienia preprocesora. Oba warunki pilnuje test
+    JednostkiReklam_WybieraKonfiguracja.
+  -->
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <Compile Remove="Services\AdUnits.Release.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' != 'Debug'">
+    <Compile Remove="Services\AdUnits.Debug.cs" />
+  </ItemGroup>
+
 </Project>

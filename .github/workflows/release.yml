@@ -94,6 +94,9 @@ jobs:
             dotnet test "$projekt" --configuration Release
           done
 
+      # Sprawdzane są TYLKO pliki kompilowane w Release: AdUnits.Debug.cs celowo zawiera
+      # identyfikatory testowe, ale projekt wyłącza go z kompilacji poza Debug.
+      #
       # Testowe identyfikatory Google zawsze zwracają reklamę testową, więc pakiet z nimi
       # wygląda w sklepie na sprawny i nie zarabia ani groszem — a zauważa się to po tygodniach.
       #
@@ -105,10 +108,11 @@ jobs:
         run: |
           if grep -rq 'ca-app-pub-3940256099942544' \
                src/TwisterCompanion.App/Services/AdUnits.cs \
+               src/TwisterCompanion.App/Services/AdUnits.Release.cs \
                src/TwisterCompanion.App/Platforms/Android/AndroidManifest.xml; then
             if [ '${{ startsWith(github.ref, 'refs/tags/v') }}' = 'true' ]; then
               echo '::error::Pakiet wydania ma TESTOWE identyfikatory reklam Google.'
-              echo 'Wpisz identyfikatory z konta AdMob w AdUnits.cs i w AndroidManifest.xml,'
+              echo 'Wpisz identyfikatory z konta AdMob w AdUnits.Release.cs i w AndroidManifest.xml.'
               echo 'a potem usun test IdentyfikatoryReklam_SaJeszczeTestowe.'
               exit 1
             fi

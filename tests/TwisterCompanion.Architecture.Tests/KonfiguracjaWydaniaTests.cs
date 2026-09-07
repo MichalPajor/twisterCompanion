@@ -154,6 +154,38 @@ public class KonfiguracjaWydaniaTests(ITestOutputHelper wyjscie)
         Assert.All(IdentyfikatoryZKodu().Values, id => Assert.NotEqual(WydawcaTestowy, Wydawca(id)));
     }
 
+    [Fact]
+    public void JednostkiDebug_SaWylacznieTestowe()
+    {
+        // Debug ma zawsze pokazywać reklamy testowe — na każdym emulatorze i telefonie, bez
+        // rejestrowania czegokolwiek. Produkcyjna jednostka wklejona tu przez pomyłkę zamienia
+        // każde uruchomienie deweloperskie w nieprawidłowy ruch na koncie wydawcy.
+        Dictionary<string, string> debug = IdentyfikatoryZPlikow("AdUnits.cs", "AdUnits.Debug.cs");
+
+        Assert.Equal(WydawcaTestowy, Wydawca(debug["Banner"]));
+        Assert.Equal(WydawcaTestowy, Wydawca(debug["Interstitial"]));
+    }
+
+    [Fact]
+    public void JednostkiReklam_WybieraKonfiguracja()
+    {
+        // Dwa pliki definiują te same stałe, więc projekt MUSI wyłączać jeden z nich w każdej
+        // konfiguracji — inaczej Release nie skompiluje się, albo gorzej: skompiluje się
+        // z plikiem Debug i wyjdzie wydanie z reklamami testowymi. Test czyta oba warunki
+        // wprost z projektu, bo tylko one decydują, który plik trafia do pakietu.
+        XDocument projekt = XDocument.Load(
+            KatalogRepozytorium.Plik("src", "TwisterCompanion.App", "TwisterCompanion.App.csproj"));
+
+        Dictionary<string, string> usuwane = projekt.Descendants("Compile")
+            .Where(element => element.Attribute("Remove") is not null)
+            .ToDictionary(
+                element => Path.GetFileName(element.Attribute("Remove")!.Value.Replace('\\', '/')),
+                element => element.Parent!.Attribute("Condition")?.Value ?? string.Empty);
+
+        Assert.Equal("'$(Configuration)' == 'Debug'", usuwane["AdUnits.Release.cs"]);
+        Assert.Equal("'$(Configuration)' != 'Debug'", usuwane["AdUnits.Debug.cs"]);
+    }
+
     private static string WersjaProjektu()
     {
         XDocument wlasciwosci = XDocument.Load(KatalogRepozytorium.Plik("Directory.Build.props"));
@@ -210,14 +242,25 @@ public class KonfiguracjaWydaniaTests(ITestOutputHelper wyjscie)
         return wartosc!;
     }
 
-    private static Dictionary<string, string> IdentyfikatoryZKodu()
-    {
-        string kod = File.ReadAllText(
-            KatalogRepozytorium.Plik("src", "TwisterCompanion.App", "Services", "AdUnits.cs"));
+    /// <summary>Identyfikatory z plików kompilowanych w <b>Release</b> — czyli z tego, co idzie do sklepu.</summary>
+    private static Dictionary<string, string> IdentyfikatoryZKodu() =>
+        IdentyfikatoryZPlikow("AdUnits.cs", "AdUnits.Release.cs");
 
-        Dictionary<string, string> znalezione = Regex
-            .Matches(kod, @"public const string (?<nazwa>\w+) = ""(?<wartosc>ca-app-pub-[^""]+)"";")
-            .ToDictionary(wpis => wpis.Groups["nazwa"].Value, wpis => wpis.Groups["wartosc"].Value);
+    private static Dictionary<string, string> IdentyfikatoryZPlikow(params string[] pliki)
+    {
+        Dictionary<string, string> znalezione = [];
+
+        foreach (string plik in pliki)
+        {
+            string kod = File.ReadAllText(
+                KatalogRepozytorium.Plik("src", "TwisterCompanion.App", "Services", plik));
+
+            foreach (Match wpis in Regex.Matches(
+                         kod, @"public const string (?<nazwa>\w+) = ""(?<wartosc>ca-app-pub-[^""]+)"";"))
+            {
+                znalezione.Add(wpis.Groups["nazwa"].Value, wpis.Groups["wartosc"].Value);
+            }
+        }
 
         Assert.Equal(3, znalezione.Count);
 

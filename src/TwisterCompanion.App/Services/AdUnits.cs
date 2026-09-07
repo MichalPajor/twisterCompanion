@@ -1,37 +1,37 @@
 namespace TwisterCompanion.App.Services;
 
 /// <summary>
-/// Identyfikatory reklam — <b>produkcyjne</b>, z konta AdMob wydawcy aplikacji.
+/// Identyfikatory reklam.
 /// </summary>
 /// <remarks>
-/// Nie są sekretem: trafiają do pakietu i da się je z niego odczytać, więc ukrywanie ich
-/// w repozytorium nic by nie dało. Realne ryzyko jest inne — cudzy identyfikator da się
-/// wkleić do własnej aplikacji i generować na nim sztuczny ruch, żeby AdMob zawiesił konto.
-/// Standardową obroną jest plik <c>app-ads.txt</c> na stronie dewelopera; do zrobienia po
-/// publikacji, gdy karta sklepu będzie publiczna.
+/// Klasa jest podzielona na trzy pliki według tego, <b>co się zmienia między konfiguracjami</b>:
+/// <list type="bullet">
+/// <item><description>ten plik — identyfikator aplikacji, wspólny dla Debug i Release;</description></item>
+/// <item><description><c>AdUnits.Release.cs</c> — jednostki produkcyjne z konta AdMob wydawcy,
+/// kompilowane wyłącznie w Release;</description></item>
+/// <item><description><c>AdUnits.Debug.cs</c> — przykładowe jednostki testowe Google,
+/// kompilowane wyłącznie w Debug.</description></item>
+/// </list>
+/// Wybór pliku robi projekt (<c>Compile Remove</c> pod warunkiem konfiguracji), więc build Debug
+/// <b>zawsze</b> pokazuje reklamy testowe — na każdym emulatorze i każdym telefonie, bez rejestrowania
+/// czegokolwiek. Chodzi o bezpieczeństwo konta: wyświetlenie produkcyjnej reklamy na urządzeniu
+/// dewelopera to dla AdMob nieprawidłowy ruch, a to najczęstszy powód zawieszenia konta.
 /// <para>
-/// Identyfikator aplikacji jest też w <c>AndroidManifest.xml</c> i musi się z tym plikiem
-/// zgadzać — pilnuje tego test <c>IdentyfikatorAplikacjiWAdMob_ZgadzaSieMiedzyManifestemIKodem</c>.
-/// Wspólnego wydawcy wszystkich trzech pilnuje <c>IdentyfikatoryReklam_PochodzaZJednegoKonta</c>:
-/// wymieszanie kont to aplikacja, która działa, pokazuje reklamy i przekazuje przychód
-/// gdzie indziej.
+/// Identyfikator aplikacji nie przełącza się, bo nie musi: Google dokumentuje, że przykładowe
+/// jednostki testowe wolno łączyć z własnym identyfikatorem aplikacji. Dzięki temu manifest jest
+/// jeden, a test zgodności manifestu z kodem nie zależy od konfiguracji.
 /// </para>
 /// <para>
-/// Do testów na własnym urządzeniu <b>nie wraca się</b> do identyfikatorów testowych Google —
-/// urządzenie rejestruje się w konsoli AdMob jako testowe i wtedy na nim nadal lecą reklamy
-/// testowe. Każde wyświetlenie prawdziwej reklamy na telefonie dewelopera to nieprawidłowy
-/// ruch, a przebieg wydania odmawia zbudowania pakietu ze znacznika z identyfikatorami
-/// testowymi właśnie po to, żeby przez pomyłkę nie wyszła wersja, która nic nie zarabia.
+/// Identyfikatory nie są sekretem — trafiają do pakietu i da się je z niego odczytać. Realne
+/// ryzyko to podszycie się cudzą aplikacją pod nasze jednostki; obroną jest <c>app-ads.txt</c>
+/// na stronie dewelopera, do zrobienia po publikacji. Zgodności manifestu z kodem, wspólnego
+/// wydawcy i tego, że w Release nie ma identyfikatorów testowych, pilnują testy
+/// w <c>KonfiguracjaWydaniaTests</c>, a przebieg wydania odmawia zbudowania pakietu ze
+/// znacznika, gdyby testowe trafiły do plików kompilowanych w Release.
 /// </para>
 /// </remarks>
-internal static class AdUnits
+internal static partial class AdUnits
 {
-    /// <summary>Identyfikator aplikacji w AdMob.</summary>
+    /// <summary>Identyfikator aplikacji w AdMob — ten sam w Debug i Release.</summary>
     public const string ApplicationId = "ca-app-pub-6431615298155605~3559351453";
-
-    /// <summary>Jednostka banera na ekranie rozgrywki.</summary>
-    public const string Banner = "ca-app-pub-6431615298155605/9488771883";
-
-    /// <summary>Jednostka reklamy pełnoekranowej po zakończonej partii.</summary>
-    public const string Interstitial = "ca-app-pub-6431615298155605/8620106447";
 }
