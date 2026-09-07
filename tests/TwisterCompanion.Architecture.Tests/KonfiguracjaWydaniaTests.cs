@@ -143,14 +143,15 @@ public class KonfiguracjaWydaniaTests(ITestOutputHelper wyjscie)
     }
 
     [Fact]
-    public void IdentyfikatoryReklam_SaJeszczeTestowe()
+    public void IdentyfikatoryReklam_NieSaTestowe()
     {
-        // Test-świadek, nie test-strażnik. Dopóki nie ma konta AdMob, w kodzie są testowe
-        // identyfikatory Google i to jest w porządku. W dniu, w którym wejdą prawdziwe,
-        // ten test się wywali — i to jest jego sens: przypomni o dwóch rzeczach, które
-        // trzeba wtedy zrobić razem, czyli o zdjęciu blokady w przebiegu wydania i o wpisie
-        // w historii zmian.
-        Assert.Equal(WydawcaTestowy, Wydawca(IdentyfikatorZManifestu()));
+        // Odwrotność testu-świadka z czasu przed kontem AdMob. Testowe identyfikatory Google
+        // zawsze zwracają reklamę testową, więc pakiet z nimi wygląda w sklepie na sprawny
+        // i nie zarabia ani groszem — a zauważa się to po tygodniach. Przebieg wydania ma
+        // na to blokadę; ten test łapie to samo wcześniej, przy każdym uruchomieniu testów,
+        // gdyby ktoś na czas debugowania wrócił do identyfikatorów testowych i zapomniał.
+        Assert.NotEqual(WydawcaTestowy, Wydawca(IdentyfikatorZManifestu()));
+        Assert.All(IdentyfikatoryZKodu().Values, id => Assert.NotEqual(WydawcaTestowy, Wydawca(id)));
     }
 
     private static string WersjaProjektu()

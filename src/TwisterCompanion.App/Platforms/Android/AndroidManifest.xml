@@ -6,11 +6,11 @@
 			ostrzeżenia przy budowaniu, tylko wywala aplikację przy starcie, bo zestaw SDK
 			reklam czyta go z manifestu w swoim inicjalizatorze.
 
-			Wartość jest testowym identyfikatorem Google i musi zgadzać się z AdUnits.cs.
-			Prawdziwy wchodzi przy publikacji — patrz komentarz w tamtym pliku.
+			Wartość musi zgadzać się z AdUnits.cs — pilnuje tego test w KonfiguracjaWydaniaTests.
+			Identyfikator produkcyjny, z konta AdMob wydawcy; komentarz o ryzyku w AdUnits.cs.
 		-->
 		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
-		           android:value="ca-app-pub-3940256099942544~3347511713" />
+		           android:value="ca-app-pub-6431615298155605~3559351453" />
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />

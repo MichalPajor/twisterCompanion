@@ -1,32 +1,37 @@
 namespace TwisterCompanion.App.Services;
 
 /// <summary>
-/// Identyfikatory reklam.
+/// Identyfikatory reklam — <b>produkcyjne</b>, z konta AdMob wydawcy aplikacji.
 /// </summary>
 /// <remarks>
-/// Wpisane są <b>testowe</b> identyfikatory Google — te same, które podaje dokumentacja
-/// AdMob. Zawsze zwracają reklamę testową i nigdy prawdziwą, więc nie da się nimi naruszyć
-/// zasad ani zarobić. Do sprawdzenia całej integracji na urządzeniu nie trzeba przy nich
-/// żadnego konta.
-/// <para>
-/// Prawdziwe identyfikatory wchodzą tu przy publikacji (Etap 16), razem z założeniem konta
-/// AdMob. Nie są sekretem — trafiają do pakietu i da się je z niego odczytać — ale zamiana
-/// musi być <b>jedną zmianą w jednym miejscu</b>, bo pomyłka oznacza reklamy liczone na cudze
-/// konto albo aplikację bez reklam.
-/// </para>
+/// Nie są sekretem: trafiają do pakietu i da się je z niego odczytać, więc ukrywanie ich
+/// w repozytorium nic by nie dało. Realne ryzyko jest inne — cudzy identyfikator da się
+/// wkleić do własnej aplikacji i generować na nim sztuczny ruch, żeby AdMob zawiesił konto.
+/// Standardową obroną jest plik <c>app-ads.txt</c> na stronie dewelopera; do zrobienia po
+/// publikacji, gdy karta sklepu będzie publiczna.
 /// <para>
 /// Identyfikator aplikacji jest też w <c>AndroidManifest.xml</c> i musi się z tym plikiem
-/// zgadzać. Jego brak w manifeście nie daje ostrzeżenia — aplikacja wywala się przy starcie.
+/// zgadzać — pilnuje tego test <c>IdentyfikatorAplikacjiWAdMob_ZgadzaSieMiedzyManifestemIKodem</c>.
+/// Wspólnego wydawcy wszystkich trzech pilnuje <c>IdentyfikatoryReklam_PochodzaZJednegoKonta</c>:
+/// wymieszanie kont to aplikacja, która działa, pokazuje reklamy i przekazuje przychód
+/// gdzie indziej.
+/// </para>
+/// <para>
+/// Do testów na własnym urządzeniu <b>nie wraca się</b> do identyfikatorów testowych Google —
+/// urządzenie rejestruje się w konsoli AdMob jako testowe i wtedy na nim nadal lecą reklamy
+/// testowe. Każde wyświetlenie prawdziwej reklamy na telefonie dewelopera to nieprawidłowy
+/// ruch, a przebieg wydania odmawia zbudowania pakietu ze znacznika z identyfikatorami
+/// testowymi właśnie po to, żeby przez pomyłkę nie wyszła wersja, która nic nie zarabia.
 /// </para>
 /// </remarks>
 internal static class AdUnits
 {
-    /// <summary>Identyfikator aplikacji w AdMob (wersja testowa Google).</summary>
-    public const string ApplicationId = "ca-app-pub-3940256099942544~3347511713";
+    /// <summary>Identyfikator aplikacji w AdMob.</summary>
+    public const string ApplicationId = "ca-app-pub-6431615298155605~3559351453";
 
-    /// <summary>Jednostka banera (wersja testowa Google).</summary>
-    public const string Banner = "ca-app-pub-3940256099942544/6300978111";
+    /// <summary>Jednostka banera na ekranie rozgrywki.</summary>
+    public const string Banner = "ca-app-pub-6431615298155605/9488771883";
 
-    /// <summary>Jednostka reklamy pełnoekranowej (wersja testowa Google).</summary>
-    public const string Interstitial = "ca-app-pub-3940256099942544/1033173712";
+    /// <summary>Jednostka reklamy pełnoekranowej po zakończonej partii.</summary>
+    public const string Interstitial = "ca-app-pub-6431615298155605/8620106447";
 }
