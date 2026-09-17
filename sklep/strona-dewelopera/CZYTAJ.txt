@@ -1,0 +1,23 @@
+Zawartosc repozytorium MichalPajor.github.io (strona uzytkownika GitHub Pages).
+
+Dlaczego osobne repozytorium: Google szuka app-ads.txt w KATALOGU GLOWNYM domeny
+podanej w Play jako strona dewelopera. Strona projektu (michalpajor.github.io/twisterCompanion/)
+to podkatalog — plik tam lezacy nie zostanie znaleziony. Katalog glowny michalpajor.github.io
+serwuje wylacznie repozytorium o nazwie dokladnie: MichalPajor.github.io
+
+Kroki:
+1. github.com/new -> nazwa: MichalPajor.github.io (wielkosc liter jak w nazwie uzytkownika),
+   publiczne, puste.
+2. Wgraj oba pliki: app-ads.txt oraz index.html (przez "Add file -> Upload files" w przegladarce).
+3. Settings -> Pages -> Source: Deploy from a branch -> main -> / (root). Strona uzytkownika
+   publikuje sie zwykle sama; sprawdz po kilku minutach:
+     https://michalpajor.github.io/app-ads.txt   (ma zwrocic jedna linie z pub-...)
+     https://michalpajor.github.io/              (strona dewelopera)
+4. Play Console -> Zwieksz liczbe uzytkownikow -> Obecnosc w sklepie -> Ustawienia sklepu
+   -> Dane kontaktowe -> Strona internetowa: https://michalpajor.github.io/
+5. AdMob -> Aplikacje -> Twister Companion -> Ustawienia aplikacji -> app-ads.txt
+   -> "Sprawdz aktualizacje". Pierwsze sprawdzenie moze potrwac do 24 h.
+
+Linia w app-ads.txt: google.com, pub-6431615298155605, DIRECT, f08c47fec0942fa0
+  pub-... to numer wydawcy (ten sam, co w identyfikatorach jednostek),
+  f08c47fec0942fa0 to staly identyfikator Google jako systemu reklamowego.
