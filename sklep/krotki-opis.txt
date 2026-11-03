@@ -1,2 +1,10 @@
 EN: Twister spinner that talks: picks the moves, calls players by name, keeps time.
 PL: Mówiąca ruletka do Twistera: losuje ruchy, woła graczy po imieniu, liczy czas.
+DE: Sprechende Twister-Drehscheibe: wählt Züge, ruft Spieler beim Namen, misst Zeit.
+ES: Ruleta de Twister que habla: elige jugadas, nombra jugadores, mide el tiempo.
+FR: Roulette Twister qui parle : tire les coups, appelle chaque joueur, chronomètre.
+IT: Ruota del Twister che parla: sceglie le mosse, chiama i giocatori, cronometra.
+PT-BR: Roleta do Twister que fala: sorteia movimentos, chama pelo nome, marca o tempo.
+RU: Говорящая рулетка для твистера: выбирает ходы, зовёт по имени, засекает время.
+UK: Рулетка для твістера, що говорить: обирає рухи, кличе на ім’я, стежить за часом.
+TR: Konuşan Twister çarkı: hamleleri seçer, oyuncuları adıyla çağırır, süre tutar.

@@ -1,0 +1,13 @@
+Nazwa aplikacji w Google Play (limit 30 znakow), per jezyk strony.
+Kod jezyka w Play Console w nawiasie.
+
+EN (en-US): Twister Companion
+PL (pl-PL): Twister Companion: Ruletka
+DE (de-DE): Twister Companion: Drehscheibe
+ES (es-ES, es-419): Twister Companion: Ruleta
+FR (fr-FR): Twister Companion : Roulette
+IT (it-IT): Twister Companion: Ruota
+PT-BR (pt-BR): Twister Companion: Roleta
+RU (ru-RU): Twister Companion: рулетка
+UK (uk): Twister Companion: рулетка
+TR (tr-TR): Twister Companion: Çark

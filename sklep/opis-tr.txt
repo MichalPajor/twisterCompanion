@@ -1,0 +1,38 @@
+Twister çarkı kayboldu ya da kimse kenarda oturup onu çevirmek istemiyor mu? Twister Companion bu işi üstlenir: hamleyi seçer, oyuncuyu adıyla çağırır ve ne yapacağını yüksek sesle söyler. Herkes oynar.
+
+İki kişilik oyunu sonunda keyifli yapan da bu — kimsenin hakem olması gerekmez.
+
+KONUŞAN BİR ÇARK
+Kendi kendine dönen bir Twister çarkı gibi çalışır: her hamle bir uzuv ve bir renktir — "sağ el, kırmızı" — ve yüksek sesle duyurulur. Okunacak bir ok yok, nerede durduğu konusunda tartışma yok. Mat sizden; uygulama yalnızca çarkın yerini alır.
+
+OYUNU YÖNETMENİN ÜÇ YOLU
+• Elle — tur bitince "Sonraki" düğmesine dokunun.
+• Otomatik — uygulama, ayarladığınız süreden sonra kendiliğinden devam eder.
+• Sesle — "sonraki", "tekrar", "duraklat" veya "devam" deyin. Telefon matın dışında kalabilir, ona hiç dokunmanız gerekmez.
+
+NE GÖRÜRSÜNÜZ
+Konacak uzvu gösteren, odanın öbür ucundan okunabilecek büyüklükte renkli bir daire ve hamle için geri sayım. İsimler yüksek sesle söylenir, kimsenin ekrana bakması gerekmez.
+
+BEŞ OYUN MODU
+• Klasik — bildiğiniz Twister oyunu.
+• Çocuklar için — kolay hamleler, daha fazla süre, kimse elenmez.
+• Parti — eğlenmeye gelen ekip için durmadan olayların yaşandığı bir parti oyunu.
+• Hardcore — en zorlayıcı diziler, sık olaylar, yarı yarıya süre.
+• Şarkılı — şarkı söylemeye dayalı olaylar ve görev için daha uzun süre.
+
+OLAYLAR
+Üç hazır pakette — ailece, çocuklar için ve parti — rastgele çıkıp turu altüst eden 159 kısa görev. Kendi paketlerinizi de oluşturabilir, her görevin çıkma olasılığını binde bir hassasiyetle ayarlayabilirsiniz.
+
+ON DİL
+İngilizce, Lehçe, İspanyolca, Almanca, Fransızca, İtalyanca, Portekizce (Brezilya), Türkçe, Rusça ve Ukraynaca — hem arayüz hem de sesli duyurular.
+
+PRATİK DÜŞÜNÜLDÜ
+• İnternetsiz çalışır. Hesap yok, kayıt yok, oluşturulacak hiçbir şey yok.
+• Verileriniz telefonunuzda kalır.
+• Açık, koyu veya sistem teması.
+• Sesler, titreşimler ve animasyonlar — her biri ayrı ayrı kapatılabilir.
+• Ses, konuşma hızı ve ses perdesi ayarlanabilir.
+
+Ücretsiz, reklamlı. Tam ekran reklam yalnızca bir oyun bittikten sonra çıkabilir — asla oyun sırasında, asla bir hamle sırasında değil.
+
+Twister®, Hasbro'nun ticari markasıdır. Bu uygulama resmi değildir; Hasbro veya oyunun yayıncılarıyla bağlantılı değildir, onlar tarafından desteklenmez ya da onaylanmaz.
