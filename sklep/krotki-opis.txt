@@ -1,2 +1,2 @@
 EN: Twister spinner that talks: picks the moves, calls players by name, keeps time.
-PL: Głosowy prowadzący do Twistera: losuje ruchy, woła po imieniu, odlicza czas.
+PL: Mówiąca ruletka do Twistera: losuje ruchy, woła graczy po imieniu, liczy czas.

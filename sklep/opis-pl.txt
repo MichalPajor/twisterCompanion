@@ -1,6 +1,9 @@
-Ruletka się zgubiła albo nikomu nie chce się siedzieć z boku i nią kręcić. Twister Companion bierze to na siebie: losuje ruch, woła gracza po imieniu i mówi na głos, co ma zrobić. Grają wszyscy.
+Zgubiła się ruletka do Twistera albo nikomu nie chce się siedzieć z boku i kręcić kołem? Twister Companion bierze to na siebie: losuje ruch, woła gracza po imieniu i mówi na głos, co ma zrobić. Grają wszyscy.
 
 To dopiero sprawia, że gra we dwoje ma sens — nikt nie musi być sędzią.
+
+RULETKA, KTÓRA MÓWI
+Działa jak koło ruletki do gry Twister, które samo się kręci: każdy ruch to kończyna i kolor — „prawa ręka, czerwony" — ogłaszane na głos. Nie trzeba odczytywać strzałki ani spierać się, gdzie się zatrzymała. Matę potrzebujesz własną; aplikacja zastępuje tylko ruletkę.
 
 TRZY SPOSOBY PROWADZENIA GRY
 • Ręcznie — naciskasz „Dalej", kiedy tura się skończy.
@@ -11,9 +14,9 @@ CO WIDZISZ
 Duże kolorowe koło z kończyną do postawienia, w rozmiarze czytelnym z drugiego końca pokoju, i odliczanie czasu na ruch. Imiona padają na głos, więc nikt nie musi patrzeć w ekran.
 
 PIĘĆ TRYBÓW GRY
-• Klasyczny — Twister, jaki znasz.
+• Klasyczny — gra Twister, jaką znasz.
 • Dla dzieci — łatwe ruchy, więcej czasu, nikt nie odpada.
-• Impreza — wydarzenia bez przerwy, dla towarzystwa, które przyszło się bawić.
+• Impreza — gra imprezowa z wydarzeniami bez przerwy, dla towarzystwa, które przyszło się bawić.
 • Hardcore — najbardziej niewygodne sekwencje, częste wydarzenia, o połowę mniej czasu.
 • Z piosenką — wydarzenia wokół śpiewania i dłuższy czas na zadanie.
 
