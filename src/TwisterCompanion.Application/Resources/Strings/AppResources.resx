@@ -703,6 +703,9 @@ Did not catch the instruction? “Repeat” will read it out again.</value>
   <data name="Settings_Button_AdPrivacyOptions" xml:space="preserve">
     <value>Ad privacy settings</value>
   </data>
+  <data name="Settings_Button_RateApp" xml:space="preserve">
+    <value>Rate the app</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Show „How to play"</value>
   </data>

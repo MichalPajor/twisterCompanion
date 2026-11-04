@@ -676,6 +676,9 @@ Não ouviram a instrução? «Repete» lê de novo.</value>
   <data name="Settings_Button_AdPrivacyOptions" xml:space="preserve">
     <value>Privacidade dos anúncios</value>
   </data>
+  <data name="Settings_Button_RateApp" xml:space="preserve">
+    <value>Avaliar o app</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Ver «Como jogar»</value>
   </data>

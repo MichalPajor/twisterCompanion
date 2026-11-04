@@ -609,6 +609,18 @@ public class SettingsViewModelTests
     }
 
     [Fact]
+    public async Task OcenAplikacje_OtwieraKarteWSklepie()
+    {
+        // Etap 18: przycisk prowadzi do karty w sklepie, nie do okienka oceny — tamto
+        // pokazuje Google według własnego limitu i kliknięcie mogłoby nic nie dać.
+        SettingsViewModel viewModel = CreateViewModel();
+
+        await viewModel.OpenStoreListingCommand.ExecuteAsync(null);
+
+        await _storeListing.Received(1).OpenAsync();
+    }
+
+    [Fact]
     public void OpcjePrywatnosciReklam_WidoczneTylkoGdyRegionWymaga()
     {
         // Zasady certyfikowanego CMP: tam, gdzie pytano o zgode, musi byc droga powrotu do niej.
@@ -638,6 +650,7 @@ public class SettingsViewModelTests
 
     private readonly IExternalBrowser _browser = Substitute.For<IExternalBrowser>();
     private readonly IAdService _ads = Substitute.For<IAdService>();
+    private readonly IStoreListing _storeListing = Substitute.For<IStoreListing>();
 
     private SettingsViewModel CreateViewModel() => new(
         Substitute.For<INavigationService>(),
@@ -652,5 +665,6 @@ public class SettingsViewModelTests
         NullLogger<SettingsViewModel>.Instance,
         Substitute.For<IDialogService>(),
         _browser,
-        _ads);
+        _ads,
+        _storeListing);
 }

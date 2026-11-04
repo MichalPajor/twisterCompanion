@@ -74,6 +74,7 @@ public class DependencyInjectionTests
         services.AddSingleton(Substitute.For<INavigationService>());
         services.AddSingleton(Substitute.For<IDialogService>());
         services.AddSingleton(Substitute.For<IExternalBrowser>());
+        services.AddSingleton(Substitute.For<IStoreListing>());
         services.AddSingleton(Substitute.For<ISystemSettings>());
         services.AddSingleton<ILocalizationService>(new FakeLocalizationService());
         services.AddSingleton<ISettingsService>(new FakeSettingsService());

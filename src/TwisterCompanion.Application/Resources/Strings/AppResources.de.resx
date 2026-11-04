@@ -676,6 +676,9 @@ Die Anweisung nicht verstanden? „Wiederhole“ liest sie noch einmal vor.</val
   <data name="Settings_Button_AdPrivacyOptions" xml:space="preserve">
     <value>Datenschutz bei Werbung</value>
   </data>
+  <data name="Settings_Button_RateApp" xml:space="preserve">
+    <value>App bewerten</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>„So wird gespielt“ ansehen</value>
   </data>

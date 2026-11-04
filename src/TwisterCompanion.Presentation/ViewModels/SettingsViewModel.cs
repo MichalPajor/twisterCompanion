@@ -31,6 +31,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
     private readonly IGameFeedback _feedback;
     private readonly IUserDataService _userData;
     private readonly IExternalBrowser _browser;
+    private readonly IStoreListing _storeListing;
     private readonly IAdService _ads;
 
     /// <summary>
@@ -58,6 +59,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
     /// <param name="dialogService">Serwis komunikatów dla użytkownika.</param>
     /// <param name="browser">Przeglądarka systemowa — otwiera politykę prywatności.</param>
     /// <param name="ads">Reklamy — wejście do zmiany zgody, gdy region tego wymaga.</param>
+    /// <param name="storeListing">Karta aplikacji w sklepie — wystawienie oceny.</param>
     public SettingsViewModel(
         INavigationService navigation,
         ISettingsService settingsService,
@@ -71,11 +73,13 @@ public partial class SettingsViewModel : NavigableViewModelBase
         ILogger<SettingsViewModel> logger,
         IDialogService dialogService,
         IExternalBrowser browser,
-        IAdService ads)
+        IAdService ads,
+        IStoreListing storeListing)
         : base(navigation, logger, dialogService, localization)
     {
         ArgumentNullException.ThrowIfNull(browser);
         ArgumentNullException.ThrowIfNull(ads);
+        ArgumentNullException.ThrowIfNull(storeListing);
 
         ArgumentNullException.ThrowIfNull(settingsService);
         ArgumentNullException.ThrowIfNull(textToSpeech);
@@ -94,6 +98,7 @@ public partial class SettingsViewModel : NavigableViewModelBase
         _announcementBuilder = announcementBuilder;
         _browser = browser;
         _ads = ads;
+        _storeListing = storeListing;
 
         MoveTime = new SecondsSetting(
             AppSettings.MinMoveTime,
@@ -683,6 +688,15 @@ public partial class SettingsViewModel : NavigableViewModelBase
     [RelayCommand]
     private Task OpenPrivacyPolicyAsync() =>
         ExecuteSafeAsync(() => _browser.OpenAsync(AppLinks.PrivacyPolicy));
+
+    /// <summary>Otwiera kartę aplikacji w sklepie, żeby można było ją ocenić.</summary>
+    /// <remarks>
+    /// Uzupełnienie okienka oceny po partii (Etap 18), nie jego zamiennik: okienko pokazuje
+    /// Google według własnego limitu i nie da się go wywołać przyciskiem. Karta w sklepie
+    /// działa zawsze — dla kogoś, kto chce ocenić od razu albo zmienić swoją ocenę.
+    /// </remarks>
+    [RelayCommand]
+    private Task OpenStoreListingAsync() => ExecuteSafeAsync(() => _storeListing.OpenAsync());
 
     /// <summary>
     /// Czy pokazać wejście do zmiany zgody na reklamy.

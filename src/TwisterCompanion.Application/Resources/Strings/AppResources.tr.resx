@@ -676,6 +676,9 @@ Talimatı duymadınız mı? «Tekrar» yeniden okur.</value>
   <data name="Settings_Button_AdPrivacyOptions" xml:space="preserve">
     <value>Reklam gizlilik ayarları</value>
   </data>
+  <data name="Settings_Button_RateApp" xml:space="preserve">
+    <value>Uygulamayı değerlendir</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>«Nasıl oynanır»ı göster</value>
   </data>

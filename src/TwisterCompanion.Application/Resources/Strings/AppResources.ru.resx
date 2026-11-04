@@ -676,6 +676,9 @@ Twister® — торговая марка Hasbro. Это приложение н
   <data name="Settings_Button_AdPrivacyOptions" xml:space="preserve">
     <value>Настройки конфиденциальности рекламы</value>
   </data>
+  <data name="Settings_Button_RateApp" xml:space="preserve">
+    <value>Оценить приложение</value>
+  </data>
   <data name="Settings_Button_HowToPlay" xml:space="preserve">
     <value>Показать «Как играть»</value>
   </data>
