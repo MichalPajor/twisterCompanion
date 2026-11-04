@@ -67,6 +67,9 @@ public static class MauiProgram
 
         GlobalExceptionHandler.Register(app.Services.GetRequiredService<ILogger<App>>());
 
+        // Trasy raz na proces, nie w konstruktorze powłoki — patrz AppShell.RegisterRoutes.
+        AppShell.RegisterRoutes(app.Services);
+
         // Musi nastąpić przed pierwszym wczytaniem XAML — rozszerzenie {loc:Translate}
         // sięga po tę instancję statycznie, bo parser XAML nie zna kontenera zależności.
         // Instancja aplikacji powstaje po zbudowaniu kontenera, więc kolejność jest pewna.
