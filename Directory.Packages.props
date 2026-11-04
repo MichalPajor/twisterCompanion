@@ -50,6 +50,21 @@
     <PackageVersion Include="Xamarin.Google.UserMessagingPlatform" Version="4.0.0.3" />
   </ItemGroup>
 
+  <!-- ===================== Prosba o ocene (Etap 18) =====================
+       In-App Review API Google Play - oficjalne okienko oceny w aplikacji. Wiazanie
+       z dotnet/android-libraries, jak reklamy; numeracja to numeracja natywnej biblioteki
+       com.google.android.play:review 2.0.2.
+
+       2.0.2.9, nie najnowsze 2.0.2.10: oba wiaza te sama biblioteke natywna, ale 2.0.2.10
+       podnosi GooglePlayServices.Basement do 118.10.0.3, a ta wersja wymaga AndroidX.Fragment
+       1.9 - konflikt z wyrownana rodzina AndroidX ponizej (NU1107). 2.0.2.9 zalezy dokladnie
+       od Basement i Tasks, ktore wiazanie reklam juz ciagnie, wiec graf zaleznosci sie nie
+       zmienia. Podnosimy razem z wiazaniem reklam.
+  -->
+  <ItemGroup>
+    <PackageVersion Include="Xamarin.Google.Android.Play.Review" Version="2.0.2.9" />
+  </ItemGroup>
+
   <!--
     Wyrownanie AndroidX. Wiazanie reklam ciagnie rodzine Lifecycle w wersji 2.9.2.x, a MAUI
     rozwiazuje Lifecycle.Runtime do 2.11.0.1 — NuGet zglasza wtedy NU1608 (wersja poza

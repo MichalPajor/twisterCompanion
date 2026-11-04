@@ -103,6 +103,9 @@
     <PackageReference Include="Xamarin.GooglePlayServices.Ads" />
     <PackageReference Include="Xamarin.Google.UserMessagingPlatform" />
 
+    <!-- Okienko oceny Google Play (Etap 18) -->
+    <PackageReference Include="Xamarin.Google.Android.Play.Review" />
+
     <!-- Wyrównanie rodziny AndroidX Lifecycle — patrz komentarz w Directory.Packages.props -->
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" />
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx" />

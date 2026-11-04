@@ -4,6 +4,7 @@ using TwisterCompanion.Presentation.Abstractions;
 using IAdPlatform = TwisterCompanion.Application.Advertising.IAdPlatform;
 using IAudioCueService = TwisterCompanion.Application.Abstractions.IAudioCueService;
 using IHapticService = TwisterCompanion.Application.Abstractions.IHapticService;
+using IReviewPlatform = TwisterCompanion.Application.AppReview.IReviewPlatform;
 using ISoundService = TwisterCompanion.Application.Abstractions.ISoundService;
 using ISpeechRecognitionService = TwisterCompanion.Application.Abstractions.ISpeechRecognitionService;
 using IStoragePathProvider = TwisterCompanion.Application.Abstractions.IStoragePathProvider;
@@ -75,6 +76,11 @@ internal static class AppServiceCollectionExtensions
         // więc pierwszy zarejestrowany wygrywa. Dzięki temu build bez tej linii — albo inna
         // platforma — po prostu nie ma reklam i nie wymaga żadnej innej zmiany.
         services.AddSingleton<IAdPlatform, Platforms.Android.AdMobService>();
+
+        // Okienko oceny Google Play (Etap 18) — ta sama zasada: przed AddApplication(), które
+        // bez tej linii podstawia wersję nieobecną. Rejestrowane także w Debug: poza Sklepem
+        // Play biblioteka i tak niczego nie pokazuje, a logi pokazują, że prośba padła.
+        services.AddSingleton<IReviewPlatform, Platforms.Android.PlayReviewService>();
 #endif
 
         return services;
