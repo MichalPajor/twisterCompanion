@@ -75,6 +75,9 @@ public class SettingsServiceTests
             AreHapticsEnabled = false,
             HasSeenOnboarding = true,
             FinishedGamesCount = 7,
+            ReviewQualifyingGamesCount = 1,
+            FirstQualifyingGameAt = new DateTimeOffset(2026, 11, 4, 18, 30, 0, TimeSpan.FromHours(1)),
+            LastReviewRequestAt = new DateTimeOffset(2026, 12, 6, 20, 0, 0, TimeSpan.FromHours(1)),
             GameModeKey = "hardcore",
             ActiveEventPackId = new Guid("11111111-2222-3333-4444-555555555555"),
         });
@@ -96,6 +99,16 @@ public class SettingsServiceTests
         // „reklama pełnoekranowa co trzecią partię". Gdyby żył w pamięci, wystarczyłoby
         // zamknąć aplikację, żeby reklama wracała częściej.
         Assert.Equal(7, storage.Settings.Current.FinishedGamesCount);
+
+        // Etap 18: stan prośby o ocenę przeżywa restart — inaczej po każdym zamknięciu
+        // aplikacji odliczanie partii i odstęp 30 dni zaczynałyby się od nowa.
+        Assert.Equal(1, storage.Settings.Current.ReviewQualifyingGamesCount);
+        Assert.Equal(
+            new DateTimeOffset(2026, 11, 4, 18, 30, 0, TimeSpan.FromHours(1)),
+            storage.Settings.Current.FirstQualifyingGameAt);
+        Assert.Equal(
+            new DateTimeOffset(2026, 12, 6, 20, 0, 0, TimeSpan.FromHours(1)),
+            storage.Settings.Current.LastReviewRequestAt);
 
         // Zadanie 2 Etapu 12: wybrany tryb i aktywna paczka wydarzeń przeżywają restart.
         Assert.Equal("hardcore", storage.Settings.Current.GameModeKey);
@@ -186,6 +199,30 @@ public class SettingsServiceTests
 
         Assert.Equal(TimeSpan.FromSeconds(25), storage.Settings.Current.MoveTime);
         Assert.Equal(AppSettings.Default.TaskTime, storage.Settings.Current.TaskTime);
+    }
+
+    [Fact]
+    public async Task LoadAsync_ZPlikuWersji103_ZachowujeUstawieniaIZaczynaOcenyOdZera()
+    {
+        // Etap 18 dokłada pola bez podnoszenia wersji schematu. Plik z wersji 1.0.3 nie ma
+        // ich wcale — musi się wczytać bez utraty reszty, z prośbą o ocenę liczoną od nowa.
+        using TemporaryStorage storage = new();
+        storage.WriteRawSettingsFile(
+            """
+            {
+              "schemaVersion": 1,
+              "languageCode": "pl",
+              "finishedGamesCount": 5
+            }
+            """);
+
+        await storage.Settings.LoadAsync();
+
+        Assert.Equal("pl", storage.Settings.Current.LanguageCode);
+        Assert.Equal(5, storage.Settings.Current.FinishedGamesCount);
+        Assert.Equal(0, storage.Settings.Current.ReviewQualifyingGamesCount);
+        Assert.Null(storage.Settings.Current.FirstQualifyingGameAt);
+        Assert.Null(storage.Settings.Current.LastReviewRequestAt);
     }
 
     [Fact]

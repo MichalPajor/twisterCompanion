@@ -52,6 +52,7 @@ public sealed record AppSettings
     private readonly TimeSpan _voiceListeningDelay = TimeSpan.FromSeconds(10);
     private readonly string _gameModeKey = "classic";
     private readonly int _finishedGamesCount;
+    private readonly int _reviewQualifyingGamesCount;
 
     /// <summary>
     /// Kod języka interfejsu, na przykład <c>pl</c> albo <c>en</c>.
@@ -149,6 +150,30 @@ public sealed record AppSettings
         get => _finishedGamesCount;
         init => _finishedGamesCount = value < 0 ? 0 : value;
     }
+
+    /// <summary>
+    /// Ile liczących się partii zakończono od ostatniej prośby o ocenę.
+    /// </summary>
+    /// <remarks>
+    /// Osobny od <see cref="FinishedGamesCount"/>, bo liczy co innego: nie każdą partię,
+    /// tylko taką, która coś znaczy (zwycięzca albo dość tur), i zeruje się po każdej prośbie.
+    /// Leży w ustawieniach z tego samego powodu — musi przeżyć restart aplikacji.
+    /// </remarks>
+    public int ReviewQualifyingGamesCount
+    {
+        get => _reviewQualifyingGamesCount;
+        init => _reviewQualifyingGamesCount = value < 0 ? 0 : value;
+    }
+
+    /// <summary>Kiedy zakończono pierwszą liczącą się partię.</summary>
+    /// <remarks>
+    /// Od tej chwili liczy się czas do pierwszej prośby o ocenę. <see langword="null"/>,
+    /// dopóki żadna partia się nie liczyła.
+    /// </remarks>
+    public DateTimeOffset? FirstQualifyingGameAt { get; init; }
+
+    /// <summary>Kiedy ostatnio poproszono o ocenę; <see langword="null"/>, jeśli jeszcze nigdy.</summary>
+    public DateTimeOffset? LastReviewRequestAt { get; init; }
 
     /// <summary>
     /// Czy animacje interfejsu są włączone.

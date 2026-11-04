@@ -48,6 +48,15 @@ internal sealed class AppSettingsDto
     /// <summary>Ile partii zakończono od zainstalowania aplikacji.</summary>
     public int FinishedGamesCount { get; set; }
 
+    /// <summary>Ile liczących się partii zakończono od ostatniej prośby o ocenę.</summary>
+    public int ReviewQualifyingGamesCount { get; set; }
+
+    /// <summary>Kiedy zakończono pierwszą liczącą się partię.</summary>
+    public DateTimeOffset? FirstQualifyingGameAt { get; set; }
+
+    /// <summary>Kiedy ostatnio poproszono o ocenę.</summary>
+    public DateTimeOffset? LastReviewRequestAt { get; set; }
+
     /// <summary>Czy animacje interfejsu są włączone.</summary>
     public bool AreAnimationsEnabled { get; set; } = true;
 
