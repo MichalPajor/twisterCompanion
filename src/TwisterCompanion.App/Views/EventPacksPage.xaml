@@ -26,9 +26,15 @@
         -->
         <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
             <Border Grid.Column="0" Style="{StaticResource FieldBorder}" VerticalOptions="Center">
+                <!--
+                    Limit znaków w każdym polu tekstowym: Android układa cały tekst pola przy
+                    każdym znaku, więc wklejony bardzo długi tekst blokował wątek interfejsu
+                    na tyle, że system zgłaszał ANR (Google Play, wersja 1.0.3).
+                -->
                 <Entry
                     Placeholder="{loc:Translate EventPacks_Entry_PackName}"
                     Text="{Binding NewPackName}"
+                    MaxLength="40"
                     FontSize="{StaticResource FontSizeBody}"
                     ReturnCommand="{Binding CreatePackCommand}" />
             </Border>
@@ -245,9 +251,11 @@
             Spacing="{StaticResource SpacingS}"
             IsVisible="{Binding IsSelectedPackEditable}">
             <Border Style="{StaticResource FieldBorder}">
+                <!-- 150 znaków: najdłuższe wbudowane wydarzenie ma 88 we wszystkich językach. -->
                 <Entry
                     Placeholder="{loc:Translate EventPacks_Entry_EventName}"
                     Text="{Binding NewEventName}"
+                    MaxLength="150"
                     FontSize="{StaticResource FontSizeBody}"
                     ReturnCommand="{Binding AddEventCommand}" />
             </Border>
