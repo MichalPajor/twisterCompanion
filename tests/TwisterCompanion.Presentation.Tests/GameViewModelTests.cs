@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
 using TwisterCompanion.Application.Abstractions;
 using TwisterCompanion.Application.Advertising;
+using TwisterCompanion.Application.AppReview;
 using TwisterCompanion.Application.Feedback;
 using TwisterCompanion.Application.Game;
 using TwisterCompanion.Application.GameModes;
@@ -35,6 +36,7 @@ public class GameViewModelTests
 
     private readonly ISystemSettings _systemSettings = Substitute.For<ISystemSettings>();
     private readonly IAdCoordinator _ads = Substitute.For<IAdCoordinator>();
+    private readonly IReviewCoordinator _reviews = Substitute.For<IReviewCoordinator>();
     private readonly IDialogService _dialogs = Substitute.For<IDialogService>();
 
     public GameViewModelTests()
@@ -771,6 +773,20 @@ public class GameViewModelTests
     }
 
     [Fact]
+    public void ProsbaOOcene_DzialaTylkoNaEkranieRozgrywki()
+    {
+        // Etap 18: prośba pada po zakończonej partii, więc jej miejsce jest tutaj — tak jak
+        // reklamy. Na ekranie startowym i w ustawieniach okienko oceny wyskakiwałoby bez powodu.
+        GameViewModel viewModel = CreateSubscribedViewModel();
+
+        _ = _reviews.Received(1).ActivateAsync();
+
+        viewModel.OnDisappearing();
+
+        _ = _reviews.Received(1).DeactivateAsync();
+    }
+
+    [Fact]
     public void GdyReklamNieMaWTymWydaniu_MiejsceNaBanerNieJestTrzymane()
     {
         _ads.IsBannerAllowed.Returns(false);
@@ -952,6 +968,7 @@ public class GameViewModelTests
             _voiceCoordinator,
             _systemSettings,
             _ads,
+            _reviews,
             new ImmediateUiDispatcher(),
             _audioCues,
             _feedback,

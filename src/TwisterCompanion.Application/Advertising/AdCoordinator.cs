@@ -77,6 +77,9 @@ internal sealed class AdCoordinator : IAdCoordinator, IDisposable
     public event EventHandler<bool>? BannerAllowedChanged;
 
     /// <inheritdoc />
+    public event EventHandler<PostGameAdOutcome>? PostGameAdResolved;
+
+    /// <inheritdoc />
     public async Task ActivateAsync(CancellationToken cancellationToken = default)
     {
         if (_isActive || _disposed)
@@ -122,43 +125,61 @@ internal sealed class AdCoordinator : IAdCoordinator, IDisposable
         _engine.GameFinished -= OnGameFinished;
     }
 
-    private void OnGameFinished(object? sender, GameSummary summary) => _ = HandleFinishedGameAsync();
+    private void OnGameFinished(object? sender, GameSummary summary) => _ = HandleFinishedGameAsync(summary);
 
-    private async Task HandleFinishedGameAsync()
+    private async Task HandleFinishedGameAsync(GameSummary summary)
     {
+        bool shown = false;
+
         try
         {
-            int finishedGames = await CountFinishedGameAsync();
-
-            if (finishedGames % _options.InterstitialEveryNthGame != 0)
-            {
-                _logger.LogDebug(
-                    "Reklama pełnoekranowa pominięta — partia {Count} z {Every}.",
-                    finishedGames % _options.InterstitialEveryNthGame,
-                    _options.InterstitialEveryNthGame);
-
-                return;
-            }
-
-            if (!await WaitForSilenceAsync())
-            {
-                return;
-            }
-
-            // Warunki sprawdzamy jeszcze raz: przez czas zapowiedzi gracze mogli zejść
-            // z ekranu albo rozpocząć kolejną partię.
-            if (!_isActive || _engine.State != GameState.Finished)
-            {
-                return;
-            }
-
-            await _ads.ShowInterstitialAsync();
+            shown = await TryShowInterstitialAsync();
         }
         catch (Exception exception)
         {
             // Reklama nie może zepsuć końca partii — podsumowanie jest ważniejsze.
             _logger.LogError(exception, "Nie udało się obsłużyć reklamy po zakończeniu partii.");
         }
+
+        PostGameAdResolved?.Invoke(this, new PostGameAdOutcome(summary, shown));
+    }
+
+    /// <summary>Pokazuje reklamę pełnoekranową, jeśli po tej partii wypada.</summary>
+    /// <returns><see langword="true"/>, gdy reklama została pokazana.</returns>
+    private async Task<bool> TryShowInterstitialAsync()
+    {
+        int finishedGames = await CountFinishedGameAsync();
+
+        if (finishedGames % _options.InterstitialEveryNthGame != 0)
+        {
+            _logger.LogDebug(
+                "Reklama pełnoekranowa pominięta — partia {Count} z {Every}.",
+                finishedGames % _options.InterstitialEveryNthGame,
+                _options.InterstitialEveryNthGame);
+
+            return false;
+        }
+
+        // Limit czasu odmierza sterowane źródło czasu, a nie zegar systemowy — inaczej
+        // test tej reguły musiałby naprawdę czekać piętnaście sekund.
+        if (!await _speaker.WaitForSilenceAsync(_options.SpeechWaitTimeout, _timeProvider))
+        {
+            _logger.LogWarning(
+                "Reklama pełnoekranowa pominięta — zapowiedź końca partii nie zamilkła w ciągu"
+                + " {Seconds} s.",
+                _options.SpeechWaitTimeout.TotalSeconds);
+
+            return false;
+        }
+
+        // Warunki sprawdzamy jeszcze raz: przez czas zapowiedzi gracze mogli zejść
+        // z ekranu albo rozpocząć kolejną partię.
+        if (!_isActive || _engine.State != GameState.Finished)
+        {
+            return false;
+        }
+
+        return await _ads.ShowInterstitialAsync();
     }
 
     /// <summary>Zwiększa trwały licznik zakończonych partii i zwraca nową wartość.</summary>
@@ -169,59 +190,6 @@ internal sealed class AdCoordinator : IAdCoordinator, IDisposable
         await _settings.UpdateAsync(settings => settings with { FinishedGamesCount = finishedGames });
 
         return finishedGames;
-    }
-
-    /// <summary>
-    /// Czeka na koniec zapowiedzi głosowej.
-    /// </summary>
-    /// <returns><see langword="false"/>, gdy zapowiedź nie zamilkła w wyznaczonym czasie.</returns>
-    private async Task<bool> WaitForSilenceAsync()
-    {
-        if (!_speaker.IsSpeaking)
-        {
-            return true;
-        }
-
-        TaskCompletionSource silence = new(TaskCreationOptions.RunContinuationsAsynchronously);
-
-        void OnSpeakingChanged(object? sender, bool isSpeaking)
-        {
-            if (!isSpeaking)
-            {
-                silence.TrySetResult();
-            }
-        }
-
-        _speaker.SpeakingChanged += OnSpeakingChanged;
-
-        try
-        {
-            if (!_speaker.IsSpeaking)
-            {
-                return true;
-            }
-
-            // Limit czasu odmierza sterowane źródło czasu, a nie zegar systemowy — inaczej
-            // test tej reguły musiałby naprawdę czekać piętnaście sekund.
-            using CancellationTokenSource timeout = new(_options.SpeechWaitTimeout, _timeProvider);
-
-            await silence.Task.WaitAsync(timeout.Token);
-
-            return true;
-        }
-        catch (OperationCanceledException)
-        {
-            _logger.LogWarning(
-                "Reklama pełnoekranowa pominięta — zapowiedź końca partii nie zamilkła w ciągu"
-                + " {Seconds} s.",
-                _options.SpeechWaitTimeout.TotalSeconds);
-
-            return false;
-        }
-        finally
-        {
-            _speaker.SpeakingChanged -= OnSpeakingChanged;
-        }
     }
 
     private void SetBannerAllowed(bool allowed)

@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using TwisterCompanion.Application.Abstractions;
 using TwisterCompanion.Application.Advertising;
+using TwisterCompanion.Application.AppReview;
 using TwisterCompanion.Application.Feedback;
 using TwisterCompanion.Application.Game;
 using TwisterCompanion.Application.GameModes;
@@ -48,6 +49,7 @@ public partial class GameViewModel : NavigableViewModelBase
     private readonly IVoiceControlCoordinator _voiceCoordinator;
     private readonly ISystemSettings _systemSettings;
     private readonly IAdCoordinator _ads;
+    private readonly IReviewCoordinator _reviews;
     private readonly IUiDispatcher _dispatcher;
     private readonly IAudioCueService _audioCues;
     private readonly IGameFeedback _feedback;
@@ -71,6 +73,7 @@ public partial class GameViewModel : NavigableViewModelBase
     /// <param name="voiceCoordinator">Sterowanie głosem włączane na czas rozgrywki.</param>
     /// <param name="systemSettings">Ustawienia systemu — otwierają ekran prywatności.</param>
     /// <param name="ads">Reklamy — baner na czas rozgrywki i reklama po zakończeniu partii.</param>
+    /// <param name="reviews">Prośba o ocenę po zakończonej partii.</param>
     /// <param name="dispatcher">Przeniesienie odliczania na wątek interfejsu.</param>
     /// <param name="audioCues">Sygnały dźwiękowe — tykanie odliczania.</param>
     /// <param name="feedback">Efekty dźwiękowe i wibracje zdarzeń partii.</param>
@@ -89,6 +92,7 @@ public partial class GameViewModel : NavigableViewModelBase
         IVoiceControlCoordinator voiceCoordinator,
         ISystemSettings systemSettings,
         IAdCoordinator ads,
+        IReviewCoordinator reviews,
         IUiDispatcher dispatcher,
         IAudioCueService audioCues,
         IGameFeedback feedback,
@@ -106,6 +110,7 @@ public partial class GameViewModel : NavigableViewModelBase
         ArgumentNullException.ThrowIfNull(voiceControl);
         ArgumentNullException.ThrowIfNull(voiceCoordinator);
         ArgumentNullException.ThrowIfNull(ads);
+        ArgumentNullException.ThrowIfNull(reviews);
         ArgumentNullException.ThrowIfNull(dispatcher);
         ArgumentNullException.ThrowIfNull(audioCues);
         ArgumentNullException.ThrowIfNull(feedback);
@@ -120,6 +125,7 @@ public partial class GameViewModel : NavigableViewModelBase
         _voiceCoordinator = voiceCoordinator;
         _systemSettings = systemSettings;
         _ads = ads;
+        _reviews = reviews;
         _dispatcher = dispatcher;
         _audioCues = audioCues;
         _feedback = feedback;
@@ -488,7 +494,7 @@ public partial class GameViewModel : NavigableViewModelBase
     private void OnBannerAllowedChanged(object? sender, bool allowed) =>
         _dispatcher.Post(() => IsBannerVisible = allowed);
 
-    /// <summary>Włącza reklamy na czas pobytu na ekranie rozgrywki.</summary>
+    /// <summary>Włącza reklamy i prośbę o ocenę na czas pobytu na ekranie rozgrywki.</summary>
     /// <remarks>
     /// Awarie są pochłaniane z logiem: reklama jest dodatkiem do gry, a nie jej częścią, więc
     /// nieudane przygotowanie zestawu SDK nie może przeszkodzić w rozgrywce.
@@ -497,6 +503,8 @@ public partial class GameViewModel : NavigableViewModelBase
     {
         try
         {
+            // Prośba o ocenę rusza razem z reklamami, bo czeka na ich decyzję po partii.
+            await _reviews.ActivateAsync();
             await _ads.ActivateAsync();
         }
         catch (Exception exception)
@@ -529,6 +537,7 @@ public partial class GameViewModel : NavigableViewModelBase
         {
             await _voiceCoordinator.DeactivateAsync();
             await _ads.DeactivateAsync();
+            await _reviews.DeactivateAsync();
 
             // Partia zakończona nie ma czego wznawiać, więc znika z pamięci silnika.
             // Bez tego powrót na ekran rozgrywki pokazywał podsumowanie poprzedniej gry

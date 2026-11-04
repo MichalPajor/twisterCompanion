@@ -41,4 +41,13 @@ public sealed record ReviewOptions
 
     /// <summary>Najkrótszy odstęp między kolejnymi prośbami.</summary>
     public TimeSpan MinimumTimeBetweenRequests { get; init; } = TimeSpan.FromDays(30);
+
+    /// <summary>
+    /// Ile najwyżej czekamy na koniec zapowiedzi końca partii, zanim poprosimy o ocenę.
+    /// </summary>
+    /// <remarks>
+    /// Tyle samo co przy reklamie (<see cref="Advertising.AdOptions.SpeechWaitTimeout"/>).
+    /// Po tym czasie prośba przechodzi na następną partię — licznik jej nie gubi.
+    /// </remarks>
+    public TimeSpan SpeechWaitTimeout { get; init; } = TimeSpan.FromSeconds(15);
 }

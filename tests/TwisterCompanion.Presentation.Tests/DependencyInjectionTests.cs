@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using NSubstitute;
 using TwisterCompanion.Application.Abstractions;
 using TwisterCompanion.Application.Advertising;
+using TwisterCompanion.Application.AppReview;
 using TwisterCompanion.Application.Feedback;
 using TwisterCompanion.Application.Game;
 using TwisterCompanion.Application.GameModes;
@@ -89,6 +90,7 @@ public class DependencyInjectionTests
         services.AddSingleton<IVoiceControlService>(new FakeVoiceControlService());
         services.AddSingleton(Substitute.For<IVoiceControlCoordinator>());
         services.AddSingleton(Substitute.For<IAdCoordinator>());
+        services.AddSingleton(Substitute.For<IReviewCoordinator>());
         services.AddSingleton(Substitute.For<IAdService>());
         services.AddSingleton(Substitute.For<IGameModeService>());
         services.AddSingleton<IUiDispatcher>(new ImmediateUiDispatcher());

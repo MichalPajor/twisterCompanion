@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Time.Testing;
 using TwisterCompanion.Application.Abstractions;
 using TwisterCompanion.Application.Advertising;
+using TwisterCompanion.Application.AppReview;
 using TwisterCompanion.Application.DependencyInjection;
 using TwisterCompanion.Application.Feedback;
 using TwisterCompanion.Application.Game;
@@ -71,6 +72,7 @@ internal sealed class GameTestHarness : IDisposable
         // Reklamy PRZED AddApplication: tamta rejestruje wersję nieobecną przez TryAdd, więc
         // pierwszy zarejestrowany wygrywa — dokładnie tak, jak robi to projekt aplikacji.
         services.AddSingleton<IAdPlatform>(Ads);
+        services.AddSingleton<IReviewPlatform>(Reviews);
 
         services.AddApplication();
 
@@ -135,6 +137,12 @@ internal sealed class GameTestHarness : IDisposable
     /// <see cref="Configuration"/> — właściwość o tej nazwie przysłoniłaby ją.
     /// </remarks>
     public InMemorySettingsService SettingsService { get; } = new();
+
+    /// <summary>Okienko oceny zastępcze.</summary>
+    public FakeReviewPlatform Reviews { get; } = new();
+
+    /// <summary>Koordynator prośby o ocenę.</summary>
+    public IReviewCoordinator ReviewCoordinator => _services.GetRequiredService<IReviewCoordinator>();
 
     /// <summary>Reklamy z regułami — jedyna droga do platformy reklam.</summary>
     public IAdService AdService => _services.GetRequiredService<IAdService>();

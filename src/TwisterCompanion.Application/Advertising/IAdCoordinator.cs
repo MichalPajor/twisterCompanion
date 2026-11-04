@@ -20,6 +20,18 @@ public interface IAdCoordinator
     /// </remarks>
     event EventHandler<bool>? BannerAllowedChanged;
 
+    /// <summary>
+    /// Zgłaszane po każdej zakończonej partii, gdy decyzja o reklamie już zapadła.
+    /// </summary>
+    /// <remarks>
+    /// Zgłaszane zawsze — także wtedy, gdy reklama nie wypadała albo się nie udała — bo na tę
+    /// informację czeka prośba o ocenę (Etap 18). Dwa okna jedno po drugim to przepis na złą
+    /// ocenę, a dzięki temu zdarzeniu prośba rusza dopiero, gdy wiadomo, że reklamy nie było.
+    /// Przy reklamie zdarzenie pada po jej zamknięciu; bez niej — od razu, jeszcze w trakcie
+    /// zapowiedzi końca partii.
+    /// </remarks>
+    event EventHandler<PostGameAdOutcome>? PostGameAdResolved;
+
     /// <summary>Wejście na ekran rozgrywki.</summary>
     /// <param name="cancellationToken">Token anulowania.</param>
     Task ActivateAsync(CancellationToken cancellationToken = default);

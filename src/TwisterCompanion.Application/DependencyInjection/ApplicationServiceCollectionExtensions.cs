@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TwisterCompanion.Application.Abstractions;
 using TwisterCompanion.Application.Advertising;
+using TwisterCompanion.Application.AppReview;
 using TwisterCompanion.Application.Events;
 using TwisterCompanion.Application.Feedback;
 using TwisterCompanion.Application.Game;
@@ -60,6 +61,7 @@ public static class ApplicationServiceCollectionExtensions
 
         AddVoiceControl(services);
         AddAdvertising(services);
+        AddAppReview(services);
 
         // Źródło czasu: pozwala testować tryb automatyczny bez czekania w teście
         // ośmiu sekund na turę.
@@ -123,6 +125,19 @@ public static class ApplicationServiceCollectionExtensions
         services.TryAddSingleton<IAdPlatform, NoOpAdPlatform>();
         services.AddSingleton<IAdService, GuardedAdService>();
         services.AddSingleton<IAdCoordinator, AdCoordinator>();
+    }
+
+    /// <summary>Rejestruje prośbę o ocenę: port sklepu i koordynator.</summary>
+    /// <remarks>
+    /// Port idzie przez <c>TryAdd</c> z tego samego powodu co reklamy: projekt aplikacji
+    /// podstawia implementację Google Play przed tą rejestracją, a bez niej obowiązuje
+    /// wersja nieobecna.
+    /// </remarks>
+    private static void AddAppReview(IServiceCollection services)
+    {
+        services.AddSingleton(ReviewOptions.Default);
+        services.TryAddSingleton<IReviewPlatform, NoOpReviewPlatform>();
+        services.AddSingleton<IReviewCoordinator, ReviewCoordinator>();
     }
 
     private static void AddTurnPipeline(IServiceCollection services)
